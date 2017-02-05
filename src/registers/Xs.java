@@ -11,6 +11,19 @@ public class Xs {
 		this.x2 = 0;
 		this.x3 = 0;
 	}
+	
+	public int getXByNum(int num){
+		if(num == 1) return this.x1;
+		if(num == 2) return this.x2;
+		if(num == 3) return this.x3;
+		return 0;
+	}
+	
+	public void setXByNum(int num, int x){
+		if(num == 1) this.x1 = x;
+		if(num == 2) this.x2 = x;
+		if(num == 3) this.x3 = x;
+	}
 
 	public int getX1() {
 		return x1;

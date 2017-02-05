@@ -2,7 +2,7 @@ package registers;
 
 public class PC {
 	// Program Counter: address of next instruction to be executed
-	// 16 bits
+	// 12 bits
 	int pc;
 	
 	public PC(){

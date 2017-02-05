@@ -40,22 +40,24 @@ public class MCU {
 		}
 		System.out.println("current size of memory: " + memory.size());
 	}
-
-	// Using the address in the MAR to fetch a word from memory
-	// The word fetched from memory is placed in the MBR
-	public int fetchAWordFromMemory(MAR mar) {
-		int address = mar.getMar();
-		if (address <= this.memory.size()) {
-			return this.memory.get(address);
+	
+	public int getCurrentSize(){
+		if(this.memory != null){
+			return this.memory.size();
 		}
 		return 0;
 	}
 
-	// store into memory using address in MAR and value in MBR
-	public void storeIntoMemory(MAR mar, MBR mbr) {
-		int address = mar.getMar();
-		if (this.memory != null && address <= this.memory.size()) {
-			this.memory.set(address, mbr.getMbr());
+
+	//using the address to fetch a word from memory
+	public int fetchFromMemory(int address){
+		return this.memory.get(address);
+	}
+	
+	//store into memory using address and value
+	public void storeIntoMemory(int address, int value){
+		if(this.memory != null){
+			this.memory.set(address, value);
 		}
 	}
 
@@ -81,9 +83,5 @@ public class MCU {
 		}
 	}
 
-	// only for test purpose
-	public int getMemory(int address) {
-		return this.memory.get(address);
-	}
 
 }
