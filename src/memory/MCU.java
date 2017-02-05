@@ -38,25 +38,24 @@ public class MCU {
 				this.memory.add(0);
 			}
 		}
-		System.out.println("current size of memory: " + memory.size());
+		System.out.println("memory size has been expanded to " + memory.size());
 	}
-	
-	public int getCurrentSize(){
-		if(this.memory != null){
+
+	public int getCurrentSize() {
+		if (this.memory != null) {
 			return this.memory.size();
 		}
 		return 0;
 	}
 
-
-	//using the address to fetch a word from memory
-	public int fetchFromMemory(int address){
+	// using the address to fetch a word from memory
+	public int fetchFromMemory(int address) {
 		return this.memory.get(address);
 	}
-	
-	//store into memory using address and value
-	public void storeIntoMemory(int address, int value){
-		if(this.memory != null){
+
+	// store into memory using address and value
+	public void storeIntoMemory(int address, int value) {
+		if (this.memory != null) {
 			this.memory.set(address, value);
 		}
 	}
@@ -64,6 +63,7 @@ public class MCU {
 	// Load from ROM and store every value into memory with specific address
 	public void loadFromROM() {
 		HashMap<String, Integer> rom = Const.ROM;
+		System.out.println("read from the ROM");
 		if (rom != null) {
 			for (Map.Entry<String, Integer> entry : rom.entrySet()) {
 				int address = Integer.parseInt(entry.getKey());
@@ -75,13 +75,5 @@ public class MCU {
 			}
 		}
 	}
-
-	// only for test purpose
-	public void setMemory(int address, int value) {
-		if (address <= this.memory.size() && value <= 65535) {
-			this.memory.set(address, value);
-		}
-	}
-
 
 }

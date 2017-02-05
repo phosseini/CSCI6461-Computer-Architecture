@@ -7,8 +7,7 @@ import registers.MBR;
 import registers.MFR;
 import registers.PC;
 
-public class test {
-
+public class Test {
 	public static void main(String[] args) {
 		MCU mcu = new MCU();
 		PC pc = new PC();
@@ -52,5 +51,4 @@ public class test {
 			pc.pcIncrease();
 		} while (pc.getPc() <= Const.Instruction.End.value);
 	}
-
 }
