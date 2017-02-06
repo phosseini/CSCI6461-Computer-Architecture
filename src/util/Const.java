@@ -40,4 +40,6 @@ public class Const {
 			this.value = value;
 		}
 	}
+	
+	public int test;
 }
