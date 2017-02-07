@@ -41,5 +41,6 @@ public class Const {
 		}
 	}
 	
+	int test;
 	
 }
