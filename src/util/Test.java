@@ -7,6 +7,12 @@ import registers.MBR;
 import registers.MFR;
 import registers.PC;
 
+/**
+ * @author Liang
+ * 
+ *         this is a test program demonstrating how MCU and registers work
+ * 
+ */
 public class Test {
 	public static void main(String[] args) {
 		MCU mcu = new MCU();

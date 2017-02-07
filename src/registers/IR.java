@@ -22,7 +22,7 @@ public class IR {
 	}
 
 	public String getBinaryStringIr() {
-		if (this.ir <= 65535) {
+		if (this.ir <= 0xffff) {
 			return String.format("%16s", Integer.toBinaryString(this.ir)).replace(" ", "0");
 		}
 		return null;
