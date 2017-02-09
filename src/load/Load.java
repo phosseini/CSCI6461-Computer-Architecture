@@ -11,7 +11,8 @@ public class Load {
 	    //int[][] i = {{1,3},{23,4},{1,4}};
 	    
 	    int opcode = 0;
-	    int IX = 0;
+	    int IX121 = 0;
+	    int IX=0;
 	    int R = 0;
 	    int I = 0;
 	    int address = 0;
