@@ -4,8 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import registers.MAR;
-import registers.MBR;
+
 import util.Const;
 
 public class MCU {

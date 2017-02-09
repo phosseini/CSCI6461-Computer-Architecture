@@ -8,21 +8,13 @@ public class Const {
 
 	public static final HashMap<String, Integer> ROM = new HashMap<>();
 	static {
-		// address-value pair instruction
-		ROM.put("22", 0x1234);
-		ROM.put("23", 0x0809);
-		ROM.put("24", 0x2333);
+		// address-value pair Boot Program
+		ROM.put("8", 0x1234);
+		ROM.put("9", 0x0809);
+		ROM.put("10", 0x2333);
+		ROM.put("11", 0x7777);
 	}
 
-	// the start and end address of instructions in memory
-	public enum Instruction {
-		Start(22), End(24);
-		int value;
-
-		private Instruction(int value) {
-			this.value = value;
-		}
-	}
 
 	public enum ConditionCode {
 		OVERFLOW(0), UNDERFLOW(1), DIVZERO(2), EQUALORNOT(3);
