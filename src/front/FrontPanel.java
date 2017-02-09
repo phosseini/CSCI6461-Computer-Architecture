@@ -14,9 +14,12 @@ import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 
+import ALU.instructions;
 import memory.MCU;
 import registers.Registers;
 import util.Const;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class FrontPanel {
 
@@ -310,7 +313,6 @@ public class FrontPanel {
 	private JRadioButton rdbIns_2;
 	private JRadioButton rdbIns_1;
 	private JButton btnExecute;
-
 
 	/**
 	 * Launch the application.
@@ -1130,78 +1132,167 @@ public class FrontPanel {
 		btnIPL = new JButton("IPL");
 		btnIPL.setBounds(799, 109, 136, 69);
 		frmCsciClassProject.getContentPane().add(btnIPL);
-		
+
 		pnlIns = new JPanel();
 		pnlIns.setBounds(14, 28, 716, 44);
 		frmCsciClassProject.getContentPane().add(pnlIns);
 		pnlIns.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
-		
+
 		lblIns = new JLabel("Instruction");
 		pnlIns.add(lblIns);
-		
+
 		rdbIns_16 = new JRadioButton("");
 		pnlIns.add(rdbIns_16);
-		
+
 		rdbIns_15 = new JRadioButton("");
 		pnlIns.add(rdbIns_15);
-		
+
 		rdbIns_14 = new JRadioButton("");
 		pnlIns.add(rdbIns_14);
-		
+
 		rdbIns_13 = new JRadioButton("");
 		pnlIns.add(rdbIns_13);
-		
+
 		rdbIns_12 = new JRadioButton("");
 		pnlIns.add(rdbIns_12);
-		
+
 		rdbIns_11 = new JRadioButton("");
 		pnlIns.add(rdbIns_11);
-		
+
 		rdbIns_10 = new JRadioButton("");
 		pnlIns.add(rdbIns_10);
-		
+
 		rdbIns_9 = new JRadioButton("");
 		pnlIns.add(rdbIns_9);
-		
+
 		rdbIns_8 = new JRadioButton("");
 		pnlIns.add(rdbIns_8);
-		
+
 		rdbIns_7 = new JRadioButton("");
 		pnlIns.add(rdbIns_7);
-		
+
 		rdbIns_6 = new JRadioButton("");
 		pnlIns.add(rdbIns_6);
-		
+
 		rdbIns_5 = new JRadioButton("");
 		pnlIns.add(rdbIns_5);
-		
+
 		rdbIns_4 = new JRadioButton("");
 		pnlIns.add(rdbIns_4);
-		
+
 		rdbIns_3 = new JRadioButton("");
 		pnlIns.add(rdbIns_3);
-		
+
 		rdbIns_2 = new JRadioButton("");
 		pnlIns.add(rdbIns_2);
-		
+
 		rdbIns_1 = new JRadioButton("");
 		pnlIns.add(rdbIns_1);
-		
+
 		btnExecute = new JButton("execute");
+		btnExecute.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				// execute button event
+				ALU.instructions obj = new instructions();
+				ALU.instruction instruction = new ALU.instruction();
+				instruction.Opcode = readInst(4);
+				instruction.R = readInst(3);
+				instruction.IX = readInst(2);
+				instruction.I = readInst(1);
+				instruction.Address = readInst(0);
+				obj.execute(instruction);
+			}
+		});
 		pnlIns.add(btnExecute);
-		
 
 	}
 
+	// We use this method in order to read current instruction
+	private int readInst(int choice) {
+		// choice = 0 -> Address
+		// choice = 1 -> I
+		// choice = 2 -> IX
+		// choice = 3 -> R
+		// choice = 4 -> Opcode
 
-	
+		int inst = 0;
+		switch (choice) {
+		case 0: {
+			if (rdbIns_1.isSelected()) {
+				inst += Math.pow(10, 0);
+			}
+			if (rdbIns_2.isSelected()) {
+				inst += Math.pow(10, 1);
+				;
+			}
+			if (rdbIns_3.isSelected()) {
+				inst += Math.pow(10, 2);
+				;
+			}
+			if (rdbIns_4.isSelected()) {
+				inst += Math.pow(10, 3);
+			}
+			if (rdbIns_5.isSelected()) {
+				inst += Math.pow(10, 4);
+			}
+			break;
+		}
+		case 1: {
+			if (rdbIns_6.isSelected()) {
+				inst = 1;
+			}
+			break;
+		}
+		case 2: {
+			if (rdbIns_7.isSelected()) {
+				inst += Math.pow(10, 0);
+			}
+			if (rdbIns_8.isSelected()) {
+				inst += Math.pow(10, 1);
+			}
+			break;
+		}
+		case 3: {
+			if (rdbIns_9.isSelected()) {
+				inst += Math.pow(10, 0);
+			}
+			if (rdbIns_10.isSelected()) {
+				inst += Math.pow(10, 1);
+			}
+			break;
+		}
+		case 4: {
+			if (rdbIns_11.isSelected()) {
+				inst += Math.pow(10, 0);
+			}
+			if (rdbIns_12.isSelected()) {
+				inst += Math.pow(10, 1);
+			}
+			if (rdbIns_13.isSelected()) {
+				inst += Math.pow(10, 2);
+			}
+			if (rdbIns_14.isSelected()) {
+				inst += Math.pow(10, 3);
+			}
+			if (rdbIns_15.isSelected()) {
+				inst += Math.pow(10, 4);
+			}
+			if (rdbIns_16.isSelected()) {
+				inst += Math.pow(10, 5);
+			}
+			break;
+		}
+		}
+		return inst;
+	}
+
 	private void addListeners() {
 		btnStoreR0.addMouseListener(new MouseAdapter() {
 			public void mousePressed(MouseEvent e) {
 				StringBuffer buffer = new StringBuffer();
-				for(Component com: pnlR0.getComponents()){
-					if(com instanceof JRadioButton){
-						JRadioButton rdb = (JRadioButton)com;
+				for (Component com : pnlR0.getComponents()) {
+					if (com instanceof JRadioButton) {
+						JRadioButton rdb = (JRadioButton) com;
 						buffer = rdb.isSelected() ? buffer.append("1") : buffer.append("0");
 					}
 				}
@@ -1214,9 +1305,9 @@ public class FrontPanel {
 		btnStoreR1.addMouseListener(new MouseAdapter() {
 			public void mousePressed(MouseEvent e) {
 				StringBuffer buffer = new StringBuffer();
-				for(Component com: pnlR1.getComponents()){
-					if(com instanceof JRadioButton){
-						JRadioButton rdb = (JRadioButton)com;
+				for (Component com : pnlR1.getComponents()) {
+					if (com instanceof JRadioButton) {
+						JRadioButton rdb = (JRadioButton) com;
 						buffer = rdb.isSelected() ? buffer.append("1") : buffer.append("0");
 					}
 				}
@@ -1229,9 +1320,9 @@ public class FrontPanel {
 		btnStoreR2.addMouseListener(new MouseAdapter() {
 			public void mousePressed(MouseEvent e) {
 				StringBuffer buffer = new StringBuffer();
-				for(Component com: pnlR2.getComponents()){
-					if(com instanceof JRadioButton){
-						JRadioButton rdb = (JRadioButton)com;
+				for (Component com : pnlR2.getComponents()) {
+					if (com instanceof JRadioButton) {
+						JRadioButton rdb = (JRadioButton) com;
 						buffer = rdb.isSelected() ? buffer.append("1") : buffer.append("0");
 					}
 				}
@@ -1244,9 +1335,9 @@ public class FrontPanel {
 		btnStoreR3.addMouseListener(new MouseAdapter() {
 			public void mousePressed(MouseEvent e) {
 				StringBuffer buffer = new StringBuffer();
-				for(Component com: pnlR3.getComponents()){
-					if(com instanceof JRadioButton){
-						JRadioButton rdb = (JRadioButton)com;
+				for (Component com : pnlR3.getComponents()) {
+					if (com instanceof JRadioButton) {
+						JRadioButton rdb = (JRadioButton) com;
 						buffer = rdb.isSelected() ? buffer.append("1") : buffer.append("0");
 					}
 				}
@@ -1259,9 +1350,9 @@ public class FrontPanel {
 		btnStoreX1.addMouseListener(new MouseAdapter() {
 			public void mousePressed(MouseEvent e) {
 				StringBuffer buffer = new StringBuffer();
-				for(Component com: pnlX1.getComponents()){
-					if(com instanceof JRadioButton){
-						JRadioButton rdb = (JRadioButton)com;
+				for (Component com : pnlX1.getComponents()) {
+					if (com instanceof JRadioButton) {
+						JRadioButton rdb = (JRadioButton) com;
 						buffer = rdb.isSelected() ? buffer.append("1") : buffer.append("0");
 					}
 				}
@@ -1274,9 +1365,9 @@ public class FrontPanel {
 		btnStoreX2.addMouseListener(new MouseAdapter() {
 			public void mousePressed(MouseEvent e) {
 				StringBuffer buffer = new StringBuffer();
-				for(Component com: pnlX2.getComponents()){
-					if(com instanceof JRadioButton){
-						JRadioButton rdb = (JRadioButton)com;
+				for (Component com : pnlX2.getComponents()) {
+					if (com instanceof JRadioButton) {
+						JRadioButton rdb = (JRadioButton) com;
 						buffer = rdb.isSelected() ? buffer.append("1") : buffer.append("0");
 					}
 				}
@@ -1289,9 +1380,9 @@ public class FrontPanel {
 		btnStoreX3.addMouseListener(new MouseAdapter() {
 			public void mousePressed(MouseEvent e) {
 				StringBuffer buffer = new StringBuffer();
-				for(Component com: pnlX3.getComponents()){
-					if(com instanceof JRadioButton){
-						JRadioButton rdb = (JRadioButton)com;
+				for (Component com : pnlX3.getComponents()) {
+					if (com instanceof JRadioButton) {
+						JRadioButton rdb = (JRadioButton) com;
 						buffer = rdb.isSelected() ? buffer.append("1") : buffer.append("0");
 					}
 				}
@@ -1304,9 +1395,9 @@ public class FrontPanel {
 		btnStoreMAR.addMouseListener(new MouseAdapter() {
 			public void mousePressed(MouseEvent e) {
 				StringBuffer buffer = new StringBuffer();
-				for(Component com: pnlMAR.getComponents()){
-					if(com instanceof JRadioButton){
-						JRadioButton rdb = (JRadioButton)com;
+				for (Component com : pnlMAR.getComponents()) {
+					if (com instanceof JRadioButton) {
+						JRadioButton rdb = (JRadioButton) com;
 						buffer = rdb.isSelected() ? buffer.append("1") : buffer.append("0");
 					}
 				}
@@ -1319,9 +1410,9 @@ public class FrontPanel {
 		btnStoreMBR.addMouseListener(new MouseAdapter() {
 			public void mousePressed(MouseEvent e) {
 				StringBuffer buffer = new StringBuffer();
-				for(Component com: pnlMBR.getComponents()){
-					if(com instanceof JRadioButton){
-						JRadioButton rdb = (JRadioButton)com;
+				for (Component com : pnlMBR.getComponents()) {
+					if (com instanceof JRadioButton) {
+						JRadioButton rdb = (JRadioButton) com;
 						buffer = rdb.isSelected() ? buffer.append("1") : buffer.append("0");
 					}
 				}
@@ -1334,9 +1425,9 @@ public class FrontPanel {
 		btnStoreMSR.addMouseListener(new MouseAdapter() {
 			public void mousePressed(MouseEvent e) {
 				StringBuffer buffer = new StringBuffer();
-				for(Component com: pnlMSR.getComponents()){
-					if(com instanceof JRadioButton){
-						JRadioButton rdb = (JRadioButton)com;
+				for (Component com : pnlMSR.getComponents()) {
+					if (com instanceof JRadioButton) {
+						JRadioButton rdb = (JRadioButton) com;
 						buffer = rdb.isSelected() ? buffer.append("1") : buffer.append("0");
 					}
 				}
@@ -1349,9 +1440,9 @@ public class FrontPanel {
 		btnStoreMFR.addMouseListener(new MouseAdapter() {
 			public void mousePressed(MouseEvent e) {
 				StringBuffer buffer = new StringBuffer();
-				for(Component com: pnlMFR.getComponents()){
-					if(com instanceof JRadioButton){
-						JRadioButton rdb = (JRadioButton)com;
+				for (Component com : pnlMFR.getComponents()) {
+					if (com instanceof JRadioButton) {
+						JRadioButton rdb = (JRadioButton) com;
 						buffer = rdb.isSelected() ? buffer.append("1") : buffer.append("0");
 					}
 				}
@@ -1364,9 +1455,9 @@ public class FrontPanel {
 		btnStorePC.addMouseListener(new MouseAdapter() {
 			public void mousePressed(MouseEvent e) {
 				StringBuffer buffer = new StringBuffer();
-				for(Component com: pnlPC.getComponents()){
-					if(com instanceof JRadioButton){
-						JRadioButton rdb = (JRadioButton)com;
+				for (Component com : pnlPC.getComponents()) {
+					if (com instanceof JRadioButton) {
+						JRadioButton rdb = (JRadioButton) com;
 						buffer = rdb.isSelected() ? buffer.append("1") : buffer.append("0");
 					}
 				}
@@ -1379,9 +1470,9 @@ public class FrontPanel {
 		btnStoreIR.addMouseListener(new MouseAdapter() {
 			public void mousePressed(MouseEvent e) {
 				StringBuffer buffer = new StringBuffer();
-				for(Component com: pnlIR.getComponents()){
-					if(com instanceof JRadioButton){
-						JRadioButton rdb = (JRadioButton)com;
+				for (Component com : pnlIR.getComponents()) {
+					if (com instanceof JRadioButton) {
+						JRadioButton rdb = (JRadioButton) com;
 						buffer = rdb.isSelected() ? buffer.append("1") : buffer.append("0");
 					}
 				}
@@ -1394,9 +1485,9 @@ public class FrontPanel {
 		btnStoreCC.addMouseListener(new MouseAdapter() {
 			public void mousePressed(MouseEvent e) {
 				StringBuffer buffer = new StringBuffer();
-				for(Component com: pnlCC.getComponents()){
-					if(com instanceof JRadioButton){
-						JRadioButton rdb = (JRadioButton)com;
+				for (Component com : pnlCC.getComponents()) {
+					if (com instanceof JRadioButton) {
+						JRadioButton rdb = (JRadioButton) com;
 						buffer = rdb.isSelected() ? buffer.append("1") : buffer.append("0");
 					}
 				}
@@ -1406,25 +1497,25 @@ public class FrontPanel {
 				System.out.println("CC is set to: " + value);
 			}
 		});
-		btnExecute.addMouseListener(new MouseAdapter(){
-			public void mousePressed(MouseEvent e){
+		btnExecute.addMouseListener(new MouseAdapter() {
+			public void mousePressed(MouseEvent e) {
 				StringBuffer buffer = new StringBuffer();
-				for(Component com: pnlIns.getComponents()){
-					if(com instanceof JRadioButton){
-						JRadioButton rdb = (JRadioButton)com;
+				for (Component com : pnlIns.getComponents()) {
+					if (com instanceof JRadioButton) {
+						JRadioButton rdb = (JRadioButton) com;
 						buffer = rdb.isSelected() ? buffer.append("1") : buffer.append("0");
 					}
 				}
 				String value = new BigInteger(buffer.toString(), 2).toString();
-				mcu.storeIntoMemory(8+Const.ROM.size()+8, Integer.valueOf(value));
-				registers.setPC(8+Const.ROM.size()+8);
+				mcu.storeIntoMemory(8 + Const.ROM.size() + 8, Integer.valueOf(value));
+				registers.setPC(8 + Const.ROM.size() + 8);
 				refreshRegistersPanel();
 				registers.setMAR(registers.getPC());
 				refreshRegistersPanel();
 				registers.setMBR(mcu.fetchFromMemory(registers.getMAR()));
 				registers.setIR(registers.getMBR());
 				refreshRegistersPanel();
-				runInstruction(registers.getBinaryStringIr(),registers,mcu);
+				runInstruction(registers.getBinaryStringIr(), registers, mcu);
 			}
 		});
 		btnIPL.addMouseListener(new MouseAdapter() {
@@ -1432,26 +1523,25 @@ public class FrontPanel {
 				mcu.loadFromROM();
 				refreshRegistersPanel();
 				registers.setPC(8);
-				do{
+				do {
 					refreshRegistersPanel();
 					registers.setMAR(registers.getPC());
 					refreshRegistersPanel();
 					registers.setMBR(mcu.fetchFromMemory(registers.getMAR()));
 					registers.setIR(registers.getMBR());
 					refreshRegistersPanel();
-					runInstruction(registers.getBinaryStringIr(),registers,mcu);
+					runInstruction(registers.getBinaryStringIr(), registers, mcu);
 					registers.increasePCByOne();
-				}while(mcu.fetchFromMemory(registers.getMAR())!=0);
+				} while (mcu.fetchFromMemory(registers.getMAR()) != 0);
 				registers.setPC(8);
 				refreshRegistersPanel();
 			}
 		});
 	}
-	
 
 	/**
-	 * everytime you change the value of a register,
-	 * call this method to let the change show on the frontpanel.
+	 * everytime you change the value of a register, call this method to let the
+	 * change show on the frontpanel.
 	 */
 	private void refreshRegistersPanel() {
 		for (Component com : pnlRegisters.getComponents()) {
@@ -1488,9 +1578,8 @@ public class FrontPanel {
 			}
 		}
 	}
-	
 
-	private void runInstruction(String instruction, Registers registers, MCU mcu){
+	private void runInstruction(String instruction, Registers registers, MCU mcu) {
 		System.out.println(instruction);
 		//
 		//
