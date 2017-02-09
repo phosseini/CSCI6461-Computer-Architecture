@@ -24,6 +24,10 @@ import javax.swing.JTextArea;
 import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 
+import util.Const;
+import javax.swing.JTextArea;
+import javax.swing.JScrollBar;
+import javax.swing.JScrollPane;
 
 public class FrontPanel {
 
@@ -320,7 +324,7 @@ public class FrontPanel {
 	private JTextArea console;
 	private JScrollPane scrollPane;
 	private JTextField textField;
-
+	
 	/**
 	 * Launch the application.
 	 */
@@ -1215,6 +1219,7 @@ public class FrontPanel {
 			}
 		});
 		pnlIns.add(btnExecute);
+		pnlIns.add(btnExecute);
 
 		scrollPane = new JScrollPane();
 		scrollPane.setBounds(752, 208, 251, 214);
@@ -1239,6 +1244,7 @@ public class FrontPanel {
 			}
 		});
 		panel.add(btnNewButton);
+		panel.add(btnNewButton);
 
 	}
 
@@ -1249,7 +1255,7 @@ public class FrontPanel {
 		// choice = 2 -> IX
 		// choice = 3 -> R
 		// choice = 4 -> Opcode
-
+		
 		int inst = 0;
 		switch (choice) {
 		case 0: {
@@ -1321,6 +1327,9 @@ public class FrontPanel {
 		return inst;
 	}
 
+	/**
+	 * add listeners to the components
+	 */
 	/**
 	 * add listeners to the components
 	 */
@@ -1590,9 +1599,11 @@ public class FrontPanel {
 				refreshRegistersPanel();
 				runInstruction(registers.getBinaryStringIr(), registers, mcu);
 				refreshRegistersPanel();
+				runInstruction(registers.getBinaryStringIr(), registers, mcu);
+				refreshRegistersPanel();
 			}
 		});
-		
+
 		// add listener to the IPL button
 		btnIPL.addMouseListener(new MouseAdapter() {
 			public void mousePressed(MouseEvent e) {
@@ -1617,8 +1628,15 @@ public class FrontPanel {
 
 	/**
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * everytime you change the value of a register, call this method to let the
 	 * change show on the frontpanel.
+=======
+	 * every time you change the value of a register, call this method to let
+	 * the change show on the front panel. this method will read the value of
+	 * every register and set the radiobuttons and textfield according to the
+	 * value
+>>>>>>> branch 'master' of https://github.com/phosseini/CSCI6461-computer-architecture
 =======
 	 * every time you change the value of a register, call this method to let
 	 * the change show on the front panel. this method will read the value of
@@ -1665,7 +1683,7 @@ public class FrontPanel {
 	private void printConsole(String message) {
 		console.append(message + "\n");
 	}
-
+	
 	private void runInstruction(String instruction, Registers registers, MCU mcu) {
 		System.out.println("instruction: " + instruction);
 		printConsole("instruction: " + instruction);
