@@ -78,7 +78,7 @@ public class FrontPanel {
 	private JRadioButton rdbR1_2;
 
 	private JRadioButton rdbR1_1;
-	JButton btnStoreR1;
+	private JButton btnStoreR1;
 	private JPanel pnlR2;
 	private JLabel lblR_2;
 	private JRadioButton rdbR2_16;
@@ -315,6 +315,7 @@ public class FrontPanel {
 	private JButton btnExecute;
 	private JTextArea console;
 	private JScrollPane scrollPane;
+	private JTextField textField;
 
 	/**
 	 * Launch the application.
@@ -1204,6 +1205,23 @@ public class FrontPanel {
 
 		console = new JTextArea();
 		scrollPane.setViewportView(console);
+		
+		JPanel panel = new JPanel();
+		panel.setBounds(752, 460, 251, 132);
+		frmCsciClassProject.getContentPane().add(panel);
+		
+		textField = new JTextField();
+		panel.add(textField);
+		textField.setColumns(10);
+		
+		JButton btnNewButton = new JButton("New button");
+		btnNewButton.addMouseListener(new MouseAdapter(){
+			public void mousePressed(MouseEvent e){				
+				int value = mcu.fetchFromMemory(Integer.parseInt(textField.getText()));
+				textField.setText(String.valueOf(value));
+			}
+		});
+		panel.add(btnNewButton);
 
 	}
 
@@ -1214,8 +1232,8 @@ public class FrontPanel {
 
 		// add listener to the store button of R0. when you push the store
 		// button, the selecting status of the radiobuttons will be read, and
-		// calculate the value of the register, then put it into the textfield
-		// and store it into the
+		// this method will calculate the value of the register, then put it
+		// into the textfield and store it into the
 		// register. no effective value will be read from textfield
 		btnStoreR0.addMouseListener(new MouseAdapter() {
 			public void mousePressed(MouseEvent e) {
@@ -1542,7 +1560,7 @@ public class FrontPanel {
 	}
 
 	private void printConsole(String message) {
-		console.append(message+"\n");
+		console.append(message + "\n");
 	}
 
 	private void runInstruction(String instruction, Registers registers, MCU mcu) {
