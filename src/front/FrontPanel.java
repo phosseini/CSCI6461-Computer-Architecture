@@ -17,6 +17,9 @@ import javax.swing.JTextField;
 import memory.MCU;
 import registers.Registers;
 import util.Const;
+import javax.swing.JTextArea;
+import javax.swing.JScrollBar;
+import javax.swing.JScrollPane;
 
 public class FrontPanel {
 
@@ -310,7 +313,8 @@ public class FrontPanel {
 	private JRadioButton rdbIns_2;
 	private JRadioButton rdbIns_1;
 	private JButton btnExecute;
-
+	private JTextArea console;
+	private JScrollPane scrollPane;
 
 	/**
 	 * Launch the application.
@@ -335,8 +339,12 @@ public class FrontPanel {
 		initCPU();
 		initComponents();
 		addListeners();
+		refreshRegistersPanel();
 	}
 
+	/**
+	 * initialize the registers and the memory control unit
+	 */
 	private void initCPU() {
 		registers = new Registers();
 		mcu = new MCU();
@@ -1130,78 +1138,91 @@ public class FrontPanel {
 		btnIPL = new JButton("IPL");
 		btnIPL.setBounds(799, 109, 136, 69);
 		frmCsciClassProject.getContentPane().add(btnIPL);
-		
+
 		pnlIns = new JPanel();
 		pnlIns.setBounds(14, 28, 716, 44);
 		frmCsciClassProject.getContentPane().add(pnlIns);
 		pnlIns.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
-		
+
 		lblIns = new JLabel("Instruction");
 		pnlIns.add(lblIns);
-		
+
 		rdbIns_16 = new JRadioButton("");
 		pnlIns.add(rdbIns_16);
-		
+
 		rdbIns_15 = new JRadioButton("");
 		pnlIns.add(rdbIns_15);
-		
+
 		rdbIns_14 = new JRadioButton("");
 		pnlIns.add(rdbIns_14);
-		
+
 		rdbIns_13 = new JRadioButton("");
 		pnlIns.add(rdbIns_13);
-		
+
 		rdbIns_12 = new JRadioButton("");
 		pnlIns.add(rdbIns_12);
-		
+
 		rdbIns_11 = new JRadioButton("");
 		pnlIns.add(rdbIns_11);
-		
+
 		rdbIns_10 = new JRadioButton("");
 		pnlIns.add(rdbIns_10);
-		
+
 		rdbIns_9 = new JRadioButton("");
 		pnlIns.add(rdbIns_9);
-		
+
 		rdbIns_8 = new JRadioButton("");
 		pnlIns.add(rdbIns_8);
-		
+
 		rdbIns_7 = new JRadioButton("");
 		pnlIns.add(rdbIns_7);
-		
+
 		rdbIns_6 = new JRadioButton("");
 		pnlIns.add(rdbIns_6);
-		
+
 		rdbIns_5 = new JRadioButton("");
 		pnlIns.add(rdbIns_5);
-		
+
 		rdbIns_4 = new JRadioButton("");
 		pnlIns.add(rdbIns_4);
-		
+
 		rdbIns_3 = new JRadioButton("");
 		pnlIns.add(rdbIns_3);
-		
+
 		rdbIns_2 = new JRadioButton("");
 		pnlIns.add(rdbIns_2);
-		
+
 		rdbIns_1 = new JRadioButton("");
 		pnlIns.add(rdbIns_1);
-		
+
 		btnExecute = new JButton("execute");
 		pnlIns.add(btnExecute);
-		
+
+		scrollPane = new JScrollPane();
+		scrollPane.setBounds(752, 208, 251, 214);
+		frmCsciClassProject.getContentPane().add(scrollPane);
+
+		console = new JTextArea();
+		scrollPane.setViewportView(console);
 
 	}
 
-
-	
+	/**
+	 * add listeners to the components
+	 */
 	private void addListeners() {
+
+		// add listener to the store button of R0. when you push the store
+		// button, the selecting status of the radiobuttons will be read, and
+		// calculate the value of the register, then put it into the textfield
+		// and store it into the
+		// register. no effective value will be read from textfield
 		btnStoreR0.addMouseListener(new MouseAdapter() {
 			public void mousePressed(MouseEvent e) {
 				StringBuffer buffer = new StringBuffer();
-				for(Component com: pnlR0.getComponents()){
-					if(com instanceof JRadioButton){
-						JRadioButton rdb = (JRadioButton)com;
+				for (Component com : pnlR0.getComponents()) {
+					if (com instanceof JRadioButton) {
+						JRadioButton rdb = (JRadioButton) com;
 						buffer = rdb.isSelected() ? buffer.append("1") : buffer.append("0");
 					}
 				}
@@ -1209,14 +1230,16 @@ public class FrontPanel {
 				textFieldR0.setText(value);
 				registers.setR0(Integer.parseInt(value));
 				System.out.println("R0 is set to: " + value);
+				printConsole("R0 is set to: " + value);
 			}
 		});
+		// add listener to the store button of R1
 		btnStoreR1.addMouseListener(new MouseAdapter() {
 			public void mousePressed(MouseEvent e) {
 				StringBuffer buffer = new StringBuffer();
-				for(Component com: pnlR1.getComponents()){
-					if(com instanceof JRadioButton){
-						JRadioButton rdb = (JRadioButton)com;
+				for (Component com : pnlR1.getComponents()) {
+					if (com instanceof JRadioButton) {
+						JRadioButton rdb = (JRadioButton) com;
 						buffer = rdb.isSelected() ? buffer.append("1") : buffer.append("0");
 					}
 				}
@@ -1224,14 +1247,16 @@ public class FrontPanel {
 				textFieldR1.setText(value);
 				registers.setR1(Integer.parseInt(value));
 				System.out.println("R1 is set to: " + value);
+				printConsole("R1 is set to: " + value);
 			}
 		});
+		// add listener to the store button of R2
 		btnStoreR2.addMouseListener(new MouseAdapter() {
 			public void mousePressed(MouseEvent e) {
 				StringBuffer buffer = new StringBuffer();
-				for(Component com: pnlR2.getComponents()){
-					if(com instanceof JRadioButton){
-						JRadioButton rdb = (JRadioButton)com;
+				for (Component com : pnlR2.getComponents()) {
+					if (com instanceof JRadioButton) {
+						JRadioButton rdb = (JRadioButton) com;
 						buffer = rdb.isSelected() ? buffer.append("1") : buffer.append("0");
 					}
 				}
@@ -1239,14 +1264,16 @@ public class FrontPanel {
 				textFieldR2.setText(value);
 				registers.setR2(Integer.parseInt(value));
 				System.out.println("R2 is set to: " + value);
+				printConsole("R2 is set to: " + value);
 			}
 		});
+		// add listener to the store button of R3
 		btnStoreR3.addMouseListener(new MouseAdapter() {
 			public void mousePressed(MouseEvent e) {
 				StringBuffer buffer = new StringBuffer();
-				for(Component com: pnlR3.getComponents()){
-					if(com instanceof JRadioButton){
-						JRadioButton rdb = (JRadioButton)com;
+				for (Component com : pnlR3.getComponents()) {
+					if (com instanceof JRadioButton) {
+						JRadioButton rdb = (JRadioButton) com;
 						buffer = rdb.isSelected() ? buffer.append("1") : buffer.append("0");
 					}
 				}
@@ -1254,14 +1281,16 @@ public class FrontPanel {
 				textFieldR3.setText(value);
 				registers.setR3(Integer.parseInt(value));
 				System.out.println("R3 is set to: " + value);
+				printConsole("R3 is set to: " + value);
 			}
 		});
+		// add listener to the store button of X1
 		btnStoreX1.addMouseListener(new MouseAdapter() {
 			public void mousePressed(MouseEvent e) {
 				StringBuffer buffer = new StringBuffer();
-				for(Component com: pnlX1.getComponents()){
-					if(com instanceof JRadioButton){
-						JRadioButton rdb = (JRadioButton)com;
+				for (Component com : pnlX1.getComponents()) {
+					if (com instanceof JRadioButton) {
+						JRadioButton rdb = (JRadioButton) com;
 						buffer = rdb.isSelected() ? buffer.append("1") : buffer.append("0");
 					}
 				}
@@ -1269,14 +1298,16 @@ public class FrontPanel {
 				textFieldX1.setText(value);
 				registers.setX1(Integer.parseInt(value));
 				System.out.println("X1 is set to: " + value);
+				printConsole("X1 is set to: " + value);
 			}
 		});
+		// add listener to the store button of X2
 		btnStoreX2.addMouseListener(new MouseAdapter() {
 			public void mousePressed(MouseEvent e) {
 				StringBuffer buffer = new StringBuffer();
-				for(Component com: pnlX2.getComponents()){
-					if(com instanceof JRadioButton){
-						JRadioButton rdb = (JRadioButton)com;
+				for (Component com : pnlX2.getComponents()) {
+					if (com instanceof JRadioButton) {
+						JRadioButton rdb = (JRadioButton) com;
 						buffer = rdb.isSelected() ? buffer.append("1") : buffer.append("0");
 					}
 				}
@@ -1284,14 +1315,16 @@ public class FrontPanel {
 				textFieldX2.setText(value);
 				registers.setX2(Integer.parseInt(value));
 				System.out.println("X2 is set to: " + value);
+				printConsole("X2 is set to: " + value);
 			}
 		});
+		// add listener to the store button of X3
 		btnStoreX3.addMouseListener(new MouseAdapter() {
 			public void mousePressed(MouseEvent e) {
 				StringBuffer buffer = new StringBuffer();
-				for(Component com: pnlX3.getComponents()){
-					if(com instanceof JRadioButton){
-						JRadioButton rdb = (JRadioButton)com;
+				for (Component com : pnlX3.getComponents()) {
+					if (com instanceof JRadioButton) {
+						JRadioButton rdb = (JRadioButton) com;
 						buffer = rdb.isSelected() ? buffer.append("1") : buffer.append("0");
 					}
 				}
@@ -1299,14 +1332,16 @@ public class FrontPanel {
 				textFieldX3.setText(value);
 				registers.setX1(Integer.parseInt(value));
 				System.out.println("X3 is set to: " + value);
+				printConsole("X3 is set to: " + value);
 			}
 		});
+		// add listener to the store button of MAR
 		btnStoreMAR.addMouseListener(new MouseAdapter() {
 			public void mousePressed(MouseEvent e) {
 				StringBuffer buffer = new StringBuffer();
-				for(Component com: pnlMAR.getComponents()){
-					if(com instanceof JRadioButton){
-						JRadioButton rdb = (JRadioButton)com;
+				for (Component com : pnlMAR.getComponents()) {
+					if (com instanceof JRadioButton) {
+						JRadioButton rdb = (JRadioButton) com;
 						buffer = rdb.isSelected() ? buffer.append("1") : buffer.append("0");
 					}
 				}
@@ -1314,14 +1349,16 @@ public class FrontPanel {
 				textFieldMAR.setText(value);
 				registers.setMAR(Integer.parseInt(value));
 				System.out.println("MAR is set to: " + value);
+				printConsole("MAR is set to: " + value);
 			}
 		});
+		// add listener to the store button of MBR
 		btnStoreMBR.addMouseListener(new MouseAdapter() {
 			public void mousePressed(MouseEvent e) {
 				StringBuffer buffer = new StringBuffer();
-				for(Component com: pnlMBR.getComponents()){
-					if(com instanceof JRadioButton){
-						JRadioButton rdb = (JRadioButton)com;
+				for (Component com : pnlMBR.getComponents()) {
+					if (com instanceof JRadioButton) {
+						JRadioButton rdb = (JRadioButton) com;
 						buffer = rdb.isSelected() ? buffer.append("1") : buffer.append("0");
 					}
 				}
@@ -1329,14 +1366,16 @@ public class FrontPanel {
 				textFieldMBR.setText(value);
 				registers.setMBR(Integer.parseInt(value));
 				System.out.println("MBR is set to: " + value);
+				printConsole("MBR is set to: " + value);
 			}
 		});
+		// add listener to the store button of MSR
 		btnStoreMSR.addMouseListener(new MouseAdapter() {
 			public void mousePressed(MouseEvent e) {
 				StringBuffer buffer = new StringBuffer();
-				for(Component com: pnlMSR.getComponents()){
-					if(com instanceof JRadioButton){
-						JRadioButton rdb = (JRadioButton)com;
+				for (Component com : pnlMSR.getComponents()) {
+					if (com instanceof JRadioButton) {
+						JRadioButton rdb = (JRadioButton) com;
 						buffer = rdb.isSelected() ? buffer.append("1") : buffer.append("0");
 					}
 				}
@@ -1344,14 +1383,16 @@ public class FrontPanel {
 				textFieldMSR.setText(value);
 				registers.setMSR(Integer.parseInt(value));
 				System.out.println("MSR is set to: " + value);
+				printConsole("MSR is set to: " + value);
 			}
 		});
+		// add listener to the store button of MFR
 		btnStoreMFR.addMouseListener(new MouseAdapter() {
 			public void mousePressed(MouseEvent e) {
 				StringBuffer buffer = new StringBuffer();
-				for(Component com: pnlMFR.getComponents()){
-					if(com instanceof JRadioButton){
-						JRadioButton rdb = (JRadioButton)com;
+				for (Component com : pnlMFR.getComponents()) {
+					if (com instanceof JRadioButton) {
+						JRadioButton rdb = (JRadioButton) com;
 						buffer = rdb.isSelected() ? buffer.append("1") : buffer.append("0");
 					}
 				}
@@ -1359,14 +1400,16 @@ public class FrontPanel {
 				textFieldMFR.setText(value);
 				registers.setMFR(Integer.parseInt(value));
 				System.out.println("MFR is set to: " + value);
+				printConsole("MFR is set to: " + value);
 			}
 		});
+		// add listener to the store button of PC
 		btnStorePC.addMouseListener(new MouseAdapter() {
 			public void mousePressed(MouseEvent e) {
 				StringBuffer buffer = new StringBuffer();
-				for(Component com: pnlPC.getComponents()){
-					if(com instanceof JRadioButton){
-						JRadioButton rdb = (JRadioButton)com;
+				for (Component com : pnlPC.getComponents()) {
+					if (com instanceof JRadioButton) {
+						JRadioButton rdb = (JRadioButton) com;
 						buffer = rdb.isSelected() ? buffer.append("1") : buffer.append("0");
 					}
 				}
@@ -1374,14 +1417,16 @@ public class FrontPanel {
 				textFieldPC.setText(value);
 				registers.setPC(Integer.parseInt(value));
 				System.out.println("PC is set to: " + value);
+				printConsole("PC is set to: " + value);
 			}
 		});
+		// add listener to the store button of ID
 		btnStoreIR.addMouseListener(new MouseAdapter() {
 			public void mousePressed(MouseEvent e) {
 				StringBuffer buffer = new StringBuffer();
-				for(Component com: pnlIR.getComponents()){
-					if(com instanceof JRadioButton){
-						JRadioButton rdb = (JRadioButton)com;
+				for (Component com : pnlIR.getComponents()) {
+					if (com instanceof JRadioButton) {
+						JRadioButton rdb = (JRadioButton) com;
 						buffer = rdb.isSelected() ? buffer.append("1") : buffer.append("0");
 					}
 				}
@@ -1389,14 +1434,16 @@ public class FrontPanel {
 				textFieldIR.setText(value);
 				registers.setIR(Integer.parseInt(value));
 				System.out.println("IR is set to: " + value);
+				printConsole("IR is set to: " + value);
 			}
 		});
+		// add listener to the store button of CC
 		btnStoreCC.addMouseListener(new MouseAdapter() {
 			public void mousePressed(MouseEvent e) {
 				StringBuffer buffer = new StringBuffer();
-				for(Component com: pnlCC.getComponents()){
-					if(com instanceof JRadioButton){
-						JRadioButton rdb = (JRadioButton)com;
+				for (Component com : pnlCC.getComponents()) {
+					if (com instanceof JRadioButton) {
+						JRadioButton rdb = (JRadioButton) com;
 						buffer = rdb.isSelected() ? buffer.append("1") : buffer.append("0");
 					}
 				}
@@ -1404,54 +1451,59 @@ public class FrontPanel {
 				textFieldCC.setText(value);
 				registers.setCC(Integer.parseInt(value));
 				System.out.println("CC is set to: " + value);
+				printConsole("CC is set to: " + value);
 			}
 		});
-		btnExecute.addMouseListener(new MouseAdapter(){
-			public void mousePressed(MouseEvent e){
+		// add listener to the execute button of instruction
+		btnExecute.addMouseListener(new MouseAdapter() {
+			public void mousePressed(MouseEvent e) {
 				StringBuffer buffer = new StringBuffer();
-				for(Component com: pnlIns.getComponents()){
-					if(com instanceof JRadioButton){
-						JRadioButton rdb = (JRadioButton)com;
+				for (Component com : pnlIns.getComponents()) {
+					if (com instanceof JRadioButton) {
+						JRadioButton rdb = (JRadioButton) com;
 						buffer = rdb.isSelected() ? buffer.append("1") : buffer.append("0");
 					}
 				}
 				String value = new BigInteger(buffer.toString(), 2).toString();
-				mcu.storeIntoMemory(8+Const.ROM.size()+8, Integer.valueOf(value));
-				registers.setPC(8+Const.ROM.size()+8);
+				mcu.storeIntoMemory(8 + Const.ROM.size() + 8, Integer.valueOf(value));
+				registers.setPC(8 + Const.ROM.size() + 8);
 				refreshRegistersPanel();
 				registers.setMAR(registers.getPC());
 				refreshRegistersPanel();
 				registers.setMBR(mcu.fetchFromMemory(registers.getMAR()));
 				registers.setIR(registers.getMBR());
 				refreshRegistersPanel();
-				runInstruction(registers.getBinaryStringIr(),registers,mcu);
+				runInstruction(registers.getBinaryStringIr(), registers, mcu);
+				refreshRegistersPanel();
 			}
 		});
+		// add listener to the IPL button
 		btnIPL.addMouseListener(new MouseAdapter() {
 			public void mousePressed(MouseEvent e) {
 				mcu.loadFromROM();
 				refreshRegistersPanel();
 				registers.setPC(8);
-				do{
+				do {
 					refreshRegistersPanel();
 					registers.setMAR(registers.getPC());
 					refreshRegistersPanel();
 					registers.setMBR(mcu.fetchFromMemory(registers.getMAR()));
 					registers.setIR(registers.getMBR());
 					refreshRegistersPanel();
-					runInstruction(registers.getBinaryStringIr(),registers,mcu);
+					runInstruction(registers.getBinaryStringIr(), registers, mcu);
 					registers.increasePCByOne();
-				}while(mcu.fetchFromMemory(registers.getMAR())!=0);
+				} while (mcu.fetchFromMemory(registers.getMAR()) != 0);
 				registers.setPC(8);
 				refreshRegistersPanel();
 			}
 		});
 	}
-	
 
 	/**
-	 * everytime you change the value of a register,
-	 * call this method to let the change show on the frontpanel.
+	 * every time you change the value of a register, call this method to let
+	 * the change show on the front panel. this method will read the value of
+	 * every register and set the radiobuttons and textfield according to the
+	 * value
 	 */
 	private void refreshRegistersPanel() {
 		for (Component com : pnlRegisters.getComponents()) {
@@ -1488,10 +1540,14 @@ public class FrontPanel {
 			}
 		}
 	}
-	
 
-	private void runInstruction(String instruction, Registers registers, MCU mcu){
-		System.out.println(instruction);
+	private void printConsole(String message) {
+		console.append(message+"\n");
+	}
+
+	private void runInstruction(String instruction, Registers registers, MCU mcu) {
+		System.out.println("instruction: " + instruction);
+		printConsole("instruction: " + instruction);
 		//
 		//
 		//
