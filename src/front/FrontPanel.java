@@ -20,6 +20,10 @@ import registers.Registers;
 import util.Const;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JTextArea;
+import javax.swing.JScrollBar;
+import javax.swing.JScrollPane;
+
 
 public class FrontPanel {
 
@@ -78,7 +82,7 @@ public class FrontPanel {
 	private JRadioButton rdbR1_2;
 
 	private JRadioButton rdbR1_1;
-	JButton btnStoreR1;
+	private JButton btnStoreR1;
 	private JPanel pnlR2;
 	private JLabel lblR_2;
 	private JRadioButton rdbR2_16;
@@ -313,6 +317,9 @@ public class FrontPanel {
 	private JRadioButton rdbIns_2;
 	private JRadioButton rdbIns_1;
 	private JButton btnExecute;
+	private JTextArea console;
+	private JScrollPane scrollPane;
+	private JTextField textField;
 
 	/**
 	 * Launch the application.
@@ -337,8 +344,12 @@ public class FrontPanel {
 		initCPU();
 		initComponents();
 		addListeners();
+		refreshRegistersPanel();
 	}
 
+	/**
+	 * initialize the registers and the memory control unit
+	 */
 	private void initCPU() {
 		registers = new Registers();
 		mcu = new MCU();
@@ -1205,6 +1216,30 @@ public class FrontPanel {
 		});
 		pnlIns.add(btnExecute);
 
+		scrollPane = new JScrollPane();
+		scrollPane.setBounds(752, 208, 251, 214);
+		frmCsciClassProject.getContentPane().add(scrollPane);
+
+		console = new JTextArea();
+		scrollPane.setViewportView(console);
+		
+		JPanel panel = new JPanel();
+		panel.setBounds(752, 460, 251, 132);
+		frmCsciClassProject.getContentPane().add(panel);
+		
+		textField = new JTextField();
+		panel.add(textField);
+		textField.setColumns(10);
+		
+		JButton btnNewButton = new JButton("New button");
+		btnNewButton.addMouseListener(new MouseAdapter(){
+			public void mousePressed(MouseEvent e){				
+				int value = mcu.fetchFromMemory(Integer.parseInt(textField.getText()));
+				textField.setText(String.valueOf(value));
+			}
+		});
+		panel.add(btnNewButton);
+
 	}
 
 	// We use this method in order to read current instruction
@@ -1286,7 +1321,16 @@ public class FrontPanel {
 		return inst;
 	}
 
+	/**
+	 * add listeners to the components
+	 */
 	private void addListeners() {
+
+		// add listener to the store button of R0. when you push the store
+		// button, the selecting status of the radiobuttons will be read, and
+		// this method will calculate the value of the register, then put it
+		// into the textfield and store it into the
+		// register. no effective value will be read from textfield
 		btnStoreR0.addMouseListener(new MouseAdapter() {
 			public void mousePressed(MouseEvent e) {
 				StringBuffer buffer = new StringBuffer();
@@ -1300,8 +1344,10 @@ public class FrontPanel {
 				textFieldR0.setText(value);
 				registers.setR0(Integer.parseInt(value));
 				System.out.println("R0 is set to: " + value);
+				printConsole("R0 is set to: " + value);
 			}
 		});
+		// add listener to the store button of R1
 		btnStoreR1.addMouseListener(new MouseAdapter() {
 			public void mousePressed(MouseEvent e) {
 				StringBuffer buffer = new StringBuffer();
@@ -1315,8 +1361,10 @@ public class FrontPanel {
 				textFieldR1.setText(value);
 				registers.setR1(Integer.parseInt(value));
 				System.out.println("R1 is set to: " + value);
+				printConsole("R1 is set to: " + value);
 			}
 		});
+		// add listener to the store button of R2
 		btnStoreR2.addMouseListener(new MouseAdapter() {
 			public void mousePressed(MouseEvent e) {
 				StringBuffer buffer = new StringBuffer();
@@ -1330,8 +1378,10 @@ public class FrontPanel {
 				textFieldR2.setText(value);
 				registers.setR2(Integer.parseInt(value));
 				System.out.println("R2 is set to: " + value);
+				printConsole("R2 is set to: " + value);
 			}
 		});
+		// add listener to the store button of R3
 		btnStoreR3.addMouseListener(new MouseAdapter() {
 			public void mousePressed(MouseEvent e) {
 				StringBuffer buffer = new StringBuffer();
@@ -1345,8 +1395,10 @@ public class FrontPanel {
 				textFieldR3.setText(value);
 				registers.setR3(Integer.parseInt(value));
 				System.out.println("R3 is set to: " + value);
+				printConsole("R3 is set to: " + value);
 			}
 		});
+		// add listener to the store button of X1
 		btnStoreX1.addMouseListener(new MouseAdapter() {
 			public void mousePressed(MouseEvent e) {
 				StringBuffer buffer = new StringBuffer();
@@ -1360,8 +1412,10 @@ public class FrontPanel {
 				textFieldX1.setText(value);
 				registers.setX1(Integer.parseInt(value));
 				System.out.println("X1 is set to: " + value);
+				printConsole("X1 is set to: " + value);
 			}
 		});
+		// add listener to the store button of X2
 		btnStoreX2.addMouseListener(new MouseAdapter() {
 			public void mousePressed(MouseEvent e) {
 				StringBuffer buffer = new StringBuffer();
@@ -1375,8 +1429,10 @@ public class FrontPanel {
 				textFieldX2.setText(value);
 				registers.setX2(Integer.parseInt(value));
 				System.out.println("X2 is set to: " + value);
+				printConsole("X2 is set to: " + value);
 			}
 		});
+		// add listener to the store button of X3
 		btnStoreX3.addMouseListener(new MouseAdapter() {
 			public void mousePressed(MouseEvent e) {
 				StringBuffer buffer = new StringBuffer();
@@ -1390,8 +1446,10 @@ public class FrontPanel {
 				textFieldX3.setText(value);
 				registers.setX1(Integer.parseInt(value));
 				System.out.println("X3 is set to: " + value);
+				printConsole("X3 is set to: " + value);
 			}
 		});
+		// add listener to the store button of MAR
 		btnStoreMAR.addMouseListener(new MouseAdapter() {
 			public void mousePressed(MouseEvent e) {
 				StringBuffer buffer = new StringBuffer();
@@ -1405,8 +1463,10 @@ public class FrontPanel {
 				textFieldMAR.setText(value);
 				registers.setMAR(Integer.parseInt(value));
 				System.out.println("MAR is set to: " + value);
+				printConsole("MAR is set to: " + value);
 			}
 		});
+		// add listener to the store button of MBR
 		btnStoreMBR.addMouseListener(new MouseAdapter() {
 			public void mousePressed(MouseEvent e) {
 				StringBuffer buffer = new StringBuffer();
@@ -1420,8 +1480,10 @@ public class FrontPanel {
 				textFieldMBR.setText(value);
 				registers.setMBR(Integer.parseInt(value));
 				System.out.println("MBR is set to: " + value);
+				printConsole("MBR is set to: " + value);
 			}
 		});
+		// add listener to the store button of MSR
 		btnStoreMSR.addMouseListener(new MouseAdapter() {
 			public void mousePressed(MouseEvent e) {
 				StringBuffer buffer = new StringBuffer();
@@ -1435,8 +1497,10 @@ public class FrontPanel {
 				textFieldMSR.setText(value);
 				registers.setMSR(Integer.parseInt(value));
 				System.out.println("MSR is set to: " + value);
+				printConsole("MSR is set to: " + value);
 			}
 		});
+		// add listener to the store button of MFR
 		btnStoreMFR.addMouseListener(new MouseAdapter() {
 			public void mousePressed(MouseEvent e) {
 				StringBuffer buffer = new StringBuffer();
@@ -1450,8 +1514,10 @@ public class FrontPanel {
 				textFieldMFR.setText(value);
 				registers.setMFR(Integer.parseInt(value));
 				System.out.println("MFR is set to: " + value);
+				printConsole("MFR is set to: " + value);
 			}
 		});
+		// add listener to the store button of PC
 		btnStorePC.addMouseListener(new MouseAdapter() {
 			public void mousePressed(MouseEvent e) {
 				StringBuffer buffer = new StringBuffer();
@@ -1465,8 +1531,10 @@ public class FrontPanel {
 				textFieldPC.setText(value);
 				registers.setPC(Integer.parseInt(value));
 				System.out.println("PC is set to: " + value);
+				printConsole("PC is set to: " + value);
 			}
 		});
+		// add listener to the store button of ID
 		btnStoreIR.addMouseListener(new MouseAdapter() {
 			public void mousePressed(MouseEvent e) {
 				StringBuffer buffer = new StringBuffer();
@@ -1480,8 +1548,10 @@ public class FrontPanel {
 				textFieldIR.setText(value);
 				registers.setIR(Integer.parseInt(value));
 				System.out.println("IR is set to: " + value);
+				printConsole("IR is set to: " + value);
 			}
 		});
+		// add listener to the store button of CC
 		btnStoreCC.addMouseListener(new MouseAdapter() {
 			public void mousePressed(MouseEvent e) {
 				StringBuffer buffer = new StringBuffer();
@@ -1495,8 +1565,11 @@ public class FrontPanel {
 				textFieldCC.setText(value);
 				registers.setCC(Integer.parseInt(value));
 				System.out.println("CC is set to: " + value);
+				printConsole("CC is set to: " + value);
 			}
 		});
+
+		// add listener to the execute button of instruction
 		btnExecute.addMouseListener(new MouseAdapter() {
 			public void mousePressed(MouseEvent e) {
 				StringBuffer buffer = new StringBuffer();
@@ -1516,8 +1589,11 @@ public class FrontPanel {
 				registers.setIR(registers.getMBR());
 				refreshRegistersPanel();
 				runInstruction(registers.getBinaryStringIr(), registers, mcu);
+				refreshRegistersPanel();
 			}
 		});
+		
+		// add listener to the IPL button
 		btnIPL.addMouseListener(new MouseAdapter() {
 			public void mousePressed(MouseEvent e) {
 				mcu.loadFromROM();
@@ -1540,8 +1616,15 @@ public class FrontPanel {
 	}
 
 	/**
+<<<<<<< HEAD
 	 * everytime you change the value of a register, call this method to let the
 	 * change show on the frontpanel.
+=======
+	 * every time you change the value of a register, call this method to let
+	 * the change show on the front panel. this method will read the value of
+	 * every register and set the radiobuttons and textfield according to the
+	 * value
+>>>>>>> branch 'master' of https://github.com/phosseini/CSCI6461-computer-architecture
 	 */
 	private void refreshRegistersPanel() {
 		for (Component com : pnlRegisters.getComponents()) {
@@ -1578,14 +1661,13 @@ public class FrontPanel {
 			}
 		}
 	}
+	
+	private void printConsole(String message) {
+		console.append(message + "\n");
+	}
 
 	private void runInstruction(String instruction, Registers registers, MCU mcu) {
-		System.out.println(instruction);
-		//
-		//
-		//
-		//
-		//
-		//
+		System.out.println("instruction: " + instruction);
+		printConsole("instruction: " + instruction);
 	}
 }
