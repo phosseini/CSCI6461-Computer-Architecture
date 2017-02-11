@@ -1205,10 +1205,7 @@ public class FrontPanel {
 		pnlIns.add(rdbIns_1);
 
 		btnExecute = new JButton("execute");
-		btnExecute.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
+
 		pnlIns.add(btnExecute);
 		pnlIns.add(btnExecute);
 
