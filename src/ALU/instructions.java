@@ -64,9 +64,39 @@ public class instructions {
 			// now, we store the content of Index register into the memory
 			objMem.storeIntoMemory(bin2dec(effectiveAddress), bin2dec(IXreg));
 		}
+		case 1: {
+			// 01: LDR -> Load Register From Memory
+			// we read the content of effective address and laod to the register
+			reg = objMem.fetchFromMemory(bin2dec(effectiveAddress));
+		}
+		case 11: {
+			// 03: LDA -> Load Register with Address
+			reg = bin2dec(effectiveAddress);
+		}
+		case 101001: {
+			// 41: LDX -> Load Index Register from Memory
+			// first, we read the content of selected Index Register using [IX]
+			// in instruction
+			switch (inst.getIX()) {
+			case 0: {
+				IXreg = objReg.getX1();
+			}
+			case 1: {
+				IXreg = objReg.getX2();
+			}
+			case 10: {
+				IXreg = objReg.getX3();
+			}
+			
+			}
+			// now, we load the content of effective address from the memory
+			IXreg = objMem.fetchFromMemory(bin2dec(effectiveAddress));
+		}
+			
+		}
 		}
 
-	}
+	
 
 	// Using this method, we calculate the effective address
 	private int EA(ALU.instruction inst) {
