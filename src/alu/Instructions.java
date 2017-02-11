@@ -1,8 +1,8 @@
-package ALU;
+package alu;
 
 import java.math.BigInteger;
 
-public class instructions {
+public class Instructions {
 
 	// converting a binary value to a decimal value
 	public int bin2dec(int binary) {
@@ -18,7 +18,7 @@ public class instructions {
 		int ix = Integer.valueOf(inst.substring(8, 10));
 		int r = Integer.valueOf(inst.substring(6, 8));
 		int opcode = Integer.valueOf(inst.substring(0, 6));
-		ALU.instruction objInst = new instruction();
+		alu.Instruction objInst = new Instruction();
 		objInst.address = address;
 		objInst.i = i;
 		objInst.ix = ix;
@@ -82,7 +82,7 @@ public class instructions {
 	}
 
 	// calculating the effective address
-	private int EA(ALU.instruction objInst, memory.MCU mcu, registers.Registers registers) {
+	private int EA(alu.Instruction objInst, memory.MCU mcu, registers.Registers registers) {
 
 		if (objInst.getI() == 0) {
 			// NO indirect addressing
