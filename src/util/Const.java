@@ -23,6 +23,10 @@ public class Const {
 		private ConditionCode(int value) {
 			this.value = value;
 		}
+		
+		public int getValue(){
+			return this.value;
+		}
 	}
 
 	// Machine Fault
@@ -37,6 +41,10 @@ public class Const {
 		private MachineFault(int value) {
 			this.value = value;
 		}
+		
+		public int getValue(){
+			return this.value;
+		}
 	}
 
 	public enum OpCode {
@@ -46,6 +54,10 @@ public class Const {
 
 		private OpCode(String value) {
 			this.value = value;
+		}
+		
+		public String getValue(){
+			return this.value;
 		}
 	}
 

@@ -12,22 +12,14 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 import ALU.instructions;
 import memory.MCU;
 import registers.Registers;
 import util.Const;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import javax.swing.JTextArea;
-import javax.swing.JScrollBar;
-import javax.swing.JScrollPane;
-
-import util.Const;
-import javax.swing.JTextArea;
-import javax.swing.JScrollBar;
-import javax.swing.JScrollPane;
 
 public class FrontPanel {
 
@@ -1205,8 +1197,6 @@ public class FrontPanel {
 		pnlIns.add(rdbIns_1);
 
 		btnExecute = new JButton("execute");
-		
-		pnlIns.add(btnExecute);
 		pnlIns.add(btnExecute);
 
 		scrollPane = new JScrollPane();
@@ -1232,16 +1222,11 @@ public class FrontPanel {
 			}
 		});
 		panel.add(btnNewButton);
-		panel.add(btnNewButton);
 
 	}
 
-	/**
-	 * add listeners to the components
-	 */
-	/**
-	 * add listeners to the components
-	 */
+	 // add listeners to the components
+	
 	private void addListeners() {
 
 		// add listener to the store button of R0. when you push the store
@@ -1545,6 +1530,7 @@ public class FrontPanel {
 	 * front panel. this method will read the value of every register and set
 	 * the radiobuttons and textfield according to the value
 	 */
+	
 	private void refreshRegistersPanel() {
 		for (Component com : pnlRegisters.getComponents()) {
 			if (com instanceof JPanel) {
