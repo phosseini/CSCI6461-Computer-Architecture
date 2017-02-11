@@ -1207,15 +1207,6 @@ public class FrontPanel {
 		btnExecute = new JButton("execute");
 		btnExecute.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				// execute button event
-				ALU.instructions obj = new instructions();
-				ALU.instruction instruction = new ALU.instruction();
-				instruction.Opcode = readInst(4);
-				instruction.R = readInst(3);
-				instruction.IX = readInst(2);
-				instruction.I = readInst(1);
-				instruction.Address = readInst(0);
-				obj.execute(instruction);
 			}
 		});
 		pnlIns.add(btnExecute);
@@ -1626,23 +1617,17 @@ public class FrontPanel {
 		});
 	}
 
-	/**
-<<<<<<< HEAD
-<<<<<<< HEAD
+	/*
 	 * everytime you change the value of a register, call this method to let the
 	 * change show on the frontpanel.
-=======
 	 * every time you change the value of a register, call this method to let
 	 * the change show on the front panel. this method will read the value of
 	 * every register and set the radiobuttons and textfield according to the
 	 * value
->>>>>>> branch 'master' of https://github.com/phosseini/CSCI6461-computer-architecture
-=======
 	 * every time you change the value of a register, call this method to let
 	 * the change show on the front panel. this method will read the value of
 	 * every register and set the radiobuttons and textfield according to the
 	 * value
->>>>>>> branch 'master' of https://github.com/phosseini/CSCI6461-computer-architecture
 	 */
 	private void refreshRegistersPanel() {
 		for (Component com : pnlRegisters.getComponents()) {
@@ -1687,5 +1672,14 @@ public class FrontPanel {
 	private void runInstruction(String instruction, Registers registers, MCU mcu) {
 		System.out.println("instruction: " + instruction);
 		printConsole("instruction: " + instruction);
+		// execute button event
+		ALU.instructions obj = new instructions();
+		ALU.instruction instObj = new ALU.instruction();
+		instObj.Opcode = readInst(4);
+		instObj.R = readInst(3);
+		instObj.IX = readInst(2);
+		instObj.I = readInst(1);
+		instObj.Address = readInst(0);
+		obj.execute(instObj, registers, mcu);
 	}
 }
