@@ -20,6 +20,9 @@ import ALU.instructions;
 import memory.MCU;
 import registers.Registers;
 import util.Const;
+import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.Alignment;
+import javax.swing.LayoutStyle.ComponentPlacement;
 
 public class FrontPanel {
 
@@ -316,6 +319,7 @@ public class FrontPanel {
 	private JTextArea console;
 	private JScrollPane scrollPane;
 	private JTextField textField;
+	private JTextField textField_1;
 
 	/**
 	 * Launch the application.
@@ -1204,24 +1208,82 @@ public class FrontPanel {
 		frmCsciClassProject.getContentPane().add(scrollPane);
 
 		console = new JTextArea();
-		scrollPane.setViewportView(console);
+		scrollPane.setColumnHeaderView(console);
 
 		JPanel panel = new JPanel();
 		panel.setBounds(752, 460, 251, 132);
 		frmCsciClassProject.getContentPane().add(panel);
+		
+		JLabel lblAddress = new JLabel("address");
 
 		textField = new JTextField();
-		panel.add(textField);
 		textField.setColumns(10);
-
-		JButton btnNewButton = new JButton("New button");
-		btnNewButton.addMouseListener(new MouseAdapter() {
+		
+		JLabel lblNewLabel_1 = new JLabel("value");
+		
+		textField_1 = new JTextField();
+		textField_1.setColumns(10);
+		
+		JButton btnStore = new JButton("store");
+		
+				JButton btnNewButton = new JButton("load");
+				btnNewButton.addMouseListener(new MouseAdapter() {
+					public void mousePressed(MouseEvent e) {
+						int value = mcu.fetchFromMemory(Integer.parseInt(textField.getText()));
+						textField.setText(String.valueOf(value));
+					}
+				});
+				GroupLayout gl_panel = new GroupLayout(panel);
+				gl_panel.setHorizontalGroup(
+					gl_panel.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_panel.createSequentialGroup()
+							.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+								.addGroup(gl_panel.createSequentialGroup()
+									.addGap(13)
+									.addComponent(lblAddress)
+									.addGap(5)
+									.addComponent(textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+								.addGroup(gl_panel.createSequentialGroup()
+									.addContainerGap()
+									.addComponent(lblNewLabel_1)
+									.addPreferredGap(ComponentPlacement.RELATED)
+									.addComponent(textField_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+								.addGroup(gl_panel.createSequentialGroup()
+									.addContainerGap()
+									.addComponent(btnStore)
+									.addPreferredGap(ComponentPlacement.RELATED)
+									.addComponent(btnNewButton)))
+							.addContainerGap(102, Short.MAX_VALUE))
+				);
+				gl_panel.setVerticalGroup(
+					gl_panel.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_panel.createSequentialGroup()
+							.addGap(5)
+							.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+								.addGroup(gl_panel.createSequentialGroup()
+									.addGap(3)
+									.addComponent(lblAddress))
+								.addComponent(textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+							.addGap(6)
+							.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
+								.addComponent(textField_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+								.addComponent(lblNewLabel_1))
+							.addGap(33)
+							.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
+								.addComponent(btnStore)
+								.addComponent(btnNewButton))
+							.addContainerGap())
+				);
+				panel.setLayout(gl_panel);
+		
+		JLabel lblNewLabel = new JLabel("Console");
+		lblNewLabel.setBounds(752, 191, 72, 18);
+		frmCsciClassProject.getContentPane().add(lblNewLabel);
+		btnStore.addMouseListener(new MouseAdapter() {
 			public void mousePressed(MouseEvent e) {
-				int value = mcu.fetchFromMemory(Integer.parseInt(textField.getText()));
-				textField.setText(String.valueOf(value));
+				mcu.storeIntoMemory(Integer.parseInt(textField.getText()), Integer.parseInt(textField_1.getText()));
 			}
 		});
-		panel.add(btnNewButton);
 
 	}
 
