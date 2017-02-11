@@ -324,7 +324,7 @@ public class FrontPanel {
 	private JTextArea console;
 	private JScrollPane scrollPane;
 	private JTextField textField;
-	
+
 	/**
 	 * Launch the application.
 	 */
@@ -1205,10 +1205,7 @@ public class FrontPanel {
 		pnlIns.add(rdbIns_1);
 
 		btnExecute = new JButton("execute");
-		btnExecute.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
+		
 		pnlIns.add(btnExecute);
 		pnlIns.add(btnExecute);
 
@@ -1218,18 +1215,18 @@ public class FrontPanel {
 
 		console = new JTextArea();
 		scrollPane.setViewportView(console);
-		
+
 		JPanel panel = new JPanel();
 		panel.setBounds(752, 460, 251, 132);
 		frmCsciClassProject.getContentPane().add(panel);
-		
+
 		textField = new JTextField();
 		panel.add(textField);
 		textField.setColumns(10);
-		
+
 		JButton btnNewButton = new JButton("New button");
-		btnNewButton.addMouseListener(new MouseAdapter(){
-			public void mousePressed(MouseEvent e){				
+		btnNewButton.addMouseListener(new MouseAdapter() {
+			public void mousePressed(MouseEvent e) {
 				int value = mcu.fetchFromMemory(Integer.parseInt(textField.getText()));
 				textField.setText(String.valueOf(value));
 			}
@@ -1237,85 +1234,6 @@ public class FrontPanel {
 		panel.add(btnNewButton);
 		panel.add(btnNewButton);
 
-	}
-
-	// We use this method in order to read current instruction
-	private int readInst(int choice) {
-		// choice = 0 -> Address
-		// choice = 1 -> I
-		// choice = 2 -> IX
-		// choice = 3 -> R
-		// choice = 4 -> Opcode
-		
-		int inst = 0;
-		switch (choice) {
-		case 0: {
-			if (rdbIns_1.isSelected()) {
-				inst += Math.pow(10, 0);
-			}
-			if (rdbIns_2.isSelected()) {
-				inst += Math.pow(10, 1);
-				;
-			}
-			if (rdbIns_3.isSelected()) {
-				inst += Math.pow(10, 2);
-				;
-			}
-			if (rdbIns_4.isSelected()) {
-				inst += Math.pow(10, 3);
-			}
-			if (rdbIns_5.isSelected()) {
-				inst += Math.pow(10, 4);
-			}
-			break;
-		}
-		case 1: {
-			if (rdbIns_6.isSelected()) {
-				inst = 1;
-			}
-			break;
-		}
-		case 2: {
-			if (rdbIns_7.isSelected()) {
-				inst += Math.pow(10, 0);
-			}
-			if (rdbIns_8.isSelected()) {
-				inst += Math.pow(10, 1);
-			}
-			break;
-		}
-		case 3: {
-			if (rdbIns_9.isSelected()) {
-				inst += Math.pow(10, 0);
-			}
-			if (rdbIns_10.isSelected()) {
-				inst += Math.pow(10, 1);
-			}
-			break;
-		}
-		case 4: {
-			if (rdbIns_11.isSelected()) {
-				inst += Math.pow(10, 0);
-			}
-			if (rdbIns_12.isSelected()) {
-				inst += Math.pow(10, 1);
-			}
-			if (rdbIns_13.isSelected()) {
-				inst += Math.pow(10, 2);
-			}
-			if (rdbIns_14.isSelected()) {
-				inst += Math.pow(10, 3);
-			}
-			if (rdbIns_15.isSelected()) {
-				inst += Math.pow(10, 4);
-			}
-			if (rdbIns_16.isSelected()) {
-				inst += Math.pow(10, 5);
-			}
-			break;
-		}
-		}
-		return inst;
 	}
 
 	/**
@@ -1619,15 +1537,13 @@ public class FrontPanel {
 
 	/*
 	 * everytime you change the value of a register, call this method to let the
-	 * change show on the frontpanel.
-	 * every time you change the value of a register, call this method to let
-	 * the change show on the front panel. this method will read the value of
-	 * every register and set the radiobuttons and textfield according to the
-	 * value
-	 * every time you change the value of a register, call this method to let
-	 * the change show on the front panel. this method will read the value of
-	 * every register and set the radiobuttons and textfield according to the
-	 * value
+	 * change show on the frontpanel. every time you change the value of a
+	 * register, call this method to let the change show on the front panel.
+	 * this method will read the value of every register and set the
+	 * radiobuttons and textfield according to the value every time you change
+	 * the value of a register, call this method to let the change show on the
+	 * front panel. this method will read the value of every register and set
+	 * the radiobuttons and textfield according to the value
 	 */
 	private void refreshRegistersPanel() {
 		for (Component com : pnlRegisters.getComponents()) {
@@ -1664,22 +1580,16 @@ public class FrontPanel {
 			}
 		}
 	}
-	
+
 	private void printConsole(String message) {
 		console.append(message + "\n");
 	}
-	
+
 	private void runInstruction(String instruction, Registers registers, MCU mcu) {
 		System.out.println("instruction: " + instruction);
 		printConsole("instruction: " + instruction);
 		// execute button event
 		ALU.instructions obj = new instructions();
-		ALU.instruction instObj = new ALU.instruction();
-		instObj.Opcode = readInst(4);
-		instObj.R = readInst(3);
-		instObj.IX = readInst(2);
-		instObj.I = readInst(1);
-		instObj.Address = readInst(0);
-		obj.execute(instObj, registers, mcu);
+		obj.execute(instruction, registers, mcu);
 	}
 }

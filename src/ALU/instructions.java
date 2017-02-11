@@ -11,13 +11,26 @@ public class instructions {
 	}
 
 	// executing instructions
-	public void execute(ALU.instruction inst, registers.Registers registers, memory.MCU mcu) {
-		int effectiveAddress = EA(inst, mcu);
+	public void execute(String inst, registers.Registers registers, memory.MCU mcu) {
+
+		int address = Integer.valueOf(inst.substring(11, 16));
+		int i = Integer.valueOf(inst.substring(10, 11));
+		int ix = Integer.valueOf(inst.substring(8, 10));
+		int r = Integer.valueOf(inst.substring(6, 8));
+		int opcode = Integer.valueOf(inst.substring(0, 6));
+		ALU.instruction objInst = new instruction();
+		objInst.address = address;
+		objInst.i = i;
+		objInst.ix = ix;
+		objInst.r = r;
+		objInst.opcode = opcode;
+
+		int effectiveAddress = EA(objInst, mcu);
 		int reg = 0; // selected general purpose register
 		int IXreg = 0; // selected Index register
 
 		// reading the content of selected register using [R] in the instruction
-		switch (inst.getR()) {
+		switch (r) {
 		case 0: {
 			reg = registers.getR0();
 		}
@@ -33,7 +46,7 @@ public class instructions {
 		}
 
 		// reading Opcode to see which instruction we should execute
-		switch (inst.getOpcode()) {
+		switch (opcode) {
 		case 10: {
 			// 02:STR -> Store Register to Memory
 			mcu.storeIntoMemory(bin2dec(effectiveAddress), bin2dec(reg));
@@ -42,7 +55,7 @@ public class instructions {
 			// 42: STX -> Store Index Register to Memory
 
 			// first, we read the content of selected Index Register using [IX]
-			switch (inst.getIX()) {
+			switch (ix) {
 			case 0: {
 				IXreg = registers.getX1();
 			}
@@ -59,7 +72,7 @@ public class instructions {
 		}
 		case 1: {
 			// 01: LDR -> Load Register From Memory
-			// we read the content of effective address and laod to the register
+			// we read the content of effective address and load to the register
 			reg = mcu.fetchFromMemory(bin2dec(effectiveAddress));
 		}
 		case 11: {
@@ -70,7 +83,7 @@ public class instructions {
 			// 41: LDX -> Load Index Register from Memory
 			// first, we read the content of selected Index Register using [IX]
 			// in instruction
-			switch (inst.getIX()) {
+			switch (ix) {
 			case 0: {
 				IXreg = registers.getX1();
 			}
@@ -90,24 +103,26 @@ public class instructions {
 	}
 
 	// calculating the effective address
-	private int EA(ALU.instruction inst, memory.MCU mcu) {
+	private int EA(ALU.instruction objInst, memory.MCU mcu) {
 
-		if (inst.getI() == 0) {
+		if (objInst.getI() == 0) {
 			// NO indirect addressing
-			if (inst.getIX() == 0) {
-				return inst.getAddress();
+			if (objInst.getIX() == 0) {
+				return objInst.getAddress();
 			} else {
-				return inst.getAddress() + inst.getIX();
+				return bin2dec(objInst.getAddress()) + bin2dec(objInst.getIX());
 			}
 
-		} else if (inst.getI() == 1) {
+		} else if (objInst.getI() == 1) {
 			// indirect addressing, but NO indexing
-			if (inst.getIX() == 0) {
-				return mcu.fetchFromMemory(bin2dec(inst.getAddress()));
+			if (objInst.getIX() == 0) {
+				return mcu.fetchFromMemory(bin2dec(objInst.getAddress()));
 			} else {
-				return mcu.fetchFromMemory(bin2dec(inst.getAddress() + mcu.fetchFromMemory(bin2dec(inst.getIX()))));
+				return mcu
+						.fetchFromMemory(bin2dec(objInst.getAddress() + mcu.fetchFromMemory(bin2dec(objInst.getIX()))));
 			}
 		}
 		return 0;
 	}
+
 }
