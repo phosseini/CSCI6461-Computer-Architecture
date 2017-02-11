@@ -21,13 +21,10 @@ import ALU.instructions;
 import memory.MCU;
 import registers.Registers;
 import util.Const;
-import javax.swing.GroupLayout;
-import javax.swing.GroupLayout.Alignment;
-import javax.swing.LayoutStyle.ComponentPlacement;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 
 public class FrontPanel {
+	
+	private int enableFlag;
 
 	private JFrame frmCsciClassProject;
 	private JPanel pnlRegisters;
@@ -323,15 +320,15 @@ public class FrontPanel {
 	private JScrollPane scrollPane;
 	private JTextField textFieldAddress;
 	private JTextField textFieldValue;
-	JPanel testPanel;
-	JPanel pnlAddress;
-	JLabel lblAddress;
-	JPanel pnlValue;
-	JLabel lblValue;
-	JPanel pnlButton;
-	JButton btnStore;
-	JButton btnLoad;
-	JLabel lblConsle;
+	private JPanel testPanel;
+	private JPanel pnlAddress;
+	private JLabel lblAddress;
+	private JPanel pnlValue;
+	private JLabel lblValue;
+	private JPanel pnlButton;
+	private JButton btnStore;
+	private JButton btnLoad;
+	private JLabel lblConsle;
 	private JLabel lblTestPanel;
 
 	/**
@@ -1269,6 +1266,10 @@ public class FrontPanel {
 		lblTestPanel = new JLabel("Test Panel");
 		lblTestPanel.setBounds(923, 437, 80, 18);
 		frmCsciClassProject.getContentPane().add(lblTestPanel);
+		
+		setEnableForPanel(pnlIns, false);
+		setEnableForPanel(pnlRegisters, false);
+		enableFlag = 0;
 
 	}
 
@@ -1548,6 +1549,11 @@ public class FrontPanel {
 		// add listener to the IPL button
 		btnIPL.addMouseListener(new MouseAdapter() {
 			public void mousePressed(MouseEvent e) {
+				if(enableFlag == 0){
+					setEnableForPanel(pnlIns, true);
+					setEnableForPanel(pnlRegisters, true);
+					enableFlag = 1;
+				}
 				mcu.loadFromROM();
 				refreshRegistersPanel();
 				registers.setPC(8);
@@ -1574,11 +1580,18 @@ public class FrontPanel {
 
 		btnStore.addMouseListener(new MouseAdapter() {
 			public void mousePressed(MouseEvent e) {
-				mcu.storeIntoMemory(Integer.parseInt(textFieldAddress.getText()),
-						Integer.parseInt(textFieldValue.getText()));
-				textFieldAddress.setText("0");
-				textFieldValue.setText("0");
-
+				int address = Integer.parseInt(textFieldAddress.getText());
+				int value = Integer.parseInt(textFieldValue.getText());
+				if (address > 2047) {
+					JOptionPane.showMessageDialog(null, "Memory between 0 and 2047!");
+				} else if (value > 65535) {
+					JOptionPane.showMessageDialog(null, "Value between 0 and 65535!");
+				} else {
+					mcu.storeIntoMemory(Integer.parseInt(textFieldAddress.getText()),
+							Integer.parseInt(textFieldValue.getText()));
+					textFieldAddress.setText("0");
+					textFieldValue.setText("0");
+				}
 			}
 		});
 	}
@@ -1629,6 +1642,17 @@ public class FrontPanel {
 			}
 		}
 	}
+	
+	private void setEnableForPanel(JPanel panel, boolean flag){
+		for(Component com : panel.getComponents()){
+			if(com instanceof JPanel){
+				JPanel subPanel = (JPanel)com;
+				this.setEnableForPanel(subPanel, flag);
+			}else{
+				com.setEnabled(flag);
+			}
+		}
+	}
 
 	private void printConsole(String message) {
 		console.append(message + "\n");
@@ -1639,14 +1663,15 @@ public class FrontPanel {
 		// execute button event
 		ALU.instructions obj = new instructions();
 		if (Const.OPCODE.containsValue(instruction.substring(0, 6))) {
-			if(instruction.substring(0, 6).equals(Const.OPCODE.get("HLT"))){
-				if(instruction.substring(8,16).equals("00000000")){
+			if (instruction.substring(0, 6).equals(Const.OPCODE.get("HLT"))) {
+				if (instruction.substring(8, 16).equals("00000000")) {
 					JOptionPane.showMessageDialog(null, "Program stop!");
 				}
-			}else{
-			System.out.println("instruction: " + instruction);
-			printConsole("instruction: " + instruction);
-			obj.execute(instruction, registers, mcu);}
+			} else {
+				System.out.println("instruction: " + instruction);
+				printConsole("instruction: " + instruction);
+				obj.execute(instruction, registers, mcu);
+			}
 		} else {
 			JOptionPane.showMessageDialog(null, "The instruction does not exist!");
 		}

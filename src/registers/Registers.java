@@ -1,7 +1,5 @@
 package registers;
 
-import javax.swing.JOptionPane;
-
 public class Registers {
 
 	// Condition Code: set when arithmetic/logical operations are executed
