@@ -26,79 +26,58 @@ public class instructions {
 		objInst.opcode = opcode;
 
 		int effectiveAddress = EA(objInst, mcu);
-		int reg = 0; // selected general purpose register
-		int IXreg = 0; // selected Index register
-
-		// reading the content of selected register using [R] in the instruction
-		switch (r) {
-		case 0: {
-			reg = registers.getR0();
-		}
-		case 1: {
-			reg = registers.getR1();
-		}
-		case 10: {
-			reg = registers.getR2();
-		}
-		case 11: {
-			reg = registers.getR3();
-		}
-		}
 
 		// reading Opcode to see which instruction we should execute
 		switch (opcode) {
 		case 10: {
 			// 02:STR -> Store Register to Memory
-			mcu.storeIntoMemory(bin2dec(effectiveAddress), bin2dec(reg));
+			
+			// reading the content of selected register using [R] in the instruction
+			registers.setMAR(effectiveAddress);
+			registers.setMBR(registers.getRnByNum(r));
+			mcu.storeIntoMemory(registers.getMAR(), registers.getMBR());
+			
+			break;
 		}
+
 		case 101010: {
 			// 42: STX -> Store Index Register to Memory
-
-			// first, we read the content of selected Index Register using [IX]
-			switch (ix) {
-			case 0: {
-				IXreg = registers.getX1();
-			}
-			case 1: {
-				IXreg = registers.getX2();
-			}
-			case 10: {
-				IXreg = registers.getX3();
-			}
-			}
-
-			// now, we store the content of Index register into the memory
-			mcu.storeIntoMemory(bin2dec(effectiveAddress), bin2dec(IXreg));
+			
+			registers.setMAR(effectiveAddress);
+			registers.setMBR(registers.getXnByNum(ix));
+			mcu.storeIntoMemory(registers.getMAR(), registers.getMBR());
+			
+			break;
 		}
+
 		case 1: {
 			// 01: LDR -> Load Register From Memory
+			
 			// we read the content of effective address and load to the register
-			reg = mcu.fetchFromMemory(bin2dec(effectiveAddress));
+			registers.setMAR(effectiveAddress);
+			registers.setMBR(mcu.fetchFromMemory(registers.getMAR()));
+			registers.setRnByNum(bin2dec(r), registers.getMBR());
+
+			break;
 		}
+
 		case 11: {
 			// 03: LDA -> Load Register with Address
-			reg = bin2dec(effectiveAddress);
+			registers.setRnByNum(bin2dec(r), effectiveAddress);
+			;
+			break;
 		}
+
 		case 101001: {
 			// 41: LDX -> Load Index Register from Memory
+			
 			// first, we read the content of selected Index Register using [IX]
-			// in instruction
-			switch (ix) {
-			case 0: {
-				IXreg = registers.getX1();
-			}
-			case 1: {
-				IXreg = registers.getX2();
-			}
-			case 10: {
-				IXreg = registers.getX3();
-			}
-
-			}
-			// now, we load the content of effective address from the memory
-			IXreg = mcu.fetchFromMemory(bin2dec(effectiveAddress));
+			registers.setMAR(effectiveAddress);
+			registers.setMBR(mcu.fetchFromMemory(registers.getMAR()));
+			registers.setXnByNum(bin2dec(ix), registers.getMBR());
+			
+			break;
 		}
-
 		}
 	}
 
@@ -108,7 +87,7 @@ public class instructions {
 		if (objInst.getI() == 0) {
 			// NO indirect addressing
 			if (objInst.getIX() == 0) {
-				return objInst.getAddress();
+				return bin2dec(objInst.getAddress());
 			} else {
 				return bin2dec(objInst.getAddress()) + bin2dec(objInst.getIX());
 			}

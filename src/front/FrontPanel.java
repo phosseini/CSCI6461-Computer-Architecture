@@ -1555,8 +1555,6 @@ public class FrontPanel {
 				refreshRegistersPanel();
 				runInstruction(registers.getBinaryStringIr(), registers, mcu);
 				refreshRegistersPanel();
-				runInstruction(registers.getBinaryStringIr(), registers, mcu);
-				refreshRegistersPanel();
 			}
 		});
 
@@ -1638,6 +1636,10 @@ public class FrontPanel {
 		printConsole("instruction: " + instruction);
 		// execute button event
 		ALU.instructions obj = new instructions();
+		
+		int opcode = Integer.valueOf(instruction.substring(0,6));
+		
+		
 		obj.execute(instruction, registers, mcu);
 	}
 }
