@@ -10,6 +10,7 @@ import java.math.BigInteger;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
@@ -1636,10 +1637,10 @@ public class FrontPanel {
 		printConsole("instruction: " + instruction);
 		// execute button event
 		ALU.instructions obj = new instructions();
-		
-		int opcode = Integer.valueOf(instruction.substring(0,6));
-		
-		
-		obj.execute(instruction, registers, mcu);
+		if(Const.OPCODE.containsValue(instruction.substring(0,6))){
+			obj.execute(instruction, registers, mcu);
+		}else{
+		JOptionPane.showMessageDialog(null, "The instruction does not exist!");}
+
 	}
 }

@@ -47,18 +47,15 @@ public class Const {
 		}
 	}
 
-	public enum OpCode {
-		HLT("000000"), TRAP("100100"), LDR("000001"), STR("000010"), LDA("000011"), LDX("101001"), STX("101010");
 
-		String value;
-
-		private OpCode(String value) {
-			this.value = value;
-		}
-		
-		public String getValue(){
-			return this.value;
-		}
+	
+	public static final HashMap<String, String> OPCODE = new HashMap<String, String>();
+	static{
+		OPCODE.put("LDR", "000001");
+		OPCODE.put("STR", "000010");
+		OPCODE.put("LDA", "000011");
+		OPCODE.put("LDX", "101001");
+		OPCODE.put("STX", "101010");
 	}
 
 }
