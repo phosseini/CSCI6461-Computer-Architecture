@@ -25,7 +25,7 @@ public class instructions {
 		objInst.r = r;
 		objInst.opcode = opcode;
 
-		int effectiveAddress = EA(objInst, mcu);
+		int effectiveAddress = EA(objInst, mcu, registers);
 
 		// reading Opcode to see which instruction we should execute
 		switch (opcode) {
@@ -82,14 +82,14 @@ public class instructions {
 	}
 
 	// calculating the effective address
-	private int EA(ALU.instruction objInst, memory.MCU mcu) {
+	private int EA(ALU.instruction objInst, memory.MCU mcu, registers.Registers registers) {
 
 		if (objInst.getI() == 0) {
 			// NO indirect addressing
 			if (objInst.getIX() == 0) {
 				return bin2dec(objInst.getAddress());
 			} else {
-				return bin2dec(objInst.getAddress()) + bin2dec(objInst.getIX());
+				return bin2dec(objInst.getAddress()) + registers.getXnByNum(bin2dec(objInst.getIX()));
 			}
 
 		} else if (objInst.getI() == 1) {
@@ -97,8 +97,7 @@ public class instructions {
 			if (objInst.getIX() == 0) {
 				return mcu.fetchFromMemory(bin2dec(objInst.getAddress()));
 			} else {
-				return mcu
-						.fetchFromMemory(bin2dec(objInst.getAddress() + mcu.fetchFromMemory(bin2dec(objInst.getIX()))));
+				return mcu.fetchFromMemory(bin2dec(objInst.getAddress()) + registers.getXnByNum(bin2dec(objInst.getIX())));
 			}
 		}
 		return 0;
