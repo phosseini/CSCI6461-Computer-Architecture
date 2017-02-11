@@ -1,5 +1,7 @@
 package registers;
 
+import javax.swing.JOptionPane;
+
 public class Registers {
 
 	// Condition Code: set when arithmetic/logical operations are executed
@@ -149,7 +151,7 @@ public class Registers {
 	public int getIR() {
 		return ir;
 	}
-	
+
 	public String getBinaryStringIr() {
 		if (this.ir <= 0xffff) {
 			return String.format("%16s", Integer.toBinaryString(this.ir)).replace(" ", "0");
@@ -246,6 +248,7 @@ public class Registers {
 			this.x2 = x;
 		if (num == 3)
 			this.x3 = x;
+
 	}
 
 	public int getRegistersByName(String name) {
@@ -279,8 +282,8 @@ public class Registers {
 			return this.x3;
 		return 0;
 	}
-	
-	public int getBitLongByName(String name){
+
+	public int getBitLongByName(String name) {
 		if (name.equals("CC"))
 			return 4;
 		if (name.equals("R0"))

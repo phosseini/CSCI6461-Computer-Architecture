@@ -58,6 +58,7 @@ public class Const {
 	
 	public static final HashMap<String, String> OPCODE = new HashMap<String, String>();
 	static{
+		OPCODE.put("HLT", "000000");
 		OPCODE.put("LDR", "000001");
 		OPCODE.put("STR", "000010");
 		OPCODE.put("LDA", "000011");

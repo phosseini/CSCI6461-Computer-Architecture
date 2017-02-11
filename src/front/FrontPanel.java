@@ -24,6 +24,8 @@ import util.Const;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class FrontPanel {
 
@@ -319,8 +321,18 @@ public class FrontPanel {
 	private JButton btnExecute;
 	private JTextArea console;
 	private JScrollPane scrollPane;
-	private JTextField textField;
-	private JTextField textField_1;
+	private JTextField textFieldAddress;
+	private JTextField textFieldValue;
+	JPanel testPanel;
+	JPanel pnlAddress;
+	JLabel lblAddress;
+	JPanel pnlValue;
+	JLabel lblValue;
+	JPanel pnlButton;
+	JButton btnStore;
+	JButton btnLoad;
+	JLabel lblConsle;
+	private JLabel lblTestPanel;
 
 	/**
 	 * Launch the application.
@@ -367,7 +379,7 @@ public class FrontPanel {
 		frmCsciClassProject.getContentPane().setLayout(null);
 
 		pnlRegisters = new JPanel();
-		pnlRegisters.setBounds(14, 109, 700, 596);
+		pnlRegisters.setBounds(14, 85, 700, 596);
 		frmCsciClassProject.getContentPane().add(pnlRegisters);
 
 		pnlR3 = new JPanel();
@@ -1211,85 +1223,57 @@ public class FrontPanel {
 		console = new JTextArea();
 		scrollPane.setColumnHeaderView(console);
 
-		JPanel panel = new JPanel();
-		panel.setBounds(752, 460, 251, 132);
-		frmCsciClassProject.getContentPane().add(panel);
-		
-		JLabel lblAddress = new JLabel("address");
+		testPanel = new JPanel();
+		testPanel.setBounds(752, 454, 251, 165);
+		frmCsciClassProject.getContentPane().add(testPanel);
+		testPanel.setLayout(new FlowLayout(FlowLayout.RIGHT, 5, 5));
 
-		textField = new JTextField();
-		textField.setColumns(10);
-		
-		JLabel lblNewLabel_1 = new JLabel("value");
-		
-		textField_1 = new JTextField();
-		textField_1.setColumns(10);
-		
-		JButton btnStore = new JButton("store");
-		
-				JButton btnNewButton = new JButton("load");
-				btnNewButton.addMouseListener(new MouseAdapter() {
-					public void mousePressed(MouseEvent e) {
-						int value = mcu.fetchFromMemory(Integer.parseInt(textField.getText()));
-						textField.setText(String.valueOf(value));
-					}
-				});
-				GroupLayout gl_panel = new GroupLayout(panel);
-				gl_panel.setHorizontalGroup(
-					gl_panel.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_panel.createSequentialGroup()
-							.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-								.addGroup(gl_panel.createSequentialGroup()
-									.addGap(13)
-									.addComponent(lblAddress)
-									.addGap(5)
-									.addComponent(textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-								.addGroup(gl_panel.createSequentialGroup()
-									.addContainerGap()
-									.addComponent(lblNewLabel_1)
-									.addPreferredGap(ComponentPlacement.RELATED)
-									.addComponent(textField_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-								.addGroup(gl_panel.createSequentialGroup()
-									.addContainerGap()
-									.addComponent(btnStore)
-									.addPreferredGap(ComponentPlacement.RELATED)
-									.addComponent(btnNewButton)))
-							.addContainerGap(102, Short.MAX_VALUE))
-				);
-				gl_panel.setVerticalGroup(
-					gl_panel.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_panel.createSequentialGroup()
-							.addGap(5)
-							.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-								.addGroup(gl_panel.createSequentialGroup()
-									.addGap(3)
-									.addComponent(lblAddress))
-								.addComponent(textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-							.addGap(6)
-							.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
-								.addComponent(textField_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-								.addComponent(lblNewLabel_1))
-							.addGap(33)
-							.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
-								.addComponent(btnStore)
-								.addComponent(btnNewButton))
-							.addContainerGap())
-				);
-				panel.setLayout(gl_panel);
-		
-		JLabel lblNewLabel = new JLabel("Console");
-		lblNewLabel.setBounds(752, 191, 72, 18);
-		frmCsciClassProject.getContentPane().add(lblNewLabel);
-		btnStore.addMouseListener(new MouseAdapter() {
-			public void mousePressed(MouseEvent e) {
-				mcu.storeIntoMemory(Integer.parseInt(textField.getText()), Integer.parseInt(textField_1.getText()));
-			}
-		});
+		pnlAddress = new JPanel();
+		testPanel.add(pnlAddress);
+		pnlAddress.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+
+		lblAddress = new JLabel("address");
+		pnlAddress.add(lblAddress);
+
+		textFieldAddress = new JTextField();
+		textFieldAddress.setText("0");
+		pnlAddress.add(textFieldAddress);
+		textFieldAddress.setColumns(10);
+
+		pnlValue = new JPanel();
+		testPanel.add(pnlValue);
+		pnlValue.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+
+		lblValue = new JLabel("value");
+		pnlValue.add(lblValue);
+
+		textFieldValue = new JTextField();
+		textFieldValue.setText("0");
+		pnlValue.add(textFieldValue);
+		textFieldValue.setColumns(10);
+
+		pnlButton = new JPanel();
+		testPanel.add(pnlButton);
+		pnlButton.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+
+		btnStore = new JButton("store");
+		pnlButton.add(btnStore);
+
+		btnLoad = new JButton("load");
+		pnlButton.add(btnLoad);
+
+		lblConsle = new JLabel("Console");
+		lblConsle.setBounds(931, 189, 72, 18);
+		frmCsciClassProject.getContentPane().add(lblConsle);
+
+		lblTestPanel = new JLabel("Test Panel");
+		lblTestPanel.setBounds(923, 437, 80, 18);
+		frmCsciClassProject.getContentPane().add(lblTestPanel);
 
 	}
 
-	 // add listeners to the components
-	
+	// add listeners to the components
+
 	private void addListeners() {
 
 		// add listener to the store button of R0. when you push the store
@@ -1545,10 +1529,12 @@ public class FrontPanel {
 						buffer = rdb.isSelected() ? buffer.append("1") : buffer.append("0");
 					}
 				}
-				String value = new BigInteger(buffer.toString(), 2).toString();
-				mcu.storeIntoMemory(8 + Const.ROM.size() + 8, Integer.valueOf(value));
-				registers.setPC(8 + Const.ROM.size() + 8);
-				refreshRegistersPanel();
+				int value = new BigInteger(buffer.toString(), 2).intValue();
+				// mcu.storeIntoMemory(8 + Const.ROM.size() + 8,
+				// Integer.valueOf(value));
+				// registers.setPC(8 + Const.ROM.size() + 8);
+				// refreshRegistersPanel();
+				mcu.storeIntoMemory(registers.getPC(), value);
 				registers.setMAR(registers.getPC());
 				refreshRegistersPanel();
 				registers.setMBR(mcu.fetchFromMemory(registers.getMAR()));
@@ -1574,9 +1560,25 @@ public class FrontPanel {
 					refreshRegistersPanel();
 					runInstruction(registers.getBinaryStringIr(), registers, mcu);
 					registers.increasePCByOne();
-				} while (mcu.fetchFromMemory(registers.getMAR()) != 0);
+				} while (registers.getIR() != 0);
 				registers.setPC(8);
 				refreshRegistersPanel();
+			}
+		});
+		btnLoad.addMouseListener(new MouseAdapter() {
+			public void mousePressed(MouseEvent e) {
+				int value = mcu.fetchFromMemory(Integer.parseInt(textFieldAddress.getText()));
+				textFieldValue.setText(String.valueOf(value));
+			}
+		});
+
+		btnStore.addMouseListener(new MouseAdapter() {
+			public void mousePressed(MouseEvent e) {
+				mcu.storeIntoMemory(Integer.parseInt(textFieldAddress.getText()),
+						Integer.parseInt(textFieldValue.getText()));
+				textFieldAddress.setText("0");
+				textFieldValue.setText("0");
+
 			}
 		});
 	}
@@ -1591,7 +1593,7 @@ public class FrontPanel {
 	 * front panel. this method will read the value of every register and set
 	 * the radiobuttons and textfield according to the value
 	 */
-	
+
 	private void refreshRegistersPanel() {
 		for (Component com : pnlRegisters.getComponents()) {
 			if (com instanceof JPanel) {
@@ -1633,14 +1635,21 @@ public class FrontPanel {
 	}
 
 	private void runInstruction(String instruction, Registers registers, MCU mcu) {
-		System.out.println("instruction: " + instruction);
-		printConsole("instruction: " + instruction);
+
 		// execute button event
 		ALU.instructions obj = new instructions();
-		if(Const.OPCODE.containsValue(instruction.substring(0,6))){
-			obj.execute(instruction, registers, mcu);
-		}else{
-		JOptionPane.showMessageDialog(null, "The instruction does not exist!");}
+		if (Const.OPCODE.containsValue(instruction.substring(0, 6))) {
+			if(instruction.substring(0, 6).equals(Const.OPCODE.get("HLT"))){
+				if(instruction.substring(8,16).equals("00000000")){
+					JOptionPane.showMessageDialog(null, "Program stop!");
+				}
+			}else{
+			System.out.println("instruction: " + instruction);
+			printConsole("instruction: " + instruction);
+			obj.execute(instruction, registers, mcu);}
+		} else {
+			JOptionPane.showMessageDialog(null, "The instruction does not exist!");
+		}
 
 	}
 }
