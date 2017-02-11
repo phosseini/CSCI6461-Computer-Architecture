@@ -1,6 +1,6 @@
-package ALU;
+package alu;
 
-public class instruction {
+public class Instruction {
 	
 	public int opcode;
 	public int r;

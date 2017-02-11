@@ -17,7 +17,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-import ALU.instructions;
+import alu.Instructions;
 import memory.MCU;
 import registers.Registers;
 import util.Const;
@@ -1221,7 +1221,7 @@ public class FrontPanel {
 		scrollPane.setColumnHeaderView(console);
 
 		testPanel = new JPanel();
-		testPanel.setBounds(752, 454, 251, 165);
+		testPanel.setBounds(752, 454, 203, 165);
 		frmCsciClassProject.getContentPane().add(testPanel);
 		testPanel.setLayout(new FlowLayout(FlowLayout.RIGHT, 5, 5));
 
@@ -1260,11 +1260,11 @@ public class FrontPanel {
 		pnlButton.add(btnLoad);
 
 		lblConsle = new JLabel("Console");
-		lblConsle.setBounds(931, 189, 72, 18);
+		lblConsle.setBounds(752, 189, 72, 18);
 		frmCsciClassProject.getContentPane().add(lblConsle);
 
-		lblTestPanel = new JLabel("Test Panel");
-		lblTestPanel.setBounds(923, 437, 80, 18);
+		lblTestPanel = new JLabel("Memory interface");
+		lblTestPanel.setBounds(834, 433, 121, 18);
 		frmCsciClassProject.getContentPane().add(lblTestPanel);
 		
 		setEnableForPanel(pnlIns, false);
@@ -1661,7 +1661,7 @@ public class FrontPanel {
 	private void runInstruction(String instruction, Registers registers, MCU mcu) {
 
 		// execute button event
-		ALU.instructions obj = new instructions();
+		alu.Instructions obj = new Instructions();
 		if (Const.OPCODE.containsValue(instruction.substring(0, 6))) {
 			if (instruction.substring(0, 6).equals(Const.OPCODE.get("HLT"))) {
 				if (instruction.substring(8, 16).equals("00000000")) {
