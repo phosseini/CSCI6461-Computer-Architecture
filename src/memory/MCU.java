@@ -30,6 +30,9 @@ public class MCU {
 		System.out.println("MCU init with a size of " + this.memory.size());
 	}
 
+	/**
+	 * expand the memory size to 4096
+	 */
 	public void expandMemorySize() {
 		if (this.memory != null && this.memory.size() > 0) {
 			this.memory.ensureCapacity(this.wordsExpanded);
@@ -40,6 +43,9 @@ public class MCU {
 		System.out.println("memory size has been expanded to " + memory.size());
 	}
 
+	/**
+	 * @return current size of the memory
+	 */
 	public int getCurrentSize() {
 		if (this.memory != null) {
 			return this.memory.size();
@@ -47,19 +53,32 @@ public class MCU {
 		return 0;
 	}
 
-	// using the address to fetch a word from memory
+	
+	/**
+	 * @param address
+	 * @return a word from memory
+	 * using the address to fetch a word from memory
+	 */
 	public int fetchFromMemory(int address) {
 		return this.memory.get(address);
 	}
 
-	// store into memory using address and value
+	
+	/**
+	 * @param address
+	 * @param value
+	 * store into memory using address and value
+	 */
 	public void storeIntoMemory(int address, int value) {
 		if (this.memory != null) {
 			this.memory.set(address, value);
 		}
 	}
 
-	// Load from ROM and store every value into memory with specific address
+	 
+	/**
+	 * Load from ROM and store every value into memory with specific address
+	 */
 	public void loadFromROM() {
 		HashMap<String, Integer> rom = Const.ROM;
 		System.out.println("read from the ROM");

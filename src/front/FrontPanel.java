@@ -1214,7 +1214,7 @@ public class FrontPanel {
 		pnlIns.add(btnExecute);
 
 		scrollPane = new JScrollPane();
-		scrollPane.setBounds(752, 208, 251, 214);
+		scrollPane.setBounds(752, 206, 251, 214);
 		frmCsciClassProject.getContentPane().add(scrollPane);
 
 		console = new JTextArea();
@@ -1264,17 +1264,21 @@ public class FrontPanel {
 		frmCsciClassProject.getContentPane().add(lblConsle);
 
 		lblTestPanel = new JLabel("Memory interface");
-		lblTestPanel.setBounds(834, 433, 121, 18);
+		lblTestPanel.setBounds(813, 433, 156, 18);
 		frmCsciClassProject.getContentPane().add(lblTestPanel);
 		
+		//set the panels to disabled
+		//after you push the IPL button on the frontpanel, these panels will be set to able
 		setEnableForPanel(pnlIns, false);
 		setEnableForPanel(pnlRegisters, false);
 		enableFlag = 0;
 
 	}
 
-	// add listeners to the components
-
+	
+	/**
+	 *  add listeners to the components
+	 */
 	private void addListeners() {
 
 		// add listener to the store button of R0. when you push the store
@@ -1553,8 +1557,8 @@ public class FrontPanel {
 					setEnableForPanel(pnlIns, true);
 					setEnableForPanel(pnlRegisters, true);
 					enableFlag = 1;
+					mcu.loadFromROM();
 				}
-				mcu.loadFromROM();
 				refreshRegistersPanel();
 				registers.setPC(8);
 				do {
@@ -1597,13 +1601,7 @@ public class FrontPanel {
 	}
 
 	/*
-	 * everytime you change the value of a register, call this method to let the
-	 * change show on the frontpanel. every time you change the value of a
-	 * register, call this method to let the change show on the front panel.
-	 * this method will read the value of every register and set the
-	 * radiobuttons and textfield according to the value every time you change
-	 * the value of a register, call this method to let the change show on the
-	 * front panel. this method will read the value of every register and set
+	 * this method will read the value of every register and set
 	 * the radiobuttons and textfield according to the value
 	 */
 
@@ -1643,6 +1641,11 @@ public class FrontPanel {
 		}
 	}
 	
+	/**
+	 * @param panel
+	 * @param flag
+	 * set every component in the @param panel enabled/disabled according to @param flag
+	 */
 	private void setEnableForPanel(JPanel panel, boolean flag){
 		for(Component com : panel.getComponents()){
 			if(com instanceof JPanel){
@@ -1654,10 +1657,20 @@ public class FrontPanel {
 		}
 	}
 
+	/**
+	 * @param message the message you want to print
+	 * print a message in the console
+	 */
 	private void printConsole(String message) {
 		console.append(message + "\n");
 	}
 
+	/**
+	 * @param instruction instruction in binary String, for example "000001"
+	 * @param registers
+	 * @param mcu
+	 * run the instruction
+	 */
 	private void runInstruction(String instruction, Registers registers, MCU mcu) {
 
 		// execute button event
