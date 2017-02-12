@@ -1,6 +1,8 @@
 # CSCI6461-computer-architecture
 
 CSCI6461: Computer System Architecture Project
+Spring 2017
+The George Washington University
 
 In this project, we design and implement a simple computer simulator. This project has 4 components. And, these components will be implemented during the semester.
 
