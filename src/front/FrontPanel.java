@@ -1216,9 +1216,10 @@ public class FrontPanel {
 		scrollPane = new JScrollPane();
 		scrollPane.setBounds(752, 206, 251, 214);
 		frmCsciClassProject.getContentPane().add(scrollPane);
-
-		console = new JTextArea();
-		scrollPane.setColumnHeaderView(console);
+		
+				console = new JTextArea();
+				scrollPane.setViewportView(console);
+				console.setEditable(false);
 
 		testPanel = new JPanel();
 		testPanel.setBounds(752, 454, 203, 165);
