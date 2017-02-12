@@ -13,11 +13,14 @@ public class Instructions {
 	// executing instructions
 	public void execute(String inst, registers.Registers registers, memory.MCU mcu) {
 
+		// the inst argument is just a string. As a result, we first need to extract all 5 fields from that string and that is what we do in next following lines.
 		int address = Integer.valueOf(inst.substring(11, 16));
 		int i = Integer.valueOf(inst.substring(10, 11));
 		int ix = Integer.valueOf(inst.substring(8, 10));
 		int r = Integer.valueOf(inst.substring(6, 8));
 		int opcode = Integer.valueOf(inst.substring(0, 6));
+		
+		// and now that we have all fields, we create an object from instruction class to store these values into an instruction object.
 		alu.Instruction objInst = new Instruction();
 		objInst.address = address;
 		objInst.i = i;
@@ -25,6 +28,7 @@ public class Instructions {
 		objInst.r = r;
 		objInst.opcode = opcode;
 
+		// before executing the instruction, we calculate the effective address
 		int effectiveAddress = EA(objInst, mcu, registers);
 
 		// reading Opcode to see which instruction we should execute

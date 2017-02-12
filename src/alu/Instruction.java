@@ -2,6 +2,8 @@ package alu;
 
 public class Instruction {
 	
+	// we use this class in order to create an object for the instruction that we want to execute.
+	
 	public int opcode;
 	public int r;
 	public int ix;
