@@ -77,7 +77,7 @@ public class MCU {
 
 	 
 	/**
-	 * Load from ROM and store every value into memory with specific address
+	 * Load from ROM and store the instructions after octal 10
 	 */
 	public void loadFromROM() {
 		HashMap<String, Integer> rom = Const.ROM;
