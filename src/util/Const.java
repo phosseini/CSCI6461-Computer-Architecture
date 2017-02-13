@@ -41,11 +41,11 @@ public class Const {
 	// 1 Illegal TRAP code
 	// 2 Illegal Operation Code
 	// 3 Illegal Memory Address beyond 2048 (memory installed)
-	public enum MachineFault {
-		ILL_MEM_RSV(0), ILL_TPC(1), ILL_OPC(2), ILL_MEM_BYD(3);
+	public enum FaultCode {
+		ILL_MEM_RSV(0), ILL_TRPC(1), ILL_OPRC(2), ILL_MEM_BYD(3);
 		int value;
 
-		private MachineFault(int value) {
+		private FaultCode(int value) {
 			this.value = value;
 		}
 		
@@ -58,12 +58,12 @@ public class Const {
 	
 	public static final HashMap<String, String> OPCODE = new HashMap<String, String>();
 	static{
-		OPCODE.put("HLT", "000000");
-		OPCODE.put("LDR", "000001");
-		OPCODE.put("STR", "000010");
-		OPCODE.put("LDA", "000011");
-		OPCODE.put("LDX", "101001");
-		OPCODE.put("STX", "101010");
+		OPCODE.put("000000", "HLT");
+		OPCODE.put("000001", "LDR");
+		OPCODE.put("000010", "STR");
+		OPCODE.put("000011", "LDA");
+		OPCODE.put("101001", "LDX");
+		OPCODE.put("101010", "STX");
 	}
 
 }

@@ -11,7 +11,7 @@ public class Instructions {
 	}
 
 	// executing instructions
-	public void execute(String inst, registers.Registers registers, memory.MCU mcu) {
+	public void execute(String inst, cpu.Registers registers, memory.MCU mcu) {
 
 		// the inst argument is just a string. As a result, we first need to extract all 5 fields from that string and that is what we do in next following lines.
 		int address = Integer.valueOf(inst.substring(11, 16));
@@ -86,7 +86,7 @@ public class Instructions {
 	}
 
 	// calculating the effective address
-	private int EA(alu.Instruction objInst, memory.MCU mcu, registers.Registers registers) {
+	private int EA(alu.Instruction objInst, memory.MCU mcu, cpu.Registers registers) {
 
 		if (objInst.getI() == 0) {
 			// NO indirect addressing
