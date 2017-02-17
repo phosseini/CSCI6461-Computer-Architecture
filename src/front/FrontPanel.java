@@ -19,15 +19,12 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-import alu.Instructions;
 import alu.instruction.AbstractInstruction;
 import cpu.Registers;
 import memory.MCU;
 import util.Const;
 import util.MachineFaultException;
-import java.awt.BorderLayout;
-import javax.swing.GroupLayout;
-import javax.swing.GroupLayout.Alignment;
+import util.StringUtil;
 
 public class FrontPanel {
 
@@ -338,6 +335,7 @@ public class FrontPanel {
     private JLabel lblConsle;
     private JLabel lblTestPanel;
     private JPanel pnlConsole;
+    private JButton btnBuilder;
 
     /**
      * Launch the application.
@@ -384,7 +382,7 @@ public class FrontPanel {
         frmCsciClassProject.getContentPane().setLayout(null);
 
         pnlRegisters = new JPanel();
-        pnlRegisters.setBounds(0, 75, 704, 617);
+        pnlRegisters.setBounds(14, 133, 704, 617);
         frmCsciClassProject.getContentPane().add(pnlRegisters);
 
         pnlR3 = new JPanel();
@@ -1177,7 +1175,7 @@ public class FrontPanel {
         frmCsciClassProject.getContentPane().add(btnIPL);
 
         pnlIns = new JPanel();
-        pnlIns.setBounds(14, 28, 716, 44);
+        pnlIns.setBounds(14, 76, 704, 44);
         frmCsciClassProject.getContentPane().add(pnlIns);
         pnlIns.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 
@@ -1299,6 +1297,10 @@ public class FrontPanel {
         console = new JTextArea();
         scrollPane.setViewportView(console);
         console.setEditable(false);
+        
+        btnBuilder = new JButton("Instruction Builder");
+        btnBuilder.setBounds(296, 36, 185, 27);
+        frmCsciClassProject.getContentPane().add(btnBuilder);
         enableFlag = 0;
 
     }
@@ -1629,6 +1631,15 @@ public class FrontPanel {
                 }
             }
         });
+        
+        btnBuilder.addMouseListener(new MouseAdapter(){
+            public void mousePressed(MouseEvent e){
+                
+                
+                
+            }
+        });
+        
         textFieldAddress.addFocusListener(new FocusListener() {
 
             @Override
@@ -1749,6 +1760,11 @@ public class FrontPanel {
                 instr.execute(instruction, registers, mcu);
                 System.out.println("instruction: " + instruction);
                 printConsole("instruction: " + instruction);
+                
+                String message = instr.getExecuteMessage();
+                //
+                //TODO do something with this message
+                //
             } else {
                 // we don't have that kind of instruction
                 throw new MachineFaultException(Const.FaultCode.ILL_OPRC.getValue());
@@ -1758,16 +1774,17 @@ public class FrontPanel {
             e.printStackTrace();
         } catch (MachineFaultException t) {
             // handle the machine fault
-            //
-            // TODO write something to handle the machine fault
-            //
+            
             t.printStackTrace();
             handleMachineFault(t.getFaultCode());
         }
     }
 
     private void handleMachineFault(int faultCode) {
+        //
+        // TODO write something to handle the machine fault
+        //
         JOptionPane.showMessageDialog(null, "Program stop!");
-
+        
     }
 }

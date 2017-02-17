@@ -1,6 +1,4 @@
+/util/
+/cpu/
 /front/
 /memory/
-/registers/
-/util/
-/ALU/
-/alu/
