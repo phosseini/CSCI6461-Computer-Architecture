@@ -28,6 +28,10 @@ import util.StringUtil;
 
 public class FrontPanel {
 
+    /**
+     * 0 - the registers panel is not enabled. </br>
+     * 1 - the registers panel has been enabled.
+     */
     private int enableFlag;
 
     private JFrame frmCsciClassProject;
@@ -1277,7 +1281,7 @@ public class FrontPanel {
 
         // set the panels to disabled
         // after you push the IPL button on the frontpanel, these panels will be
-        // set to able
+        // set to enabled
         setEnableForPanel(pnlIns, false);
         setEnableForPanel(pnlRegisters, false);
 
@@ -1297,7 +1301,7 @@ public class FrontPanel {
         console = new JTextArea();
         scrollPane.setViewportView(console);
         console.setEditable(false);
-        
+
         btnBuilder = new JButton("Instruction Builder");
         btnBuilder.setBounds(296, 36, 185, 27);
         frmCsciClassProject.getContentPane().add(btnBuilder);
@@ -1306,7 +1310,7 @@ public class FrontPanel {
     }
 
     /**
-     * add listeners to the components
+     * Add listeners to the components
      */
     private void addListeners() {
 
@@ -1631,15 +1635,13 @@ public class FrontPanel {
                 }
             }
         });
-        
-        btnBuilder.addMouseListener(new MouseAdapter(){
-            public void mousePressed(MouseEvent e){
-                
-                
-                
+
+        btnBuilder.addMouseListener(new MouseAdapter() {
+            public void mousePressed(MouseEvent e) {
+
             }
         });
-        
+
         textFieldAddress.addFocusListener(new FocusListener() {
 
             @Override
@@ -1671,11 +1673,11 @@ public class FrontPanel {
 
     }
 
-    /*
-     * this method will read the value of every register and set the radio
-     * buttons and text fields according to the value
-     */
 
+    /**
+     * This method will read the value of every register and set the radio
+     * buttons and text field according to the value of the register.
+     */
     private void refreshRegistersPanel() {
         for (Component com : pnlRegisters.getComponents()) {
             if (com instanceof JPanel) {
@@ -1712,11 +1714,13 @@ public class FrontPanel {
     }
 
     /**
+     * 
+     * set every component in the panel enabled/disabled according to the flag
+     * 
      * @param panel
      * @param flag
+     *            true: enable; false: disable
      * 
-     *            set every component in the @param panel enabled/disabled
-     *            according to @param flag
      */
     private void setEnableForPanel(JPanel panel, boolean flag) {
         for (Component com : panel.getComponents()) {
@@ -1730,22 +1734,25 @@ public class FrontPanel {
     }
 
     /**
+     * 
+     * print a message in the console
+     * 
      * @param message
      *            the message you want to print
      * 
-     *            print a message in the console
      */
     private void printConsole(String message) {
         console.append(message + "\n");
     }
 
     /**
+     * 
+     * run the instruction
+     * 
      * @param instruction
      *            instruction in binary String, for example "0000000000000000".
      * @param registers
      * @param mcu
-     * 
-     *            run the instruction
      * 
      */
     private void runInstruction(String instruction, Registers registers, MCU mcu) {
@@ -1760,10 +1767,10 @@ public class FrontPanel {
                 instr.execute(instruction, registers, mcu);
                 System.out.println("instruction: " + instruction);
                 printConsole("instruction: " + instruction);
-                
+
                 String message = instr.getExecuteMessage();
                 //
-                //TODO do something with this message
+                // TODO do something with this message
                 //
             } else {
                 // we don't have that kind of instruction
@@ -1774,7 +1781,7 @@ public class FrontPanel {
             e.printStackTrace();
         } catch (MachineFaultException t) {
             // handle the machine fault
-            
+
             t.printStackTrace();
             handleMachineFault(t.getFaultCode());
         }
@@ -1785,6 +1792,6 @@ public class FrontPanel {
         // TODO write something to handle the machine fault
         //
         JOptionPane.showMessageDialog(null, "Program stop!");
-        
+
     }
 }

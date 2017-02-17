@@ -5,10 +5,12 @@ import java.math.BigInteger;
 public class StringUtil {
 
     /**
-     * @param binary
-     * @return
      * 
-     *         convert a binary string to a decimal integer number
+     * convert a binary string to a decimal integer number
+     * 
+     * @param binary
+     *            binary String
+     * @return decimal number
      * 
      */
     public int binaryToDecimal(String binary) {
@@ -16,13 +18,15 @@ public class StringUtil {
     }
 
     /**
-     * @param decimal
-     * @param bitLength
-     * @return
      * 
-     *         convert a decimal number to a binary String with a length
-     *         of @param bitLength. Additional zeros may be added at the left
-     *         side of the string in order to fit this length.
+     * convert a decimal number to a binary String with a length of @param
+     * bitLength. Additional zeros may be added at the left side of the string
+     * in order to fit this length.
+     * 
+     * @param decimal decimal number
+     * @param bitLength the bits of the binary
+     * @return binary String
+     * 
      * 
      */
     public String decimalToBinary(int decimal, int bitLength) {

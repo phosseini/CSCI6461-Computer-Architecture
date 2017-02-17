@@ -2,55 +2,96 @@ package cpu;
 
 public class Registers {
 
-    // Condition Code: set when arithmetic/logical operations are executed
-    // 4 bits
+    /**
+     * Condition Code: set when arithmetic/logical operations are executed.<br/>
+     * 4 bits.
+     */
     int cc;
 
-    // 4 General Purpose Registers (GPRs)
-    // each 16 bits in length
+    /**
+     * General Purpose Register R0. <br/>
+     * 16 bits.
+     */
     int r0;
+    /**
+     * General Purpose Register R1. <br/>
+     * 16 bits.
+     */
     int r1;
+    /**
+     * General Purpose Register R2. <br/>
+     * 16 bits.
+     */
     int r2;
+    /**
+     * General Purpose Register R3. <br/>
+     * 16 bits.
+     */
     int r3;
 
-    // Instruction Register: holds the instruction to be executed
-    // 16 bits
+    /**
+     * Instruction Register: holds the instruction to be executed. <br/>
+     * 16 bits
+     */
     int ir;
 
-    // Memory Address Register: holds the address of the word to be fetched from
-    // memory
-    // 16 bits
+    /**
+     * Memory Address Register: holds the address of the word to be fetched from
+     * memory.<br/>
+     * 16 bits
+     */
     int mar;
 
-    // Memory Buffer Register: holds the word just fetched from or the word to
-    // be /last stored into memory
-    // 16 bits
+    /**
+     * Memory Buffer Register: holds the word just fetched from or the word to
+     * be /last stored into memory.<br/>
+     * 16 bits
+     */
     int mbr;
 
-    // Machine Fault Register: contains the ID code if a machine fault after it
-    // occurs
-    // 4 bits
-    // 0 - Illegal Memory Address to Reserved Locations
-    // 1 - Illegal TRAP code
-    // 2 - Illegal Operation Code
-    // 3 - Illegal Memory Address beyond 2048 (memory installed)
+    /**
+     * Machine Fault Register: contains the ID code if a machine fault after it
+     * occurs.<br/>
+     * 4 bits.<br/>
+     * 0 - Illegal Memory Address to Reserved Locations;<br/>
+     * 1 - Illegal TRAP code;<br/>
+     * 2 - Illegal Operation Code;<br/>
+     * 3 - Illegal Memory Address beyond 2048 (memory installed).
+     */
     int mfr;
 
-    // Machine Status Register: certain bits record the status of the health of
-    // the machine
-    // 16 bits
+    /**
+     * Machine Status Register: certain bits record the status of the health of
+     * the machine.<br/>
+     * 16 bits.
+     */
     int msr;
 
-    // Program Counter: address of next instruction to be executed
-    // 12 bits
+    /**
+     * Program Counter: address of next instruction to be executed. <br/>
+     * 12 bits
+     */
     int pc;
 
-    // 3 Index Registers
-    // 16 bits in length
+    /**
+     * Index Register X1. <br/>
+     * 16 bits.
+     */
     int x1;
+    /**
+     * Index Register X2. <br/>
+     * 16 bits.
+     */
     int x2;
+    /**
+     * Index Register X3. <br/>
+     * 16 bits.
+     */
     int x3;
 
+    /**
+     * initialize all the registers
+     */
     public Registers() {
         this.cc = 0;
         this.ir = 0;
@@ -68,6 +109,9 @@ public class Registers {
         this.x3 = 0;
     }
 
+    /**
+     * reset all the registers
+     */
     public void init() {
         this.cc = 0;
         this.ir = 0;
@@ -125,6 +169,13 @@ public class Registers {
         this.r3 = r3;
     }
 
+    /**
+     * 
+     * @param num
+     *            from 0 to 3
+     * @param r
+     *            the value of the GPR
+     */
     public void setRnByNum(int num, int r) {
         if (num == 0)
             this.r0 = r;
@@ -136,6 +187,11 @@ public class Registers {
             this.r3 = r;
     }
 
+    /**
+     * @param num
+     *            from 0 to 3
+     * @return the value of the GPR
+     */
     public int getRnByNum(int num) {
         if (num == 0)
             return this.r0;
@@ -152,6 +208,9 @@ public class Registers {
         return ir;
     }
 
+    /**
+     * @return the value of IR in 16 bit binary String
+     */
     public String getBinaryStringIr() {
         if (this.ir <= 0xffff) {
             return String.format("%16s", Integer.toBinaryString(this.ir)).replace(" ", "0");
@@ -231,6 +290,11 @@ public class Registers {
         this.x3 = x3;
     }
 
+    /**
+     * @param num
+     *            from 1 to 3
+     * @return the value of Index Register
+     */
     public int getXnByNum(int num) {
         if (num == 1)
             return this.x1;
@@ -241,6 +305,12 @@ public class Registers {
         return 0;
     }
 
+    /**
+     * @param num
+     *            from 1 to 3
+     * @param x
+     *            the value of Index Register
+     */
     public void setXnByNum(int num, int x) {
         if (num == 1)
             this.x1 = x;
