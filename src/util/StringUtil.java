@@ -13,7 +13,7 @@ public class StringUtil {
      * @return decimal number
      * 
      */
-    public int binaryToDecimal(String binary) {
+    public static int binaryToDecimal(String binary) {
         return new BigInteger(binary, 2).intValue();
     }
 
@@ -29,7 +29,7 @@ public class StringUtil {
      * 
      * 
      */
-    public String decimalToBinary(int decimal, int bitLength) {
+    public static String decimalToBinary(int decimal, int bitLength) {
         return String.format("%" + bitLength + "s", Integer.toBinaryString(decimal)).replace(" ", "0");
 
     }

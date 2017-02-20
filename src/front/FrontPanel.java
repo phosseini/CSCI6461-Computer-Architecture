@@ -25,6 +25,12 @@ import memory.MCU;
 import util.Const;
 import util.MachineFaultException;
 import util.StringUtil;
+import javax.swing.BoxLayout;
+import javax.swing.SwingConstants;
+import com.jgoodies.forms.layout.FormLayout;
+import com.jgoodies.forms.layout.ColumnSpec;
+import com.jgoodies.forms.layout.FormSpecs;
+import com.jgoodies.forms.layout.RowSpec;
 
 public class FrontPanel {
 
@@ -324,8 +330,8 @@ public class FrontPanel {
     private JRadioButton rdbIns_2;
     private JRadioButton rdbIns_1;
     private JButton btnExecute;
-    private JTextArea console;
-    private JScrollPane scrollPane;
+    private JTextArea consolePrinter;
+    private JScrollPane scrollPane1;
     private JTextField textFieldAddress;
     private JTextField textFieldValue;
     private JPanel testPanel;
@@ -336,10 +342,16 @@ public class FrontPanel {
     private JPanel pnlButton;
     private JButton btnStore;
     private JButton btnLoad;
-    private JLabel lblConsle;
+    private JLabel lblPrinter;
     private JLabel lblTestPanel;
     private JPanel pnlConsole;
-    private JButton btnBuilder;
+
+    private JLabel lblKeyboard;
+
+    private JScrollPane scrollPane2;
+
+    private JTextArea consoleKeyboard;
+    private JPanel pnlOp;
 
     /**
      * Launch the application.
@@ -381,12 +393,12 @@ public class FrontPanel {
     private void initComponents() {
         frmCsciClassProject = new JFrame();
         frmCsciClassProject.setTitle("CSCI6461 Class Project");
-        frmCsciClassProject.setBounds(100, 100, 1100, 810);
+        frmCsciClassProject.setBounds(100, 100, 1108, 871);
         frmCsciClassProject.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frmCsciClassProject.getContentPane().setLayout(null);
 
         pnlRegisters = new JPanel();
-        pnlRegisters.setBounds(14, 133, 704, 617);
+        pnlRegisters.setBounds(14, 169, 704, 617);
         frmCsciClassProject.getContentPane().add(pnlRegisters);
 
         pnlR3 = new JPanel();
@@ -1178,9 +1190,80 @@ public class FrontPanel {
         btnIPL.setBounds(799, 109, 136, 69);
         frmCsciClassProject.getContentPane().add(btnIPL);
 
+        testPanel = new JPanel();
+        testPanel.setBounds(757, 621, 203, 165);
+        frmCsciClassProject.getContentPane().add(testPanel);
+        testPanel.setLayout(new FlowLayout(FlowLayout.RIGHT, 5, 5));
+
+        lblTestPanel = new JLabel("Memory interface");
+        testPanel.add(lblTestPanel);
+
+        pnlAddress = new JPanel();
+        testPanel.add(pnlAddress);
+        pnlAddress.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+
+        lblAddress = new JLabel("address");
+        pnlAddress.add(lblAddress);
+
+        textFieldAddress = new JTextField();
+        textFieldAddress.setText("0");
+        pnlAddress.add(textFieldAddress);
+        textFieldAddress.setColumns(10);
+
+        pnlValue = new JPanel();
+        testPanel.add(pnlValue);
+        pnlValue.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+
+        lblValue = new JLabel("value");
+        pnlValue.add(lblValue);
+
+        textFieldValue = new JTextField();
+        textFieldValue.setText("0");
+        pnlValue.add(textFieldValue);
+        textFieldValue.setColumns(10);
+
+        pnlButton = new JPanel();
+        testPanel.add(pnlButton);
+        pnlButton.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+
+        btnStore = new JButton("store");
+        pnlButton.add(btnStore);
+
+        btnLoad = new JButton("load");
+        pnlButton.add(btnLoad);
+        setEnableForPanel(pnlRegisters, false);
+
+        pnlConsole = new JPanel();
+        pnlConsole.setBounds(757, 231, 254, 361);
+        frmCsciClassProject.getContentPane().add(pnlConsole);
+        pnlConsole.setLayout(new BoxLayout(pnlConsole, BoxLayout.Y_AXIS));
+
+        lblPrinter = new JLabel("Console Printer");
+        pnlConsole.add(lblPrinter);
+
+        scrollPane1 = new JScrollPane();
+        pnlConsole.add(scrollPane1);
+
+        consolePrinter = new JTextArea();
+        consolePrinter.setEditable(false);
+        scrollPane1.setViewportView(consolePrinter);
+
+        lblKeyboard = new JLabel("Console Keyboard");
+        pnlConsole.add(lblKeyboard);
+
+        scrollPane2 = new JScrollPane();
+        pnlConsole.add(scrollPane2);
+
+        consoleKeyboard = new JTextArea();
+        scrollPane2.setViewportView(consoleKeyboard);
+
+        pnlOp = new JPanel();
+        pnlOp.setBounds(14, 45, 704, 98);
+        frmCsciClassProject.getContentPane().add(pnlOp);
+        pnlOp.setLayout(new FlowLayout(FlowLayout.RIGHT, 5, 5));
+
         pnlIns = new JPanel();
-        pnlIns.setBounds(14, 76, 704, 44);
-        frmCsciClassProject.getContentPane().add(pnlIns);
+        pnlOp.add(pnlIns);
         pnlIns.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 
         lblIns = new JLabel("Instruction");
@@ -1237,74 +1320,10 @@ public class FrontPanel {
         btnExecute = new JButton("execute");
         pnlIns.add(btnExecute);
 
-        testPanel = new JPanel();
-        testPanel.setBounds(752, 585, 203, 165);
-        frmCsciClassProject.getContentPane().add(testPanel);
-        testPanel.setLayout(new FlowLayout(FlowLayout.RIGHT, 5, 5));
-
-        lblTestPanel = new JLabel("Memory interface");
-        testPanel.add(lblTestPanel);
-
-        pnlAddress = new JPanel();
-        testPanel.add(pnlAddress);
-        pnlAddress.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
-
-        lblAddress = new JLabel("address");
-        pnlAddress.add(lblAddress);
-
-        textFieldAddress = new JTextField();
-        textFieldAddress.setText("0");
-        pnlAddress.add(textFieldAddress);
-        textFieldAddress.setColumns(10);
-
-        pnlValue = new JPanel();
-        testPanel.add(pnlValue);
-        pnlValue.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
-
-        lblValue = new JLabel("value");
-        pnlValue.add(lblValue);
-
-        textFieldValue = new JTextField();
-        textFieldValue.setText("0");
-        pnlValue.add(textFieldValue);
-        textFieldValue.setColumns(10);
-
-        pnlButton = new JPanel();
-        testPanel.add(pnlButton);
-        pnlButton.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
-
-        btnStore = new JButton("store");
-        pnlButton.add(btnStore);
-
-        btnLoad = new JButton("load");
-        pnlButton.add(btnLoad);
-
         // set the panels to disabled
         // after you push the IPL button on the frontpanel, these panels will be
         // set to enabled
         setEnableForPanel(pnlIns, false);
-        setEnableForPanel(pnlRegisters, false);
-
-        pnlConsole = new JPanel();
-        pnlConsole.setBounds(757, 231, 254, 192);
-        frmCsciClassProject.getContentPane().add(pnlConsole);
-        pnlConsole.setLayout(null);
-
-        lblConsle = new JLabel("Console");
-        lblConsle.setBounds(0, 0, 252, 18);
-        pnlConsole.add(lblConsle);
-
-        scrollPane = new JScrollPane();
-        scrollPane.setBounds(0, 21, 254, 144);
-        pnlConsole.add(scrollPane);
-
-        console = new JTextArea();
-        scrollPane.setViewportView(console);
-        console.setEditable(false);
-
-        btnBuilder = new JButton("Instruction Builder");
-        btnBuilder.setBounds(296, 36, 185, 27);
-        frmCsciClassProject.getContentPane().add(btnBuilder);
         enableFlag = 0;
 
     }
@@ -1589,7 +1608,7 @@ public class FrontPanel {
                     setEnableForPanel(pnlIns, true);
                     setEnableForPanel(pnlRegisters, true);
                     enableFlag = 1;
-                    mcu.loadFromROM();
+                    mcu.loadMemoryFromROM();
                 }
                 refreshRegistersPanel();
                 registers.setPC(8);
@@ -1609,8 +1628,8 @@ public class FrontPanel {
         btnLoad.addMouseListener(new MouseAdapter() {
             public void mousePressed(MouseEvent e) {
                 int address = Integer.parseInt(textFieldAddress.getText());
-                if (address > mcu.getCurrentSize() - 1 || address < 0) {
-                    JOptionPane.showMessageDialog(null, "Memory between 0 and " + (mcu.getCurrentSize() - 1) + "!");
+                if (address > mcu.getCurrentMemorySize() - 1 || address < 0) {
+                    JOptionPane.showMessageDialog(null, "Memory between 0 and " + (mcu.getCurrentMemorySize() - 1) + "!");
                 } else {
                     int value = mcu.fetchFromMemory(address);
                     textFieldValue.setText(String.valueOf(value));
@@ -1622,8 +1641,8 @@ public class FrontPanel {
             public void mousePressed(MouseEvent e) {
                 int address = Integer.parseInt(textFieldAddress.getText());
                 int value = Integer.parseInt(textFieldValue.getText());
-                if (address > mcu.getCurrentSize() - 1 || address < 0) {
-                    JOptionPane.showMessageDialog(null, "Memory between 0 and " + (mcu.getCurrentSize() - 1) + "!");
+                if (address > mcu.getCurrentMemorySize() - 1 || address < 0) {
+                    JOptionPane.showMessageDialog(null, "Memory between 0 and " + (mcu.getCurrentMemorySize() - 1) + "!");
                 } else if (value > 0xffff || value < 0) {
                     JOptionPane.showMessageDialog(null, "Value between 0 and 65535!");
                 } else {
@@ -1633,12 +1652,6 @@ public class FrontPanel {
                     textFieldValue.setText("0");
                     printConsole("store memory address " + address + " with value " + value);
                 }
-            }
-        });
-
-        btnBuilder.addMouseListener(new MouseAdapter() {
-            public void mousePressed(MouseEvent e) {
-
             }
         });
 
@@ -1672,7 +1685,19 @@ public class FrontPanel {
         });
 
     }
-
+    
+    //TODO finish it
+    private String buildInstruction(String text){
+        StringBuffer buffer = new StringBuffer();
+        String[] args = text.trim().split(",");
+        if(args[0].equals(Const.OPCODE.get("000000"))){ //HLT
+            buffer.append("0000000000000000");
+        }
+        else if(args[0].equals(Const.OPCODE.get("100100"))){ //TRAP
+            
+        }
+        return buffer.toString();
+    }
 
     /**
      * This method will read the value of every register and set the radio
@@ -1742,7 +1767,7 @@ public class FrontPanel {
      * 
      */
     private void printConsole(String message) {
-        console.append(message + "\n");
+        consolePrinter.append(message + "\n");
     }
 
     /**
@@ -1764,9 +1789,9 @@ public class FrontPanel {
 
                 AbstractInstruction instr = (AbstractInstruction) Class
                         .forName("alu.instruction." + Const.OPCODE.get(opCode)).newInstance();
+                printConsole("instruction: " + instruction);      
                 instr.execute(instruction, registers, mcu);
-                System.out.println("instruction: " + instruction);
-                printConsole("instruction: " + instruction);
+                
 
                 String message = instr.getExecuteMessage();
                 //

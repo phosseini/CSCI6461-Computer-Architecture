@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import util.Const;
+import util.StringUtil;
 
 /**
  * Memory Control Unit<br/>
@@ -20,17 +21,26 @@ public class MCU {
 
 
 
+    /**
+     *  16 bit words
+     */
     ArrayList<Integer> memory;
+    
+    /**
+     *  16 block cache
+     */
+    Cache cache;
 
 
     /**
-     * initialize the MCU, all memories set to 0
+     * initialize the MCU, all memories set to 0, memories size 2048.
      */
     public MCU() {
         this.memory = new ArrayList<Integer>(Const.MEMORY_WORDS_BOUND);
         for (int i = 0; i < Const.MEMORY_WORDS_BOUND; i++) {
             this.memory.add(0);
         }
+        this.cache = new Cache();
         System.out.println("MCU init with a size of " + this.memory.size());
     }
 
@@ -50,7 +60,7 @@ public class MCU {
     /**
      * @return current size of the memory
      */
-    public int getCurrentSize() {
+    public int getCurrentMemorySize() {
         if (this.memory != null) {
             return this.memory.size();
         }
@@ -81,11 +91,23 @@ public class MCU {
             this.memory.set(address, value);
         }
     }
+    
+    //TODO finish it
+    public int fetchFromCache(int address){
+        String memoryIndex = StringUtil.decimalToBinary(address, 11); // 2^11 = 2048 words
+        
+        return 0;
+    }
+    
+    //TODO finish it
+    public void storeIntoCache(int address, int value){
+        
+    }
 
     /**
      * Load from ROM and store the instructions after octal 10
      */
-    public void loadFromROM() {
+    public void loadMemoryFromROM() {
         HashMap<String, Integer> rom = Const.ROM;
         System.out.println("read from the ROM");
         if (rom != null) {

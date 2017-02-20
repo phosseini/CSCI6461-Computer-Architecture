@@ -7,6 +7,7 @@ public class Const {
     public static final Integer MEMORY_RESERVE_LOCATION = 5;
     public static final Integer MEMORY_WORDS_BOUND = 2048;
     public static final Integer MEMORY_WORDS_BOUND_EXPANDED = 4096;
+    public static final Integer CACHE_LINES = 16;
 
     public static final HashMap<String, Integer> ROM = new HashMap<>();
     static {
@@ -74,6 +75,7 @@ public class Const {
     public static final HashMap<String, String> OPCODE = new HashMap<String, String>();
     static {
         OPCODE.put("000000", "HLT");
+        OPCODE.put("100100", "TRAP");
         OPCODE.put("000001", "LDR");
         OPCODE.put("000010", "STR");
         OPCODE.put("000011", "LDA");
