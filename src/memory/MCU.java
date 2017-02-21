@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import memory.Cache.CacheLine;
 import util.Const;
 import util.StringUtil;
 
@@ -92,11 +93,27 @@ public class MCU {
         }
     }
     
-    //TODO finish it
+    
+    /**
+     * @param address
+     * @return
+     */
     public int fetchFromCache(int address){
         String memoryIndex = StringUtil.decimalToBinary(address, 11); // 2^11 = 2048 words
         
-        return 0;
+        int lower = StringUtil.binaryToDecimal(memoryIndex.substring(7, 11));
+        int upper = StringUtil.binaryToDecimal(memoryIndex.substring(0, 7));
+        CacheLine line = this.cache.get(lower);
+        if(line.isValid() && line.getTag() == upper){ // this is a match!
+            return line.getData(); 
+        }else{ //this is a mismatch!
+            int value = fetchFromMemory(address);
+            line.setV(1);
+            line.setTag(upper);
+            line.setData(value);
+            this.cache.set(lower, line);
+            return line.getData();
+        }
     }
     
     //TODO finish it
@@ -114,9 +131,9 @@ public class MCU {
             for (Map.Entry<String, Integer> entry : rom.entrySet()) {
                 int address = Integer.parseInt(entry.getKey());
                 int value = entry.getValue();
-                if (address > this.memory.size() || address <= Const.MEMORY_RESERVE_LOCATION || value > 0xffff) {
-                    continue; // ignore this entry
-                }
+                //if (address > this.memory.size() || address <= Const.MEMORY_RESERVE_LOCATION || value > 0xffff) {
+                //    continue; // ignore this entry
+                //}
                 this.memory.set(address, value);
             }
         }

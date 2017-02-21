@@ -3,6 +3,7 @@ package memory;
 import java.util.ArrayList;
 
 import util.Const;
+import util.StringUtil;
 
 public class Cache {
 
@@ -52,8 +53,8 @@ public class Cache {
         public void setData(int data) {
             this.data = data;
         }
-        
-        public boolean isValid(){
+
+        public boolean isValid() {
             return this.v == 0 ? false : true;
         }
     }
@@ -67,15 +68,37 @@ public class Cache {
         }
         System.out.println("Cache init complete");
     }
-    
+
     public ArrayList<CacheLine> getCacheLines() {
-        return cacheLines;
+        return this.cacheLines;
     }
-    
-    public CacheLine get(int index){
+
+    public CacheLine get(int index) {
         return this.cacheLines.get(index);
     }
-    
-    
+
+    public void set(int index, CacheLine cacheLine) {
+        this.cacheLines.set(index, cacheLine);
+    }
+
+    public String toString() {
+        StringBuffer buffer = new StringBuffer();
+        if (this.cacheLines != null && cacheLines.size() > 0) {
+            for (int i = 0; i < cacheLines.size(); i++) {
+                CacheLine line = cacheLines.get(i);
+                buffer.append(i);
+                buffer.append(": ");
+                buffer.append(line.getV());
+                buffer.append(", ");
+                buffer.append(line.getTag());
+                buffer.append(", ");
+                buffer.append(line.getData());
+                buffer.append("\n");
+            }
+            return buffer.toString();
+        }
+        return null;
+
+    }
 
 }
