@@ -8,6 +8,7 @@ import java.awt.event.FocusListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.math.BigInteger;
+import java.util.LinkedList;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -22,9 +23,16 @@ import javax.swing.JTextField;
 
 import alu.instruction.AbstractInstruction;
 import cpu.Registers;
+import memory.Cache.CacheLine;
 import memory.MCU;
 import util.Const;
 import util.MachineFaultException;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.Alignment;
+import javax.swing.LayoutStyle.ComponentPlacement;
+import java.awt.GridLayout;
 
 public class FrontPanel {
 
@@ -346,6 +354,13 @@ public class FrontPanel {
 
     private JTextArea consoleKeyboard;
     private JPanel pnlOp;
+    private JTable tableCache;
+
+    private JPanel pnlCache;
+
+    private JLabel lblCache;
+
+    private JScrollPane scrollPane3;
 
     /**
      * Launch the application.
@@ -371,6 +386,7 @@ public class FrontPanel {
         initComponents();
         addListeners();
         refreshRegistersPanel();
+
     }
 
     /**
@@ -387,7 +403,7 @@ public class FrontPanel {
     private void initComponents() {
         frmCsciClassProject = new JFrame();
         frmCsciClassProject.setTitle("CSCI6461 Class Project");
-        frmCsciClassProject.setBounds(100, 100, 1108, 871);
+        frmCsciClassProject.setBounds(100, 100, 1345, 890);
         frmCsciClassProject.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frmCsciClassProject.getContentPane().setLayout(null);
 
@@ -1318,6 +1334,26 @@ public class FrontPanel {
         // after you push the IPL button on the frontpanel, these panels will be
         // set to enabled
         setEnableForPanel(pnlIns, false);
+
+        pnlCache = new JPanel();
+        pnlCache.setBounds(1038, 506, 217, 223);
+        frmCsciClassProject.getContentPane().add(pnlCache);
+
+        lblCache = new JLabel("Cache");
+
+        scrollPane3 = new JScrollPane();
+
+        tableCache = new JTable(16, 2);
+        tableCache.setEnabled(false);
+        scrollPane3.setViewportView(tableCache);
+        tableCache.setModel(new DefaultTableModel(
+                new Object[][] { { null, null }, { null, null }, { null, null }, { null, null }, { null, null },
+                        { null, null }, { null, null }, { null, null }, { null, null }, { null, null }, { null, null },
+                        { null, null }, { null, null }, { null, null }, { null, null }, { null, null }, },
+                new String[] { "Tag", "Data" }));
+        pnlCache.setLayout(new BoxLayout(pnlCache, BoxLayout.Y_AXIS));
+        pnlCache.add(lblCache);
+        pnlCache.add(scrollPane3);
         enableFlag = 0;
 
     }
@@ -1591,6 +1627,7 @@ public class FrontPanel {
                 registers.setIR(registers.getMBR());
                 refreshRegistersPanel();
                 runInstruction(registers.getBinaryStringIr(), registers, mcu);
+                registers.increasePCByOne();
                 refreshRegistersPanel();
             }
         });
@@ -1613,7 +1650,7 @@ public class FrontPanel {
                     registers.setIR(registers.getMBR());
                     runInstruction(registers.getBinaryStringIr(), registers, mcu);
                     refreshRegistersPanel();
-                    registers.increasePCByOne();
+                    // TODO pc increase by 1
                 } while (registers.getIR() != 0);
                 registers.setPC(8);
                 refreshRegistersPanel();
@@ -1623,7 +1660,8 @@ public class FrontPanel {
             public void mousePressed(MouseEvent e) {
                 int address = Integer.parseInt(textFieldAddress.getText());
                 if (address > mcu.getCurrentMemorySize() - 1 || address < 0) {
-                    JOptionPane.showMessageDialog(null, "Memory between 0 and " + (mcu.getCurrentMemorySize() - 1) + "!");
+                    JOptionPane.showMessageDialog(null,
+                            "Memory between 0 and " + (mcu.getCurrentMemorySize() - 1) + "!");
                 } else {
                     int value = mcu.fetchFromMemory(address);
                     textFieldValue.setText(String.valueOf(value));
@@ -1636,12 +1674,12 @@ public class FrontPanel {
                 int address = Integer.parseInt(textFieldAddress.getText());
                 int value = Integer.parseInt(textFieldValue.getText());
                 if (address > mcu.getCurrentMemorySize() - 1 || address < 0) {
-                    JOptionPane.showMessageDialog(null, "Memory between 0 and " + (mcu.getCurrentMemorySize() - 1) + "!");
+                    JOptionPane.showMessageDialog(null,
+                            "Memory between 0 and " + (mcu.getCurrentMemorySize() - 1) + "!");
                 } else if (value > 0xffff || value < 0) {
                     JOptionPane.showMessageDialog(null, "Value between 0 and 65535!");
                 } else {
-                    mcu.storeIntoMemory(Integer.parseInt(textFieldAddress.getText()),
-                            Integer.parseInt(textFieldValue.getText()));
+                    mcu.storeIntoMemory(address, value);
                     textFieldAddress.setText("0");
                     textFieldValue.setText("0");
                     printConsole("store memory address " + address + " with value " + value);
@@ -1679,18 +1717,14 @@ public class FrontPanel {
         });
 
     }
-    
-    //TODO finish it
-    private String buildInstruction(String text){
-        StringBuffer buffer = new StringBuffer();
-        String[] args = text.trim().split(",");
-        if(args[0].equals(Const.OPCODE.get("000000"))){ //HLT
-            buffer.append("0000000000000000");
+
+    private void refreshCacheTable() {
+        int row = 0;
+        for (CacheLine line : mcu.getCache().getCacheLines()) {
+            this.tableCache.setValueAt(line.getTag(), row, 0);
+            this.tableCache.setValueAt(line.getData(), row, 1);
+            row++;
         }
-        else if(args[0].equals(Const.OPCODE.get("100100"))){ //TRAP
-            
-        }
-        return buffer.toString();
     }
 
     /**
@@ -1783,9 +1817,9 @@ public class FrontPanel {
 
                 AbstractInstruction instr = (AbstractInstruction) Class
                         .forName("alu.instruction." + Const.OPCODE.get(opCode)).newInstance();
-                printConsole("instruction: " + instruction);      
+                printConsole("instruction: " + instruction);
                 instr.execute(instruction, registers, mcu);
-                
+                refreshCacheTable();
 
                 String message = instr.getExecuteMessage();
                 //

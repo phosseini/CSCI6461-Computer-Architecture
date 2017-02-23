@@ -2,6 +2,7 @@ package memory;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.Map;
 
 import memory.Cache.CacheLine;
@@ -20,18 +21,19 @@ import util.StringUtil;
  */
 public class MCU {
 
-
-
     /**
-     *  16 bit words
+     * 16 bit words
      */
     ArrayList<Integer> memory;
-    
+
     /**
-     *  16 block cache
+     * 16 block fully associative, unified cache
      */
     Cache cache;
 
+    public Cache getCache() {
+        return cache;
+    }
 
     /**
      * initialize the MCU, all memories set to 0, memories size 2048.
@@ -70,7 +72,7 @@ public class MCU {
 
     /**
      * 
-     * Using the address to fetch a word from memory.
+     * Using the address to fetch a word directly from memory.
      * 
      * @param address
      * @return a word from memory
@@ -82,7 +84,7 @@ public class MCU {
 
     /**
      * 
-     * Store into memory using address and value.
+     * Store directly into memory using address and value.
      * 
      * @param address
      * @param value
@@ -92,33 +94,41 @@ public class MCU {
             this.memory.set(address, value);
         }
     }
-    
-    
+
     /**
+     * 
+     * 
+     * 
      * @param address
      * @return
      */
-    public int fetchFromCache(int address){
-        String memoryIndex = StringUtil.decimalToBinary(address, 11); // 2^11 = 2048 words
-        
-        int lower = StringUtil.binaryToDecimal(memoryIndex.substring(7, 11));
-        int upper = StringUtil.binaryToDecimal(memoryIndex.substring(0, 7));
-        CacheLine line = this.cache.get(lower);
-        if(line.isValid() && line.getTag() == upper){ // this is a match!
-            return line.getData(); 
-        }else{ //this is a mismatch!
-            int value = fetchFromMemory(address);
-            line.setV(1);
-            line.setTag(upper);
-            line.setData(value);
-            this.cache.set(lower, line);
-            return line.getData();
+    public int fetchFromCache(int address) {
+        for(CacheLine line: cache.getCacheLines()){ // check every block whether the tag is already exist
+            if(address == line.getTag()){
+                return line.getData(); // tag exist, return the data of the block
+            }
         }
+        // tag not exist
+        int value = fetchFromMemory(address);
+        cache.add(address, value);
+        return value;
     }
+
     
-    //TODO finish it
-    public void storeIntoCache(int address, int value){
-        
+    /**
+     * @param address
+     * @param value
+     */
+    public void storeIntoCache(int address, int value) {
+        storeIntoMemory(address, value);
+        for(CacheLine line: cache.getCacheLines()){ // check every block the tag is already exist
+            if(address == line.getTag()){
+                line.setData(value); //replace the block
+                return;
+            }
+        }
+        //tag not exist
+        cache.add(address, value);
     }
 
     /**
@@ -131,9 +141,10 @@ public class MCU {
             for (Map.Entry<String, Integer> entry : rom.entrySet()) {
                 int address = Integer.parseInt(entry.getKey());
                 int value = entry.getValue();
-                //if (address > this.memory.size() || address <= Const.MEMORY_RESERVE_LOCATION || value > 0xffff) {
-                //    continue; // ignore this entry
-                //}
+                // if (address > this.memory.size() || address <=
+                // Const.MEMORY_RESERVE_LOCATION || value > 0xffff) {
+                // continue; // ignore this entry
+                // }
                 this.memory.set(address, value);
             }
         }
