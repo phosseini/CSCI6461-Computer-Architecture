@@ -1645,7 +1645,8 @@ public class FrontPanel {
                     registers.setIR(registers.getMBR());
                     runInstruction(registers.getBinaryStringIr(), registers, mcu);
                     refreshRegistersPanel();
-                    // TODO pc increase by 1
+                    registers.increasePCByOne();
+                    //TODO fix it
                 } while (registers.getIR() != 0);
                 registers.setPC(8);
                 refreshRegistersPanel();
@@ -1820,10 +1821,7 @@ public class FrontPanel {
                 //
                 // TODO do something with this message
                 //
-                registers.increasePCByOne();
-                //
-                // TODO fix it
-                //
+                
             } else {
                 // we don't have that kind of instruction
                 throw new MachineFaultException(Const.FaultCode.ILL_OPRC.getValue());
