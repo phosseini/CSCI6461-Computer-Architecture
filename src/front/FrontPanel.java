@@ -8,7 +8,6 @@ import java.awt.event.FocusListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.math.BigInteger;
-import java.util.LinkedList;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -18,8 +17,10 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
 
 import alu.instruction.AbstractInstruction;
 import cpu.Registers;
@@ -27,12 +28,6 @@ import memory.Cache.CacheLine;
 import memory.MCU;
 import util.Const;
 import util.MachineFaultException;
-import javax.swing.JTable;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.GroupLayout;
-import javax.swing.GroupLayout.Alignment;
-import javax.swing.LayoutStyle.ComponentPlacement;
-import java.awt.GridLayout;
 
 public class FrontPanel {
 
@@ -1824,6 +1819,10 @@ public class FrontPanel {
                 String message = instr.getExecuteMessage();
                 //
                 // TODO do something with this message
+                //
+                registers.increasePCByOne();
+                //
+                // TODO fix it
                 //
             } else {
                 // we don't have that kind of instruction

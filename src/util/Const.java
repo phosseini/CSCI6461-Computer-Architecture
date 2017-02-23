@@ -81,6 +81,8 @@ public class Const {
         OPCODE.put("000011", "LDA");
         OPCODE.put("101001", "LDX");
         OPCODE.put("101010", "STX");
+        OPCODE.put("111101","IN");
+        OPCODE.put("111110", "OUT");
     }
 
 }

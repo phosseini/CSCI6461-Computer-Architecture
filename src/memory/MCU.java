@@ -2,12 +2,10 @@ package memory;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.Map;
 
 import memory.Cache.CacheLine;
 import util.Const;
-import util.StringUtil;
 
 /**
  * Memory Control Unit<br/>

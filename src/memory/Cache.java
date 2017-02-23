@@ -1,10 +1,8 @@
 package memory;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
 
 import util.Const;
-import util.StringUtil;
 
 public class Cache {
 
