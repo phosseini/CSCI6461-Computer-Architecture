@@ -1618,7 +1618,7 @@ public class FrontPanel {
                 refreshRegistersPanel();
                 mcu.storeIntoMemory(registers.getPC(), value);
                 registers.setMAR(registers.getPC());
-                registers.setMBR(mcu.fetchFromMemory(registers.getMAR()));
+                registers.setMBR(mcu.fetchFromCache(registers.getMAR()));
                 registers.setIR(registers.getMBR());
                 refreshRegistersPanel();
                 runInstruction(registers.getBinaryStringIr(), registers, mcu);
@@ -1628,26 +1628,29 @@ public class FrontPanel {
         });
 
         // add listener to the IPL button
-        btnIPL.addMouseListener(new MouseAdapter() {
+        btnIPL.addMouseListener(new MouseAdapter() { //TODO
             public void mousePressed(MouseEvent e) {
                 if (enableFlag == 0) {
                     setEnableForPanel(pnlIns, true);
                     setEnableForPanel(pnlRegisters, true);
                     enableFlag = 1;
-                    mcu.loadMemoryFromROM();
+                    
                 }
+                mcu.loadMemoryFromROM();
                 refreshRegistersPanel();
-                registers.setPC(8);
+                registers.setPC(Const.BOOT_PROG_BASE);
+                int end = Const.ROM.size() + Const.BOOT_PROG_BASE;
+                
                 do {
                     refreshRegistersPanel();
                     registers.setMAR(registers.getPC());
-                    registers.setMBR(mcu.fetchFromMemory(registers.getMAR()));
+                    registers.setMBR(mcu.fetchFromCache(registers.getMAR()));
                     registers.setIR(registers.getMBR());
                     runInstruction(registers.getBinaryStringIr(), registers, mcu);
                     refreshRegistersPanel();
                     registers.increasePCByOne();
                     //TODO fix it
-                } while (registers.getIR() != 0);
+                } while (registers.getPC() < end);
                 registers.setPC(8);
                 refreshRegistersPanel();
             }

@@ -8,6 +8,7 @@ public class Const {
     public static final Integer MEMORY_WORDS_BOUND = 2048;
     public static final Integer MEMORY_WORDS_BOUND_EXPANDED = 4096;
     public static final Integer CACHE_LINES = 16;
+    public static final Integer BOOT_PROG_BASE = 8;
 
     public static final HashMap<String, Integer> ROM = new HashMap<>();
     static {

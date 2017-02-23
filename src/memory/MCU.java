@@ -142,11 +142,7 @@ public class MCU {
             for (Map.Entry<String, Integer> entry : rom.entrySet()) {
                 int address = Integer.parseInt(entry.getKey());
                 int value = entry.getValue();
-                // if (address > this.memory.size() || address <=
-                // Const.MEMORY_RESERVE_LOCATION || value > 0xffff) {
-                // continue; // ignore this entry
-                // }
-                this.memory.set(address, value);
+                storeIntoMemory(address, value);
             }
         }
     }
