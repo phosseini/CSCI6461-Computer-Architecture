@@ -97,7 +97,7 @@ public class MCU {
 
     /**
      * 
-     * 
+     * fetch a word from cache. If the word is not in cache, fetch it from memory, then store it into cache.
      * 
      * @param address
      * @return
@@ -116,6 +116,9 @@ public class MCU {
 
     
     /**
+     * 
+     * store into cache with replacement. Also store into memory simultaneously.
+     * 
      * @param address
      * @param value
      */
