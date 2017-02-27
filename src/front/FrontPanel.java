@@ -1841,7 +1841,8 @@ public class FrontPanel {
                 refreshCacheTable();
                 pushConsoleBuffer();
 
-                //String message = instr.getExecuteMessage();
+                String message = instr.getExecuteMessage();
+                System.out.println(message);
                 //
                 // TODO do something with this message
                 //

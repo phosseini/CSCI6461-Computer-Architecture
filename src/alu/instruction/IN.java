@@ -28,7 +28,7 @@ public class IN extends AbstractInstruction {
 
     @Override
     public String getExecuteMessage() {
-        return "IN " + num + ", " + "devId";
+        return "IN " + num + ", " + devId;
     }
 
 }

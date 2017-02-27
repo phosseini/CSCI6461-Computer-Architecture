@@ -21,7 +21,7 @@ public class OUT extends AbstractInstruction {
 
     @Override
     public String getExecuteMessage() {
-        return "OUT " + num + ", " + "devId";
+        return "OUT " + num + ", " + devId;
     }
 
 }
