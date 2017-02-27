@@ -5,6 +5,8 @@ import java.awt.EventQueue;
 import java.awt.FlowLayout;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.math.BigInteger;
@@ -28,6 +30,7 @@ import memory.Cache.CacheLine;
 import memory.MCU;
 import util.Const;
 import util.MachineFaultException;
+import util.StringUtil;
 
 public class FrontPanel {
 
@@ -1250,6 +1253,7 @@ public class FrontPanel {
         pnlConsole.add(scrollPane1);
 
         consolePrinter = new JTextArea();
+        consolePrinter.setLineWrap(true);
         consolePrinter.setEditable(false);
         scrollPane1.setViewportView(consolePrinter);
 
@@ -1260,6 +1264,7 @@ public class FrontPanel {
         pnlConsole.add(scrollPane2);
 
         consoleKeyboard = new JTextArea();
+        consoleKeyboard.setLineWrap(true);
         scrollPane2.setViewportView(consoleKeyboard);
 
         pnlOp = new JPanel();
@@ -1372,9 +1377,9 @@ public class FrontPanel {
                         buffer = rdb.isSelected() ? buffer.append("1") : buffer.append("0");
                     }
                 }
-                String value = new BigInteger(buffer.toString(), 2).toString();
-                textFieldR0.setText(value);
-                registers.setR0(Integer.parseInt(value));
+                int value = StringUtil.binaryToDecimal(buffer.toString());
+                textFieldR0.setText(String.valueOf(value));
+                registers.setR0(value);
                 System.out.println("R0 is set to: " + value);
                 printConsole("R0 is set to: " + value);
             }
@@ -1389,9 +1394,9 @@ public class FrontPanel {
                         buffer = rdb.isSelected() ? buffer.append("1") : buffer.append("0");
                     }
                 }
-                String value = new BigInteger(buffer.toString(), 2).toString();
-                textFieldR1.setText(value);
-                registers.setR1(Integer.parseInt(value));
+                int value = StringUtil.binaryToDecimal(buffer.toString());
+                textFieldR1.setText(String.valueOf(value));
+                registers.setR1(value);
                 System.out.println("R1 is set to: " + value);
                 printConsole("R1 is set to: " + value);
             }
@@ -1406,9 +1411,9 @@ public class FrontPanel {
                         buffer = rdb.isSelected() ? buffer.append("1") : buffer.append("0");
                     }
                 }
-                String value = new BigInteger(buffer.toString(), 2).toString();
-                textFieldR2.setText(value);
-                registers.setR2(Integer.parseInt(value));
+                int value = StringUtil.binaryToDecimal(buffer.toString());
+                textFieldR2.setText(String.valueOf(value));
+                registers.setR2(value);
                 System.out.println("R2 is set to: " + value);
                 printConsole("R2 is set to: " + value);
             }
@@ -1423,9 +1428,9 @@ public class FrontPanel {
                         buffer = rdb.isSelected() ? buffer.append("1") : buffer.append("0");
                     }
                 }
-                String value = new BigInteger(buffer.toString(), 2).toString();
-                textFieldR3.setText(value);
-                registers.setR3(Integer.parseInt(value));
+                int value = StringUtil.binaryToDecimal(buffer.toString());
+                textFieldR3.setText(String.valueOf(value));
+                registers.setR3(value);
                 System.out.println("R3 is set to: " + value);
                 printConsole("R3 is set to: " + value);
             }
@@ -1440,9 +1445,9 @@ public class FrontPanel {
                         buffer = rdb.isSelected() ? buffer.append("1") : buffer.append("0");
                     }
                 }
-                String value = new BigInteger(buffer.toString(), 2).toString();
-                textFieldX1.setText(value);
-                registers.setX1(Integer.parseInt(value));
+                int value = StringUtil.binaryToDecimal(buffer.toString());
+                textFieldX1.setText(String.valueOf(value));
+                registers.setX1(value);
                 System.out.println("X1 is set to: " + value);
                 printConsole("X1 is set to: " + value);
             }
@@ -1457,9 +1462,9 @@ public class FrontPanel {
                         buffer = rdb.isSelected() ? buffer.append("1") : buffer.append("0");
                     }
                 }
-                String value = new BigInteger(buffer.toString(), 2).toString();
-                textFieldX2.setText(value);
-                registers.setX2(Integer.parseInt(value));
+                int value = StringUtil.binaryToDecimal(buffer.toString());
+                textFieldX2.setText(String.valueOf(value));
+                registers.setX2(value);
                 System.out.println("X2 is set to: " + value);
                 printConsole("X2 is set to: " + value);
             }
@@ -1474,9 +1479,9 @@ public class FrontPanel {
                         buffer = rdb.isSelected() ? buffer.append("1") : buffer.append("0");
                     }
                 }
-                String value = new BigInteger(buffer.toString(), 2).toString();
-                textFieldX3.setText(value);
-                registers.setX1(Integer.parseInt(value));
+                int value = StringUtil.binaryToDecimal(buffer.toString());
+                textFieldX3.setText(String.valueOf(value));
+                registers.setX1(value);
                 System.out.println("X3 is set to: " + value);
                 printConsole("X3 is set to: " + value);
             }
@@ -1491,9 +1496,9 @@ public class FrontPanel {
                         buffer = rdb.isSelected() ? buffer.append("1") : buffer.append("0");
                     }
                 }
-                String value = new BigInteger(buffer.toString(), 2).toString();
-                textFieldMAR.setText(value);
-                registers.setMAR(Integer.parseInt(value));
+                int value = StringUtil.binaryToDecimal(buffer.toString());
+                textFieldMAR.setText(String.valueOf(value));
+                registers.setMAR(value);
                 System.out.println("MAR is set to: " + value);
                 printConsole("MAR is set to: " + value);
             }
@@ -1508,9 +1513,9 @@ public class FrontPanel {
                         buffer = rdb.isSelected() ? buffer.append("1") : buffer.append("0");
                     }
                 }
-                String value = new BigInteger(buffer.toString(), 2).toString();
-                textFieldMBR.setText(value);
-                registers.setMBR(Integer.parseInt(value));
+                int value = StringUtil.binaryToDecimal(buffer.toString());
+                textFieldMBR.setText(String.valueOf(value));
+                registers.setMBR(value);
                 System.out.println("MBR is set to: " + value);
                 printConsole("MBR is set to: " + value);
             }
@@ -1525,9 +1530,9 @@ public class FrontPanel {
                         buffer = rdb.isSelected() ? buffer.append("1") : buffer.append("0");
                     }
                 }
-                String value = new BigInteger(buffer.toString(), 2).toString();
-                textFieldMSR.setText(value);
-                registers.setMSR(Integer.parseInt(value));
+                int value = StringUtil.binaryToDecimal(buffer.toString());
+                textFieldMSR.setText(String.valueOf(value));
+                registers.setMSR(value);
                 System.out.println("MSR is set to: " + value);
                 printConsole("MSR is set to: " + value);
             }
@@ -1542,9 +1547,9 @@ public class FrontPanel {
                         buffer = rdb.isSelected() ? buffer.append("1") : buffer.append("0");
                     }
                 }
-                String value = new BigInteger(buffer.toString(), 2).toString();
-                textFieldMFR.setText(value);
-                registers.setMFR(Integer.parseInt(value));
+                int value = StringUtil.binaryToDecimal(buffer.toString());
+                textFieldMFR.setText(String.valueOf(value));
+                registers.setMFR(value);
                 System.out.println("MFR is set to: " + value);
                 printConsole("MFR is set to: " + value);
             }
@@ -1559,9 +1564,9 @@ public class FrontPanel {
                         buffer = rdb.isSelected() ? buffer.append("1") : buffer.append("0");
                     }
                 }
-                String value = new BigInteger(buffer.toString(), 2).toString();
-                textFieldPC.setText(value);
-                registers.setPC(Integer.parseInt(value));
+                int value = StringUtil.binaryToDecimal(buffer.toString());
+                textFieldPC.setText(String.valueOf(value));
+                registers.setPC(value);
                 System.out.println("PC is set to: " + value);
                 printConsole("PC is set to: " + value);
             }
@@ -1576,9 +1581,10 @@ public class FrontPanel {
                         buffer = rdb.isSelected() ? buffer.append("1") : buffer.append("0");
                     }
                 }
-                String value = new BigInteger(buffer.toString(), 2).toString();
-                textFieldIR.setText(value);
-                registers.setIR(Integer.parseInt(value));
+
+                int value = StringUtil.binaryToDecimal(buffer.toString());
+                textFieldIR.setText(String.valueOf(value));
+                registers.setIR(value);
                 System.out.println("IR is set to: " + value);
                 printConsole("IR is set to: " + value);
             }
@@ -1593,9 +1599,9 @@ public class FrontPanel {
                         buffer = rdb.isSelected() ? buffer.append("1") : buffer.append("0");
                     }
                 }
-                String value = new BigInteger(buffer.toString(), 2).toString();
-                textFieldCC.setText(value);
-                registers.setCC(Integer.parseInt(value));
+                int value = StringUtil.binaryToDecimal(buffer.toString());
+                textFieldCC.setText(String.valueOf(value));
+                registers.setCC(value);
                 System.out.println("CC is set to: " + value);
                 printConsole("CC is set to: " + value);
             }
@@ -1611,10 +1617,7 @@ public class FrontPanel {
                         buffer = rdb.isSelected() ? buffer.append("1") : buffer.append("0");
                     }
                 }
-                int value = new BigInteger(buffer.toString(), 2).intValue();
-                // mcu.storeIntoMemory(8 + Const.ROM.size() + 8,
-                // Integer.valueOf(value));
-                // registers.setPC(8 + Const.ROM.size() + 8);
+                int value = StringUtil.binaryToDecimal(buffer.toString());
                 refreshRegistersPanel();
                 mcu.storeIntoMemory(registers.getPC(), value);
                 registers.setMAR(registers.getPC());
@@ -1628,19 +1631,19 @@ public class FrontPanel {
         });
 
         // add listener to the IPL button
-        btnIPL.addMouseListener(new MouseAdapter() { //TODO
+        btnIPL.addMouseListener(new MouseAdapter() { // TODO
             public void mousePressed(MouseEvent e) {
                 if (enableFlag == 0) {
                     setEnableForPanel(pnlIns, true);
                     setEnableForPanel(pnlRegisters, true);
                     enableFlag = 1;
-                    
+
                 }
                 mcu.loadMemoryFromROM();
                 refreshRegistersPanel();
                 registers.setPC(Const.BOOT_PROG_BASE);
                 int end = Const.ROM.size() + Const.BOOT_PROG_BASE;
-                
+
                 do {
                     refreshRegistersPanel();
                     registers.setMAR(registers.getPC());
@@ -1649,10 +1652,11 @@ public class FrontPanel {
                     runInstruction(registers.getBinaryStringIr(), registers, mcu);
                     refreshRegistersPanel();
                     registers.increasePCByOne();
-                    //TODO fix it
+                    // TODO fix it
                 } while (registers.getPC() < end);
                 registers.setPC(8);
                 refreshRegistersPanel();
+                printConsole("IPL complete!");
             }
         });
         btnLoad.addMouseListener(new MouseAdapter() {
@@ -1714,6 +1718,11 @@ public class FrontPanel {
 
             }
         });
+        consoleKeyboard.addKeyListener(new KeyAdapter() {
+            public void keyReleased(KeyEvent e) {
+                mcu.setKeyboardBuffer(consoleKeyboard.getText());
+            }
+        });
 
     }
 
@@ -1723,6 +1732,17 @@ public class FrontPanel {
             this.tableCache.setValueAt(line.getTag(), row, 0);
             this.tableCache.setValueAt(line.getData(), row, 1);
             row++;
+        }
+
+    }
+
+    private void pushConsoleBuffer() {
+        if (mcu.getPrinterBuffer() != null) {
+            consolePrinter.append(mcu.getPrinterBuffer());
+            mcu.setPrinterBuffer("");
+        }
+        if (mcu.getKeyboardBuffer() != null) {
+            consoleKeyboard.setText(mcu.getKeyboardBuffer());
         }
     }
 
@@ -1743,8 +1763,7 @@ public class FrontPanel {
                         JLabel lbl = (JLabel) comm;
                         regVal = registers.getRegistersByName(lbl.getText());
                         bitLong = registers.getBitLongByName(lbl.getText());
-                        bitString = String.format("%" + bitLong + "s", Integer.toBinaryString(regVal)).replace(" ",
-                                "0");
+                        bitString = StringUtil.decimalToBinary(regVal, bitLong);
                         i = bitLong;
                     }
                     if (comm instanceof JRadioButton) {
@@ -1816,15 +1835,17 @@ public class FrontPanel {
 
                 AbstractInstruction instr = (AbstractInstruction) Class
                         .forName("alu.instruction." + Const.OPCODE.get(opCode)).newInstance();
-                printConsole("instruction: " + instruction);
                 instr.execute(instruction, registers, mcu);
+                System.out.println("instruction: " + instruction);
+                //printConsole("instruction: " + instruction);
                 refreshCacheTable();
+                pushConsoleBuffer();
 
-                String message = instr.getExecuteMessage();
+                //String message = instr.getExecuteMessage();
                 //
                 // TODO do something with this message
                 //
-                
+
             } else {
                 // we don't have that kind of instruction
                 throw new MachineFaultException(Const.FaultCode.ILL_OPRC.getValue());

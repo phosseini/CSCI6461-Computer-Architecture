@@ -23,8 +23,10 @@ public class StringUtil {
      * bitLength. Additional zeros may be added at the left side of the string
      * in order to fit this length.
      * 
-     * @param decimal decimal number
-     * @param bitLength the bits of the binary
+     * @param decimal
+     *            decimal number
+     * @param bitLength
+     *            the bits of the binary
      * @return binary String
      * 
      * 

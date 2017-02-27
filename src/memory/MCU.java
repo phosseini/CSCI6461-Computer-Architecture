@@ -29,6 +29,25 @@ public class MCU {
      */
     Cache cache;
 
+    String printerBuffer;
+    String keyboardBuffer;
+
+    public String getPrinterBuffer() {
+        return printerBuffer;
+    }
+
+    public void setPrinterBuffer(String printerBuffer) {
+        this.printerBuffer = printerBuffer;
+    }
+
+    public String getKeyboardBuffer() {
+        return keyboardBuffer;
+    }
+
+    public void setKeyboardBuffer(String keyboardBuffer) {
+        this.keyboardBuffer = keyboardBuffer;
+    }
+
     public Cache getCache() {
         return cache;
     }
@@ -42,7 +61,7 @@ public class MCU {
             this.memory.add(0);
         }
         this.cache = new Cache();
-        System.out.println("MCU init with a size of " + this.memory.size());
+        // System.out.println("MCU init with a size of " + this.memory.size());
     }
 
     /**
@@ -95,15 +114,19 @@ public class MCU {
 
     /**
      * 
-     * fetch a word from cache. If the word is not in cache, fetch it from memory, then store it into cache.
+     * fetch a word from cache. If the word is not in cache, fetch it from
+     * memory, then store it into cache.
      * 
      * @param address
      * @return
      */
     public int fetchFromCache(int address) {
-        for(CacheLine line: cache.getCacheLines()){ // check every block whether the tag is already exist
-            if(address == line.getTag()){
-                return line.getData(); // tag exist, return the data of the block
+        for (CacheLine line : cache.getCacheLines()) { // check every block
+                                                       // whether the tag is
+                                                       // already exist
+            if (address == line.getTag()) {
+                return line.getData(); // tag exist, return the data of the
+                                       // block
             }
         }
         // tag not exist
@@ -112,7 +135,6 @@ public class MCU {
         return value;
     }
 
-    
     /**
      * 
      * store into cache with replacement. Also store into memory simultaneously.
@@ -122,13 +144,14 @@ public class MCU {
      */
     public void storeIntoCache(int address, int value) {
         storeIntoMemory(address, value);
-        for(CacheLine line: cache.getCacheLines()){ // check every block the tag is already exist
-            if(address == line.getTag()){
-                line.setData(value); //replace the block
+        for (CacheLine line : cache.getCacheLines()) { // check every block the
+                                                       // tag is already exist
+            if (address == line.getTag()) {
+                line.setData(value); // replace the block
                 return;
             }
         }
-        //tag not exist
+        // tag not exist
         cache.add(address, value);
     }
 
@@ -137,7 +160,7 @@ public class MCU {
      */
     public void loadMemoryFromROM() {
         HashMap<String, Integer> rom = Const.ROM;
-        System.out.println("read from the ROM");
+        // System.out.println("read from the ROM");
         if (rom != null) {
             for (Map.Entry<String, Integer> entry : rom.entrySet()) {
                 int address = Integer.parseInt(entry.getKey());
