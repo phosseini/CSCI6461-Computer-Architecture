@@ -2,6 +2,7 @@ package alu.instruction;
 
 import cpu.Registers;
 import memory.MCU;
+import util.Const;
 import util.MachineFaultException;
 import util.StringUtil;
 
@@ -14,16 +15,19 @@ public class IN extends AbstractInstruction {
     public void execute(String instruction, Registers registers, MCU mcu) throws MachineFaultException {
         this.num = StringUtil.binaryToDecimal(instruction.substring(6, 8));
         this.devId = StringUtil.binaryToDecimal(instruction.substring(11, 16));
-        String buffer = mcu.getKeyboardBuffer();
-        if (buffer != null && buffer.length() > 0) {
-            char ch = buffer.charAt(0);
-            int val = StringUtil.binaryToDecimal(Integer.toBinaryString(ch));
-            registers.setRnByNum(this.num, val);
+        if (this.devId == Const.DevId.KEYBOARD.getValue()) {
+            String buffer = mcu.getKeyboardBuffer();
+            if (buffer != null && buffer.length() > 0) {
+                char ch = buffer.charAt(0);
+                int val = StringUtil.binaryToDecimal(Integer.toBinaryString(ch));
+                registers.setRnByNum(this.num, val);
 
-            mcu.setKeyboardBuffer(buffer.substring(1, buffer.length()));
-        } else {
-            registers.setRnByNum(this.num, 0);
+                mcu.setKeyboardBuffer(buffer.substring(1, buffer.length()));
+            } else {
+                registers.setRnByNum(this.num, 0);
+            }
         }
+
     }
 
     @Override

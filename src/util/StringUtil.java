@@ -35,5 +35,6 @@ public class StringUtil {
         return String.format("%" + bitLength + "s", Integer.toBinaryString(decimal)).replace(" ", "0");
 
     }
+    
 
 }

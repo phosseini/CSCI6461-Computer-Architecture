@@ -64,6 +64,19 @@ public class Const {
             return this.value;
         }
     }
+    
+    public enum DevId{
+        KEYBOARD(0), PRINTER(1);
+        int value;
+        
+        private DevId(int value){
+            this.value = value;
+        }
+        
+        public int getValue(){
+            return this.value;
+        }
+    }
 
     /**
      * 000000 - HLT</br>
