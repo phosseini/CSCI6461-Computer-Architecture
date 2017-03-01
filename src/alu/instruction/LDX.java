@@ -4,6 +4,7 @@ import cpu.Registers;
 import memory.MCU;
 import util.EffectiveAddress;
 import util.MachineFaultException;
+import util.StringUtil;
 
 public class LDX extends AbstractInstruction {
 
@@ -12,7 +13,7 @@ public class LDX extends AbstractInstruction {
 		//-----------------------------------
 		// 41: LDX -> Load Index Register from Memory
 		//-----------------------------------
-				int ix = Integer.valueOf(instruction.substring(8, 10));
+				int ix = StringUtil.binaryToDecimal(instruction.substring(8, 10));
 				
 				// first, we read the content of selected Index Register using [IX]
 				registers.setMAR(util.EffectiveAddress.EA(instruction, mcu, registers));

@@ -4,6 +4,7 @@ import cpu.Registers;
 import memory.MCU;
 import util.EffectiveAddress;
 import util.MachineFaultException;
+import util.StringUtil;
 
 public class JNE extends AbstractInstruction {
 
@@ -12,7 +13,7 @@ public class JNE extends AbstractInstruction {
 		//-----------------------------------
 		// 011: JNE -> Jump if Not Equal
 		//-----------------------------------
-		int r = Integer.valueOf(instruction.substring(6, 8));
+		int r = StringUtil.binaryToDecimal(instruction.substring(6, 8));
 		
 		// reading the content of selected register using [R] in the instruction
 		if (mcu.fetchFromMemory(registers.getRnByNum(r)) != 0){

@@ -4,6 +4,7 @@ import cpu.Registers;
 import memory.MCU;
 import util.EffectiveAddress;
 import util.MachineFaultException;
+import util.StringUtil;
 
 public class STR extends AbstractInstruction {
 
@@ -12,7 +13,7 @@ public class STR extends AbstractInstruction {
 		//-----------------------------------
 		// 02:STR -> Store Register to Memory
 		//-----------------------------------
-		int r = Integer.valueOf(instruction.substring(6, 8));
+		int r = StringUtil.binaryToDecimal(instruction.substring(6, 8));
 		
 		// reading the content of selected register using [R] in the instruction
 		registers.setMAR(util.EffectiveAddress.EA(instruction, mcu, registers));

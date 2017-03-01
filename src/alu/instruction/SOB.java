@@ -4,6 +4,7 @@ import cpu.Registers;
 import memory.MCU;
 import util.EffectiveAddress;
 import util.MachineFaultException;
+import util.StringUtil;
 
 public class SOB extends AbstractInstruction {
 
@@ -12,8 +13,7 @@ public class SOB extends AbstractInstruction {
 		//-----------------------------------
 		//016: SOB -> Subtract One and Branch
 		//-----------------------------------
-		int r = Integer.valueOf(instruction.substring(6, 8));
-		
+		int r = StringUtil.binaryToDecimal(instruction.substring(6, 8));
 		registers.setRnByNum(r,(mcu.fetchFromMemory(registers.getRnByNum(r)) - 1));
 		if (mcu.fetchFromMemory(registers.getRnByNum(r)) > 0){
 			registers.setPC(util.EffectiveAddress.EA(instruction, mcu, registers));

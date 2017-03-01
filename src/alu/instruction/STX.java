@@ -4,6 +4,7 @@ import cpu.Registers;
 import memory.MCU;
 import util.EffectiveAddress;
 import util.MachineFaultException;
+import util.StringUtil;
 
 public class STX extends AbstractInstruction {
 
@@ -13,7 +14,7 @@ public class STX extends AbstractInstruction {
 		// 42: STX -> Store Index Register to Memory
 		//------------------------------------------
 		
-		int ix = Integer.valueOf(instruction.substring(8, 10));
+		int ix = StringUtil.binaryToDecimal(instruction.substring(8, 10));
 		
 		registers.setMAR(util.EffectiveAddress.EA(instruction, mcu, registers));
 		registers.setMBR(registers.getXnByNum(ix));

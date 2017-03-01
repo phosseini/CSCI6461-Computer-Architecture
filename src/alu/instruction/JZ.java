@@ -4,6 +4,7 @@ import cpu.Registers;
 import memory.MCU;
 import util.EffectiveAddress;
 import util.MachineFaultException;
+import util.StringUtil;
 
 public class JZ extends AbstractInstruction {
 
@@ -12,7 +13,7 @@ public class JZ extends AbstractInstruction {
 		//------------------------------------------
 		//  010: JZ -> Jump if Zero
 		//------------------------------------------
-		int r = Integer.valueOf(instruction.substring(6, 8));
+		int r = StringUtil.binaryToDecimal(instruction.substring(6, 8));
 		if (mcu.fetchFromMemory(registers.getRnByNum(r)) == 0){
 			registers.setPC(util.EffectiveAddress.EA(instruction, mcu, registers));
 		}
