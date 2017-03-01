@@ -2,16 +2,25 @@ package alu.instruction;
 
 import cpu.Registers;
 import memory.MCU;
+import util.EffectiveAddress;
 import util.MachineFaultException;
 
 public class LDR extends AbstractInstruction {
 
 	@Override
 	public void execute(String instruction, Registers registers, MCU mcu) throws MachineFaultException {
-		// TODO Auto-generated method stub
-		System.out.println("this is a LDR instruction!");
-	}
-
+		//-----------------------------------
+		// 01:LDR -> Load Register From Memory
+		//-----------------------------------
+				int r = Integer.valueOf(instruction.substring(6, 8));
+				
+				// reading the content of selected register using [R] in the instruction
+				registers.setMAR(util.EffectiveAddress.EA(instruction, mcu, registers));
+				registers.setMBR(mcu.fetchFromMemory(registers.getMAR()));
+				registers.setRnByNum(r, registers.getMBR());
+				
+				// System.out.println("this is a LDR instruction!");
+			}
 	@Override
 	public String getExecuteMessage() {
 		// TODO Auto-generated method stub

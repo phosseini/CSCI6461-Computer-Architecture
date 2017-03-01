@@ -82,6 +82,69 @@ public class Instructions {
 			
 			break;
 		}
+		case 1010: {
+			// 010: JZ -> Jump if Zero
+			if (mcu.fetchFromMemory(registers.getRnByNum(bin2dec(r))) == 0){
+				registers.setPC(effectiveAddress);
+			}
+			else {
+				registers.setPC(registers.getPC()+1);
+			}
+		}
+		case 1011: {
+			// 011: JNE -> Jump if Not Equal
+			if (mcu.fetchFromMemory(registers.getRnByNum(bin2dec(r))) != 0){
+				registers.setPC(effectiveAddress);
+			}
+			else {
+				registers.setPC(registers.getPC()+1);
+			}
+			
+		}
+		case 1100: {
+			// 012: JCC -> Jump If Condition Code cc replaces r for this instruction
+			// ??????????????????
+			if (registers.getCC() == 1){
+				registers.setPC(effectiveAddress);
+			}
+			else {
+				registers.setPC(registers.getPC()+1);
+			}
+		}
+		case 1101: {
+			// 013: JMA -> Unconditional Jump To Address
+			registers.setPC(effectiveAddress);
+		}
+		case 1110: {
+			// 014: JSR -> Jump and Save Return Address
+		    registers.setR3(registers.getPC()+1);
+		    registers.setPC(effectiveAddress);
+		}
+		case 1111: {
+			// 015: RFS -> Return From Subroutine w/ return code as Immed portion
+			// (optional) stored in the instruvtion's address field
+			//registers.setR0(Immed));?????????????????
+			registers.setPC(mcu.fetchFromMemory(registers.getR3()));
+		}
+		case 10000: {
+			// 016: SOB -> Subtract One and Branch
+			registers.setRnByNum(bin2dec(r),(mcu.fetchFromMemory(registers.getRnByNum(bin2dec(r))) - 1));
+			if (mcu.fetchFromMemory(registers.getRnByNum(bin2dec(r))) > 0){
+				registers.setPC(effectiveAddress);
+			}
+			else {
+				registers.setPC(registers.getPC()+1);
+			}
+		}
+		case 10001: {
+			// 017: JGE -> Jump Greater Than or Equal To
+			if (mcu.fetchFromMemory(registers.getRnByNum(bin2dec(r))) >= 0){
+				registers.setPC(effectiveAddress);
+			}
+			else {
+				registers.setPC(registers.getPC()+1);
+			}
+		}
 		}
 	}
 
