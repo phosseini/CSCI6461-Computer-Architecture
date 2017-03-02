@@ -9,7 +9,7 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.math.BigInteger;
+
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -31,6 +31,9 @@ import memory.MCU;
 import util.Const;
 import util.MachineFaultException;
 import util.StringUtil;
+import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.Alignment;
+import javax.swing.LayoutStyle.ComponentPlacement;
 
 public class FrontPanel {
 
@@ -360,6 +363,13 @@ public class FrontPanel {
 
     private JScrollPane scrollPane3;
 
+    private JButton btn20Num;
+    private JPanel pnlProgram1;
+
+    private JLabel lblProgram1;
+
+    private JButton btn1Num;
+
     /**
      * Launch the application.
      */
@@ -403,11 +413,8 @@ public class FrontPanel {
         frmCsciClassProject.setTitle("CSCI6461 Class Project");
         frmCsciClassProject.setBounds(100, 100, 1345, 890);
         frmCsciClassProject.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frmCsciClassProject.getContentPane().setLayout(null);
 
         pnlRegisters = new JPanel();
-        pnlRegisters.setBounds(14, 169, 704, 617);
-        frmCsciClassProject.getContentPane().add(pnlRegisters);
 
         pnlR3 = new JPanel();
 
@@ -1195,12 +1202,8 @@ public class FrontPanel {
         pnlRegisters.add(pnlCC);
 
         btnIPL = new JButton("IPL");
-        btnIPL.setBounds(799, 109, 136, 69);
-        frmCsciClassProject.getContentPane().add(btnIPL);
 
         testPanel = new JPanel();
-        testPanel.setBounds(757, 621, 203, 165);
-        frmCsciClassProject.getContentPane().add(testPanel);
         testPanel.setLayout(new FlowLayout(FlowLayout.RIGHT, 5, 5));
 
         lblTestPanel = new JLabel("Memory interface");
@@ -1242,8 +1245,6 @@ public class FrontPanel {
         setEnableForPanel(pnlRegisters, false);
 
         pnlConsole = new JPanel();
-        pnlConsole.setBounds(757, 231, 254, 361);
-        frmCsciClassProject.getContentPane().add(pnlConsole);
         pnlConsole.setLayout(new BoxLayout(pnlConsole, BoxLayout.Y_AXIS));
 
         lblPrinter = new JLabel("Console Printer");
@@ -1268,8 +1269,6 @@ public class FrontPanel {
         scrollPane2.setViewportView(consoleKeyboard);
 
         pnlOp = new JPanel();
-        pnlOp.setBounds(14, 45, 704, 98);
-        frmCsciClassProject.getContentPane().add(pnlOp);
         pnlOp.setLayout(new FlowLayout(FlowLayout.RIGHT, 5, 5));
 
         pnlIns = new JPanel();
@@ -1336,8 +1335,6 @@ public class FrontPanel {
         setEnableForPanel(pnlIns, false);
 
         pnlCache = new JPanel();
-        pnlCache.setBounds(1038, 506, 217, 223);
-        frmCsciClassProject.getContentPane().add(pnlCache);
 
         lblCache = new JLabel("Cache");
 
@@ -1354,6 +1351,60 @@ public class FrontPanel {
         pnlCache.setLayout(new BoxLayout(pnlCache, BoxLayout.Y_AXIS));
         pnlCache.add(lblCache);
         pnlCache.add(scrollPane3);
+        
+        pnlProgram1 = new JPanel();
+        
+        lblProgram1 = new JLabel("Program 1");
+        pnlProgram1.add(lblProgram1);
+        
+        btn20Num = new JButton("read 20 numbers");
+        pnlProgram1.add(btn20Num);
+        
+        btn1Num = new JButton("read 1 number");
+        pnlProgram1.add(btn1Num);
+        GroupLayout groupLayout = new GroupLayout(frmCsciClassProject.getContentPane());
+        groupLayout.setHorizontalGroup(
+            groupLayout.createParallelGroup(Alignment.LEADING)
+                .addGroup(groupLayout.createSequentialGroup()
+                    .addGap(14)
+                    .addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+                        .addComponent(pnlOp, GroupLayout.PREFERRED_SIZE, 704, GroupLayout.PREFERRED_SIZE)
+                        .addComponent(pnlRegisters, GroupLayout.PREFERRED_SIZE, 704, GroupLayout.PREFERRED_SIZE))
+                    .addGap(39)
+                    .addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+                        .addGroup(groupLayout.createSequentialGroup()
+                            .addGap(42)
+                            .addComponent(btnIPL, GroupLayout.PREFERRED_SIZE, 136, GroupLayout.PREFERRED_SIZE))
+                        .addComponent(pnlConsole, GroupLayout.PREFERRED_SIZE, 254, GroupLayout.PREFERRED_SIZE)
+                        .addComponent(testPanel, GroupLayout.PREFERRED_SIZE, 203, GroupLayout.PREFERRED_SIZE))
+                    .addGap(27)
+                    .addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+                        .addGroup(groupLayout.createSequentialGroup()
+                            .addGap(25)
+                            .addComponent(pnlProgram1, GroupLayout.PREFERRED_SIZE, 177, GroupLayout.PREFERRED_SIZE))
+                        .addComponent(pnlCache, GroupLayout.PREFERRED_SIZE, 217, GroupLayout.PREFERRED_SIZE)))
+        );
+        groupLayout.setVerticalGroup(
+            groupLayout.createParallelGroup(Alignment.LEADING)
+                .addGroup(groupLayout.createSequentialGroup()
+                    .addGap(45)
+                    .addComponent(pnlOp, GroupLayout.PREFERRED_SIZE, 98, GroupLayout.PREFERRED_SIZE)
+                    .addGap(26)
+                    .addComponent(pnlRegisters, GroupLayout.PREFERRED_SIZE, 617, GroupLayout.PREFERRED_SIZE))
+                .addGroup(groupLayout.createSequentialGroup()
+                    .addGap(109)
+                    .addComponent(btnIPL, GroupLayout.PREFERRED_SIZE, 69, GroupLayout.PREFERRED_SIZE)
+                    .addGap(53)
+                    .addComponent(pnlConsole, GroupLayout.PREFERRED_SIZE, 361, GroupLayout.PREFERRED_SIZE)
+                    .addGap(29)
+                    .addComponent(testPanel, GroupLayout.PREFERRED_SIZE, 165, GroupLayout.PREFERRED_SIZE))
+                .addGroup(groupLayout.createSequentialGroup()
+                    .addGap(202)
+                    .addComponent(pnlProgram1, GroupLayout.PREFERRED_SIZE, 111, GroupLayout.PREFERRED_SIZE)
+                    .addGap(246)
+                    .addComponent(pnlCache, GroupLayout.PREFERRED_SIZE, 223, GroupLayout.PREFERRED_SIZE))
+        );
+        frmCsciClassProject.getContentPane().setLayout(groupLayout);
         enableFlag = 0;
 
     }
