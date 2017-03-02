@@ -6,6 +6,14 @@ import util.Const;
 import util.MachineFaultException;
 import util.StringUtil;
 
+/**
+ * 
+ * OUT r, devid</br>
+ * Output Character to Device from Register
+ * 
+ * @author Liang
+ *
+ */
 public class OUT extends AbstractInstruction {
 
     int num;
@@ -24,7 +32,7 @@ public class OUT extends AbstractInstruction {
 
     @Override
     public String getExecuteMessage() {
-        return "OUT " + num + ", " + devId;
+        return "OUT " + this.num + ", " + this.devId;
     }
 
 }

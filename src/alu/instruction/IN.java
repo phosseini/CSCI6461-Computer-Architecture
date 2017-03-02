@@ -6,6 +6,14 @@ import util.Const;
 import util.MachineFaultException;
 import util.StringUtil;
 
+/**
+ * 
+ * IN r, devid</br>
+ * Input Character To Register from Device
+ * 
+ * @author Liang
+ *
+ */
 public class IN extends AbstractInstruction {
 
     int num;
@@ -32,7 +40,7 @@ public class IN extends AbstractInstruction {
 
     @Override
     public String getExecuteMessage() {
-        return "IN " + num + ", " + devId;
+        return "IN " + this.num + ", " + this.devId;
     }
 
 }
