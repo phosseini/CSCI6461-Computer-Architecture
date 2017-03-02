@@ -137,7 +137,16 @@ public class Registers {
         this.cc = cc;
     }
     
-    public boolean getCCByBit(int bitNum){
+    /**
+     * 
+     * @param bitNum </br>
+     * 0 - OVERFLOW</br>
+     * 1 - UNDERFLOW</br>
+     * 2 - DIVZERO</br>
+     * 3 - EQUALORNOT
+     * @return
+     */
+    public boolean getCCElementByBit(int bitNum){
         return ((this.cc & (1 << bitNum)) != 0);
     }
     
