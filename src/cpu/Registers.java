@@ -136,7 +136,12 @@ public class Registers {
     public void setCC(int cc) {
         this.cc = cc;
     }
-
+    
+    public boolean getCCByBit(int bitNum){
+        return ((this.cc & (1 << bitNum)) != 0);
+    }
+    
+    
     public int getR0() {
         return r0;
     }
