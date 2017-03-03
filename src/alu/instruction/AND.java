@@ -15,7 +15,8 @@ public class AND extends AbstractInstruction{
 		this.ry=StringUtil.binaryToDecimal(instruction.substring(7,10));
 		this.x=registers.getRnByNum(rx);
 		this.y=registers.getRnByNum(ry);
-		
+		x=x&y;
+		registers.setRnByNum(rx, x);
 	}
 
 	@Override
