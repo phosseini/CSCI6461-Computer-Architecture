@@ -6,15 +6,15 @@ import util.MachineFaultException;
 import util.StringUtil;
 
 public class RRC extends AbstractInstruction{
-	int AL, LR, Bd, Ct;
+	int AL, LR, Bd, Ct, r;
 	@Override
 	public void execute(String instruction, Registers registers, MCU mcu) throws MachineFaultException {
 		// TODO Auto-generated method stub
 		this.AL=StringUtil.binaryToDecimal(instruction.substring(7,8));
 		this.LR=StringUtil.binaryToDecimal(instruction.substring(8,9));
-		this.Bd=StringUtil.binaryToDecimal(instruction.substring(0,15));
+		this.Bd=StringUtil.binaryToDecimal(instruction);
 		this.Ct=StringUtil.binaryToDecimal(instruction.substring(11,15));
-	
+		this.r=StringUtil.binaryToDecimal(instruction.substring(5,8));
 		if(AL==1){
 			if(LR==0){
 				Bd= (Bd>>Ct|Bd<<(16-Ct));
@@ -23,7 +23,7 @@ public class RRC extends AbstractInstruction{
 				Bd= (Bd<<Ct|Bd>>(16-Ct));
 			}
 		}
-		System.out.println((byte)Bd);
+		registers.setRnByNum(r,(byte)Bd);
 	}
 
 	@Override

@@ -89,7 +89,7 @@ public class Const {
     public static final HashMap<String, String> OPCODE = new HashMap<String, String>();
     static {
         OPCODE.put("000000", "HLT");
-        OPCODE.put("100100", "TRAP");
+        OPCODE.put("011110", "TRAP");
         OPCODE.put("000001", "LDR");
         OPCODE.put("000010", "STR");
         OPCODE.put("000011", "LDA");
@@ -104,7 +104,8 @@ public class Const {
         OPCODE.put("001111", "RFS");
         OPCODE.put("010000", "SOB");
         OPCODE.put("010001", "JGE");
-        
+        OPCODE.put("011111", "SRC");
+        OPCODE.put("100000", "RRC");
     }
 
 }
