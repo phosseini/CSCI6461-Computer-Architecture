@@ -137,6 +137,39 @@ public class Registers {
         this.cc = cc;
     }
 
+    /**
+     * 
+     * @param bitNum
+     *            </br>
+     *            0 - OVERFLOW</br>
+     *            1 - UNDERFLOW</br>
+     *            2 - DIVZERO</br>
+     *            3 - EQUALORNOT
+     * @return
+     */
+    public boolean getCCElementByBit(int bitNum) {
+        return ((this.cc & (1 << bitNum)) != 0);
+    }
+
+    /**
+     * @param bitNum
+     *            </br>
+     *            0 - OVERFLOW</br>
+     *            1 - UNDERFLOW</br>
+     *            2 - DIVZERO</br>
+     *            3 - EQUALORNOT
+     * @param flag set either 1 or 0
+     * 
+     */
+    public void setCCElementByBit(int bitNum, boolean flag) {
+        if(flag){
+            this.cc = (this.cc | (1 << bitNum));
+        }else{
+            int mask = ~(1 << bitNum);
+            this.cc = this.cc & mask;
+        }
+    }
+
     public int getR0() {
         return r0;
     }

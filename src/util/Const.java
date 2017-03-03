@@ -96,6 +96,7 @@ public class Const {
         OPCODE.put("101001", "LDX");
         OPCODE.put("101010", "STX");
         OPCODE.put("111101", "IN");
+        OPCODE.put("111110", "OUT");
         OPCODE.put("001010", "JZ");
         OPCODE.put("001011", "JNE");
         OPCODE.put("001100", "JCC");
@@ -106,6 +107,8 @@ public class Const {
         OPCODE.put("010001", "JGE");
         OPCODE.put("011111", "SRC");
         OPCODE.put("100000", "RRC");
+        OPCODE.put("000100", "AMR");
+        OPCODE.put("000101", "SMR");
     }
 
 }
