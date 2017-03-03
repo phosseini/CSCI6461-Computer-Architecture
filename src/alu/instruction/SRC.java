@@ -13,7 +13,7 @@ public class SRC extends AbstractInstruction{
 		this.AL=StringUtil.binaryToDecimal(instruction.substring(7,8));
 		this.LR=StringUtil.binaryToDecimal(instruction.substring(8,9));
 		this.Ct=StringUtil.binaryToDecimal(instruction.substring(11,15));
-		this.r=StringUtil.binaryToDecimal(instruction.substring(5,8));
+		this.r=StringUtil.binaryToDecimal(instruction.substring(5,7));
 		this.Bd=registers.getRnByNum(r);
 		if (AL==0){
 			if(LR==0){

@@ -12,7 +12,7 @@ public class RRC extends AbstractInstruction{
 		// TODO Auto-generated method stub
 		this.AL=StringUtil.binaryToDecimal(instruction.substring(7,8));
 		this.LR=StringUtil.binaryToDecimal(instruction.substring(8,9));
-		this.r=StringUtil.binaryToDecimal(instruction.substring(5,8));
+		this.r=StringUtil.binaryToDecimal(instruction.substring(5,7));
 		this.Bd=registers.getRnByNum(r);
 		this.Ct=StringUtil.binaryToDecimal(instruction.substring(11,15));
 		

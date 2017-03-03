@@ -11,8 +11,8 @@ public class AND extends AbstractInstruction{
 	public void execute(String instruction, Registers registers, MCU mcu) throws MachineFaultException {
 		// TODO Auto-generated method stub
 		
-		this.rx=StringUtil.binaryToDecimal(instruction.substring(5,8));
-		this.ry=StringUtil.binaryToDecimal(instruction.substring(7,10));
+		this.rx=StringUtil.binaryToDecimal(instruction.substring(5,7));
+		this.ry=StringUtil.binaryToDecimal(instruction.substring(7,9));
 		this.x=registers.getRnByNum(rx);
 		this.y=registers.getRnByNum(ry);
 		x=x&y;

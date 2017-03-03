@@ -109,6 +109,9 @@ public class Const {
         OPCODE.put("100000", "RRC");
         OPCODE.put("000100", "AMR");
         OPCODE.put("000101", "SMR");
+        OPCODE.put("010111", "AND");
+        OPCODE.put("011000", "ORR");
+        OPCODE.put("011001", "NOT");
     }
 
 }
