@@ -10,7 +10,7 @@ public class NOT extends AbstractInstruction{
 	@Override
 	public void execute(String instruction, Registers registers, MCU mcu) throws MachineFaultException {
 		// TODO Auto-generated method stub
-		this.rx=StringUtil.binaryToDecimal(instruction.substring(5,7));
+		this.rx=StringUtil.binaryToDecimal(instruction.substring(6,8));
 		this.Bd=registers.getRnByNum(rx);
 		
 		Bd=~Bd;
