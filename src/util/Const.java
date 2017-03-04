@@ -32,6 +32,14 @@ public class Const {
      * 2 - DIVZERO</br>
      * 3 - EQUALORNOT
      */
+    
+    
+    public static final HashMap<String, Integer> Pro1 = new HashMap<>();
+    static {
+        // address-value pair Boot Program
+        Pro1.put("1",0xa9ca); // LDR 2, 2, 31,1
+    }
+
     public enum ConditionCode {
         OVERFLOW(0), UNDERFLOW(1), DIVZERO(2), EQUALORNOT(3);
         int value;

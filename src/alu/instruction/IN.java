@@ -27,7 +27,7 @@ public class IN extends AbstractInstruction {
             String buffer = mcu.getKeyboardBuffer();
             if (buffer != null && buffer.length() > 0) {
                 char ch = buffer.charAt(0);
-                int val = StringUtil.binaryToDecimal(Integer.toBinaryString(ch));
+                int val = StringUtil.binaryToDecimal(Integer.toBinaryString(ch));        
                 registers.setRnByNum(this.num, val);
 
                 mcu.setKeyboardBuffer(buffer.substring(1, buffer.length()));
