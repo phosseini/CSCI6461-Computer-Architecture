@@ -4,7 +4,7 @@ import cpu.Registers;
 import memory.MCU;
 import util.EffectiveAddress;
 import util.MachineFaultException;
-
+import util.StringUtil;
 public class RFS extends AbstractInstruction {
 
 	@Override
@@ -14,6 +14,8 @@ public class RFS extends AbstractInstruction {
 		// (optional) stored in the instruvtion's address field
 		//registers.setR0(Immed));?????????????????
 		//-----------------------------------
+		int immed = StringUtil.binaryToDecimal(instruction.substring(11, 16)); 
+		registers.setR0(immed);	//1233	
 		registers.setPC(mcu.fetchFromMemory(registers.getR3()));
 		// System.out.println("this is a RFS instruction!");
 	}
