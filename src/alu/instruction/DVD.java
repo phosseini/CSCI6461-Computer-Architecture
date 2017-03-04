@@ -36,7 +36,10 @@ public class DVD extends AbstractInstruction {
 				int result = registers.getRnByNum(rx) / registers.getRnByNum(ry);
 				int remainder = registers.getRnByNum(rx) % registers.getRnByNum(ry);
 
+				// saving the quotient in rx
 				registers.setRnByNum(rx, result);
+
+				// saving the remainder in rx+1
 				registers.setRnByNum(rx + 1, remainder);
 
 			}
