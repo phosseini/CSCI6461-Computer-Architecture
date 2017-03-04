@@ -32,7 +32,7 @@ public class SRC extends AbstractInstruction{
 			}
 		}
 		registers.setRnByNum(r,Bd);
-		
+		registers.increasePCByOne();
 	}
 	
 	

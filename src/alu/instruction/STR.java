@@ -21,6 +21,7 @@ public class STR extends AbstractInstruction {
 		mcu.storeIntoMemory(registers.getMAR(), registers.getMBR());
 		
 		// System.out.println("this is a STR instruction!");
+		registers.increasePCByOne();
 	}
 
 	@Override

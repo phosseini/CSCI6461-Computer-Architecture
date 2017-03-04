@@ -17,6 +17,8 @@ public class AMR extends AbstractInstruction {
 
 		registers.setRnByNum(r,
 				registers.getRnByNum(r) + mcu.fetchFromCache(util.EffectiveAddress.EA(instruction, mcu, registers)));
+		
+		registers.increasePCByOne();
 
 	}
 

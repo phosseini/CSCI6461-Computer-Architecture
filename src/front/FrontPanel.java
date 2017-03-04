@@ -1689,7 +1689,7 @@ public class FrontPanel {
                 registers.setIR(registers.getMBR());
                 refreshRegistersPanel();
                 runInstruction(registers.getBinaryStringIr(), registers, mcu);
-                registers.increasePCByOne(); // TODO fix it
+                //registers.increasePCByOne(); // TODO fix it
                 refreshRegistersPanel();
             }
         });
@@ -1717,7 +1717,7 @@ public class FrontPanel {
                     registers.setIR(registers.getMBR());
                     runInstruction(registers.getBinaryStringIr(), registers, mcu);
                     refreshRegistersPanel();
-                    registers.increasePCByOne();// TODO fix it
+                    //registers.increasePCByOne();// TODO fix it
 
                 } while (registers.getPC() < end);
                 registers.setPC(8);

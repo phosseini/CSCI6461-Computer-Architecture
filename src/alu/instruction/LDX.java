@@ -20,7 +20,7 @@ public class LDX extends AbstractInstruction {
 				registers.setMBR(mcu.fetchFromMemory(registers.getMAR()));
 				registers.setXnByNum(ix, registers.getMBR());
 				
-				
+				registers.increasePCByOne();
 				// System.out.println("this is a LDX instruction!");
 			}
 	@Override

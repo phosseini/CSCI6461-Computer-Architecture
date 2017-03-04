@@ -19,6 +19,7 @@ public class STX extends AbstractInstruction {
 		registers.setMAR(util.EffectiveAddress.EA(instruction, mcu, registers));
 		registers.setMBR(registers.getXnByNum(ix));
 		mcu.storeIntoMemory(registers.getMAR(), registers.getMBR());
+		registers.increasePCByOne();
 	}
 
 	@Override

@@ -17,7 +17,7 @@ public class SMR extends AbstractInstruction {
 
 		registers.setRnByNum(r,
 				registers.getRnByNum(r) - mcu.fetchFromCache(util.EffectiveAddress.EA(instruction, mcu, registers)));
-
+		registers.increasePCByOne();
 	}
 
 	@Override
