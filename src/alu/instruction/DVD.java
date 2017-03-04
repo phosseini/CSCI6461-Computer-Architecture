@@ -32,16 +32,25 @@ public class DVD extends AbstractInstruction {
 			if (registers.getRnByNum(ry) == 0) {
 				registers.setCCElementByBit(Const.ConditionCode.DIVZERO.getValue(), true);
 			} else {
+
 				// doing the division: result is the same as quotient
 				int result = registers.getRnByNum(rx) / registers.getRnByNum(ry);
-				int remainder = registers.getRnByNum(rx) % registers.getRnByNum(ry);
 
-				// saving the quotient in rx
-				registers.setRnByNum(rx, result);
+				// first we check if we have an overflow
+				if (result > Integer.MAX_VALUE || result < Integer.MIN_VALUE) {
+					registers.setCCElementByBit(Const.ConditionCode.OVERFLOW.getValue(), true);
+				} else {
 
-				// saving the remainder in rx+1
-				registers.setRnByNum(rx + 1, remainder);
+					// if we do not have an overflow, we continue updating the
+					// value of registers
+					int remainder = registers.getRnByNum(rx) % registers.getRnByNum(ry);
 
+					// saving the quotient in rx
+					registers.setRnByNum(rx, result);
+
+					// saving the remainder in rx+1
+					registers.setRnByNum(rx + 1, remainder);
+				}
 			}
 
 			registers.increasePCByOne();

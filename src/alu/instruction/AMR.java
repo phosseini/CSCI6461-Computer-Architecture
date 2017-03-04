@@ -2,6 +2,7 @@ package alu.instruction;
 
 import cpu.Registers;
 import memory.MCU;
+import util.Const;
 import util.MachineFaultException;
 import util.StringUtil;
 
@@ -17,11 +18,19 @@ public class AMR extends AbstractInstruction {
 
 		// first, we store the effective address in memory address register
 		registers.setMAR(util.EffectiveAddress.EA(instruction, mcu, registers));
-		
-		// now we store what we fetched from memory into the memory buffer register
+
+		// storing what we fetched from memory into the memory buffer register
 		registers.setMBR(mcu.fetchFromCache(registers.getMAR()));
-		
-		registers.setRnByNum(r, registers.getRnByNum(r) + registers.getMBR());
+
+		int result = registers.getRnByNum(r) + registers.getMBR();
+
+		// we check if we have an overflow
+		if (result > Integer.MAX_VALUE || result < Integer.MIN_VALUE) {
+			registers.setCCElementByBit(Const.ConditionCode.OVERFLOW.getValue(), true);
+		} else {
+			// if we do not have an overflow, we update the value of register
+			registers.setRnByNum(r, result);
+		}
 
 		registers.increasePCByOne();
 
