@@ -28,7 +28,23 @@ public class Const {
     public static final HashMap<String, Integer> Pro1 = new HashMap<>();
     static {
         // address-value pair Boot Program
-        Pro1.put("101",0xa9ca); // LDR 2, 2, 31,1
+        Pro1.put("101",0xF700 );
+        Pro1.put("102",0x61F  );
+        Pro1.put("103",0x5B80  );
+        Pro1.put("104",0x330A  );
+        Pro1.put("105",0xA1D  );
+        Pro1.put("106",0x61E  );
+        Pro1.put("107",0x5080  );
+        Pro1.put("108",0x101D  );
+        Pro1.put("109",0xF700 );
+        Pro1.put("110",0x61F  );
+        Pro1.put("111",0x5B80  );
+        Pro1.put("112",0x330A  );
+        Pro1.put("113",0xA1D  );
+        Pro1.put("114",0x61E  );
+        Pro1.put("115",0x5080  );
+        Pro1.put("116",0x101D  );      
+        Pro1.put("117", 801  );
     }
     /**
      * 0 - OVERFLOW</br>
