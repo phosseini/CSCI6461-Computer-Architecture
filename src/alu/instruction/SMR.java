@@ -15,8 +15,14 @@ public class SMR extends AbstractInstruction {
 		// -----------------------------------
 		int r = StringUtil.binaryToDecimal(instruction.substring(6, 8));
 
-		registers.setRnByNum(r,
-				registers.getRnByNum(r) - mcu.fetchFromCache(util.EffectiveAddress.EA(instruction, mcu, registers)));
+		// first, we store the effective address in memory address register
+		registers.setMAR(util.EffectiveAddress.EA(instruction, mcu, registers));
+				
+		// now we store what we fetched from memory into the memory buffer register
+		registers.setMBR(mcu.fetchFromCache(registers.getMAR()));
+				
+		registers.setRnByNum(r, registers.getRnByNum(r) - registers.getMBR());
+				
 		registers.increasePCByOne();
 	}
 
