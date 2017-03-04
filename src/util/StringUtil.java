@@ -16,6 +16,19 @@ public class StringUtil {
     public static int binaryToDecimal(String binary) {
         return new BigInteger(binary, 2).intValue();
     }
+    
+    public static int signedBinaryToDecimal(String binary, boolean signed){
+        if(signed){
+            String sub = binary.substring(1, binary.length());
+            sub = sub.replace('1', '2');
+            sub = sub.replace('0', '1');
+            sub = sub.replace('2', '0');
+            int i = new BigInteger(sub, 2).intValue();
+            return -i-1;
+        }else{
+            return binaryToDecimal(binary);
+        }
+    }
 
     /**
      * 
@@ -32,7 +45,13 @@ public class StringUtil {
      * 
      */
     public static String decimalToBinary(int decimal, int bitLength) {
-        return String.format("%" + bitLength + "s", Integer.toBinaryString(decimal)).replace(" ", "0");
+        if(decimal >= 0){
+            return String.format("%" + bitLength + "s", Integer.toBinaryString(decimal)).replace(" ", "0");
+        }else{
+            String seq = Integer.toBinaryString(decimal);
+            return  seq.substring(seq.length()-16, seq.length());
+        }
+        
 
     }
     
