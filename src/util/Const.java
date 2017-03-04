@@ -112,6 +112,8 @@ public class Const {
         OPCODE.put("010111", "AND");
         OPCODE.put("011000", "ORR");
         OPCODE.put("011001", "NOT");
+        OPCODE.put("000110", "AIR");
+        OPCODE.put("000111", "SIR");
     }
 
 }
