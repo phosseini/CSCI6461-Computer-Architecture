@@ -23,6 +23,8 @@ public class AMR extends AbstractInstruction {
 		
 		registers.setRnByNum(r, registers.getRnByNum(r) + registers.getMBR());
 
+		registers.increasePCByOne();
+
 	}
 
 	@Override

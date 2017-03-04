@@ -21,6 +21,8 @@ public class LDR extends AbstractInstruction {
 				registers.setRnByNum(r, registers.getMBR());
 				
 				// System.out.println("this is a LDR instruction!");
+				
+				registers.increasePCByOne();
 			}
 	@Override
 	public String getExecuteMessage() {

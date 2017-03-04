@@ -17,6 +17,8 @@ public class AND extends AbstractInstruction{
 		this.y=registers.getRnByNum(ry);
 		x=x&y;
 		registers.setRnByNum(rx, x);
+		
+		registers.increasePCByOne();
 	}
 
 	@Override

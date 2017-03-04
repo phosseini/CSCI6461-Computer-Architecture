@@ -22,6 +22,7 @@ public class TRR extends AbstractInstruction {
 		} else {
 			registers.setCCElementByBit(Const.ConditionCode.EQUALORNOT.getValue(), false);
 		}
+		registers.increasePCByOne();
 	}
 
 	@Override

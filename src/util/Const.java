@@ -9,7 +9,7 @@ public class Const {
     public static final Integer MEMORY_WORDS_BOUND_EXPANDED = 4096;
     public static final Integer CACHE_LINES = 16;
     public static final Integer BOOT_PROG_BASE = 8;
-
+    public static final Integer BOOT_PROG1_BASE = 101;
     public static final HashMap<String, Integer> ROM = new HashMap<>();
     static {
         // address-value pair Boot Program
@@ -25,13 +25,21 @@ public class Const {
         ROM.put("17", 0xa9ca); // STX 1, 3, 10
 
     }
-
+    public static final HashMap<String, Integer> Pro1 = new HashMap<>();
+    static {
+        // address-value pair Boot Program
+        Pro1.put("101",0xa9ca); // LDR 2, 2, 31,1
+    }
     /**
      * 0 - OVERFLOW</br>
      * 1 - UNDERFLOW</br>
      * 2 - DIVZERO</br>
      * 3 - EQUALORNOT
      */
+    
+    
+   
+
     public enum ConditionCode {
         OVERFLOW(0), UNDERFLOW(1), DIVZERO(2), EQUALORNOT(3);
         int value;

@@ -10,7 +10,6 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -42,6 +41,7 @@ public class FrontPanel {
      * 1 - the registers panel has been enabled.
      */
     private int enableFlag;
+    private int prog1Step;
 
     private JFrame frmCsciClassProject;
     private JPanel pnlRegisters;
@@ -1351,17 +1351,18 @@ public class FrontPanel {
         pnlCache.setLayout(new BoxLayout(pnlCache, BoxLayout.Y_AXIS));
         pnlCache.add(lblCache);
         pnlCache.add(scrollPane3);
-        
+
         pnlProgram1 = new JPanel();
-        
+
         lblProgram1 = new JLabel("Program 1");
         pnlProgram1.add(lblProgram1);
-        
+
         btn20Num = new JButton("read 20 numbers");
         pnlProgram1.add(btn20Num);
-        
+
         btn1Num = new JButton("read 1 number");
         pnlProgram1.add(btn1Num);
+        setEnableForPanel(pnlProgram1, false);
         GroupLayout groupLayout = new GroupLayout(frmCsciClassProject.getContentPane());
         groupLayout.setHorizontalGroup(
             groupLayout.createParallelGroup(Alignment.LEADING)
@@ -1422,13 +1423,19 @@ public class FrontPanel {
         btnStoreR0.addMouseListener(new MouseAdapter() {
             public void mousePressed(MouseEvent e) {
                 StringBuffer buffer = new StringBuffer();
+                int i = 0;
+                boolean sign = false;
                 for (Component com : pnlR0.getComponents()) {
                     if (com instanceof JRadioButton) {
                         JRadioButton rdb = (JRadioButton) com;
+                        if (i == 0) {
+                            sign = rdb.isSelected() ? true : false;
+                        }
                         buffer = rdb.isSelected() ? buffer.append("1") : buffer.append("0");
+                        i++;
                     }
                 }
-                int value = StringUtil.binaryToDecimal(buffer.toString());
+                int value = StringUtil.signedBinaryToDecimal(buffer.toString(), sign);
                 textFieldR0.setText(String.valueOf(value));
                 registers.setR0(value);
                 System.out.println("R0 is set to: " + value);
@@ -1439,13 +1446,19 @@ public class FrontPanel {
         btnStoreR1.addMouseListener(new MouseAdapter() {
             public void mousePressed(MouseEvent e) {
                 StringBuffer buffer = new StringBuffer();
+                int i = 0;
+                boolean sign = false;
                 for (Component com : pnlR1.getComponents()) {
                     if (com instanceof JRadioButton) {
                         JRadioButton rdb = (JRadioButton) com;
+                        if (i == 0) {
+                            sign = rdb.isSelected() ? true : false;
+                        }
                         buffer = rdb.isSelected() ? buffer.append("1") : buffer.append("0");
+                        i++;
                     }
                 }
-                int value = StringUtil.binaryToDecimal(buffer.toString());
+                int value = StringUtil.signedBinaryToDecimal(buffer.toString(), sign);
                 textFieldR1.setText(String.valueOf(value));
                 registers.setR1(value);
                 System.out.println("R1 is set to: " + value);
@@ -1456,13 +1469,19 @@ public class FrontPanel {
         btnStoreR2.addMouseListener(new MouseAdapter() {
             public void mousePressed(MouseEvent e) {
                 StringBuffer buffer = new StringBuffer();
+                int i = 0;
+                boolean sign = false;
                 for (Component com : pnlR2.getComponents()) {
                     if (com instanceof JRadioButton) {
                         JRadioButton rdb = (JRadioButton) com;
+                        if (i == 0) {
+                            sign = rdb.isSelected() ? true : false;
+                        }
                         buffer = rdb.isSelected() ? buffer.append("1") : buffer.append("0");
+                        i++;
                     }
                 }
-                int value = StringUtil.binaryToDecimal(buffer.toString());
+                int value = StringUtil.signedBinaryToDecimal(buffer.toString(), sign);
                 textFieldR2.setText(String.valueOf(value));
                 registers.setR2(value);
                 System.out.println("R2 is set to: " + value);
@@ -1473,13 +1492,19 @@ public class FrontPanel {
         btnStoreR3.addMouseListener(new MouseAdapter() {
             public void mousePressed(MouseEvent e) {
                 StringBuffer buffer = new StringBuffer();
+                int i = 0;
+                boolean sign = false;
                 for (Component com : pnlR3.getComponents()) {
                     if (com instanceof JRadioButton) {
                         JRadioButton rdb = (JRadioButton) com;
+                        if (i == 0) {
+                            sign = rdb.isSelected() ? true : false;
+                        }
                         buffer = rdb.isSelected() ? buffer.append("1") : buffer.append("0");
+                        i++;
                     }
                 }
-                int value = StringUtil.binaryToDecimal(buffer.toString());
+                int value = StringUtil.signedBinaryToDecimal(buffer.toString(), sign);
                 textFieldR3.setText(String.valueOf(value));
                 registers.setR3(value);
                 System.out.println("R3 is set to: " + value);
@@ -1676,17 +1701,19 @@ public class FrontPanel {
                 registers.setIR(registers.getMBR());
                 refreshRegistersPanel();
                 runInstruction(registers.getBinaryStringIr(), registers, mcu);
-                registers.increasePCByOne();
+                //registers.increasePCByOne(); // TODO fix it
                 refreshRegistersPanel();
             }
         });
 
         // add listener to the IPL button
-        btnIPL.addMouseListener(new MouseAdapter() { // TODO
+        btnIPL.addMouseListener(new MouseAdapter() {
             public void mousePressed(MouseEvent e) {
                 if (enableFlag == 0) {
                     setEnableForPanel(pnlIns, true);
                     setEnableForPanel(pnlRegisters, true);
+                    setEnableForPanel(pnlProgram1, true);
+                    prog1Step = 0;
                     enableFlag = 1;
 
                 }
@@ -1702,8 +1729,8 @@ public class FrontPanel {
                     registers.setIR(registers.getMBR());
                     runInstruction(registers.getBinaryStringIr(), registers, mcu);
                     refreshRegistersPanel();
-                    registers.increasePCByOne();
-                    // TODO fix it
+                    //registers.increasePCByOne();// TODO fix it
+
                 } while (registers.getPC() < end);
                 registers.setPC(8);
                 refreshRegistersPanel();
@@ -1745,13 +1772,11 @@ public class FrontPanel {
 
             @Override
             public void focusGained(FocusEvent arg0) {
-                // TODO Auto-generated method stub
                 textFieldAddress.selectAll();
             }
 
             @Override
             public void focusLost(FocusEvent arg0) {
-                // TODO Auto-generated method stub
 
             }
         });
@@ -1759,19 +1784,51 @@ public class FrontPanel {
 
             @Override
             public void focusGained(FocusEvent arg0) {
-                // TODO Auto-generated method stub
                 textFieldValue.selectAll();
             }
 
             @Override
             public void focusLost(FocusEvent arg0) {
-                // TODO Auto-generated method stub
 
             }
         });
-        consoleKeyboard.addKeyListener(new KeyAdapter() {
+        consoleKeyboard.addKeyListener(new KeyAdapter() { // TODO
             public void keyReleased(KeyEvent e) {
                 mcu.setKeyboardBuffer(consoleKeyboard.getText());
+            }
+        });
+
+        btn20Num.addMouseListener(new MouseAdapter() { // TODO
+            public void mousePressed(MouseEvent e) {
+                if (prog1Step == 0) {
+                    // read 20 numbers from the console keyboard
+                    mcu.loadProgram(Const.Pro1);
+                    registers.setPC(Const.BOOT_PROG1_BASE); //TODO FIXIT
+                    int end = Const.BOOT_PROG1_BASE + Const.Pro1.size();
+                    refreshRegistersPanel();
+                    do {
+                        refreshRegistersPanel();
+                        registers.setMAR(registers.getPC());
+                        registers.setMBR(mcu.fetchFromCache(registers.getMAR()));
+                        registers.setIR(registers.getMBR());
+                        runInstruction(registers.getBinaryStringIr(), registers, mcu);
+                        refreshRegistersPanel();
+                        //registers.increasePCByOne();// TODO fix it
+                    } while (registers.getPC() < end);
+                    prog1Step = 1;
+                }
+
+            }
+        });
+
+        btn1Num.addMouseListener(new MouseAdapter() {
+            public void mousePressed(MouseEvent e) {
+
+                if (prog1Step == 1) {
+                    // read 1 number from the concole keyboard and run program 1
+
+                    prog1Step = 0;
+                }
             }
         });
 
@@ -1888,7 +1945,7 @@ public class FrontPanel {
                         .forName("alu.instruction." + Const.OPCODE.get(opCode)).newInstance();
                 instr.execute(instruction, registers, mcu);
                 System.out.println("instruction: " + instruction);
-                //printConsole("instruction: " + instruction);
+                // printConsole("instruction: " + instruction);
                 refreshCacheTable();
                 pushConsoleBuffer();
 
