@@ -14,6 +14,7 @@ public class TRR extends AbstractInstruction {
 		// 022: TRR -> Test the equality of Register and Register
 		// if c(rx) = c(ry), set cc(4) <- 1; else, cc(4) <- 0
 		// ------------------------------------------------------
+		
 		int rx = StringUtil.binaryToDecimal(instruction.substring(6, 8));
 		int ry = StringUtil.binaryToDecimal(instruction.substring(8, 10));
 
