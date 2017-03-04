@@ -1364,35 +1364,47 @@ public class FrontPanel {
         pnlProgram1.add(btn1Num);
         setEnableForPanel(pnlProgram1, false);
         GroupLayout groupLayout = new GroupLayout(frmCsciClassProject.getContentPane());
-        groupLayout.setHorizontalGroup(groupLayout.createParallelGroup(Alignment.LEADING).addGroup(groupLayout
-                .createSequentialGroup().addGap(14)
-                .addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+        groupLayout.setHorizontalGroup(
+            groupLayout.createParallelGroup(Alignment.LEADING)
+                .addGroup(groupLayout.createSequentialGroup()
+                    .addGap(14)
+                    .addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
                         .addComponent(pnlOp, GroupLayout.PREFERRED_SIZE, 704, GroupLayout.PREFERRED_SIZE)
                         .addComponent(pnlRegisters, GroupLayout.PREFERRED_SIZE, 704, GroupLayout.PREFERRED_SIZE))
-                .addGap(39)
-                .addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-                        .addGroup(groupLayout.createSequentialGroup().addGap(42).addComponent(btnIPL,
-                                GroupLayout.PREFERRED_SIZE, 136, GroupLayout.PREFERRED_SIZE))
+                    .addGap(39)
+                    .addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+                        .addGroup(groupLayout.createSequentialGroup()
+                            .addGap(42)
+                            .addComponent(btnIPL, GroupLayout.PREFERRED_SIZE, 136, GroupLayout.PREFERRED_SIZE))
                         .addComponent(pnlConsole, GroupLayout.PREFERRED_SIZE, 254, GroupLayout.PREFERRED_SIZE)
                         .addComponent(testPanel, GroupLayout.PREFERRED_SIZE, 203, GroupLayout.PREFERRED_SIZE))
-                .addGap(27)
-                .addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-                        .addGroup(groupLayout.createSequentialGroup().addGap(25).addComponent(pnlProgram1,
-                                GroupLayout.PREFERRED_SIZE, 177, GroupLayout.PREFERRED_SIZE))
-                        .addComponent(pnlCache, GroupLayout.PREFERRED_SIZE, 217, GroupLayout.PREFERRED_SIZE))));
-        groupLayout.setVerticalGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-                .addGroup(groupLayout.createSequentialGroup().addGap(45)
-                        .addComponent(pnlOp, GroupLayout.PREFERRED_SIZE, 98, GroupLayout.PREFERRED_SIZE).addGap(26)
-                        .addComponent(pnlRegisters, GroupLayout.PREFERRED_SIZE, 617, GroupLayout.PREFERRED_SIZE))
-                .addGroup(groupLayout.createSequentialGroup().addGap(109)
-                        .addComponent(btnIPL, GroupLayout.PREFERRED_SIZE, 69, GroupLayout.PREFERRED_SIZE).addGap(53)
-                        .addComponent(pnlConsole, GroupLayout.PREFERRED_SIZE, 361, GroupLayout.PREFERRED_SIZE)
-                        .addGap(29)
-                        .addComponent(testPanel, GroupLayout.PREFERRED_SIZE, 165, GroupLayout.PREFERRED_SIZE))
-                .addGroup(groupLayout.createSequentialGroup().addGap(202)
-                        .addComponent(pnlProgram1, GroupLayout.PREFERRED_SIZE, 111, GroupLayout.PREFERRED_SIZE)
-                        .addGap(246)
-                        .addComponent(pnlCache, GroupLayout.PREFERRED_SIZE, 223, GroupLayout.PREFERRED_SIZE)));
+                    .addGap(27)
+                    .addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+                        .addGroup(groupLayout.createSequentialGroup()
+                            .addGap(25)
+                            .addComponent(pnlProgram1, GroupLayout.PREFERRED_SIZE, 177, GroupLayout.PREFERRED_SIZE))
+                        .addComponent(pnlCache, GroupLayout.PREFERRED_SIZE, 217, GroupLayout.PREFERRED_SIZE)))
+        );
+        groupLayout.setVerticalGroup(
+            groupLayout.createParallelGroup(Alignment.LEADING)
+                .addGroup(groupLayout.createSequentialGroup()
+                    .addGap(45)
+                    .addComponent(pnlOp, GroupLayout.PREFERRED_SIZE, 98, GroupLayout.PREFERRED_SIZE)
+                    .addGap(26)
+                    .addComponent(pnlRegisters, GroupLayout.PREFERRED_SIZE, 617, GroupLayout.PREFERRED_SIZE))
+                .addGroup(groupLayout.createSequentialGroup()
+                    .addGap(109)
+                    .addComponent(btnIPL, GroupLayout.PREFERRED_SIZE, 69, GroupLayout.PREFERRED_SIZE)
+                    .addGap(53)
+                    .addComponent(pnlConsole, GroupLayout.PREFERRED_SIZE, 361, GroupLayout.PREFERRED_SIZE)
+                    .addGap(29)
+                    .addComponent(testPanel, GroupLayout.PREFERRED_SIZE, 165, GroupLayout.PREFERRED_SIZE))
+                .addGroup(groupLayout.createSequentialGroup()
+                    .addGap(202)
+                    .addComponent(pnlProgram1, GroupLayout.PREFERRED_SIZE, 111, GroupLayout.PREFERRED_SIZE)
+                    .addGap(246)
+                    .addComponent(pnlCache, GroupLayout.PREFERRED_SIZE, 223, GroupLayout.PREFERRED_SIZE))
+        );
         frmCsciClassProject.getContentPane().setLayout(groupLayout);
         enableFlag = 0;
 
@@ -1689,7 +1701,7 @@ public class FrontPanel {
                 registers.setIR(registers.getMBR());
                 refreshRegistersPanel();
                 runInstruction(registers.getBinaryStringIr(), registers, mcu);
-                registers.increasePCByOne(); // TODO fix it
+                //registers.increasePCByOne(); // TODO fix it
                 refreshRegistersPanel();
             }
         });
@@ -1717,7 +1729,7 @@ public class FrontPanel {
                     registers.setIR(registers.getMBR());
                     runInstruction(registers.getBinaryStringIr(), registers, mcu);
                     refreshRegistersPanel();
-                    registers.increasePCByOne();// TODO fix it
+                    //registers.increasePCByOne();// TODO fix it
 
                 } while (registers.getPC() < end);
                 registers.setPC(8);
@@ -1790,7 +1802,19 @@ public class FrontPanel {
             public void mousePressed(MouseEvent e) {
                 if (prog1Step == 0) {
                     // read 20 numbers from the console keyboard
-
+                    mcu.loadProgram(Const.Pro1);
+                    registers.setPC(Const.BOOT_PROG1_BASE); //TODO FIXIT
+                    int end = Const.BOOT_PROG1_BASE + Const.Pro1.size();
+                    refreshRegistersPanel();
+                    do {
+                        refreshRegistersPanel();
+                        registers.setMAR(registers.getPC());
+                        registers.setMBR(mcu.fetchFromCache(registers.getMAR()));
+                        registers.setIR(registers.getMBR());
+                        runInstruction(registers.getBinaryStringIr(), registers, mcu);
+                        refreshRegistersPanel();
+                        //registers.increasePCByOne();// TODO fix it
+                    } while (registers.getPC() < end);
                     prog1Step = 1;
                 }
 

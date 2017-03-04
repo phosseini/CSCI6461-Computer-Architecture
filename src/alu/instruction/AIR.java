@@ -33,6 +33,8 @@ public class AIR extends AbstractInstruction {
 				registers.setRnByNum(r, registers.getRnByNum(r) + immed);
 			}
 		}
+		
+		registers.increasePCByOne();
 	}
 
 	@Override

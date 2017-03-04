@@ -15,6 +15,8 @@ public class NOT extends AbstractInstruction{
 		
 		Bd=~Bd;
 		registers.setRnByNum(rx, Bd);
+		
+		registers.increasePCByOne();
 	}
 
 	@Override

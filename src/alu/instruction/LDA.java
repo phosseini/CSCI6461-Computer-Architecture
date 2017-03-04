@@ -19,6 +19,8 @@ public class LDA extends AbstractInstruction {
 				registers.setRnByNum(r, util.EffectiveAddress.EA(instruction, mcu, registers));
 				
 				// System.out.println("this is a LDA instruction!");
+				
+				registers.increasePCByOne();
 			}
 	@Override
 	public String getExecuteMessage() {

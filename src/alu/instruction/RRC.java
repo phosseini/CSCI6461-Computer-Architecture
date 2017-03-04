@@ -25,6 +25,8 @@ public class RRC extends AbstractInstruction{
 			}
 		}
 		registers.setRnByNum(r,(byte)Bd);
+		
+		registers.increasePCByOne();
 	}
 
 	@Override

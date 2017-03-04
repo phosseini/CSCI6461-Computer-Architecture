@@ -27,6 +27,8 @@ public class OUT extends AbstractInstruction {
             int val = registers.getRnByNum(this.num);
             char c = (char) val;
             mcu.setPrinterBuffer(String.valueOf(c));
+            
+            registers.increasePCByOne();
         }
     }
 

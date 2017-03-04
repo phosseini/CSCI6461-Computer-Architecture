@@ -33,6 +33,8 @@ public class SIR extends AbstractInstruction {
 				registers.setRnByNum(r, registers.getRnByNum(r) - immed);
 			}
 		}
+		
+		registers.increasePCByOne();
 
 	}
 

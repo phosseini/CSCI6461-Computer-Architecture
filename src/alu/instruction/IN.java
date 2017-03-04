@@ -34,6 +34,8 @@ public class IN extends AbstractInstruction {
             } else {
                 registers.setRnByNum(this.num, 0);
             }
+            
+            registers.increasePCByOne();
         }
 
     }
