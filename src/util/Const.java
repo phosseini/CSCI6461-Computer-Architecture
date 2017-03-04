@@ -30,16 +30,37 @@ public class Const {
         // address-value pair Boot Program
         Pro1.put("101",0xa9ca); // LDR 2, 2, 31,1
     }
+    
+    
+    
+    
+    
+    public static final HashMap<String, Integer> TB = new HashMap<>();
+    static {
+        TB.put("0", 500);
+        TB.put("500", 516);
+        TB.put("501", 517);
+        TB.put("502", 518);
+        TB.put("503", 519);
+        TB.put("504", 520);
+        TB.put("505", 521);
+        TB.put("506", 522);
+        TB.put("507", 523);
+        TB.put("508", 524);
+        TB.put("509", 525);
+        TB.put("510", 526);
+        TB.put("511", 527);
+        TB.put("512", 527);
+        TB.put("513", 527);
+        TB.put("514", 527);
+    }
+    
     /**
      * 0 - OVERFLOW</br>
      * 1 - UNDERFLOW</br>
      * 2 - DIVZERO</br>
      * 3 - EQUALORNOT
      */
-    
-    
-   
-
     public enum ConditionCode {
         OVERFLOW(0), UNDERFLOW(1), DIVZERO(2), EQUALORNOT(3);
         int value;
