@@ -19,7 +19,7 @@ public class AIR extends AbstractInstruction {
 		// -----------------------------------
 
 		int r = StringUtil.binaryToDecimal(instruction.substring(6, 8));
-		
+
 		// this is the immediate operand.
 		int immed = StringUtil.binaryToDecimal(instruction.substring(11, 16));
 
