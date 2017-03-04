@@ -169,5 +169,15 @@ public class MCU {
             }
         }
     }
+    
+    public void loadProgram(HashMap<String, Integer> program){
+        if(program != null){
+            for (Map.Entry<String, Integer> entry : program.entrySet()) {
+                int address = Integer.parseInt(entry.getKey());
+                int value = entry.getValue();
+                storeIntoMemory(address, value);
+            }
+        }
+    }
 
 }

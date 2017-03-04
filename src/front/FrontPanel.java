@@ -1790,7 +1790,19 @@ public class FrontPanel {
             public void mousePressed(MouseEvent e) {
                 if (prog1Step == 0) {
                     // read 20 numbers from the console keyboard
-
+                    mcu.loadProgram(Const.Pro1);
+                    registers.setPC(Const.BOOT_PROG1_BASE); //TODO FIXIT
+                    int end = Const.BOOT_PROG1_BASE + Const.Pro1.size();
+                    refreshRegistersPanel();
+                    do {
+                        refreshRegistersPanel();
+                        registers.setMAR(registers.getPC());
+                        registers.setMBR(mcu.fetchFromCache(registers.getMAR()));
+                        registers.setIR(registers.getMBR());
+                        runInstruction(registers.getBinaryStringIr(), registers, mcu);
+                        refreshRegistersPanel();
+                        //registers.increasePCByOne();// TODO fix it
+                    } while (registers.getPC() < end);
                     prog1Step = 1;
                 }
 
