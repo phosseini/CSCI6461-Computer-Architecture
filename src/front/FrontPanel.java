@@ -1364,35 +1364,47 @@ public class FrontPanel {
         pnlProgram1.add(btn1Num);
         setEnableForPanel(pnlProgram1, false);
         GroupLayout groupLayout = new GroupLayout(frmCsciClassProject.getContentPane());
-        groupLayout.setHorizontalGroup(groupLayout.createParallelGroup(Alignment.LEADING).addGroup(groupLayout
-                .createSequentialGroup().addGap(14)
-                .addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+        groupLayout.setHorizontalGroup(
+            groupLayout.createParallelGroup(Alignment.LEADING)
+                .addGroup(groupLayout.createSequentialGroup()
+                    .addGap(14)
+                    .addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
                         .addComponent(pnlOp, GroupLayout.PREFERRED_SIZE, 704, GroupLayout.PREFERRED_SIZE)
                         .addComponent(pnlRegisters, GroupLayout.PREFERRED_SIZE, 704, GroupLayout.PREFERRED_SIZE))
-                .addGap(39)
-                .addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-                        .addGroup(groupLayout.createSequentialGroup().addGap(42).addComponent(btnIPL,
-                                GroupLayout.PREFERRED_SIZE, 136, GroupLayout.PREFERRED_SIZE))
+                    .addGap(39)
+                    .addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+                        .addGroup(groupLayout.createSequentialGroup()
+                            .addGap(42)
+                            .addComponent(btnIPL, GroupLayout.PREFERRED_SIZE, 136, GroupLayout.PREFERRED_SIZE))
                         .addComponent(pnlConsole, GroupLayout.PREFERRED_SIZE, 254, GroupLayout.PREFERRED_SIZE)
                         .addComponent(testPanel, GroupLayout.PREFERRED_SIZE, 203, GroupLayout.PREFERRED_SIZE))
-                .addGap(27)
-                .addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-                        .addGroup(groupLayout.createSequentialGroup().addGap(25).addComponent(pnlProgram1,
-                                GroupLayout.PREFERRED_SIZE, 177, GroupLayout.PREFERRED_SIZE))
-                        .addComponent(pnlCache, GroupLayout.PREFERRED_SIZE, 217, GroupLayout.PREFERRED_SIZE))));
-        groupLayout.setVerticalGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-                .addGroup(groupLayout.createSequentialGroup().addGap(45)
-                        .addComponent(pnlOp, GroupLayout.PREFERRED_SIZE, 98, GroupLayout.PREFERRED_SIZE).addGap(26)
-                        .addComponent(pnlRegisters, GroupLayout.PREFERRED_SIZE, 617, GroupLayout.PREFERRED_SIZE))
-                .addGroup(groupLayout.createSequentialGroup().addGap(109)
-                        .addComponent(btnIPL, GroupLayout.PREFERRED_SIZE, 69, GroupLayout.PREFERRED_SIZE).addGap(53)
-                        .addComponent(pnlConsole, GroupLayout.PREFERRED_SIZE, 361, GroupLayout.PREFERRED_SIZE)
-                        .addGap(29)
-                        .addComponent(testPanel, GroupLayout.PREFERRED_SIZE, 165, GroupLayout.PREFERRED_SIZE))
-                .addGroup(groupLayout.createSequentialGroup().addGap(202)
-                        .addComponent(pnlProgram1, GroupLayout.PREFERRED_SIZE, 111, GroupLayout.PREFERRED_SIZE)
-                        .addGap(246)
-                        .addComponent(pnlCache, GroupLayout.PREFERRED_SIZE, 223, GroupLayout.PREFERRED_SIZE)));
+                    .addGap(27)
+                    .addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+                        .addGroup(groupLayout.createSequentialGroup()
+                            .addGap(25)
+                            .addComponent(pnlProgram1, GroupLayout.PREFERRED_SIZE, 177, GroupLayout.PREFERRED_SIZE))
+                        .addComponent(pnlCache, GroupLayout.PREFERRED_SIZE, 217, GroupLayout.PREFERRED_SIZE)))
+        );
+        groupLayout.setVerticalGroup(
+            groupLayout.createParallelGroup(Alignment.LEADING)
+                .addGroup(groupLayout.createSequentialGroup()
+                    .addGap(45)
+                    .addComponent(pnlOp, GroupLayout.PREFERRED_SIZE, 98, GroupLayout.PREFERRED_SIZE)
+                    .addGap(26)
+                    .addComponent(pnlRegisters, GroupLayout.PREFERRED_SIZE, 617, GroupLayout.PREFERRED_SIZE))
+                .addGroup(groupLayout.createSequentialGroup()
+                    .addGap(109)
+                    .addComponent(btnIPL, GroupLayout.PREFERRED_SIZE, 69, GroupLayout.PREFERRED_SIZE)
+                    .addGap(53)
+                    .addComponent(pnlConsole, GroupLayout.PREFERRED_SIZE, 361, GroupLayout.PREFERRED_SIZE)
+                    .addGap(29)
+                    .addComponent(testPanel, GroupLayout.PREFERRED_SIZE, 165, GroupLayout.PREFERRED_SIZE))
+                .addGroup(groupLayout.createSequentialGroup()
+                    .addGap(202)
+                    .addComponent(pnlProgram1, GroupLayout.PREFERRED_SIZE, 111, GroupLayout.PREFERRED_SIZE)
+                    .addGap(246)
+                    .addComponent(pnlCache, GroupLayout.PREFERRED_SIZE, 223, GroupLayout.PREFERRED_SIZE))
+        );
         frmCsciClassProject.getContentPane().setLayout(groupLayout);
         enableFlag = 0;
 
