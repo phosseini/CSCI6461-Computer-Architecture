@@ -1350,7 +1350,7 @@ public class FrontPanel {
         pnlCache.add(scrollPane3);
 
         pnlProgram1 = new JPanel();
-        pnlProgram1.setBounds(1162, 184, 177, 111);
+        pnlProgram1.setBounds(1159, 184, 177, 111);
 
         lblProgram1 = new JLabel("Program 1");
         pnlProgram1.add(lblProgram1);
