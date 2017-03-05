@@ -81,9 +81,9 @@ public class Const {
     public static final HashMap<String, Integer> PG1_20 = new HashMap<>();
     static{
         PG1_20.put("300", 0x7c8f); //SRC Reset r0 = 0
-        PG1_20.put("301", 0xf1e); //LDA r3 with memory address 30
+        PG1_20.put("301", 0xf3e); //LDA r3 with c(memory 30)
         // (0)
-        PG1_20.put("302", 0xe1f); // LDA r2 with memory address 31
+        PG1_20.put("302", 0xe3f); // LDA r2 with c(memory 31)
         PG1_20.put("303", 0xf500); //IN r1
         PG1_20.put("304", 0x5980); //TRR r1, r2
         PG1_20.put("305", 0xe3c);  // LDA r2 with c(memory 28)

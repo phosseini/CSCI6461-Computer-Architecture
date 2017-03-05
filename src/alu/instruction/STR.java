@@ -19,7 +19,7 @@ public class STR extends AbstractInstruction {
 		registers.setMAR(util.EffectiveAddress.EA(instruction, mcu, registers));
 		registers.setMBR(registers.getRnByNum(r));
 		
-		mcu.storeIntoMemory(registers.getMAR(), registers.getMBR());
+		mcu.storeIntoCache(registers.getMAR(), registers.getMBR());
 
 		registers.increasePCByOne();
 	}
