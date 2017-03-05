@@ -10,6 +10,7 @@ public class Const {
     public static final Integer CACHE_LINES = 16;
     public static final Integer BOOT_PROG_BASE = 8;
     public static final Integer BOOT_PROG1_BASE = 101;
+    public static final Integer PG_20_BASE = 300;
     public static final HashMap<String, Integer> ROM = new HashMap<>();
     static {
         // address-value pair Boot Program
@@ -59,28 +60,80 @@ public class Const {
         Pro1.put("129",0x404  );
     }
     
-    /**
-     * table & routine for TRAP instruction
-     */
+
     public static final HashMap<String, Integer> Pre = new HashMap<>();
     static {
-        Pre.put("6", 106 );
-        Pre.put("12", 112 );
-        Pre.put("18", 118);  
-        Pre.put("18", 118); 
-        Pre.put("23", 123);
-        Pre.put("29", 129);
-        
-        Pre.put("30", 20); // the numbers of program 1
+        //Pre.put("6", 106 );
+        //Pre.put("12", 112 );
+        //Pre.put("18", 118);  
+        //Pre.put("18", 118); 
+        //Pre.put("23", 123);
+        //Pre.put("29", 129);
+        // 7 ~ 26 store the 20 numbers
+        // 27 store the 1 number
+        Pre.put("28", 302); // start of block (0)
+        Pre.put("29", 7); // the first address of the numbers
+        Pre.put("30", 20); // the numbers of words need to read in program 1
         Pre.put("31", 44); //ASCII for ','
 
     }
     
     public static final HashMap<String, Integer> PG1_20 = new HashMap<>();
     static{
-        
+        PG1_20.put("300", 0x7c8f); //SRC Reset r0 = 0
+        PG1_20.put("301", 0xf1e); //LDA r3 with memory address 30
+        // (0)
+        PG1_20.put("302", 0xe1f); // LDA r2 with memory address 31
+        PG1_20.put("303", 0xf500); //IN r1
+        PG1_20.put("304", 0x5980); //TRR r1, r2
+        PG1_20.put("305", 0xe1c);  // LDA r2 with c(memory 28)
+        PG1_20.put("306", 0x1a14); //AIR r2, 20
+        PG1_20.put("307", 0xa1c); //Store r2 into location c(memory 28)
+        PG1_20.put("308", 0x333c);// JCC cc=3 to c(memory 28) means jump to (1)
+        PG1_20.put("309", 0xe1c);//Load r2 with c(memory 28)
+        PG1_20.put("310", 0x1a14);//AIR r2, 20
+        PG1_20.put("311", 0xa1c);//Store r2 into location c(memory 28)
+        PG1_20.put("312", 0x343c);//JMA to c(memory 28) means jump to (2)
+        //(1)
+        PG1_20.put("322", 0x81d);//Store r0 into memory with a location of c(memory 29)
+        PG1_20.put("323", 0xd3d);//Load r1 with content of memory address 29
+        PG1_20.put("324", 0x1901);//AIR r1 with 1
+        PG1_20.put("325", 0x91d);//Store r1 into memory address 29
+        PG1_20.put("326", 0x7c8f);//Reset r0
+        PG1_20.put("327", 0xe1c);//Load r2 with c(memory 28)
+        PG1_20.put("328", 0x1a14);//AIR r2, 20
+        PG1_20.put("329", 0x1a14);//AIR r2, 20
+        PG1_20.put("330", 0xa1c);//Store r2 into location c(memory 28)
+        PG1_20.put("331", 0x343c);//JMA to c(memory 28) means jump to (2)
+        //(2)
+        PG1_20.put("342", 0x83D);//STR r0 into memory with a location of c(memory 29)
+        PG1_20.put("343", 0x103D);//AMR r0, c(memory 29)
+        PG1_20.put("344", 0x103D);//AMR r0, c(memory 29)
+        PG1_20.put("345", 0x103D);//AMR r0, c(memory 29)
+        PG1_20.put("346", 0x103D);//AMR r0, c(memory 29)
+        PG1_20.put("347", 0x103D);//AMR r0, c(memory 29)
+        PG1_20.put("348", 0x103D);//AMR r0, c(memory 29)
+        PG1_20.put("349", 0x103D);//AMR r0, c(memory 29)
+        PG1_20.put("350", 0x103D);//AMR r0, c(memory 29)
+        PG1_20.put("351", 0x103D);//AMR r0, c(memory 29)
+        PG1_20.put("352", 0x93D);//Store r1 into memory with a location of c(memory 29)
+        PG1_20.put("353", 0x103D);//AMR r0, c(memory 29)
+        PG1_20.put("354", 0xE1C);//LDA r2 with c(memory 28)
+        PG1_20.put("355", 0x1A14);//AIR r2, 20
+        PG1_20.put("356", 0xA1C);//Store r2 into location c(memory 28)
+        PG1_20.put("357", 0x343C);//JMA to c(memory 28) means jump to (3)
+        //(3)
+        PG1_20.put("362", 0xE1C);//Load r2 with c(memory 28)
+        PG1_20.put("363", 0x1E14);//SIR r2, 20
+        PG1_20.put("364", 0x1E14);//SIR r2, 20
+        PG1_20.put("365", 0x1E14);//SIR r2, 20
+        PG1_20.put("366", 0xA1C);//Store r2 into location c(memory 28)
+        PG1_20.put("367", 0x431C);//SOB r3, c(memory 28)
     }
 
+    /**
+     *  table and routine for TRAP instruction
+     */
     public static final HashMap<String, Integer> TB = new HashMap<>();
     static {
         TB.put("0", 1500);

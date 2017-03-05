@@ -1783,9 +1783,9 @@ public class FrontPanel {
                 if (prog1Step == 0) {
                     // read 20 numbers from the console keyboard
                     mcu.loadProgram(Const.Pre);
-                    mcu.loadProgram(Const.Pro1);
-                    registers.setPC(Const.BOOT_PROG1_BASE); //TODO FIXIT
-                    int end = Const.BOOT_PROG1_BASE + Const.Pro1.size();
+                    mcu.loadProgram(Const.PG1_20);
+                    registers.setPC(Const.PG_20_BASE); //TODO FIXIT
+                    int end = Const.PG_20_BASE + Const.PG1_20.size();
                     refreshRegistersPanel();
                     do {
                         refreshRegistersPanel();
