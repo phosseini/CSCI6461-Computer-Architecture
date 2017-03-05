@@ -412,11 +412,11 @@ public class FrontPanel {
     private void initComponents() {
         frmCsciClassProject = new JFrame();
         frmCsciClassProject.setTitle("CSCI6461 Class Project");
-        frmCsciClassProject.setBounds(100, 100, 1345, 890);
+        frmCsciClassProject.setBounds(100, 100, 1368, 890);
         frmCsciClassProject.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         pnlRegisters = new JPanel();
-        pnlRegisters.setBounds(14, 169, 704, 617);
+        pnlRegisters.setBounds(14, 169, 782, 617);
 
         pnlR3 = new JPanel();
 
@@ -1204,10 +1204,10 @@ public class FrontPanel {
         pnlRegisters.add(pnlCC);
 
         btnIPL = new JButton("IPL");
-        btnIPL.setBounds(776, 45, 136, 69);
+        btnIPL.setBounds(821, 53, 136, 69);
 
         testPanel = new JPanel();
-        testPanel.setBounds(757, 621, 203, 165);
+        testPanel.setBounds(831, 621, 203, 165);
         testPanel.setLayout(new FlowLayout(FlowLayout.RIGHT, 5, 5));
 
         lblTestPanel = new JLabel("Memory interface");
@@ -1249,7 +1249,7 @@ public class FrontPanel {
         setEnableForPanel(pnlRegisters, false);
 
         pnlPrinter = new JPanel();
-        pnlPrinter.setBounds(757, 184, 254, 201);
+        pnlPrinter.setBounds(821, 184, 254, 201);
         pnlPrinter.setLayout(new BoxLayout(pnlPrinter, BoxLayout.Y_AXIS));
 
         lblPrinter = new JLabel("Console Printer");
@@ -1264,7 +1264,7 @@ public class FrontPanel {
         scrollPane1.setViewportView(consolePrinter);
 
         pnlOp = new JPanel();
-        pnlOp.setBounds(14, 45, 704, 98);
+        pnlOp.setBounds(14, 45, 715, 98);
         pnlOp.setLayout(new FlowLayout(FlowLayout.RIGHT, 5, 5));
 
         pnlIns = new JPanel();
@@ -1331,7 +1331,7 @@ public class FrontPanel {
         setEnableForPanel(pnlIns, false);
 
         pnlCache = new JPanel();
-        pnlCache.setBounds(1038, 563, 217, 223);
+        pnlCache.setBounds(1122, 563, 217, 223);
 
         lblCache = new JLabel("Cache");
 
@@ -1350,7 +1350,7 @@ public class FrontPanel {
         pnlCache.add(scrollPane3);
 
         pnlProgram1 = new JPanel();
-        pnlProgram1.setBounds(1078, 184, 177, 111);
+        pnlProgram1.setBounds(1162, 184, 177, 111);
 
         lblProgram1 = new JLabel("Program 1");
         pnlProgram1.add(lblProgram1);
@@ -1371,7 +1371,7 @@ public class FrontPanel {
         frmCsciClassProject.getContentPane().add(pnlCache);
                                 
                                 pnlKeyb = new JPanel();
-                                pnlKeyb.setBounds(757, 398, 254, 201);
+                                pnlKeyb.setBounds(821, 397, 254, 201);
                                 frmCsciClassProject.getContentPane().add(pnlKeyb);
                                 pnlKeyb.setLayout(new BoxLayout(pnlKeyb, BoxLayout.Y_AXIS));
                                 
