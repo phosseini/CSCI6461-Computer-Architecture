@@ -11,7 +11,7 @@ public class DVD extends AbstractInstruction {
 	@Override
 	public void execute(String instruction, Registers registers, MCU mcu) throws MachineFaultException {
 		// ------------------------------------------------------
-		// 020: MLT -> Divide Register by Register
+		// 021: DVD -> Divide Register by Register
 		// rx, rx+1 <- c(rx)/c(ry)
 		// rx must be 0 or 2
 		// rx contains the high order bits, rx+1 contains the low order bits of
@@ -32,16 +32,25 @@ public class DVD extends AbstractInstruction {
 			if (registers.getRnByNum(ry) == 0) {
 				registers.setCCElementByBit(Const.ConditionCode.DIVZERO.getValue(), true);
 			} else {
+
 				// doing the division: result is the same as quotient
 				int result = registers.getRnByNum(rx) / registers.getRnByNum(ry);
-				int remainder = registers.getRnByNum(rx) % registers.getRnByNum(ry);
 
-				// saving the quotient in rx
-				registers.setRnByNum(rx, result);
+				// first we check if we have an overflow
+				if (result > Integer.MAX_VALUE || result < Integer.MIN_VALUE) {
+					registers.setCCElementByBit(Const.ConditionCode.OVERFLOW.getValue(), true);
+				} else {
 
-				// saving the remainder in rx+1
-				registers.setRnByNum(rx + 1, remainder);
+					// if we do not have an overflow, we continue updating the
+					// value of registers
+					int remainder = registers.getRnByNum(rx) % registers.getRnByNum(ry);
 
+					// saving the quotient in rx
+					registers.setRnByNum(rx, result);
+
+					// saving the remainder in rx+1
+					registers.setRnByNum(rx + 1, remainder);
+				}
 			}
 
 			registers.increasePCByOne();

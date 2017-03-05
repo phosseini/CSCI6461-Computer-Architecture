@@ -11,7 +11,7 @@ public class JGE extends AbstractInstruction {
 	@Override
 	public void execute(String instruction, Registers registers, MCU mcu) throws MachineFaultException {
 		//-----------------------------------
-		//017: JGE -> Jump Greater Than or Equal To
+		// 017: JGE -> Jump Greater Than or Equal To
 		//-----------------------------------
 		int r = StringUtil.binaryToDecimal(instruction.substring(6, 8));
 		if (mcu.fetchFromMemory(registers.getRnByNum(r)) >= 0){

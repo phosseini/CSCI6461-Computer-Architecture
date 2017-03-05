@@ -2,6 +2,7 @@ package alu.instruction;
 
 import cpu.Registers;
 import memory.MCU;
+import util.Const;
 import util.MachineFaultException;
 import util.StringUtil;
 
@@ -29,11 +30,21 @@ public class SIR extends AbstractInstruction {
 			if (registers.getRnByNum(r) == 0) {
 				registers.setR1(~immed);
 			} else {
-				// r <- c(r) + immed
-				registers.setRnByNum(r, registers.getRnByNum(r) - immed);
+
+				// r <- c(r) - immed
+
+				int result = registers.getRnByNum(r) - immed;
+
+				// we check if we have an overflow
+				if (result > Integer.MAX_VALUE || result < Integer.MIN_VALUE) {
+					registers.setCCElementByBit(Const.ConditionCode.OVERFLOW.getValue(), true);
+				} else {
+					// updating the value of register if there is no overflow
+					registers.setRnByNum(r, registers.getRnByNum(r) - immed);
+				}
 			}
 		}
-		
+
 		registers.increasePCByOne();
 
 	}
