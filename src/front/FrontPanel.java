@@ -347,7 +347,7 @@ public class FrontPanel {
     private JButton btnLoad;
     private JLabel lblPrinter;
     private JLabel lblTestPanel;
-    private JPanel pnlConsole;
+    private JPanel pnlPrinter;
 
     private JLabel lblKeyboard;
 
@@ -369,6 +369,7 @@ public class FrontPanel {
     private JLabel lblProgram1;
 
     private JButton btn1Num;
+    private JPanel pnlKeyb;
 
     /**
      * Launch the application.
@@ -411,10 +412,11 @@ public class FrontPanel {
     private void initComponents() {
         frmCsciClassProject = new JFrame();
         frmCsciClassProject.setTitle("CSCI6461 Class Project");
-        frmCsciClassProject.setBounds(100, 100, 1345, 890);
+        frmCsciClassProject.setBounds(100, 100, 1368, 890);
         frmCsciClassProject.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         pnlRegisters = new JPanel();
+        pnlRegisters.setBounds(14, 169, 782, 617);
 
         pnlR3 = new JPanel();
 
@@ -1202,8 +1204,10 @@ public class FrontPanel {
         pnlRegisters.add(pnlCC);
 
         btnIPL = new JButton("IPL");
+        btnIPL.setBounds(821, 53, 136, 69);
 
         testPanel = new JPanel();
+        testPanel.setBounds(831, 621, 207, 165);
         testPanel.setLayout(new FlowLayout(FlowLayout.RIGHT, 5, 5));
 
         lblTestPanel = new JLabel("Memory interface");
@@ -1244,31 +1248,23 @@ public class FrontPanel {
         pnlButton.add(btnLoad);
         setEnableForPanel(pnlRegisters, false);
 
-        pnlConsole = new JPanel();
-        pnlConsole.setLayout(new BoxLayout(pnlConsole, BoxLayout.Y_AXIS));
+        pnlPrinter = new JPanel();
+        pnlPrinter.setBounds(821, 184, 254, 201);
+        pnlPrinter.setLayout(new BoxLayout(pnlPrinter, BoxLayout.Y_AXIS));
 
         lblPrinter = new JLabel("Console Printer");
-        pnlConsole.add(lblPrinter);
+        pnlPrinter.add(lblPrinter);
 
         scrollPane1 = new JScrollPane();
-        pnlConsole.add(scrollPane1);
+        pnlPrinter.add(scrollPane1);
 
         consolePrinter = new JTextArea();
         consolePrinter.setLineWrap(true);
         consolePrinter.setEditable(false);
         scrollPane1.setViewportView(consolePrinter);
 
-        lblKeyboard = new JLabel("Console Keyboard");
-        pnlConsole.add(lblKeyboard);
-
-        scrollPane2 = new JScrollPane();
-        pnlConsole.add(scrollPane2);
-
-        consoleKeyboard = new JTextArea();
-        consoleKeyboard.setLineWrap(true);
-        scrollPane2.setViewportView(consoleKeyboard);
-
         pnlOp = new JPanel();
+        pnlOp.setBounds(14, 45, 715, 98);
         pnlOp.setLayout(new FlowLayout(FlowLayout.RIGHT, 5, 5));
 
         pnlIns = new JPanel();
@@ -1335,6 +1331,7 @@ public class FrontPanel {
         setEnableForPanel(pnlIns, false);
 
         pnlCache = new JPanel();
+        pnlCache.setBounds(1119, 325, 217, 223);
 
         lblCache = new JLabel("Cache");
 
@@ -1353,6 +1350,7 @@ public class FrontPanel {
         pnlCache.add(scrollPane3);
 
         pnlProgram1 = new JPanel();
+        pnlProgram1.setBounds(1159, 184, 177, 111);
 
         lblProgram1 = new JLabel("Program 1");
         pnlProgram1.add(lblProgram1);
@@ -1363,49 +1361,29 @@ public class FrontPanel {
         btn1Num = new JButton("read 1 number");
         pnlProgram1.add(btn1Num);
         setEnableForPanel(pnlProgram1, false);
-        GroupLayout groupLayout = new GroupLayout(frmCsciClassProject.getContentPane());
-        groupLayout.setHorizontalGroup(
-            groupLayout.createParallelGroup(Alignment.LEADING)
-                .addGroup(groupLayout.createSequentialGroup()
-                    .addGap(14)
-                    .addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-                        .addComponent(pnlOp, GroupLayout.PREFERRED_SIZE, 704, GroupLayout.PREFERRED_SIZE)
-                        .addComponent(pnlRegisters, GroupLayout.PREFERRED_SIZE, 704, GroupLayout.PREFERRED_SIZE))
-                    .addGap(39)
-                    .addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-                        .addGroup(groupLayout.createSequentialGroup()
-                            .addGap(42)
-                            .addComponent(btnIPL, GroupLayout.PREFERRED_SIZE, 136, GroupLayout.PREFERRED_SIZE))
-                        .addComponent(pnlConsole, GroupLayout.PREFERRED_SIZE, 254, GroupLayout.PREFERRED_SIZE)
-                        .addComponent(testPanel, GroupLayout.PREFERRED_SIZE, 203, GroupLayout.PREFERRED_SIZE))
-                    .addGap(27)
-                    .addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-                        .addGroup(groupLayout.createSequentialGroup()
-                            .addGap(25)
-                            .addComponent(pnlProgram1, GroupLayout.PREFERRED_SIZE, 177, GroupLayout.PREFERRED_SIZE))
-                        .addComponent(pnlCache, GroupLayout.PREFERRED_SIZE, 217, GroupLayout.PREFERRED_SIZE)))
-        );
-        groupLayout.setVerticalGroup(
-            groupLayout.createParallelGroup(Alignment.LEADING)
-                .addGroup(groupLayout.createSequentialGroup()
-                    .addGap(45)
-                    .addComponent(pnlOp, GroupLayout.PREFERRED_SIZE, 98, GroupLayout.PREFERRED_SIZE)
-                    .addGap(26)
-                    .addComponent(pnlRegisters, GroupLayout.PREFERRED_SIZE, 617, GroupLayout.PREFERRED_SIZE))
-                .addGroup(groupLayout.createSequentialGroup()
-                    .addGap(109)
-                    .addComponent(btnIPL, GroupLayout.PREFERRED_SIZE, 69, GroupLayout.PREFERRED_SIZE)
-                    .addGap(53)
-                    .addComponent(pnlConsole, GroupLayout.PREFERRED_SIZE, 361, GroupLayout.PREFERRED_SIZE)
-                    .addGap(29)
-                    .addComponent(testPanel, GroupLayout.PREFERRED_SIZE, 165, GroupLayout.PREFERRED_SIZE))
-                .addGroup(groupLayout.createSequentialGroup()
-                    .addGap(202)
-                    .addComponent(pnlProgram1, GroupLayout.PREFERRED_SIZE, 111, GroupLayout.PREFERRED_SIZE)
-                    .addGap(246)
-                    .addComponent(pnlCache, GroupLayout.PREFERRED_SIZE, 223, GroupLayout.PREFERRED_SIZE))
-        );
-        frmCsciClassProject.getContentPane().setLayout(groupLayout);
+        frmCsciClassProject.getContentPane().setLayout(null);
+        frmCsciClassProject.getContentPane().add(pnlOp);
+        frmCsciClassProject.getContentPane().add(pnlRegisters);
+        frmCsciClassProject.getContentPane().add(btnIPL);
+        frmCsciClassProject.getContentPane().add(pnlPrinter);
+        frmCsciClassProject.getContentPane().add(testPanel);
+        frmCsciClassProject.getContentPane().add(pnlProgram1);
+        frmCsciClassProject.getContentPane().add(pnlCache);
+                                
+                                pnlKeyb = new JPanel();
+                                pnlKeyb.setBounds(821, 397, 254, 201);
+                                frmCsciClassProject.getContentPane().add(pnlKeyb);
+                                pnlKeyb.setLayout(new BoxLayout(pnlKeyb, BoxLayout.Y_AXIS));
+                                
+                                        lblKeyboard = new JLabel("Console Keyboard");
+                                        pnlKeyb.add(lblKeyboard);
+                                        
+                                                scrollPane2 = new JScrollPane();
+                                                pnlKeyb.add(scrollPane2);
+                                                
+                                                        consoleKeyboard = new JTextArea();
+                                                        consoleKeyboard.setLineWrap(true);
+                                                        scrollPane2.setViewportView(consoleKeyboard);
         enableFlag = 0;
 
     }
@@ -1713,8 +1691,10 @@ public class FrontPanel {
                     setEnableForPanel(pnlIns, true);
                     setEnableForPanel(pnlRegisters, true);
                     setEnableForPanel(pnlProgram1, true);
+                    mcu.loadProgram(Const.TB);
                     prog1Step = 0;
                     enableFlag = 1;
+                    
 
                 }
                 mcu.loadMemoryFromROM();
@@ -1802,9 +1782,10 @@ public class FrontPanel {
             public void mousePressed(MouseEvent e) {
                 if (prog1Step == 0) {
                     // read 20 numbers from the console keyboard
-                    mcu.loadProgram(Const.Pro1);
-                    registers.setPC(Const.BOOT_PROG1_BASE); //TODO FIXIT
-                    int end = Const.BOOT_PROG1_BASE + Const.Pro1.size();
+                    mcu.loadProgram(Const.Pre);
+                    mcu.loadProgram(Const.PG1_20);
+                    registers.setPC(Const.PG_20_BASE); //TODO FIXIT
+                    int end = Const.PG_20_BASE + Const.PG1_20.size();
                     refreshRegistersPanel();
                     do {
                         refreshRegistersPanel();
