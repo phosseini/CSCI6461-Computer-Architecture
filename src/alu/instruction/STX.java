@@ -10,15 +10,16 @@ public class STX extends AbstractInstruction {
 
 	@Override
 	public void execute(String instruction, Registers registers, MCU mcu) throws MachineFaultException {
-		//------------------------------------------
+		// ------------------------------------------
 		// 42: STX -> Store Index Register to Memory
-		//------------------------------------------
-		
+		// ------------------------------------------
+
 		int ix = StringUtil.binaryToDecimal(instruction.substring(8, 10));
-		
+
 		registers.setMAR(util.EffectiveAddress.EA(instruction, mcu, registers));
 		registers.setMBR(registers.getXnByNum(ix));
 		mcu.storeIntoMemory(registers.getMAR(), registers.getMBR());
+
 		registers.increasePCByOne();
 	}
 

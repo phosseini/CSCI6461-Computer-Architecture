@@ -28,7 +28,46 @@ public class Const {
     public static final HashMap<String, Integer> Pro1 = new HashMap<>();
     static {
         // address-value pair Boot Program
-        Pro1.put("101", 0xa9ca); // LDR 2, 2, 31,1
+        Pro1.put("101",0x401 );
+        Pro1.put("102",0x1400  );
+        Pro1.put("103",0x4426  );
+        Pro1.put("104",0x400  );
+        Pro1.put("105",0x1401  );
+        Pro1.put("106",0x816  );
+        Pro1.put("107",0x402  );
+        Pro1.put("108",0x1400  );
+        Pro1.put("109",0x442c  );
+        Pro1.put("110",0x400  );
+        Pro1.put("111",0x1402  );
+        Pro1.put("112",0x817  );
+        Pro1.put("113",0x416  );
+        Pro1.put("114",0x1417  );
+        Pro1.put("115",0x4432  );
+        Pro1.put("116",0x417  );
+        Pro1.put("117",0x816  );
+        Pro1.put("118",0x403  );
+        Pro1.put("119",0x1400  );
+        Pro1.put("120",0x4437  );
+        Pro1.put("121",0x400  );
+        Pro1.put("122",0x1402  );
+        Pro1.put("123",0x817  );
+        Pro1.put("124",0x416  );
+        Pro1.put("125",0x1417  );
+        Pro1.put("126",0x443d  );
+        Pro1.put("127",0x417  );
+        Pro1.put("128",0x816  );
+        Pro1.put("129",0x404  );
+    }
+    
+    public static final HashMap<String, Integer> Pre = new HashMap<>();
+    static {
+        Pre.put("6", 106 );
+        Pre.put("12", 112 );
+        Pre.put("18", 118);  
+        Pre.put("18", 118); 
+        Pre.put("23", 123);
+        Pre.put("29", 129);
+
     }
 
     public static final HashMap<String, Integer> TB = new HashMap<>();
