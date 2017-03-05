@@ -9,6 +9,10 @@ public class ORR extends AbstractInstruction{
 	int x, y, rx, ry;
 	@Override
 	public void execute(String instruction, Registers registers, MCU mcu) throws MachineFaultException {
+		// -----------------------------------
+		// 024: ORR -> Logical Or of Register and Register
+		//c(rx) <- c(rx) OR c(ry)
+		// -----------------------------------
 		// TODO Auto-generated method stub
 		this.rx=StringUtil.binaryToDecimal(instruction.substring(6,8));
 		this.ry=StringUtil.binaryToDecimal(instruction.substring(8,10));
