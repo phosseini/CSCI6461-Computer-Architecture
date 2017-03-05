@@ -7,7 +7,7 @@ import util.StringUtil;
 
 public class SRC extends AbstractInstruction {
 	int AL, LR, Bd, Ct, r;
-
+	String x=null;
 	public void execute(String instruction, Registers registers, MCU mcu) throws MachineFaultException {
 		// -----------------------------------
 	    // 031: RRC -> Shift Register by Count, 
@@ -30,12 +30,19 @@ public class SRC extends AbstractInstruction {
 		}
 		if (AL == 1) {
 			if (LR == 0) {
-				Bd = Bd >>> Ct;
+				if(Bd>=0)
+					Bd=  (Bd>>>Ct);
+					else{
+							x=Integer.toBinaryString(Bd>>>Ct);
+							x=x.replace("1111111111111111", "");
+							Bd=Integer.parseInt(x,2);
+					}
 			}
 			if (LR == 1) {
 				Bd = Bd << Ct;
 			}
 		}
+		
 		registers.setRnByNum(r, Bd);
 		registers.increasePCByOne();
 	}
