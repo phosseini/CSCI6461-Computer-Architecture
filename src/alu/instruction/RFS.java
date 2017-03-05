@@ -18,7 +18,6 @@ public class RFS extends AbstractInstruction {
 		int immed = StringUtil.binaryToDecimal(instruction.substring(11, 16));
 		registers.setR0(immed); // 1233
 		registers.setPC(mcu.fetchFromMemory(registers.getR3()));
-		// System.out.println("this is a RFS instruction!");
 	}
 
 	@Override

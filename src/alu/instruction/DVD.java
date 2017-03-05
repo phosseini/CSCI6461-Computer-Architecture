@@ -11,7 +11,7 @@ public class DVD extends AbstractInstruction {
 	@Override
 	public void execute(String instruction, Registers registers, MCU mcu) throws MachineFaultException {
 		// ------------------------------------------------------
-		// 020: MLT -> Divide Register by Register
+		// 021: DVD -> Divide Register by Register
 		// rx, rx+1 <- c(rx)/c(ry)
 		// rx must be 0 or 2
 		// rx contains the high order bits, rx+1 contains the low order bits of

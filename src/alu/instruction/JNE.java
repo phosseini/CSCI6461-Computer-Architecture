@@ -21,8 +21,6 @@ public class JNE extends AbstractInstruction {
 		} else {
 			registers.setPC(registers.getPC() + 1);
 		}
-
-		// System.out.println("this is a JNE instruction!");
 	}
 
 	@Override
