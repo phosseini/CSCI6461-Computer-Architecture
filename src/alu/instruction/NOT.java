@@ -9,6 +9,10 @@ public class NOT extends AbstractInstruction{
 	int Bd, rx;
 	@Override
 	public void execute(String instruction, Registers registers, MCU mcu) throws MachineFaultException {
+		// -----------------------------------
+		// 025: NOT -> Logical Not of Register To Register
+		//C(rx) <- NOT c(rx)
+		// -----------------------------------
 		// TODO Auto-generated method stub
 		this.rx=StringUtil.binaryToDecimal(instruction.substring(6,8));
 		this.Bd=registers.getRnByNum(rx);

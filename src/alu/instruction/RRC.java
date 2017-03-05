@@ -9,6 +9,11 @@ public class RRC extends AbstractInstruction{
 	int AL, LR, Bd, Ct, r;
 	@Override
 	public void execute(String instruction, Registers registers, MCU mcu) throws MachineFaultException {
+		// -----------------------------------
+		// 032: RRC -> Rotate Register by Count
+		//c(r) is rotated left (L/R = 1) or right (L/R =0) either logically (A/L =1)
+
+		// -----------------------------------
 		// TODO Auto-generated method stub
 		this.AL=StringUtil.binaryToDecimal(instruction.substring(8,9));
 		this.LR=StringUtil.binaryToDecimal(instruction.substring(9,10));
