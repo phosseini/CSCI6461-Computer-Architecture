@@ -37,7 +37,7 @@ public class RRC extends AbstractInstruction{
 		String z=null;
 		
 		z=Integer.toBinaryString(Bd);
-		if(Bd>0);
+		if(Bd>=0);
 		z=z.replace("0000000000000000","");
 		if(Bd<0)
 			z=z.replaceAll("1111111111111111", "");
