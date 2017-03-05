@@ -1207,7 +1207,7 @@ public class FrontPanel {
         btnIPL.setBounds(821, 53, 136, 69);
 
         testPanel = new JPanel();
-        testPanel.setBounds(831, 621, 203, 165);
+        testPanel.setBounds(831, 621, 207, 165);
         testPanel.setLayout(new FlowLayout(FlowLayout.RIGHT, 5, 5));
 
         lblTestPanel = new JLabel("Memory interface");
@@ -1331,7 +1331,7 @@ public class FrontPanel {
         setEnableForPanel(pnlIns, false);
 
         pnlCache = new JPanel();
-        pnlCache.setBounds(1122, 563, 217, 223);
+        pnlCache.setBounds(1119, 325, 217, 223);
 
         lblCache = new JLabel("Cache");
 

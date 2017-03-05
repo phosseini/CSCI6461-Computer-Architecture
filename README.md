@@ -15,7 +15,7 @@ We are working on designing and implementing the basic machine architecture in t
 - Executing LOAD and STORE instructions.
 - Building initial user interface to simulator.
 
-## Component 2: Memory and Cache Design (ongoing)
+## Component 2: Memory and Cache Design (3/4/2017)
 - Designing and implementing the modules for enhanced memory and cache operations.
 - Implementing all instructions except for MSR, CHK, and Floating Point/Vector operations.
 - Extending the user interface.
