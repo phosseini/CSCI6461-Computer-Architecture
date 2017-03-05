@@ -86,24 +86,24 @@ public class Const {
         PG1_20.put("302", 0xe1f); // LDA r2 with memory address 31
         PG1_20.put("303", 0xf500); //IN r1
         PG1_20.put("304", 0x5980); //TRR r1, r2
-        PG1_20.put("305", 0xe1c);  // LDA r2 with c(memory 28)
+        PG1_20.put("305", 0xe3c);  // LDA r2 with c(memory 28)
         PG1_20.put("306", 0x1a14); //AIR r2, 20
-        PG1_20.put("307", 0xa1c); //Store r2 into location c(memory 28)
+        PG1_20.put("307", 0xa3c); //Store r2 into location c(memory 28)
         PG1_20.put("308", 0x333c);// JCC cc=3 to c(memory 28) means jump to (1)
-        PG1_20.put("309", 0xe1c);//Load r2 with c(memory 28)
+        PG1_20.put("309", 0xe3c);//Load r2 with c(memory 28)
         PG1_20.put("310", 0x1a14);//AIR r2, 20
-        PG1_20.put("311", 0xa1c);//Store r2 into location c(memory 28)
+        PG1_20.put("311", 0xa3c);//Store r2 into location c(memory 28)
         PG1_20.put("312", 0x343c);//JMA to c(memory 28) means jump to (2)
         //(1)
-        PG1_20.put("322", 0x81d);//Store r0 into memory with a location of c(memory 29)
+        PG1_20.put("322", 0x83d);//Store r0 into memory with a location of c(memory 29)
         PG1_20.put("323", 0xd3d);//Load r1 with content of memory address 29
         PG1_20.put("324", 0x1901);//AIR r1 with 1
         PG1_20.put("325", 0x91d);//Store r1 into memory address 29
         PG1_20.put("326", 0x7c8f);//Reset r0
-        PG1_20.put("327", 0xe1c);//Load r2 with c(memory 28)
+        PG1_20.put("327", 0xe3c);//Load r2 with c(memory 28)
         PG1_20.put("328", 0x1a14);//AIR r2, 20
         PG1_20.put("329", 0x1a14);//AIR r2, 20
-        PG1_20.put("330", 0xa1c);//Store r2 into location c(memory 28)
+        PG1_20.put("330", 0xa3c);//Store r2 into location c(memory 28)
         PG1_20.put("331", 0x343c);//JMA to c(memory 28) means jump to (2)
         //(2)
         PG1_20.put("342", 0x83D);//STR r0 into memory with a location of c(memory 29)
@@ -118,17 +118,17 @@ public class Const {
         PG1_20.put("351", 0x103D);//AMR r0, c(memory 29)
         PG1_20.put("352", 0x93D);//Store r1 into memory with a location of c(memory 29)
         PG1_20.put("353", 0x103D);//AMR r0, c(memory 29)
-        PG1_20.put("354", 0xE1C);//LDA r2 with c(memory 28)
+        PG1_20.put("354", 0xE3C);//LDA r2 with c(memory 28)
         PG1_20.put("355", 0x1A14);//AIR r2, 20
-        PG1_20.put("356", 0xA1C);//Store r2 into location c(memory 28)
+        PG1_20.put("356", 0xA3C);//Store r2 into location c(memory 28)
         PG1_20.put("357", 0x343C);//JMA to c(memory 28) means jump to (3)
         //(3)
-        PG1_20.put("362", 0xE1C);//Load r2 with c(memory 28)
+        PG1_20.put("362", 0xE3C);//Load r2 with c(memory 28)
         PG1_20.put("363", 0x1E14);//SIR r2, 20
         PG1_20.put("364", 0x1E14);//SIR r2, 20
         PG1_20.put("365", 0x1E14);//SIR r2, 20
-        PG1_20.put("366", 0xA1C);//Store r2 into location c(memory 28)
-        PG1_20.put("367", 0x431C);//SOB r3, c(memory 28)
+        PG1_20.put("366", 0xA3C);//Store r2 into location c(memory 28)
+        PG1_20.put("367", 0x433C);//SOB r3, c(memory 28)
     }
 
     /**
