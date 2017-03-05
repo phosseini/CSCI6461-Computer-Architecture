@@ -67,6 +67,9 @@ public class Const {
         Pre.put("18", 118); 
         Pre.put("23", 123);
         Pre.put("29", 129);
+        
+        Pre.put("30", 20); // the numbers of program 1
+        Pre.put("31", 44); //ASCII for ','
 
     }
 
