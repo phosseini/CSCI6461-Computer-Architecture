@@ -28,13 +28,9 @@ public class Const {
     public static final HashMap<String, Integer> Pro1 = new HashMap<>();
     static {
         // address-value pair Boot Program
-        Pro1.put("101",0xa9ca); // LDR 2, 2, 31,1
+        Pro1.put("101", 0xa9ca); // LDR 2, 2, 31,1
     }
-    
-    
-    
-    
-    
+
     public static final HashMap<String, Integer> TB = new HashMap<>();
     static {
         TB.put("0", 500);
@@ -53,8 +49,27 @@ public class Const {
         TB.put("512", 527);
         TB.put("513", 527);
         TB.put("514", 527);
+        TB.put("515", 527);
+
+        // routine 1
+        // routine 2
+        // routine 3
+        // routine 4
+        // routine 5
+        // routine 6
+        // routine 7
+        // routine 8
+        // routine 9
+        // routine 10
+        // routine 11
+        // routine 12
+        // routine 13
+        // routine 14
+        // routine 15
+        // routine 16
+
     }
-    
+
     /**
      * 0 - OVERFLOW</br>
      * 1 - UNDERFLOW</br>
@@ -93,16 +108,16 @@ public class Const {
             return this.value;
         }
     }
-    
-    public enum DevId{
+
+    public enum DevId {
         KEYBOARD(0), PRINTER(1);
         int value;
-        
-        private DevId(int value){
+
+        private DevId(int value) {
             this.value = value;
         }
-        
-        public int getValue(){
+
+        public int getValue() {
             return this.value;
         }
     }

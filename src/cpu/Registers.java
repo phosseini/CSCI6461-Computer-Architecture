@@ -19,7 +19,7 @@ public class Registers {
      */
     int r1;
     /**
-     * General Purpose Register R2. <br/>
+     * General Purose Register R2. <br/>
      * 16 bits.
      */
     int r2;
