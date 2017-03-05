@@ -1713,8 +1713,10 @@ public class FrontPanel {
                     setEnableForPanel(pnlIns, true);
                     setEnableForPanel(pnlRegisters, true);
                     setEnableForPanel(pnlProgram1, true);
+                    mcu.loadProgram(Const.TB);
                     prog1Step = 0;
                     enableFlag = 1;
+                    
 
                 }
                 mcu.loadMemoryFromROM();

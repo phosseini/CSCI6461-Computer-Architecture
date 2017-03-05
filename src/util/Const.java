@@ -35,38 +35,102 @@ public class Const {
     static {
         TB.put("0", 500);
         TB.put("500", 516);
-        TB.put("501", 517);
-        TB.put("502", 518);
-        TB.put("503", 519);
-        TB.put("504", 520);
-        TB.put("505", 521);
-        TB.put("506", 522);
-        TB.put("507", 523);
-        TB.put("508", 524);
-        TB.put("509", 525);
-        TB.put("510", 526);
-        TB.put("511", 527);
-        TB.put("512", 527);
-        TB.put("513", 527);
-        TB.put("514", 527);
-        TB.put("515", 527);
+        TB.put("501", 521);
+        TB.put("502", 526);
+        TB.put("503", 531);
+        TB.put("504", 536);
+        TB.put("505", 541);
+        TB.put("506", 546);
+        TB.put("507", 551);
+        TB.put("508", 556);
+        TB.put("509", 561);
+        TB.put("510", 566);
+        TB.put("511", 571);
+        TB.put("512", 576);
+        TB.put("513", 581);
+        TB.put("514", 586);
+        TB.put("515", 591);
 
         // routine 1
+        TB.put("516", 0x1801);// AIR 0, 1 = 0001100000000001
+        TB.put("517", 0x1901);// AIR 1, 1 = 0001100100000001
+        TB.put("518", 0x1a01);// AIR 2, 1 = 0001101000000001
+        TB.put("519", 0x1b01);// AIR 3, 1 = 0001101100000001
         // routine 2
+        TB.put("521", 0x1802);
+        TB.put("522", 0x1902);
+        TB.put("523", 0x1a02);
+        TB.put("524", 0x1b02);
         // routine 3
+        TB.put("526", 0x1803);
+        TB.put("527", 0x1903);
+        TB.put("528", 0x1a03);
+        TB.put("529", 0x1b03);
         // routine 4
+        TB.put("531", 0x1804);
+        TB.put("532", 0x1904);
+        TB.put("533", 0x1a04);
+        TB.put("534", 0x1b04);
         // routine 5
+        TB.put("536", 0x1805);
+        TB.put("537", 0x1905);
+        TB.put("538", 0x1a05);
+        TB.put("539", 0x1b05);
         // routine 6
+        TB.put("541", 0x1806);
+        TB.put("542", 0x1906);
+        TB.put("543", 0x1a06);
+        TB.put("544", 0x1b06);
         // routine 7
+        TB.put("546", 0x1807);
+        TB.put("547", 0x1907);
+        TB.put("548", 0x1a07);
+        TB.put("549", 0x1b07);
         // routine 8
+        TB.put("551", 0x1808);
+        TB.put("552", 0x1908);
+        TB.put("553", 0x1a08);
+        TB.put("554", 0x1b08);
         // routine 9
+        TB.put("556", 0x1809);
+        TB.put("557", 0x1909);
+        TB.put("558", 0x1a09);
+        TB.put("559", 0x1b09);
         // routine 10
+        TB.put("561", 0x180a);
+        TB.put("562", 0x190a);
+        TB.put("563", 0x1a0a);
+        TB.put("564", 0x1b0a);
         // routine 11
+        TB.put("566", 0x180b);
+        TB.put("567", 0x190b);
+        TB.put("568", 0x1a0b);
+        TB.put("569", 0x1b0b);
         // routine 12
+        TB.put("571", 0x180c);
+        TB.put("572", 0x190c);
+        TB.put("573", 0x1a0c);
+        TB.put("574", 0x1b0c);
         // routine 13
+        TB.put("576", 0x180d);
+        TB.put("577", 0x190d);
+        TB.put("578", 0x1a0d);
+        TB.put("579", 0x1b0d);
         // routine 14
+        TB.put("581", 0x180e);
+        TB.put("582", 0x190e);
+        TB.put("583", 0x1a0e);
+        TB.put("584", 0x1b0e);
         // routine 15
+        TB.put("586", 0x180f);
+        TB.put("587", 0x190f);
+        TB.put("588", 0x1a0f);
+        TB.put("589", 0x1b0f);
         // routine 16
+        TB.put("591", 0x1810);
+        TB.put("592", 0x1910);
+        TB.put("593", 0x1a10);
+        TB.put("594", 0x1b10);
 
     }
 
