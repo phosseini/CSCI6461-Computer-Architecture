@@ -7,6 +7,7 @@ import util.StringUtil;
 
 public class NOT extends AbstractInstruction {
 
+
     int rx;
 
     @Override
@@ -30,5 +31,6 @@ public class NOT extends AbstractInstruction {
         // TODO Auto-generated method stub
         return "NOT " + rx;
     }
+
 
 }

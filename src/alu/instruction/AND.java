@@ -9,6 +9,7 @@ public class AND extends AbstractInstruction {
     int rx;
     int ry;
 
+
     @Override
     public void execute(String instruction, Registers registers, MCU mcu) throws MachineFaultException {
         // -----------------------------------
@@ -31,5 +32,6 @@ public class AND extends AbstractInstruction {
         // TODO Auto-generated method stub
         return "AND " + rx + ", " + ry;
     }
+
 
 }

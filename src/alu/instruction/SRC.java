@@ -17,6 +17,7 @@ public class SRC extends AbstractInstruction {
         // c(r) is shifted left (L/R =1) or right (L/R = 0) either logically
         // (A/L = 1) or arithmetically (A/L = 0)
 
+
         // -----------------------------------
         // TODO Auto-generated method stub
         this.AL = StringUtil.binaryToDecimal(instruction.substring(8, 9));

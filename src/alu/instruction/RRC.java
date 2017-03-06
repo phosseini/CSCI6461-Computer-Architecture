@@ -17,6 +17,7 @@ public class RRC extends AbstractInstruction {
         // c(r) is rotated left (L/R = 1) or right (L/R =0) either logically
         // (A/L =1)
 
+
         // -----------------------------------
         // TODO Auto-generated method stub
         this.AL = StringUtil.binaryToDecimal(instruction.substring(8, 9));
@@ -27,6 +28,7 @@ public class RRC extends AbstractInstruction {
         String x = null;
         String y = null;
         String z = null;
+
 
         z = Integer.toBinaryString(Bd);
         if (Bd >= 0)

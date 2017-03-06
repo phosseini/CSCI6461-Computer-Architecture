@@ -7,6 +7,7 @@ import util.StringUtil;
 
 public class ORR extends AbstractInstruction {
 
+
     int rx;
     int ry;
 
@@ -32,5 +33,6 @@ public class ORR extends AbstractInstruction {
         // TODO Auto-generated method stub
         return "OR " + rx + ", " + ry;
     }
+
 
 }
