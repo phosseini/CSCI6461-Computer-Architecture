@@ -16,7 +16,7 @@ public class HLT extends AbstractInstruction {
 		// -----------------------------------
 		// TODO Auto-generated method stub
 		if(instruction.substring(8,16).equals("00000000")){
-			System.out.println("HALT!");
+			//System.out.println("HALT!");
 			//JOptionPane.showMessageDialog(null, "Program stop!");
 		}
 	}
@@ -24,7 +24,7 @@ public class HLT extends AbstractInstruction {
 	@Override
 	public String getExecuteMessage() {
 		// TODO Auto-generated method stub
-		return null;
+		return "HALT";
 	}
 
 }

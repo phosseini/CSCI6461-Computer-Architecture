@@ -7,16 +7,24 @@ import util.MachineFaultException;
 import util.StringUtil;
 
 public class STR extends AbstractInstruction {
-
+    
+    int r;
+    int ix;
+    int address;
+    int i;
+    
 	@Override
 	public void execute(String instruction, Registers registers, MCU mcu) throws MachineFaultException {
 		// -----------------------------------
 		// 02:STR -> Store Register to Memory
 		// -----------------------------------
-		int r = StringUtil.binaryToDecimal(instruction.substring(6, 8));
+	    r = StringUtil.binaryToDecimal(instruction.substring(6, 8));
+        ix = StringUtil.binaryToDecimal(instruction.substring(8, 10));
+        i = StringUtil.binaryToDecimal(instruction.substring(10, 11));
+        address = StringUtil.binaryToDecimal(instruction.substring(11, 16));
 
 		// reading the content of selected register using [R] in the instruction
-		registers.setMAR(util.EffectiveAddress.EA(instruction, mcu, registers));
+		registers.setMAR(EffectiveAddress.calculateEA(ix, address, i, mcu, registers));
 		registers.setMBR(registers.getRnByNum(r));
 		
 		mcu.storeIntoCache(registers.getMAR(), registers.getMBR());
@@ -27,7 +35,7 @@ public class STR extends AbstractInstruction {
 	@Override
 	public String getExecuteMessage() {
 		// TODO Auto-generated method stub
-		return null;
+		return "STR " + r + ", " + ix + ", " + address + ", " + i;
 	}
 
 }

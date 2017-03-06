@@ -8,16 +8,18 @@ import util.StringUtil;
 
 public class TRAP extends AbstractInstruction {
 
+    int trapCode;
+
     @Override
     public void execute(String instruction, Registers registers, MCU mcu) throws MachineFaultException {
         // TODO Auto-generated method stub
         // System.out.println("This is a TRAP instruction!");
-        int trapCode = StringUtil.binaryToDecimal(instruction.substring(12, 16));
+        trapCode = StringUtil.binaryToDecimal(instruction.substring(12, 16));
         // store pc+1 into memory 2
         registers.setMAR(2);
         registers.setMBR(registers.getPC() + 1);
         mcu.storeIntoCache(registers.getMAR(), registers.getMBR());
-
+        // goes to the routine whose address is in memory location 0
         registers.setMAR(0);
         registers.setMBR(mcu.fetchFromCache(registers.getMAR()));
         int tableAddress = registers.getMBR();
@@ -53,6 +55,6 @@ public class TRAP extends AbstractInstruction {
     @Override
     public String getExecuteMessage() {
         // TODO Auto-generated method stub
-        return null;
+        return "TRAP " + trapCode;
     }
 }

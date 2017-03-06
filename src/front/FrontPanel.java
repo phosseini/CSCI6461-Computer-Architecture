@@ -1697,22 +1697,22 @@ public class FrontPanel {
                     
 
                 }
-                mcu.loadMemoryFromROM();
                 refreshRegistersPanel();
+                mcu.loadMemoryFromROM();
                 registers.setPC(Const.BOOT_PROG_BASE);
-                int end = Const.ROM.size() + Const.BOOT_PROG_BASE;
-
-                do {
-                    refreshRegistersPanel();
-                    registers.setMAR(registers.getPC());
-                    registers.setMBR(mcu.fetchFromCache(registers.getMAR()));
-                    registers.setIR(registers.getMBR());
-                    runInstruction(registers.getBinaryStringIr(), registers, mcu);
-                    refreshRegistersPanel();
-                    //registers.increasePCByOne();// TODO fix it
-
-                } while (registers.getPC() < end);
-                registers.setPC(8);
+//                int end = Const.ROM.size() + Const.BOOT_PROG_BASE;
+//
+//                do {
+//                    refreshRegistersPanel();
+//                    registers.setMAR(registers.getPC());
+//                    registers.setMBR(mcu.fetchFromCache(registers.getMAR()));
+//                    registers.setIR(registers.getMBR());
+//                    runInstruction(registers.getBinaryStringIr(), registers, mcu);
+//                    refreshRegistersPanel();
+//                    //registers.increasePCByOne();// TODO fix it
+//
+//                } while (registers.getPC() < end);
+//                registers.setPC(8);
                 refreshRegistersPanel();
                 printConsole("IPL complete!");
             }
@@ -1782,9 +1782,10 @@ public class FrontPanel {
             public void mousePressed(MouseEvent e) {
                 if (prog1Step == 0) {
                     // read 20 numbers from the console keyboard
+                    System.out.println("start reading 20 numbers");
                     mcu.loadProgram(Const.Pre);
                     mcu.loadProgram(Const.PG1_20);
-                    registers.setPC(Const.PG_20_BASE); //TODO FIXIT
+                    registers.setPC(Const.PG_20_BASE); 
                     int end = Const.PG_20_BASE + Const.PG1_20.size();
                     refreshRegistersPanel();
                     do {
@@ -1794,7 +1795,7 @@ public class FrontPanel {
                         registers.setIR(registers.getMBR());
                         runInstruction(registers.getBinaryStringIr(), registers, mcu);
                         refreshRegistersPanel();
-                        //registers.increasePCByOne();// TODO fix it
+                        registers.increasePCByOne();// TODO fix it
                     } while (registers.getPC() < end);
                     prog1Step = 1;
                 }
@@ -1807,8 +1808,21 @@ public class FrontPanel {
 
                 if (prog1Step == 1) {
                     // read 1 number from the concole keyboard and run program 1
-
+//                    mcu.loadProgram(Const.Pro1);
+//                    registers.setPC(Const.PROG1_BASE);
+//                    int end = 567;
+//                    refreshRegistersPanel();
+//                    do {
+//                        refreshRegistersPanel();
+//                        registers.setMAR(registers.getPC());
+//                        registers.setMBR(mcu.fetchFromCache(registers.getMAR()));
+//                        registers.setIR(registers.getMBR());
+//                        runInstruction(registers.getBinaryStringIr(), registers, mcu);
+//                        refreshRegistersPanel();
+//                        //registers.increasePCByOne();// TODO fix it
+//                    } while (registers.getPC() < end);
                     prog1Step = 0;
+                    
                 }
             }
         });
