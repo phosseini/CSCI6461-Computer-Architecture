@@ -1696,7 +1696,7 @@ public class FrontPanel {
                     enableFlag = 1;
 
                 }
-                refreshRegistersPanel();
+                //refreshRegistersPanel();
                 mcu.loadMemoryFromROM();
                 registers.setPC(Const.BOOT_PROG_BASE);
                 // int end = Const.ROM.size() + Const.BOOT_PROG_BASE;
@@ -1789,13 +1789,13 @@ public class FrontPanel {
                     int end = Const.PG_20_END;
                     refreshRegistersPanel();
                     do {
-                        refreshRegistersPanel();
+                        //refreshRegistersPanel();
                         registers.setMAR(registers.getPC());
                         registers.setMBR(mcu.fetchFromCache(registers.getMAR()));
                         registers.setIR(registers.getMBR());
                         runInstruction(registers.getBinaryStringIr(), registers, mcu);
-                        refreshRegistersPanel();
-                        pushConsoleBuffer();
+                        //refreshRegistersPanel();
+                        //pushConsoleBuffer();
                     } while (registers.getPC() <= end);
                     prog1Step = 1;
                 }
