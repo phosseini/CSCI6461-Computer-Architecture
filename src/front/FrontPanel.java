@@ -1795,6 +1795,7 @@ public class FrontPanel {
                         registers.setIR(registers.getMBR());
                         runInstruction(registers.getBinaryStringIr(), registers, mcu);
                         refreshRegistersPanel();
+                        pushConsoleBuffer();
                     } while (registers.getPC() <= end);
                     prog1Step = 1;
                 }
