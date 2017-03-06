@@ -1786,7 +1786,7 @@ public class FrontPanel {
                     mcu.loadProgram(Const.Pre);
                     mcu.loadProgram(Const.PG1_20);
                     registers.setPC(Const.PG_20_BASE); 
-                    int end = Const.PG_20_BASE + Const.PG1_20.size();
+                    int end = Const.PG_20_END;
                     refreshRegistersPanel();
                     do {
                         refreshRegistersPanel();
@@ -1795,8 +1795,7 @@ public class FrontPanel {
                         registers.setIR(registers.getMBR());
                         runInstruction(registers.getBinaryStringIr(), registers, mcu);
                         refreshRegistersPanel();
-                        registers.increasePCByOne();// TODO fix it
-                    } while (registers.getPC() < end);
+                    } while (registers.getPC() <= end);
                     prog1Step = 1;
                 }
 

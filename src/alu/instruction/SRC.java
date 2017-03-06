@@ -54,7 +54,7 @@ public class SRC extends AbstractInstruction {
 
     public String getExecuteMessage() {
         // TODO Auto-generated method stub
-        return "RRC " + r + ", " + Ct + ", " + LR + ", " + AL;
+        return "SRC " + r + ", " + Ct + ", " + LR + ", " + AL;
     }
 
 }

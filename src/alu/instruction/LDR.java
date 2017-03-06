@@ -25,7 +25,7 @@ public class LDR extends AbstractInstruction {
 
         // reading the content of selected register using [R] in the instruction
         registers.setMAR(EffectiveAddress.calculateEA(ix, address, i, mcu, registers));
-        registers.setMBR(mcu.fetchFromMemory(registers.getMAR()));
+        registers.setMBR(mcu.fetchFromCache(registers.getMAR()));
         registers.setRnByNum(r, registers.getMBR());
 
         registers.increasePCByOne();

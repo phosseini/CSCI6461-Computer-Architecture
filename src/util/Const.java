@@ -11,7 +11,8 @@ public class Const {
     public static final Integer BOOT_PROG_BASE = 8;
     public static final Integer PROG1_BASE = 500;
     public static final Integer PG_20_BASE = 300;
-    
+    public static final Integer PG_20_END = 367;
+
     public static final HashMap<String, Integer> ROM = new HashMap<>();
     static {
         // address-value pair Boot Program
@@ -29,77 +30,76 @@ public class Const {
     }
     public static final HashMap<String, Integer> Pro1 = new HashMap<>();
     static {
-        // address-value pair Boot Program    
-        Pro1.put("500",0x407);
-        Pro1.put("501",0x141B);
-        Pro1.put("502",0x443F);
-        Pro1.put("503",0x41B);
-        Pro1.put("504",0x1407);
-        Pro1.put("505",0x81C);
-        Pro1.put("506",0x41F);
-        Pro1.put("507",0x1B0F);
-        Pro1.put("508",0xB1F);
-        Pro1.put("509",0x408);
-        Pro1.put("510",0x141B);
-        Pro1.put("511",0x443F);
-        Pro1.put("512",0x41B);
-        Pro1.put("513",0x1408);
-        Pro1.put("514",0x81D);
-        Pro1.put("515",0);
-        Pro1.put("516",0);
-        Pro1.put("517",0);
-        Pro1.put("518",0);
-        Pro1.put("519",0);
-        Pro1.put("520",0);
-        Pro1.put("521",0x41F);
-        Pro1.put("522",0x1B0F);
-        Pro1.put("523",0xB1F);
-        Pro1.put("524",0x41D);
-        Pro1.put("525",0x141C);
-        Pro1.put("526",0x508);
-        Pro1.put("527",0x91E);
-        Pro1.put("528",0x61D);
-        Pro1.put("529",0x443F);
-        Pro1.put("530",0x407);
-        Pro1.put("531",0x81E);
-        Pro1.put("532",0x61C);
-        Pro1.put("533",0);
-        Pro1.put("534",0);
-        Pro1.put("535",0);
-        Pro1.put("536",0);
-        Pro1.put("537",0xA1C);
-        Pro1.put("538",0x41F);
-        Pro1.put("539",0x1B0F);
-        Pro1.put("540",0xB1F);
-        Pro1.put("541",0x409);
-        Pro1.put("542",0x141B);
-        Pro1.put("543",0x442C);
-        Pro1.put("544",0x41B);
-        Pro1.put("545",0x1409);
-        Pro1.put("546",0x81D);
-        Pro1.put("547",0);
-        Pro1.put("548",0);
-        Pro1.put("549",0);
-        Pro1.put("550",0);
-        Pro1.put("551",0);
-        Pro1.put("552",0);
-        Pro1.put("553",0x41F);
-        Pro1.put("554",0x1B0F);
-        Pro1.put("555",0xB1F);
-        Pro1.put("556",0x41D);
-        Pro1.put("557",0x141C);
-        Pro1.put("558",0x509);
-        Pro1.put("559",0x91E);
-        Pro1.put("560",0x61D);
-        Pro1.put("561",0x4432);
-        Pro1.put("562",0x61C);
-        Pro1.put("563",0);
-        Pro1.put("564",0);
-        Pro1.put("565",0);
-        Pro1.put("566",0);
-        Pro1.put("567",0xA1C);
+        // address-value pair Boot Program
+        Pro1.put("500", 0x407);
+        Pro1.put("501", 0x141B);
+        Pro1.put("502", 0x443F);
+        Pro1.put("503", 0x41B);
+        Pro1.put("504", 0x1407);
+        Pro1.put("505", 0x81C);
+        Pro1.put("506", 0x41F);
+        Pro1.put("507", 0x1B0F);
+        Pro1.put("508", 0xB1F);
+        Pro1.put("509", 0x408);
+        Pro1.put("510", 0x141B);
+        Pro1.put("511", 0x443F);
+        Pro1.put("512", 0x41B);
+        Pro1.put("513", 0x1408);
+        Pro1.put("514", 0x81D);
+        Pro1.put("515", 0);
+        Pro1.put("516", 0);
+        Pro1.put("517", 0);
+        Pro1.put("518", 0);
+        Pro1.put("519", 0);
+        Pro1.put("520", 0);
+        Pro1.put("521", 0x41F);
+        Pro1.put("522", 0x1B0F);
+        Pro1.put("523", 0xB1F);
+        Pro1.put("524", 0x41D);
+        Pro1.put("525", 0x141C);
+        Pro1.put("526", 0x508);
+        Pro1.put("527", 0x91E);
+        Pro1.put("528", 0x61D);
+        Pro1.put("529", 0x443F);
+        Pro1.put("530", 0x407);
+        Pro1.put("531", 0x81E);
+        Pro1.put("532", 0x61C);
+        Pro1.put("533", 0);
+        Pro1.put("534", 0);
+        Pro1.put("535", 0);
+        Pro1.put("536", 0);
+        Pro1.put("537", 0xA1C);
+        Pro1.put("538", 0x41F);
+        Pro1.put("539", 0x1B0F);
+        Pro1.put("540", 0xB1F);
+        Pro1.put("541", 0x409);
+        Pro1.put("542", 0x141B);
+        Pro1.put("543", 0x442C);
+        Pro1.put("544", 0x41B);
+        Pro1.put("545", 0x1409);
+        Pro1.put("546", 0x81D);
+        Pro1.put("547", 0);
+        Pro1.put("548", 0);
+        Pro1.put("549", 0);
+        Pro1.put("550", 0);
+        Pro1.put("551", 0);
+        Pro1.put("552", 0);
+        Pro1.put("553", 0x41F);
+        Pro1.put("554", 0x1B0F);
+        Pro1.put("555", 0xB1F);
+        Pro1.put("556", 0x41D);
+        Pro1.put("557", 0x141C);
+        Pro1.put("558", 0x509);
+        Pro1.put("559", 0x91E);
+        Pro1.put("560", 0x61D);
+        Pro1.put("561", 0x4432);
+        Pro1.put("562", 0x61C);
+        Pro1.put("563", 0);
+        Pro1.put("564", 0);
+        Pro1.put("565", 0);
+        Pro1.put("566", 0);
+        Pro1.put("567", 0xA1C);
     }
-    
 
     public static final HashMap<String, Integer> Pre = new HashMap<>();
     static {
@@ -111,62 +111,67 @@ public class Const {
         Pre.put("30", 20); // the numbers of words need to read in program 1
         Pre.put("31", 506);
     }
-    
+
     public static final HashMap<String, Integer> PG1_20 = new HashMap<>();
-    static{
-        PG1_20.put("300", 0x7c8f); //SRC Reset r0 = 0
-        PG1_20.put("301", 0xf3e); //LDA r3 with c(memory 30)
+    static {
+        PG1_20.put("300", 0x7c8f); // SRC Reset r0 = 0
+        PG1_20.put("301", 0xf3e); // LDA r3 with content of memory address 30
         // (0)
-        PG1_20.put("302", 0xe3f); // LDA r2 with c(memory 31)
-        PG1_20.put("303", 0xf500); //IN r1
-        PG1_20.put("304", 0x5980); //TRR r1, r2
-        PG1_20.put("305", 0xe3c);  // LDA r2 with c(memory 28)
-        PG1_20.put("306", 0x1a14); //AIR r2, 20
-        PG1_20.put("307", 0xa3c); //Store r2 into location c(memory 28)
+        PG1_20.put("302", 0xe3f); // LDA r2 with content of memory address 31
+        PG1_20.put("303", 0xf500); // IN r1
+        PG1_20.put("304", 0x5980); // TRR r1, r2
+        PG1_20.put("305", 0xe3c); // LDA r2 with c(memory 28)
+        PG1_20.put("306", 0x1a14); // AIR r2, 20
+        PG1_20.put("307", 0xa1c); // Store r2 into location memory 28
         PG1_20.put("308", 0x333c);// JCC cc=3 to c(memory 28) means jump to (1)
-        PG1_20.put("309", 0xe3c);//Load r2 with c(memory 28)
-        PG1_20.put("310", 0x1a14);//AIR r2, 20
-        PG1_20.put("311", 0xa1c);//Store r2 into location memory 28
-        PG1_20.put("312", 0x343c);//JMA to c(memory 28) means jump to (2)
-        //(1)
-        PG1_20.put("322", 0x83d);//Store r0 into memory with a location of c(memory 29)
-        PG1_20.put("323", 0xd3d);//Load r1 with content of memory address 29
-        PG1_20.put("324", 0x1901);//AIR r1 with 1
-        PG1_20.put("325", 0x91d);//Store r1 into memory address 29
-        PG1_20.put("326", 0x7c8f);//Reset r0
-        PG1_20.put("327", 0xe3c);//Load r2 with c(memory 28)
-        PG1_20.put("328", 0x1a14);//AIR r2, 20
-        PG1_20.put("329", 0x1a14);//AIR r2, 20
-        PG1_20.put("330", 0xa1c);//Store r2 into location memory 28
-        PG1_20.put("331", 0x343c);//JMA to c(memory 28) means jump to (2)
-        //(2)
-        PG1_20.put("342", 0x83D);//STR r0 into memory with a location of c(memory 29)
-        PG1_20.put("343", 0x103D);//AMR r0, c(memory 29)
-        PG1_20.put("344", 0x103D);//AMR r0, c(memory 29)
-        PG1_20.put("345", 0x103D);//AMR r0, c(memory 29)
-        PG1_20.put("346", 0x103D);//AMR r0, c(memory 29)
-        PG1_20.put("347", 0x103D);//AMR r0, c(memory 29)
-        PG1_20.put("348", 0x103D);//AMR r0, c(memory 29)
-        PG1_20.put("349", 0x103D);//AMR r0, c(memory 29)
-        PG1_20.put("350", 0x103D);//AMR r0, c(memory 29)
-        PG1_20.put("351", 0x103D);//AMR r0, c(memory 29)
-        PG1_20.put("352", 0x93D);//Store r1 into memory with a location of c(memory 29)
-        PG1_20.put("353", 0x103D);//AMR r0, c(memory 29)
-        PG1_20.put("354", 0xE3C);//LDA r2 with c(memory 28)
-        PG1_20.put("355", 0x1A14);//AIR r2, 20
-        PG1_20.put("356", 0xA1C);//Store r2 into location memory 28
-        PG1_20.put("357", 0x343C);//JMA to c(memory 28) means jump to (3)
-        //(3)
-        PG1_20.put("362", 0xE3C);//Load r2 with c(memory 28)
-        PG1_20.put("363", 0x1E14);//SIR r2, 20
-        PG1_20.put("364", 0x1E14);//SIR r2, 20
-        PG1_20.put("365", 0x1E14);//SIR r2, 20
-        PG1_20.put("366", 0xA1C);//Store r2 into location memory 28
-        PG1_20.put("367", 0x433C);//SOB r3, c(memory 28)
+        PG1_20.put("309", 0xe3c);// Load r2 with c(memory 28)
+        PG1_20.put("310", 0x1a14);// AIR r2, 20
+        PG1_20.put("311", 0xa1c);// Store r2 into location memory 28
+        PG1_20.put("312", 0x343c);// JMA to c(memory 28) means jump to (2)
+        // (1) it is a ','
+        PG1_20.put("322", 0x83d);// Store r0 into memory with a location of
+                                 // c(memory 29)
+        PG1_20.put("323", 0xd3d);// Load r1 with content of memory address 29
+        PG1_20.put("324", 0x1901);// AIR r1 with 1
+        PG1_20.put("325", 0x91d);// Store r1 into memory address 29
+        PG1_20.put("326", 0x7c8f);// Reset r0
+        PG1_20.put("327", 0xe3c);// Load r2 with c(memory 28)
+        PG1_20.put("328", 0x1a14);// AIR r2, 20
+        PG1_20.put("329", 0x1a14);// AIR r2, 20
+        PG1_20.put("330", 0xa1c);// Store r2 into location memory 28
+        PG1_20.put("331", 0x343c);// JMA to c(memory 28) means jump to (3)
+        // (2) it is a digit
+        PG1_20.put("342", 0x83D);// STR r0 into memory with a location of
+                                 // c(memory 29)
+        PG1_20.put("343", 0x103D);// AMR r0, c(memory 29)
+        PG1_20.put("344", 0x103D);// AMR r0, c(memory 29)
+        PG1_20.put("345", 0x103D);// AMR r0, c(memory 29)
+        PG1_20.put("346", 0x103D);// AMR r0, c(memory 29)
+        PG1_20.put("347", 0x103D);// AMR r0, c(memory 29)
+        PG1_20.put("348", 0x103D);// AMR r0, c(memory 29)
+        PG1_20.put("349", 0x103D);// AMR r0, c(memory 29)
+        PG1_20.put("350", 0x103D);// AMR r0, c(memory 29)
+        PG1_20.put("351", 0x103D);// AMR r0, c(memory 29)
+        PG1_20.put("352", 0x1d18);// r1 should subtract 48 to get a digit
+        PG1_20.put("353", 0x1d18);
+        PG1_20.put("354", 0x93D);// Store r1 into memory with a location of
+                                 // c(memory 29)
+        PG1_20.put("355", 0x103D);// AMR r0, c(memory 29)
+        PG1_20.put("356", 0xE3C);// LDA r2 with c(memory 28)
+        PG1_20.put("357", 0x1A14);// AIR r2, 20
+        PG1_20.put("358", 0xA1C);// Store r2 into location memory 28
+        PG1_20.put("359", 0x343C);// JMA to c(memory 28) means jump to (3)
+        // (3)
+        PG1_20.put("362", 0xE3C);// Load r2 with c(memory 28)
+        PG1_20.put("363", 0x1E14);// SIR r2, 20
+        PG1_20.put("364", 0x1E14);// SIR r2, 20
+        PG1_20.put("365", 0x1E14);// SIR r2, 20
+        PG1_20.put("366", 0xA1C);// Store r2 into location memory 28
+        PG1_20.put("367", 0x433C);// SOB r3, c(memory 28)
     }
 
     /**
-     *  table and routine for TRAP instruction
+     * table and routine for TRAP instruction
      */
     public static final HashMap<String, Integer> TB = new HashMap<>();
     static {

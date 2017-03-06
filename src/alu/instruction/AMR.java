@@ -20,10 +20,10 @@ public class AMR extends AbstractInstruction {
         // 004: AMR -> Add Memory to Register
         // r <- c(r) + c(EA)
         // -----------------------------------
-        int r = StringUtil.binaryToDecimal(instruction.substring(6, 8));
-        int ix = StringUtil.binaryToDecimal(instruction.substring(8, 10));
-        int address = StringUtil.binaryToDecimal(instruction.substring(11, 16));
-        int i = StringUtil.binaryToDecimal(instruction.substring(10, 11));
+        r = StringUtil.binaryToDecimal(instruction.substring(6, 8));
+        ix = StringUtil.binaryToDecimal(instruction.substring(8, 10));
+        address = StringUtil.binaryToDecimal(instruction.substring(11, 16));
+        i = StringUtil.binaryToDecimal(instruction.substring(10, 11));
         // first, we store the effective address in memory address register
         registers.setMAR(EffectiveAddress.calculateEA(ix, address, i, mcu, registers));
 
