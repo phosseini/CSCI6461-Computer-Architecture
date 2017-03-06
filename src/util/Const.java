@@ -103,12 +103,12 @@ public class Const {
 
     public static final HashMap<String, Integer> Pre = new HashMap<>();
     static {
-
+        Pre.put("6", 44);
         // 7 ~ 26 store the 20 numbers
         // 27 store the 1 number
         Pre.put("28", 302); // start of block (0)
         Pre.put("29", 7); // the first address of the numbers
-        Pre.put("30", 20); // the numbers of words need to read in program 1
+        Pre.put("30", 21); // the numbers of words need to read in program 1
         Pre.put("31", 506);
     }
 
@@ -117,7 +117,7 @@ public class Const {
         PG1_20.put("300", 0x7c8f); // SRC Reset r0 = 0
         PG1_20.put("301", 0xf3e); // LDA r3 with content of memory address 30
         // (0)
-        PG1_20.put("302", 0xe3f); // LDA r2 with content of memory address 31
+        PG1_20.put("302", 0xe26); // LDA r2 with content of memory address 6
         PG1_20.put("303", 0xf500); // IN r1
         PG1_20.put("304", 0x5980); // TRR r1, r2
         PG1_20.put("305", 0xe3c); // LDA r2 with c(memory 28)
@@ -158,9 +158,10 @@ public class Const {
                                  // c(memory 29)
         PG1_20.put("355", 0x103D);// AMR r0, c(memory 29)
         PG1_20.put("356", 0xE3C);// LDA r2 with c(memory 28)
-        PG1_20.put("357", 0x1A14);// AIR r2, 20
-        PG1_20.put("358", 0xA1C);// Store r2 into location memory 28
-        PG1_20.put("359", 0x343C);// JMA to c(memory 28) means jump to (3)
+        PG1_20.put("357", 0x1E14);// SIR r2, 20
+        PG1_20.put("358", 0x1E14);// SIR r2, 20
+        PG1_20.put("359", 0xA1C);// Store r2 into location memory 28
+        PG1_20.put("360", 0x343C);// JMA to c(memory 28) means jump to (3)
         // (3)
         PG1_20.put("362", 0xE3C);// Load r2 with c(memory 28)
         PG1_20.put("363", 0x1E14);// SIR r2, 20

@@ -22,7 +22,7 @@ public class SOB extends AbstractInstruction {
         ix = StringUtil.binaryToDecimal(instruction.substring(8, 10));
         i = StringUtil.binaryToDecimal(instruction.substring(10, 11));
         address = StringUtil.binaryToDecimal(instruction.substring(11, 16));
-
+        
         registers.setRnByNum(r, registers.getRnByNum(r) - 1);
         if (registers.getRnByNum(r) > 0) {
             registers.setPC(EffectiveAddress.calculateEA(ix, address, i, mcu, registers));
