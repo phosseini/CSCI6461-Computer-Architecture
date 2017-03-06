@@ -48,8 +48,7 @@ public class SRC extends AbstractInstruction {
 	}
 
 	public String getExecuteMessage() {
-		// TODO Auto-generated method stub
-		return null;
+		return "SRC " + this.r+ ", " + this.Ct+","+this.LR+","+this.AL;
 	}
 
 }

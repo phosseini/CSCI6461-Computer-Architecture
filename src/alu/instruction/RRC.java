@@ -62,8 +62,7 @@ public class RRC extends AbstractInstruction{
 
 	@Override
 	public String getExecuteMessage() {
-		// TODO Auto-generated method stub
-		return null;
+		return "RRC " + this.r+ ", " + this.Ct+","+this.LR+","+this.AL;
 	}
 
 }	

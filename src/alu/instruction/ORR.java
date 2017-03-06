@@ -26,8 +26,7 @@ public class ORR extends AbstractInstruction{
 
 	@Override
 	public String getExecuteMessage() {
-		// TODO Auto-generated method stub
-		return null;
+		return "ORR" + this.rx+ ", " + this.ry;
 	}
 	
 }

@@ -27,8 +27,7 @@ public class AND extends AbstractInstruction{
 
 	@Override
 	public String getExecuteMessage() {
-		// TODO Auto-generated method stub
-		return null;
+		return "AND " + this.rx+ ", " + this.ry;
 	}
 	
 }

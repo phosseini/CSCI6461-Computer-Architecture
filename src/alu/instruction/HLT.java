@@ -23,8 +23,7 @@ public class HLT extends AbstractInstruction {
 
 	@Override
 	public String getExecuteMessage() {
-		// TODO Auto-generated method stub
-		return null;
+		return "AND ";
 	}
 
 }
