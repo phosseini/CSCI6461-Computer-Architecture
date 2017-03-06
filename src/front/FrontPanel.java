@@ -363,12 +363,12 @@ public class FrontPanel {
 
     private JScrollPane scrollPane3;
 
-    private JButton btn20Num;
+    private JButton btnNums;
     private JPanel pnlProgram1;
 
     private JLabel lblProgram1;
 
-    private JButton btn1Num;
+    private JButton btnCompare;
     private JPanel pnlKeyb;
 
     /**
@@ -1355,11 +1355,11 @@ public class FrontPanel {
         lblProgram1 = new JLabel("Program 1");
         pnlProgram1.add(lblProgram1);
 
-        btn20Num = new JButton("read 20 numbers");
-        pnlProgram1.add(btn20Num);
+        btnNums = new JButton("read 21 numbers");
+        pnlProgram1.add(btnNums);
 
-        btn1Num = new JButton("read 1 number");
-        pnlProgram1.add(btn1Num);
+        btnCompare = new JButton("compare");
+        pnlProgram1.add(btnCompare);
         setEnableForPanel(pnlProgram1, false);
         frmCsciClassProject.getContentPane().setLayout(null);
         frmCsciClassProject.getContentPane().add(pnlOp);
@@ -1369,21 +1369,21 @@ public class FrontPanel {
         frmCsciClassProject.getContentPane().add(testPanel);
         frmCsciClassProject.getContentPane().add(pnlProgram1);
         frmCsciClassProject.getContentPane().add(pnlCache);
-                                
-                                pnlKeyb = new JPanel();
-                                pnlKeyb.setBounds(821, 397, 254, 201);
-                                frmCsciClassProject.getContentPane().add(pnlKeyb);
-                                pnlKeyb.setLayout(new BoxLayout(pnlKeyb, BoxLayout.Y_AXIS));
-                                
-                                        lblKeyboard = new JLabel("Console Keyboard");
-                                        pnlKeyb.add(lblKeyboard);
-                                        
-                                                scrollPane2 = new JScrollPane();
-                                                pnlKeyb.add(scrollPane2);
-                                                
-                                                        consoleKeyboard = new JTextArea();
-                                                        consoleKeyboard.setLineWrap(true);
-                                                        scrollPane2.setViewportView(consoleKeyboard);
+
+        pnlKeyb = new JPanel();
+        pnlKeyb.setBounds(821, 397, 254, 201);
+        frmCsciClassProject.getContentPane().add(pnlKeyb);
+        pnlKeyb.setLayout(new BoxLayout(pnlKeyb, BoxLayout.Y_AXIS));
+
+        lblKeyboard = new JLabel("Console Keyboard");
+        pnlKeyb.add(lblKeyboard);
+
+        scrollPane2 = new JScrollPane();
+        pnlKeyb.add(scrollPane2);
+
+        consoleKeyboard = new JTextArea();
+        consoleKeyboard.setLineWrap(true);
+        scrollPane2.setViewportView(consoleKeyboard);
         enableFlag = 0;
 
     }
@@ -1679,7 +1679,7 @@ public class FrontPanel {
                 registers.setIR(registers.getMBR());
                 refreshRegistersPanel();
                 runInstruction(registers.getBinaryStringIr(), registers, mcu);
-                //registers.increasePCByOne(); // TODO fix it
+                // registers.increasePCByOne(); // TODO fix it
                 refreshRegistersPanel();
             }
         });
@@ -1694,25 +1694,25 @@ public class FrontPanel {
                     mcu.loadProgram(Const.TB);
                     prog1Step = 0;
                     enableFlag = 1;
-                    
 
                 }
                 refreshRegistersPanel();
                 mcu.loadMemoryFromROM();
                 registers.setPC(Const.BOOT_PROG_BASE);
-//                int end = Const.ROM.size() + Const.BOOT_PROG_BASE;
-//
-//                do {
-//                    refreshRegistersPanel();
-//                    registers.setMAR(registers.getPC());
-//                    registers.setMBR(mcu.fetchFromCache(registers.getMAR()));
-//                    registers.setIR(registers.getMBR());
-//                    runInstruction(registers.getBinaryStringIr(), registers, mcu);
-//                    refreshRegistersPanel();
-//                    //registers.increasePCByOne();// TODO fix it
-//
-//                } while (registers.getPC() < end);
-//                registers.setPC(8);
+                // int end = Const.ROM.size() + Const.BOOT_PROG_BASE;
+                //
+                // do {
+                // refreshRegistersPanel();
+                // registers.setMAR(registers.getPC());
+                // registers.setMBR(mcu.fetchFromCache(registers.getMAR()));
+                // registers.setIR(registers.getMBR());
+                // runInstruction(registers.getBinaryStringIr(), registers,
+                // mcu);
+                // refreshRegistersPanel();
+                // //registers.increasePCByOne();// TODO fix it
+                //
+                // } while (registers.getPC() < end);
+                // registers.setPC(8);
                 refreshRegistersPanel();
                 printConsole("IPL complete!");
             }
@@ -1778,14 +1778,14 @@ public class FrontPanel {
             }
         });
 
-        btn20Num.addMouseListener(new MouseAdapter() { // TODO
+        btnNums.addMouseListener(new MouseAdapter() { // TODO
             public void mousePressed(MouseEvent e) {
                 if (prog1Step == 0) {
                     // read 20 numbers from the console keyboard
                     System.out.println("start reading 20 numbers");
                     mcu.loadProgram(Const.Pre);
                     mcu.loadProgram(Const.PG1_20);
-                    registers.setPC(Const.PG_20_BASE); 
+                    registers.setPC(Const.PG_20_BASE);
                     int end = Const.PG_20_END;
                     refreshRegistersPanel();
                     do {
@@ -1802,26 +1802,27 @@ public class FrontPanel {
             }
         });
 
-        btn1Num.addMouseListener(new MouseAdapter() {
+        btnCompare.addMouseListener(new MouseAdapter() {
             public void mousePressed(MouseEvent e) {
 
                 if (prog1Step == 1) {
-                    // read 1 number from the concole keyboard and run program 1
-//                    mcu.loadProgram(Const.Pro1);
-//                    registers.setPC(Const.PROG1_BASE);
-//                    int end = 567;
-//                    refreshRegistersPanel();
-//                    do {
-//                        refreshRegistersPanel();
-//                        registers.setMAR(registers.getPC());
-//                        registers.setMBR(mcu.fetchFromCache(registers.getMAR()));
-//                        registers.setIR(registers.getMBR());
-//                        runInstruction(registers.getBinaryStringIr(), registers, mcu);
-//                        refreshRegistersPanel();
-//                        //registers.increasePCByOne();// TODO fix it
-//                    } while (registers.getPC() < end);
+                    // 
+                    // mcu.loadProgram(Const.Pro1);
+                    // registers.setPC(Const.PROG1_BASE);
+                    // int end = 567;
+                    // refreshRegistersPanel();
+                    // do {
+                    // refreshRegistersPanel();
+                    // registers.setMAR(registers.getPC());
+                    // registers.setMBR(mcu.fetchFromCache(registers.getMAR()));
+                    // registers.setIR(registers.getMBR());
+                    // runInstruction(registers.getBinaryStringIr(), registers,
+                    // mcu);
+                    // refreshRegistersPanel();
+                    // //registers.increasePCByOne();// TODO fix it
+                    // } while (registers.getPC() < end);
                     prog1Step = 0;
-                    
+
                 }
             }
         });
