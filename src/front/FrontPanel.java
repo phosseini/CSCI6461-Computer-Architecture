@@ -1797,6 +1797,7 @@ public class FrontPanel {
                         //refreshRegistersPanel();
                         //pushConsoleBuffer();
                     } while (registers.getPC() <= end);
+                    refreshRegistersPanel(); 
                     prog1Step = 1;
                 }
 
