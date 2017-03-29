@@ -19,5 +19,9 @@ We are working on designing and implementing the basic machine architecture in t
 - Designing and implementing the modules for enhanced memory and cache operations.
 - Implementing all instructions except for MSR, CHK, and Floating Point/Vector operations.
 - Extending the user interface.
-- Demonstrate 1st program running on your simulator.
+- Demonstrate 1st program running on our simulator.
 
+## Component 3: Execute All Instructions (ongoing)
+- Adding MSR, CHK, and Floating Point/Vector operations.
+- Extending the user interface
+- Demonstrate 2nd program running on our simulator. 
