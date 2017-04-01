@@ -1782,12 +1782,12 @@ public class FrontPanel {
             public void mousePressed(MouseEvent e) {
                 if (prog1Step == 0) {
                     // read 20 numbers from the console keyboard
-                    System.out.println("start reading 20 numbers");
+                    System.out.println("start reading numbers");
                     mcu.loadProgram(Const.Pre);
                     mcu.loadProgram(Const.PG1_20);
                     registers.setPC(Const.PG_20_BASE);
                     int end = Const.PG_20_END;
-                    refreshRegistersPanel();
+                    //refreshRegistersPanel();
                     do {
                         //refreshRegistersPanel();
                         registers.setMAR(registers.getPC());
@@ -1971,7 +1971,6 @@ public class FrontPanel {
         //
         // TODO write something to handle the machine fault
         //
-        JOptionPane.showMessageDialog(null, "Program stop!");
-
+       
     }
 }
