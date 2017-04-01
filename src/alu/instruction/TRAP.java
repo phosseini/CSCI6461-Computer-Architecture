@@ -15,6 +15,9 @@ public class TRAP extends AbstractInstruction {
         // TODO Auto-generated method stub
         // System.out.println("This is a TRAP instruction!");
         trapCode = StringUtil.binaryToDecimal(instruction.substring(12, 16));
+        if(trapCode > 15 || trapCode < 0){
+            throw new MachineFaultException(Const.FaultCode.ILL_TRPC.getValue());
+        }
         // store pc+1 into memory 2
         registers.setMAR(2);
         registers.setMBR(registers.getPC() + 1);
