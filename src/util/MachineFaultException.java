@@ -1,4 +1,5 @@
 package util;
+import javax.swing.JOptionPane;
 
 /**
  * @author Liang
@@ -16,6 +17,7 @@ public class MachineFaultException extends Exception{
 	public MachineFaultException(int faultCode, String message){
 		this.faultCode = faultCode;
 		this.message = message;
+		 JOptionPane.showMessageDialog(null, this.message, "Fault Code: " + this.faultCode, JOptionPane.INFORMATION_MESSAGE);
 	}
 	
 	public MachineFaultException(int faultCode){
