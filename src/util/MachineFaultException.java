@@ -31,8 +31,13 @@ public class MachineFaultException extends Exception{
 	private void HandlingMachineFault(MCU mcu, Registers registers)
 	{
 		// when a machine fault occurs, we should save current values of PC and MSR into reserved locations in memory.
-		mcu.storeIntoCache(4, registers.getPC());
-		mcu.storeIntoCache(5, registers.getMSR()); // location 5 in memory is not used, so we can store MSR for machine fault in address 5
+        registers.setMAR(4);
+        registers.setMBR(registers.getPC());
+		mcu.storeIntoCache(registers.getMAR(), registers.getMBR());
+		
+		registers.setMAR(5);
+        registers.setMBR(registers.getMSR());
+		mcu.storeIntoCache(registers.getMAR(), registers.getMBR()); // location 5 in memory is not used, so we can store MSR for machine fault in address 5
 		
 		// now we should fetch from location 1 into the PC
 		registers.setPC(mcu.fetchFromCache(1));

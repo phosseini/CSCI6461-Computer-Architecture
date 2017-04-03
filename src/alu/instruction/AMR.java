@@ -26,6 +26,7 @@ public class AMR extends AbstractInstruction {
 		i = StringUtil.binaryToDecimal(instruction.substring(10, 11));
 
 		int effectiveAddress = EffectiveAddress.calculateEA(ix, address, i, mcu, registers);
+		
 		// we check if effective address is a reserved memory address or not
 		if (Const.ReservedMemory.containsKey(Integer.toString(effectiveAddress))) {
 			util.MachineFaultException obj = new util.MachineFaultException(Const.FaultCode.ILL_MEM_RSV.getValue(),
