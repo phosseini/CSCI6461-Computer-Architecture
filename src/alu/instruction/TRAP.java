@@ -16,7 +16,7 @@ public class TRAP extends AbstractInstruction {
         // System.out.println("This is a TRAP instruction!");
         trapCode = StringUtil.binaryToDecimal(instruction.substring(12, 16));
         if(trapCode > 15 || trapCode < 0){
-            throw new MachineFaultException(Const.FaultCode.ILL_TRPC.getValue());
+            throw new MachineFaultException(Const.FaultCode.ILL_TRPC.getValue(), Const.FaultCode.ILL_TRPC.getMessage());
         }
         // store pc+1 into memory 2
         registers.setMAR(2);

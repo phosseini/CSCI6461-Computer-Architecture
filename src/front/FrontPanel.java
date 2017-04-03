@@ -1970,11 +1970,11 @@ public class FrontPanel {
 			// handle the machine fault
 
 			t.printStackTrace();
-			handleMachineFault(t.getFaultCode());
+			handleMachineFault(t.getFaultCode(), t.getMessage());
 		}
 	}
 
-	private void handleMachineFault(int faultCode) {
+	private void handleMachineFault(int faultCode, String message) {
 		// when a machine fault occurs, we should save current values of PC and MSR into reserved locations in memory.
         registers.setMAR(4);
         registers.setMBR(registers.getPC());
