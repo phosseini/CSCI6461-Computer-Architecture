@@ -655,6 +655,25 @@ public class Const {
     }
 
     /**
+     * 0 - Reserved for Trap</br>
+     * 1 - Reserved for Machine fault</br>
+     * 2 - Storing PC for Trap</br>
+     * 3 - Not used</br>
+     * 4 - Storing PC for Machine fault</br>
+     * 5 - Not used</br>
+     */
+    public static final HashMap<String, String> ReservedMemory = new HashMap<String, String>();
+    static
+    {
+    	ReservedMemory.put("0", "Reserved for Trap");
+    	ReservedMemory.put("1", "Reserved for Machine fault");
+    	ReservedMemory.put("2", "Storing PC for Trap");
+    	ReservedMemory.put("3", "Not used");
+    	ReservedMemory.put("4", "Storing PC for Machine fault");
+    	ReservedMemory.put("5", "Not used");
+    }
+    
+    /**
      * 000000 - HLT</br>
      * 000001 - LDR</br>
      * 000010 - STR</br>
