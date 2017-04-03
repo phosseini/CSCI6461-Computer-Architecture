@@ -1678,8 +1678,6 @@ public class FrontPanel {
 					}
 				}
 				int value = StringUtil.binaryToDecimal(buffer.toString());
-				// checking if we have the opcode in our list or not
-				if (util.Const.OPCODE.containsKey(value)) {
 					refreshRegistersPanel();
 					mcu.storeIntoMemory(registers.getPC(), value);
 					registers.setMAR(registers.getPC());
@@ -1690,11 +1688,7 @@ public class FrontPanel {
 					// registers.increasePCByOne(); // TODO fix it
 					refreshRegistersPanel();
 				}
-				else
-				{
-					 util.MachineFaultException obj = new util.MachineFaultException(2, "Illegal Operation Code", mcu, registers);
-				}
-			}
+			
 		});
 
 		// add listener to the IPL button
@@ -1981,9 +1975,19 @@ public class FrontPanel {
 	}
 
 	private void handleMachineFault(int faultCode) {
-		//
-		// TODO write something to handle the machine fault
-		//
+		// when a machine fault occurs, we should save current values of PC and MSR into reserved locations in memory.
+        registers.setMAR(4);
+        registers.setMBR(registers.getPC());
+		mcu.storeIntoCache(registers.getMAR(), registers.getMBR());
+		
+		registers.setMAR(5);
+        registers.setMBR(registers.getMSR());
+		mcu.storeIntoCache(registers.getMAR(), registers.getMBR()); // location 5 in memory is not used, so we can store MSR for machine fault in address 5
+		
+		registers.setMFR(faultCode);
+		
+		// now we should fetch from location 1 into the PC
+		registers.setPC(mcu.fetchFromCache(1));
 
 	}
 }

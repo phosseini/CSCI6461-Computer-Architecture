@@ -29,12 +29,10 @@ public class AMR extends AbstractInstruction {
 		
 		// we check if effective address is a reserved memory address or not
 		if (Const.ReservedMemory.containsKey(Integer.toString(effectiveAddress))) {
-			util.MachineFaultException obj = new util.MachineFaultException(Const.FaultCode.ILL_MEM_RSV.getValue(),
-					"Illegal Memory Address to Reserved Locations", mcu, registers);
+			throw new MachineFaultException(Const.FaultCode.ILL_MEM_RSV.getValue());
 			// now we check if address is beyond our current memory size
 		} else if (effectiveAddress >= mcu.getCurrentMemorySize()) {
-			util.MachineFaultException obj = new util.MachineFaultException(Const.FaultCode.ILL_MEM_BYD.getValue(),
-					"Illegal Memory Address beyond" + mcu.getCurrentMemorySize(), mcu, registers);
+			throw new MachineFaultException(Const.FaultCode.ILL_MEM_BYD.getValue());
 		} else {
 			// first, we store the effective address in memory address register
 			registers.setMAR(EffectiveAddress.calculateEA(ix, address, i, mcu, registers));

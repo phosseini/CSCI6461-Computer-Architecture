@@ -15,7 +15,7 @@ public class RFS extends AbstractInstruction {
         // -----------------------------------
         // 015: RFS -> Return From Subroutine w/ return code as Immed portion
         // (optional) stored in the instruction's address field
-        // registers.setR0(Immed));?????????????????
+        // registers.setR0(Immed));
         // -----------------------------------
         immed = StringUtil.binaryToDecimal(instruction.substring(11, 16));
         registers.setR0(immed);

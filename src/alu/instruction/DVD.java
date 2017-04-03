@@ -34,6 +34,7 @@ public class DVD extends AbstractInstruction {
             // if c(ry) = 0, it means that we have a divide by zero
             if (registers.getRnByNum(ry) == 0) {
                 registers.setCCElementByBit(Const.ConditionCode.DIVZERO.getValue(), true);
+                // TODO: I think it is a trap and we should handle it.
             } else {
 
                 // doing the division: result is the same as quotient
