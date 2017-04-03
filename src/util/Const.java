@@ -636,6 +636,7 @@ public class Const {
 
         private FaultCode(int value, String message) {
             this.value = value;
+            this.messsage = message;
         }
 
         public int getValue() {
