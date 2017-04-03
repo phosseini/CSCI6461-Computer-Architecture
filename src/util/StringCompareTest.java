@@ -10,7 +10,7 @@ public class StringCompareTest {
                 + "Second, the creation of standardized, vendor-independent operating systems, such as UNIX and its clone, Linux, lowered the cost and risk of bringing out a new architecture. "
                 + "These changes made it possible to develop successfully a new set of architectures with simpler instructions, called RISC architectures, in the early 1980s. "
                 + "The RISC-based machines focused the attention of designers on two critical performance techniques, the exploitation of instructionlevel parallelism and the use of caches.";
-        String word = "performance";
+        String word = "rate";
         int currentSentence = 1;
         int currentWordOfSentence = 1;
         int space = 32;

@@ -32,7 +32,7 @@ public class Const {
     public static final HashMap<String, Integer> PG1_10 = new HashMap<>();
     static {
         // address-value pair Boot Program
-    	PG1_10.put("500", 0x407);
+        PG1_10.put("500", 0x407);
         PG1_10.put("501", 0x141B);
         PG1_10.put("502", 0x443F);
         PG1_10.put("503", 0x41B);
@@ -80,9 +80,9 @@ public class Const {
         PG1_10.put("545", 0xA1C);
         PG1_10.put("546", 0x509);
         PG1_10.put("547", 0x91E);
-        
-       // for M(10)
-      
+
+        // for M(10)
+
         PG1_10.put("548", 0x71F);
         PG1_10.put("549", 0x1B08);
         PG1_10.put("550", 0xB1F);
@@ -102,8 +102,8 @@ public class Const {
         PG1_10.put("564", 0xA1C);
         PG1_10.put("565", 0x50A);
         PG1_10.put("566", 0x91E);
-       // for M(11)
-       
+        // for M(11)
+
         PG1_10.put("567", 0x71F);
         PG1_10.put("568", 0x1B08);
         PG1_10.put("569", 0xB1F);
@@ -629,15 +629,21 @@ public class Const {
      * 3 - ILL_MEM_BYD: Illegal Memory Address beyond 2048 (memory installed)
      */
     public enum FaultCode {
-        ILL_MEM_RSV(0), ILL_TRPC(1), ILL_OPRC(2), ILL_MEM_BYD(3);
+        ILL_MEM_RSV(0, "Illegal Memory Address to Reserved Locations"), ILL_TRPC(1, "Illegal TRAP code"), ILL_OPRC(2,
+                "Illegal Operation Code"), ILL_MEM_BYD(3, "Illegal Memory Address beyond 2048 (memory installed)");
         int value;
+        String messsage;
 
-        private FaultCode(int value) {
+        private FaultCode(int value, String message) {
             this.value = value;
         }
 
         public int getValue() {
             return this.value;
+        }
+
+        public String getMessage() {
+            return this.messsage;
         }
     }
 
@@ -663,16 +669,15 @@ public class Const {
      * 5 - Not used</br>
      */
     public static final HashMap<String, String> ReservedMemory = new HashMap<String, String>();
-    static
-    {
-    	ReservedMemory.put("0", "Reserved for Trap");
-    	ReservedMemory.put("1", "Reserved for Machine fault");
-    	ReservedMemory.put("2", "Storing PC for Trap");
-    	ReservedMemory.put("3", "Not used");
-    	ReservedMemory.put("4", "Storing PC for Machine fault");
-    	ReservedMemory.put("5", "Not used");
+    static {
+        ReservedMemory.put("0", "Reserved for Trap");
+        ReservedMemory.put("1", "Reserved for Machine fault");
+        ReservedMemory.put("2", "Storing PC for Trap");
+        ReservedMemory.put("3", "Not used");
+        ReservedMemory.put("4", "Storing PC for Machine fault");
+        ReservedMemory.put("5", "Not used");
     }
-    
+
     /**
      * 000000 - HLT</br>
      * 000001 - LDR</br>
