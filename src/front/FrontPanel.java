@@ -1692,7 +1692,7 @@ public class FrontPanel {
 				}
 				else
 				{
-					 util.MachineFaultException obj = new util.MachineFaultException(2, "Illegal Operation Code");
+					 util.MachineFaultException obj = new util.MachineFaultException(2, "Illegal Operation Code", mcu, registers);
 				}
 			}
 		});

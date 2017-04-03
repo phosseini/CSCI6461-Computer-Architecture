@@ -24,6 +24,7 @@ public class AMR extends AbstractInstruction {
         ix = StringUtil.binaryToDecimal(instruction.substring(8, 10));
         address = StringUtil.binaryToDecimal(instruction.substring(11, 16));
         i = StringUtil.binaryToDecimal(instruction.substring(10, 11));
+        
         // first, we store the effective address in memory address register
         registers.setMAR(EffectiveAddress.calculateEA(ix, address, i, mcu, registers));
 
