@@ -22,6 +22,6 @@ We are working on designing and implementing the basic machine architecture in t
 - Demonstrate 1st program running on our simulator.
 
 ## Component 3: Execute All Instructions (ongoing)
-- Adding MSR, CHK, and Floating Point/Vector operations.
+- Handling machine faults and TRAP.
 - Extending the user interface
 - Demonstrate 2nd program running on our simulator. 
