@@ -39,9 +39,8 @@ public class SIR extends AbstractInstruction {
                 double result = registers.getRnByNum(r) - immed;
 
                 // we check if we have an overflow
-                if (result > Integer.MAX_VALUE || result < Integer.MIN_VALUE) { // TODO
-                                                                                // not
-                                                                                // sure
+                if (result > Integer.MAX_VALUE || result < Integer.MIN_VALUE) {
+                	// TODO not sure
                     registers.setCCElementByBit(Const.ConditionCode.OVERFLOW.getValue(), true);
                 } else {
                     // updating the value of register if there is no overflow

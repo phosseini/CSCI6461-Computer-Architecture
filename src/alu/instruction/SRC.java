@@ -13,7 +13,7 @@ public class SRC extends AbstractInstruction {
 
     public void execute(String instruction, Registers registers, MCU mcu) throws MachineFaultException {
         // -----------------------------------
-        // 031: RRC -> Shift Register by Count,
+        // 031: SRC -> Shift Register by Count,
         // c(r) is shifted left (L/R =1) or right (L/R = 0) either logically
         // (A/L = 1) or arithmetically (A/L = 0)
 
