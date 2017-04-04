@@ -372,6 +372,11 @@ public class FrontPanel {
 
     private JButton btnCompare;
     private JPanel pnlKeyb;
+    private JButton btnRunSingleStep;
+    private JPanel pnlProgram2;
+    private JLabel lblProgram;
+    private JButton btnLoadSentences;
+    private JButton btnFindWord;
 
     /**
      * Launch the application.
@@ -412,7 +417,7 @@ public class FrontPanel {
     private void initComponents() {
         frmCsciClassProject = new JFrame();
         frmCsciClassProject.setTitle("CSCI6461 Class Project");
-        frmCsciClassProject.setBounds(100, 100, 1111, 833);
+        frmCsciClassProject.setBounds(100, 100, 1096, 845);
         frmCsciClassProject.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         pnlRegisters = new JPanel();
@@ -1204,7 +1209,7 @@ public class FrontPanel {
         pnlRegisters.add(pnlCC);
 
         btnIPL = new JButton("IPL");
-        btnIPL.setBounds(18, 6, 136, 69);
+        btnIPL.setBounds(36, 29, 136, 69);
 
         testPanel = new JPanel();
         testPanel.setBounds(818, 621, 208, 165);
@@ -1264,7 +1269,7 @@ public class FrontPanel {
         scrollPane1.setViewportView(consolePrinter);
 
         pnlOp = new JPanel();
-        pnlOp.setBounds(14, 101, 715, 56);
+        pnlOp.setBounds(6, 111, 715, 56);
         pnlOp.setLayout(new FlowLayout(FlowLayout.RIGHT, 5, 5));
 
         pnlIns = new JPanel();
@@ -1354,7 +1359,7 @@ public class FrontPanel {
         pnlCache.add(scrollPane3);
 
         pnlProgram1 = new JPanel();
-        pnlProgram1.setBounds(552, 6, 177, 92);
+        pnlProgram1.setBounds(353, 6, 177, 92);
 
         lblProgram1 = new JLabel("Program 1");
         pnlProgram1.add(lblProgram1);
@@ -1388,6 +1393,24 @@ public class FrontPanel {
         consoleKeyboard = new JTextArea();
         consoleKeyboard.setLineWrap(true);
         scrollPane2.setViewportView(consoleKeyboard);
+        
+        btnRunSingleStep = new JButton("run single step");
+        btnRunSingleStep.setBounds(186, 29, 153, 69);
+        frmCsciClassProject.getContentPane().add(btnRunSingleStep);
+        
+        pnlProgram2 = new JPanel();
+        pnlProgram2.setBounds(544, 6, 177, 92);
+        frmCsciClassProject.getContentPane().add(pnlProgram2);
+        
+        lblProgram = new JLabel("Program 2");
+        pnlProgram2.add(lblProgram);
+        
+        btnLoadSentences = new JButton("load sentences");
+        pnlProgram2.add(btnLoadSentences);
+        
+        btnFindWord = new JButton("find word");
+        pnlProgram2.add(btnFindWord);
+        setEnableForPanel(pnlProgram2, false);
         enableFlag = 0;
 
     }
@@ -1676,19 +1699,31 @@ public class FrontPanel {
                     }
                 }
                 int value = StringUtil.binaryToDecimal(buffer.toString());
-                refreshRegistersPanel();
-                mcu.storeIntoMemory(registers.getPC(), value);
+                //refreshRegistersPanel();
+                
+                mcu.storeIntoCache(registers.getPC(), value);
                 registers.setMAR(registers.getPC());
                 registers.setMBR(mcu.fetchFromCache(registers.getMAR()));
                 registers.setIR(registers.getMBR());
-                refreshRegistersPanel();
-                runInstruction(registers.getBinaryStringIr(), registers, mcu);
+                //refreshRegistersPanel();
+                String ins = registers.getBinaryStringIr();
+                printConsole("execute PC: " + registers.getPC() + ", instruction: " + ins);
+                runInstruction(ins, registers, mcu);
                 // registers.increasePCByOne(); // TODO fix it
                 refreshRegistersPanel();
             }
 
         });
-
+        this.btnRunSingleStep.addMouseListener(new MouseAdapter(){
+            public void mousePressed(MouseEvent e){
+                registers.setMAR(registers.getPC());
+                registers.setMBR(mcu.fetchFromCache(registers.getMAR()));
+                registers.setIR(registers.getMBR());
+                String ins = registers.getBinaryStringIr();
+                printConsole("execute PC: " + registers.getPC() + ", instruction: " + ins);
+                runInstruction(ins, registers, mcu);
+            }
+        });
         // add listener to the IPL button
         btnIPL.addMouseListener(new MouseAdapter() {
             public void mousePressed(MouseEvent e) {
