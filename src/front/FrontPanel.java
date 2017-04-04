@@ -1878,29 +1878,43 @@ public class FrontPanel {
             public void mousePressed(MouseEvent e) {
 
                 if (prog2Step == 0) {
-                    String sentences = "This growth rate, combined with the cost advantages of a mass-produced microprocessor, led to an increasing fraction of the computer business being based on microprocessors. "
-                            + "In addition, two significant changes in the computer marketplace made it easier than ever before to succeed commercially with a new architecture. "
-                            + "First, the virtual elimination of assembly language programming reduced the need for object-code compatibility. "
-                            + "Second, the creation of standardized, vendor-independent operating systems, such as UNIX and its clone, Linux, lowered the cost and risk of bringing out a new architecture. "
-                            + "These changes made it possible to develop successfully a new set of architectures with simpler instructions, called RISC architectures, in the early 1980s. "
-                            + "The RISC-bamade it possiblesed machines focused the attention of designers on two critical performance techniques, the exploitation of instructionlevel parallelism and the use of caches.";
+                    String sentences = "Python is an easy to learn, powerful programming language. "
+                            + "It has efficient high-level data structures and a simple but effective approach to object-oriented programming. "
+                            + "Python’s elegant syntax and dynamic typing, together with its interpreted nature, make it an ideal language for scripting and rapid application development in many areas on most platforms. "
+                            + "Next, install the Python interpreter on your computer. "
+                            + "When you are ready to write your first program, you will need a text editor. "
+                            + "Or, if you prefer to learn Python through listening to a lecture, you can attend a training course or even hire a trainer to come to your company. ";
                     mcu.setCardBuffer(sentences);
-                    
-                    
-                    
+                    System.out.println("start to read sentences");
+                    mcu.loadProgram(Const.PRE_PROG2);
+                    mcu.loadProgram(Const.PROG2_0);
+                    registers.setPC(Const.PG2_0_BASE);
+                    do {
+                        registers.setMAR(registers.getPC());
+                        registers.setMBR(mcu.fetchFromCache(registers.getMAR()));
+                        registers.setIR(registers.getMBR());
+                        runInstruction(registers.getBinaryStringIr(), registers, mcu);
+                    } while (registers.getPC() <= Const.PG2_0_END && registers.getPC() >= Const.PG2_0_BASE);
+                    refreshRegistersPanel();
                     prog2Step = 1;
                 }
             }
         });
-        
+
         this.btnFindWord.addMouseListener(new MouseAdapter() {
             public void mousePressed(MouseEvent e) {
 
                 if (prog2Step == 1) {
-                    
-                    
-                    
-                    
+                    System.out.println("start to read the word");
+                    mcu.loadProgram(Const.PROG2_1);
+                    registers.setPC(Const.PG2_1_BASE);
+                    do {
+                        registers.setMAR(registers.getPC());
+                        registers.setMBR(mcu.fetchFromCache(registers.getMAR()));
+                        registers.setIR(registers.getMBR());
+                        runInstruction(registers.getBinaryStringIr(), registers, mcu);
+                    } while (registers.getPC() <= Const.PG2_1_END && registers.getPC() >= Const.PG2_1_BASE);
+                    refreshRegistersPanel();
                     prog2Step = 0;
                 }
             }

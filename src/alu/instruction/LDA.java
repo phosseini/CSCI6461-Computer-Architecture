@@ -27,11 +27,11 @@ public class LDA extends AbstractInstruction {
 		int effectiveAddress = EffectiveAddress.calculateEA(ix, address, i, mcu, registers);
 
 		// we check if effective address is a reserved memory address or not
-		if (effectiveAddress < 6) {
+		if (address < 6) { // corrected by Zhihong
 			throw new MachineFaultException(Const.FaultCode.ILL_MEM_RSV.getValue(),
 					Const.FaultCode.ILL_MEM_RSV.getMessage());
 			// now we check if address is beyond our current memory size
-		} else if (effectiveAddress > mcu.getCurrentMemorySize() - 1) {
+		} else if (address > mcu.getCurrentMemorySize() - 1) { // corrected by Zhihong
 			throw new MachineFaultException(Const.FaultCode.ILL_MEM_BYD.getValue(),
 					Const.FaultCode.ILL_MEM_BYD.getMessage());
 		} else {

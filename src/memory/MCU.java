@@ -169,17 +169,17 @@ public class MCU {
     /**
      * Load from ROM and store the instructions after octal 10
      */
-    public void loadMemoryFromROM() {
-        HashMap<String, Integer> rom = Const.ROM;
-        // System.out.println("read from the ROM");
-        if (rom != null) {
-            for (Map.Entry<String, Integer> entry : rom.entrySet()) {
-                int address = Integer.parseInt(entry.getKey());
-                int value = entry.getValue();
-                storeIntoCache(address, value);
-            }
-        }
-    }
+//    public void loadMemoryFromROM() {
+//        HashMap<String, Integer> rom = Const.ROM;
+//        // System.out.println("read from the ROM");
+//        if (rom != null) {
+//            for (Map.Entry<String, Integer> entry : rom.entrySet()) {
+//                int address = Integer.parseInt(entry.getKey());
+//                int value = entry.getValue();
+//                storeIntoCache(address, value);
+//            }
+//        }
+//    }
     
     public void loadProgram(HashMap<String, Integer> program){
         if(program != null){

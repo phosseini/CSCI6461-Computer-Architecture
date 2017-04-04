@@ -18,21 +18,21 @@ public class Const {
     public static final Integer PG2_1_BASE = 1700;
     public static final Integer PG2_1_END = 1724;
 
-    public static final HashMap<String, Integer> ROM = new HashMap<>();
-    static {
-        // address-value pair Boot Program
-        ROM.put("8", 0x69f); // LDR 2, 2, 31
-        ROM.put("9", 0x75b); // LDR 3, 1, 27
-        ROM.put("10", 0xa9e); // STR 2, 2, 30
-        ROM.put("11", 0x943); // STR 1, 1, 3
-        ROM.put("12", 0xf87); // LDA 3, 2, 7
-        ROM.put("13", 0xecb); // LDA 2, 3,11
-        ROM.put("14", 0xa595); // LDX 1, 2, 21
-        ROM.put("15", 0xa7c5); // LDX 3, 3, 5
-        ROM.put("16", 0xa947); // STX 1, 1, 7
-        ROM.put("17", 0xa9ca); // STX 1, 3, 10
-
-    }
+//    public static final HashMap<String, Integer> ROM = new HashMap<>();
+//    static {
+//        // address-value pair Boot Program
+//        ROM.put("8", 0x69f); // LDR 2, 2, 31
+//        ROM.put("9", 0x75b); // LDR 3, 1, 27
+//        ROM.put("10", 0xa9e); // STR 2, 2, 30
+//        ROM.put("11", 0x943); // STR 1, 1, 3
+//        ROM.put("12", 0xf87); // LDA 3, 2, 7
+//        ROM.put("13", 0xecb); // LDA 2, 3,11
+//        ROM.put("14", 0xa595); // LDX 1, 2, 21
+//        ROM.put("15", 0xa7c5); // LDX 3, 3, 5
+//        ROM.put("16", 0xa947); // STX 1, 1, 7
+//        ROM.put("17", 0xa9ca); // STX 1, 3, 10
+//    }
+    
     public static final HashMap<String, Integer> PG1_10 = new HashMap<>();
     static {
         // address-value pair Boot Program
@@ -520,60 +520,60 @@ public class Const {
     
     public static final HashMap<String, Integer> PROG2_0 = new HashMap<>(); // read the sentences
     static {
-        PROG2_0.put("1600", 0); // Load r3 with content of m(20)
+        PROG2_0.put("1600", 0xf34); // Load r3 with content of m(20)
         // (0)
-        PROG2_0.put("1601", 0); // IN r1, 2
-        PROG2_0.put("1602", 0); // Load r2 with content of m(18)
-        PROG2_0.put("1603", 0); // AIR r2, 20
-        PROG2_0.put("1604", 0); // Store r2 into m(18)
-        PROG2_0.put("1605", 0); // JZ r1, content of m(18), means jump to (1) if r1 == 0
-        PROG2_0.put("1606", 0); // OUT r1, 1
-        PROG2_0.put("1607", 0); // Load r0 with content of m(31)
-        PROG2_0.put("1608", 0); // AIR r0, 1
-        PROG2_0.put("1609", 0); // Store r0 into m(31)
-        PROG2_0.put("1610", 0); // Load r0 with content of m(20)
-        PROG2_0.put("1611", 0); // AIR r0, 1
-        PROG2_0.put("1612", 0); // Store r0 into m(20)
-        PROG2_0.put("1613", 0); // Store r1 into content of m(20)
-        PROG2_0.put("1614", 0); // Load r2 with content of m(18)
-        PROG2_0.put("1615", 0); // SIR r2, 20
-        PROG2_0.put("1616", 0); // Store r2 into m(18)
-        PROG2_0.put("1617", 0); // JMA content of m(18), means jump to (0)
+        PROG2_0.put("1601", 0xf502); // IN r1, 2
+        PROG2_0.put("1602", 0xe32); // Load r2 with content of m(18)
+        PROG2_0.put("1603", 0x1a14); // AIR r2, 20
+        PROG2_0.put("1604", 0xa12); // Store r2 into m(18)
+        PROG2_0.put("1605", 0x2932); // JZ r1, content of m(18), means jump to (1) if r1 == 0
+        PROG2_0.put("1606", 0xf901); // OUT r1, 1
+        PROG2_0.put("1607", 0xc3f); // Load r0 with content of m(31)
+        PROG2_0.put("1608", 0x1801); // AIR r0, 1
+        PROG2_0.put("1609", 0x81f); // Store r0 into m(31)
+        PROG2_0.put("1610", 0xc34); // Load r0 with content of m(20)
+        PROG2_0.put("1611", 0x1801); // AIR r0, 1
+        PROG2_0.put("1612", 0x814); // Store r0 into m(20)
+        PROG2_0.put("1613", 0x934); // Store r1 into content of m(20)
+        PROG2_0.put("1614", 0xe32); // Load r2 with content of m(18)
+        PROG2_0.put("1615", 0x1E14); // SIR r2, 20
+        PROG2_0.put("1616", 0xa12); // Store r2 into m(18)
+        PROG2_0.put("1617", 0x3432); // JMA content of m(18), means jump to (0)
         
         //(1) if r1 == 0
-        PROG2_0.put("1621", 0);  // SRC reset r1 to 0
-        PROG2_0.put("1622", 0); // AIR r1, 13
-        PROG2_0.put("1623", 0); // OUT r1, 1
-        PROG2_0.put("1624", 0); // Store r3 into m(20)
+        PROG2_0.put("1621", 0x7d8f);  // SRC reset r1 to 0
+        PROG2_0.put("1622", 0x190a); // AIR r1, 10
+        PROG2_0.put("1623", 0xf901); // OUT r1, 1
+        PROG2_0.put("1624", 0xb14); // Store r3 into m(20)
     }
     
     public static final HashMap<String, Integer> PROG2_1 = new HashMap<>(); // read the word
     static {
-        PROG2_0.put("1700", 0); // Load r3 with content of m(19)
+        PROG2_0.put("1700", 0xf33); // Load r3 with content of m(19)
         // (0)
-        PROG2_0.put("1701", 0); // IN r1, 2
-        PROG2_0.put("1702", 0); // Load r2 with content of m(18)
-        PROG2_0.put("1703", 0); // AIR r2, 20
-        PROG2_0.put("1704", 0); // Store r2 into m(18)
-        PROG2_0.put("1705", 0); // JZ r1, content of m(18), means jump to (1) if r1 == 0
-        PROG2_0.put("1706", 0); // OUT r1, 1
-        PROG2_0.put("1707", 0); // Load r0 with content of m(30)
-        PROG2_0.put("1708", 0); // AIR r0, 1
-        PROG2_0.put("1709", 0); // Store r0 into m(30)
-        PROG2_0.put("1710", 0); // Load r0 with content of m(19)
-        PROG2_0.put("1711", 0); // AIR r0, 1
-        PROG2_0.put("1712", 0); // Store r0 into m(19)
-        PROG2_0.put("1713", 0); // Store r1 into content of m(19)
-        PROG2_0.put("1714", 0); // Load r2 with content of m(18)
-        PROG2_0.put("1715", 0); // SIR r2, 20
-        PROG2_0.put("1716", 0); // Store r2 into m(18)
-        PROG2_0.put("1717", 0); // JMA content of m(18), means jump to (0)
+        PROG2_0.put("1701", 0xf500); // IN r1, 0
+        PROG2_0.put("1702", 0xe31); // Load r2 with content of m(17)
+        PROG2_0.put("1703", 0x1a14); // AIR r2, 20
+        PROG2_0.put("1704", 0xa11); // Store r2 into m(17)
+        PROG2_0.put("1705", 0x2931); // JZ r1, content of m(17), means jump to (1) if r1 == 0
+        PROG2_0.put("1706", 0xf901); // OUT r1, 1
+        PROG2_0.put("1707", 0xc3e); // Load r0 with content of m(30)
+        PROG2_0.put("1708", 0x1801); // AIR r0, 1
+        PROG2_0.put("1709", 0x81e); // Store r0 into m(30)
+        PROG2_0.put("1710", 0xc33); // Load r0 with content of m(19)
+        PROG2_0.put("1711", 0x1801); // AIR r0, 1
+        PROG2_0.put("1712", 0x813); // Store r0 into m(19)
+        PROG2_0.put("1713", 0x933); // Store r1 into content of m(19)
+        PROG2_0.put("1714", 0xe31); // Load r2 with content of m(17)
+        PROG2_0.put("1715", 0x1E14); // SIR r2, 20
+        PROG2_0.put("1716", 0xa11); // Store r2 into m(17)
+        PROG2_0.put("1717", 0x3431); // JMA content of m(17), means jump to (0)
         
         //(1) if r1 == 0
-        PROG2_0.put("1721", 0);  // SRC reset r1 to 0
-        PROG2_0.put("1722", 0); // AIR r1, 13
-        PROG2_0.put("1723", 0); // OUT r1, 1
-        PROG2_0.put("1724", 0); // Store r3 into m(19)
+        PROG2_0.put("1721", 0x7d8f);  // SRC reset r1 to 0
+        PROG2_0.put("1722", 0x190a); // AIR r1, 10
+        PROG2_0.put("1723", 0xf901); // OUT r1, 1
+        PROG2_0.put("1724", 0xb13); // Store r3 into m(19)
     }
 
     /**
