@@ -1396,7 +1396,9 @@ public class FrontPanel {
         
         btnRunSingleStep = new JButton("run single step");
         btnRunSingleStep.setBounds(186, 29, 153, 69);
+        btnRunSingleStep.setEnabled(false);
         frmCsciClassProject.getContentPane().add(btnRunSingleStep);
+        
         
         pnlProgram2 = new JPanel();
         pnlProgram2.setBounds(544, 6, 177, 92);
@@ -1707,7 +1709,7 @@ public class FrontPanel {
                 registers.setIR(registers.getMBR());
                 //refreshRegistersPanel();
                 String ins = registers.getBinaryStringIr();
-                printConsole("execute PC: " + registers.getPC() + ", instruction: " + ins);
+                printConsole("PC: " + registers.getPC() + ", instruction: " + ins);
                 runInstruction(ins, registers, mcu);
                 // registers.increasePCByOne(); // TODO fix it
                 refreshRegistersPanel();
@@ -1720,7 +1722,7 @@ public class FrontPanel {
                 registers.setMBR(mcu.fetchFromCache(registers.getMAR()));
                 registers.setIR(registers.getMBR());
                 String ins = registers.getBinaryStringIr();
-                printConsole("execute PC: " + registers.getPC() + ", instruction: " + ins);
+                printConsole("PC: " + registers.getPC() + ", instruction: " + ins);
                 runInstruction(ins, registers, mcu);
             }
         });
@@ -1735,6 +1737,8 @@ public class FrontPanel {
                     setEnableForPanel(pnlIns, true);
                     setEnableForPanel(pnlRegisters, true);
                     setEnableForPanel(pnlProgram1, true);
+                    setEnableForPanel(pnlProgram2, true);
+                    btnRunSingleStep.setEnabled(true);
                     mcu.loadProgram(Const.TB);
                     prog1Step = 0;
                     enableFlag = 1;
