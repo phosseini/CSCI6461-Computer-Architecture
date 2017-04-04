@@ -13,6 +13,10 @@ public class Const {
     public static final Integer PG_10END = 871;
     public static final Integer PG_20_BASE = 300;
     public static final Integer PG_20_END = 367;
+    public static final Integer PG2_0_BASE = 1600;
+    public static final Integer PG2_0_END = 1624;
+    public static final Integer PG2_1_BASE = 1700;
+    public static final Integer PG2_1_END = 1724;
 
     public static final HashMap<String, Integer> ROM = new HashMap<>();
     static {
@@ -510,8 +514,67 @@ public class Const {
         PRE_PROG2.put("21", 0); // j
         PRE_PROG2.put("20", 99); // m(100) start of sentences
         PRE_PROG2.put("19", 79); // m(80) start of word
+        PRE_PROG2.put("18", 1601); // start of (0) in PROG2_0
+        PRE_PROG2.put("17", 1701); // start of (0) in PROG2_1
     }
     
+    public static final HashMap<String, Integer> PROG2_0 = new HashMap<>(); // read the sentences
+    static {
+        PROG2_0.put("1600", 0); // Load r3 with content of m(20)
+        // (0)
+        PROG2_0.put("1601", 0); // IN r1, 2
+        PROG2_0.put("1602", 0); // Load r2 with content of m(18)
+        PROG2_0.put("1603", 0); // AIR r2, 20
+        PROG2_0.put("1604", 0); // Store r2 into m(18)
+        PROG2_0.put("1605", 0); // JZ r1, content of m(18), means jump to (1) if r1 == 0
+        PROG2_0.put("1606", 0); // OUT r1, 1
+        PROG2_0.put("1607", 0); // Load r0 with content of m(31)
+        PROG2_0.put("1608", 0); // AIR r0, 1
+        PROG2_0.put("1609", 0); // Store r0 into m(31)
+        PROG2_0.put("1610", 0); // Load r0 with content of m(20)
+        PROG2_0.put("1611", 0); // AIR r0, 1
+        PROG2_0.put("1612", 0); // Store r0 into m(20)
+        PROG2_0.put("1613", 0); // Store r1 into content of m(20)
+        PROG2_0.put("1614", 0); // Load r2 with content of m(18)
+        PROG2_0.put("1615", 0); // SIR r2, 20
+        PROG2_0.put("1616", 0); // Store r2 into m(18)
+        PROG2_0.put("1617", 0); // JMA content of m(18), means jump to (0)
+        
+        //(1) if r1 == 0
+        PROG2_0.put("1621", 0);  // SRC reset r1 to 0
+        PROG2_0.put("1622", 0); // AIR r1, 13
+        PROG2_0.put("1623", 0); // OUT r1, 1
+        PROG2_0.put("1624", 0); // Store r3 into m(20)
+    }
+    
+    public static final HashMap<String, Integer> PROG2_1 = new HashMap<>(); // read the word
+    static {
+        PROG2_0.put("1700", 0); // Load r3 with content of m(19)
+        // (0)
+        PROG2_0.put("1701", 0); // IN r1, 2
+        PROG2_0.put("1702", 0); // Load r2 with content of m(18)
+        PROG2_0.put("1703", 0); // AIR r2, 20
+        PROG2_0.put("1704", 0); // Store r2 into m(18)
+        PROG2_0.put("1705", 0); // JZ r1, content of m(18), means jump to (1) if r1 == 0
+        PROG2_0.put("1706", 0); // OUT r1, 1
+        PROG2_0.put("1707", 0); // Load r0 with content of m(30)
+        PROG2_0.put("1708", 0); // AIR r0, 1
+        PROG2_0.put("1709", 0); // Store r0 into m(30)
+        PROG2_0.put("1710", 0); // Load r0 with content of m(19)
+        PROG2_0.put("1711", 0); // AIR r0, 1
+        PROG2_0.put("1712", 0); // Store r0 into m(19)
+        PROG2_0.put("1713", 0); // Store r1 into content of m(19)
+        PROG2_0.put("1714", 0); // Load r2 with content of m(18)
+        PROG2_0.put("1715", 0); // SIR r2, 20
+        PROG2_0.put("1716", 0); // Store r2 into m(18)
+        PROG2_0.put("1717", 0); // JMA content of m(18), means jump to (0)
+        
+        //(1) if r1 == 0
+        PROG2_0.put("1721", 0);  // SRC reset r1 to 0
+        PROG2_0.put("1722", 0); // AIR r1, 13
+        PROG2_0.put("1723", 0); // OUT r1, 1
+        PROG2_0.put("1724", 0); // Store r3 into m(19)
+    }
 
     /**
      * table and routine for TRAP instruction
