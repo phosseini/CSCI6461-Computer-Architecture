@@ -44,6 +44,7 @@ public class FrontPanel {
      */
     private int enableFlag;
     private int prog1Step;
+    private int prog2Step;
 
     private JFrame frmCsciClassProject;
     private JPanel pnlRegisters;
@@ -1359,7 +1360,7 @@ public class FrontPanel {
         pnlCache.add(scrollPane3);
 
         pnlProgram1 = new JPanel();
-        pnlProgram1.setBounds(353, 6, 177, 92);
+        pnlProgram1.setBounds(392, 6, 162, 92);
 
         lblProgram1 = new JLabel("Program 1");
         pnlProgram1.add(lblProgram1);
@@ -1393,23 +1394,22 @@ public class FrontPanel {
         consoleKeyboard = new JTextArea();
         consoleKeyboard.setLineWrap(true);
         scrollPane2.setViewportView(consoleKeyboard);
-        
+
         btnRunSingleStep = new JButton("run single step");
         btnRunSingleStep.setBounds(186, 29, 153, 69);
         btnRunSingleStep.setEnabled(false);
         frmCsciClassProject.getContentPane().add(btnRunSingleStep);
-        
-        
+
         pnlProgram2 = new JPanel();
-        pnlProgram2.setBounds(544, 6, 177, 92);
+        pnlProgram2.setBounds(568, 6, 153, 92);
         frmCsciClassProject.getContentPane().add(pnlProgram2);
-        
+
         lblProgram = new JLabel("Program 2");
         pnlProgram2.add(lblProgram);
-        
+
         btnLoadSentences = new JButton("load sentences");
         pnlProgram2.add(btnLoadSentences);
-        
+
         btnFindWord = new JButton("find word");
         pnlProgram2.add(btnFindWord);
         setEnableForPanel(pnlProgram2, false);
@@ -1701,13 +1701,13 @@ public class FrontPanel {
                     }
                 }
                 int value = StringUtil.binaryToDecimal(buffer.toString());
-                //refreshRegistersPanel();
-                
+                // refreshRegistersPanel();
+
                 mcu.storeIntoCache(registers.getPC(), value);
                 registers.setMAR(registers.getPC());
                 registers.setMBR(mcu.fetchFromCache(registers.getMAR()));
                 registers.setIR(registers.getMBR());
-                //refreshRegistersPanel();
+                // refreshRegistersPanel();
                 String ins = registers.getBinaryStringIr();
                 printConsole("PC: " + registers.getPC() + ", instruction: " + ins);
                 runInstruction(ins, registers, mcu);
@@ -1716,8 +1716,8 @@ public class FrontPanel {
             }
 
         });
-        this.btnRunSingleStep.addMouseListener(new MouseAdapter(){
-            public void mousePressed(MouseEvent e){
+        this.btnRunSingleStep.addMouseListener(new MouseAdapter() {
+            public void mousePressed(MouseEvent e) {
                 registers.setMAR(registers.getPC());
                 registers.setMBR(mcu.fetchFromCache(registers.getMAR()));
                 registers.setIR(registers.getMBR());
@@ -1732,15 +1732,15 @@ public class FrontPanel {
 
                 initCPU();
                 prog1Step = 0;
-                
+                prog2Step = 0;
+                mcu.loadProgram(Const.TB);
                 if (enableFlag == 0) {
                     setEnableForPanel(pnlIns, true);
                     setEnableForPanel(pnlRegisters, true);
                     setEnableForPanel(pnlProgram1, true);
                     setEnableForPanel(pnlProgram2, true);
                     btnRunSingleStep.setEnabled(true);
-                    mcu.loadProgram(Const.TB);
-                    prog1Step = 0;
+                    // prog1Step = 0;
                     enableFlag = 1;
 
                 }
@@ -1870,6 +1870,38 @@ public class FrontPanel {
                     refreshRegistersPanel();
                     prog1Step = 0;
 
+                }
+            }
+        });
+
+        this.btnLoadSentences.addMouseListener(new MouseAdapter() {
+            public void mousePressed(MouseEvent e) {
+
+                if (prog2Step == 0) {
+                    String sentences = "This growth rate, combined with the cost advantages of a mass-produced microprocessor, led to an increasing fraction of the computer business being based on microprocessors. "
+                            + "In addition, two significant changes in the computer marketplace made it easier than ever before to succeed commercially with a new architecture. "
+                            + "First, the virtual elimination of assembly language programming reduced the need for object-code compatibility. "
+                            + "Second, the creation of standardized, vendor-independent operating systems, such as UNIX and its clone, Linux, lowered the cost and risk of bringing out a new architecture. "
+                            + "These changes made it possible to develop successfully a new set of architectures with simpler instructions, called RISC architectures, in the early 1980s. "
+                            + "The RISC-bamade it possiblesed machines focused the attention of designers on two critical performance techniques, the exploitation of instructionlevel parallelism and the use of caches.";
+                    mcu.setCardBuffer(sentences);
+                    
+                    
+                    
+                    prog2Step = 1;
+                }
+            }
+        });
+        
+        this.btnFindWord.addMouseListener(new MouseAdapter() {
+            public void mousePressed(MouseEvent e) {
+
+                if (prog2Step == 1) {
+                    
+                    
+                    
+                    
+                    prog2Step = 0;
                 }
             }
         });

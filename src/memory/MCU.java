@@ -31,6 +31,7 @@ public class MCU {
 
     String printerBuffer;
     String keyboardBuffer;
+    String cardBuffer;
 
     public String getPrinterBuffer() {
         return printerBuffer;
@@ -46,6 +47,14 @@ public class MCU {
 
     public void setKeyboardBuffer(String keyboardBuffer) {
         this.keyboardBuffer = keyboardBuffer;
+    }
+
+    public String getCardBuffer() {
+        return cardBuffer;
+    }
+
+    public void setCardBuffer(String cardBuffer) {
+        this.cardBuffer = cardBuffer;
     }
 
     public Cache getCache() {

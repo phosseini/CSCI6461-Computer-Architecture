@@ -495,6 +495,23 @@ public class Const {
         PG1_20.put("366", 0xA1C);// Store r2 into location memory 28
         PG1_20.put("367", 0x433C);// SOB r3, c(memory 28)
     }
+    
+    public static final HashMap<String, Integer> PRE_PROG2 = new HashMap<>();
+    static {
+        PRE_PROG2.put("31", 0); // length of the sentence
+        PRE_PROG2.put("30", 0); // length of the word
+        PRE_PROG2.put("29", 1); // current sentence
+        PRE_PROG2.put("28", 1); // current word of sentence
+        PRE_PROG2.put("27", 32); // ascii of space
+        
+        PRE_PROG2.put("25", 46); // ascii of period
+        
+        PRE_PROG2.put("22", 0); // i
+        PRE_PROG2.put("21", 0); // j
+        PRE_PROG2.put("20", 99); // m(100) start of sentences
+        PRE_PROG2.put("19", 79); // m(80) start of word
+    }
+    
 
     /**
      * table and routine for TRAP instruction
@@ -649,7 +666,7 @@ public class Const {
     }
 
     public enum DevId {
-        KEYBOARD(0), PRINTER(1);
+        KEYBOARD(0), PRINTER(1), CARD(2);
         int value;
 
         private DevId(int value) {

@@ -51,8 +51,10 @@ public class StringCompareTest {
             }
             j++;
         }
+        
         System.out.println(currentSentence);
         System.out.println(currentWordOfSentence);
+        
     }
 
 }
