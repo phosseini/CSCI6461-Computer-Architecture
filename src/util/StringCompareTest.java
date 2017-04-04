@@ -9,8 +9,8 @@ public class StringCompareTest {
                 + "First, the virtual elimination of assembly language programming reduced the need for object-code compatibility. "
                 + "Second, the creation of standardized, vendor-independent operating systems, such as UNIX and its clone, Linux, lowered the cost and risk of bringing out a new architecture. "
                 + "These changes made it possible to develop successfully a new set of architectures with simpler instructions, called RISC architectures, in the early 1980s. "
-                + "The RISC-based machines focused the attention of designers on two critical performance techniques, the exploitation of instructionlevel parallelism and the use of caches.";
-        String word = "rate";
+                + "The RISC-bamade it possiblesed machines focused the attention of designers on two critical performance techniques, the exploitation of instructionlevel parallelism and the use of caches.";
+        String word = "elimination";
         int currentSentence = 1;
         int currentWordOfSentence = 1;
         int space = 32;

@@ -428,7 +428,7 @@ public class Const {
 
     public static final HashMap<String, Integer> Pre = new HashMap<>();
     static {
-        Pre.put("6", 44);
+        Pre.put("6", 44); // ascii of ','
         // 7 ~ 26 store the 20 numbers
         // 27 store the 1 number
         Pre.put("28", 302); // start of block (0)

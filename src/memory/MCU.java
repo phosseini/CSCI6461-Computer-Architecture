@@ -76,6 +76,8 @@ public class MCU {
         }
         System.out.println("memory size has been expanded to " + memory.size());
     }
+    
+
 
     /**
      * @return current size of the memory
@@ -165,7 +167,7 @@ public class MCU {
             for (Map.Entry<String, Integer> entry : rom.entrySet()) {
                 int address = Integer.parseInt(entry.getKey());
                 int value = entry.getValue();
-                storeIntoMemory(address, value);
+                storeIntoCache(address, value);
             }
         }
     }
@@ -175,7 +177,7 @@ public class MCU {
             for (Map.Entry<String, Integer> entry : program.entrySet()) {
                 int address = Integer.parseInt(entry.getKey());
                 int value = entry.getValue();
-                storeIntoMemory(address, value);
+                storeIntoCache(address, value);
             }
         }
     }

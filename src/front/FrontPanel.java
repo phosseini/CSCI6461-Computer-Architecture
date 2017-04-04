@@ -393,10 +393,9 @@ public class FrontPanel {
 	 * Create the application.
 	 */
 	public FrontPanel() {
-		initCPU();
 		initComponents();
 		addListeners();
-		refreshRegistersPanel();
+
 
 	}
 
@@ -1694,6 +1693,9 @@ public class FrontPanel {
 		// add listener to the IPL button
 		btnIPL.addMouseListener(new MouseAdapter() {
 			public void mousePressed(MouseEvent e) {
+			    
+			    initCPU();
+			    
 				if (enableFlag == 0) {
 					setEnableForPanel(pnlIns, true);
 					setEnableForPanel(pnlRegisters, true);
@@ -1704,7 +1706,8 @@ public class FrontPanel {
 
 				}
 				// refreshRegistersPanel();
-				mcu.loadMemoryFromROM();
+				
+				//mcu.loadMemoryFromROM();
 				registers.setPC(Const.BOOT_PROG_BASE);
 				// int end = Const.ROM.size() + Const.BOOT_PROG_BASE;
 				//
@@ -1815,21 +1818,17 @@ public class FrontPanel {
 			public void mousePressed(MouseEvent e) {
 
 				if (prog1Step == 1) {
-					//
-					// mcu.loadProgram(Const.Pro1);
-					// registers.setPC(Const.PROG1_BASE);
-					// int end = 567;
-					// refreshRegistersPanel();
-					// do {
-					// refreshRegistersPanel();
-					// registers.setMAR(registers.getPC());
-					// registers.setMBR(mcu.fetchFromCache(registers.getMAR()));
-					// registers.setIR(registers.getMBR());
-					// runInstruction(registers.getBinaryStringIr(), registers,
-					// mcu);
-					// refreshRegistersPanel();
-					// //registers.increasePCByOne();// TODO fix it
-					// } while (registers.getPC() < end);
+				    System.out.println("start comparing numbers");
+				    mcu.loadProgram(Const.PG1_10);
+				    registers.setPC(Const.PG_10BASE);
+				    int end = Const.PG_10END;
+				    do{
+				        registers.setMAR(registers.getPC());
+				        registers.setMBR(mcu.fetchFromCache(registers.getMAR()));
+				        registers.setIR(registers.getMBR());
+				        runInstruction(registers.getBinaryStringIr(), registers, mcu);
+				    } while(registers.getPC() <= end);
+				    refreshRegistersPanel();
 					prog1Step = 0;
 
 				}
