@@ -1835,7 +1835,7 @@ public class FrontPanel {
                     mcu.loadProgram(Const.Pre);
                     mcu.loadProgram(Const.PG1_20);
                     registers.setPC(Const.PG_20_BASE);
-                    int end = Const.PG_20_END;
+
                     // refreshRegistersPanel();
                     do {
                         // refreshRegistersPanel();
@@ -1845,7 +1845,7 @@ public class FrontPanel {
                         runInstruction(registers.getBinaryStringIr(), registers, mcu);
                         // refreshRegistersPanel();
                         // pushConsoleBuffer();
-                    } while (registers.getPC() <= end);
+                    } while (registers.getPC() <= Const.PG_20_END && registers.getPC() >= Const.PG_20_BASE);
                     refreshRegistersPanel();
                     prog1Step = 1;
                 }
@@ -1860,13 +1860,13 @@ public class FrontPanel {
                     System.out.println("start comparing numbers");
                     mcu.loadProgram(Const.PG1_10);
                     registers.setPC(Const.PG_10BASE);
-                    int end = Const.PG_10END;
+
                     do {
                         registers.setMAR(registers.getPC());
                         registers.setMBR(mcu.fetchFromCache(registers.getMAR()));
                         registers.setIR(registers.getMBR());
                         runInstruction(registers.getBinaryStringIr(), registers, mcu);
-                    } while (registers.getPC() <= end);
+                    } while (registers.getPC() <= Const.PG_10END && registers.getPC() >= Const.PG_10BASE);
                     refreshRegistersPanel();
                     prog1Step = 0;
 
@@ -1906,16 +1906,21 @@ public class FrontPanel {
 
                 if (prog2Step == 1) {
                     System.out.println("start to read the word");
-                    mcu.loadProgram(Const.PROG2_1);
-                    registers.setPC(Const.PG2_1_BASE);
-                    do {
-                        registers.setMAR(registers.getPC());
-                        registers.setMBR(mcu.fetchFromCache(registers.getMAR()));
-                        registers.setIR(registers.getMBR());
-                        runInstruction(registers.getBinaryStringIr(), registers, mcu);
-                    } while (registers.getPC() <= Const.PG2_1_END && registers.getPC() >= Const.PG2_1_BASE);
-                    refreshRegistersPanel();
-                    prog2Step = 0;
+                    if (consoleKeyboard.getText() == null || consoleKeyboard.getText().length() == 0) {
+                        JOptionPane.showMessageDialog(null, "type a word in the console keyboard");
+
+                    } else {
+                        mcu.loadProgram(Const.PROG2_1);
+                        registers.setPC(Const.PG2_1_BASE);
+                        do {
+                            registers.setMAR(registers.getPC());
+                            registers.setMBR(mcu.fetchFromCache(registers.getMAR()));
+                            registers.setIR(registers.getMBR());
+                            runInstruction(registers.getBinaryStringIr(), registers, mcu);
+                        } while (registers.getPC() <= Const.PG2_1_END && registers.getPC() >= Const.PG2_1_BASE);
+                        refreshRegistersPanel();
+                        prog2Step = 0;
+                    }
                 }
             }
         });
