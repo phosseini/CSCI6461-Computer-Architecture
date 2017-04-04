@@ -434,7 +434,7 @@ public class Const {
         Pre.put("28", 302); // start of block (0)
         Pre.put("29", 7); // the first address of the numbers
         Pre.put("30", 21); // the numbers of words need to read in program 1
-        Pre.put("31", 506);
+        Pre.put("31", 505);
     }
 
     public static final HashMap<String, Integer> PG1_20 = new HashMap<>();
