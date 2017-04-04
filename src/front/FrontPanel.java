@@ -1986,6 +1986,8 @@ public class FrontPanel {
 		
 		registers.setMFR(faultCode);
 		
+		JOptionPane.showMessageDialog(null, message, "Fault Code: " + faultCode, JOptionPane.WARNING_MESSAGE);
+		
 		// now we should fetch from location 1 into the PC
 		registers.setPC(mcu.fetchFromCache(1));
 

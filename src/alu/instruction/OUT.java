@@ -16,25 +16,26 @@ import util.StringUtil;
  */
 public class OUT extends AbstractInstruction {
 
-    int num;
-    int devId;
+	int num;
+	int devId;
 
-    @Override
-    public void execute(String instruction, Registers registers, MCU mcu) throws MachineFaultException {
-        this.num = StringUtil.binaryToDecimal(instruction.substring(6, 8));
-        this.devId = StringUtil.binaryToDecimal(instruction.substring(11, 16));
-        if (this.devId == Const.DevId.PRINTER.getValue()) {
-            int val = registers.getRnByNum(this.num);
-            char c = (char) val;
-            mcu.setPrinterBuffer(String.valueOf(c));
-            
-            registers.increasePCByOne();
-        }
-    }
+	@Override
+	public void execute(String instruction, Registers registers, MCU mcu) throws MachineFaultException {
+		this.num = StringUtil.binaryToDecimal(instruction.substring(6, 8));
+		this.devId = StringUtil.binaryToDecimal(instruction.substring(11, 16));
+		if (this.devId == Const.DevId.PRINTER.getValue()) {
+			int val = registers.getRnByNum(this.num);
+			char c = (char) val;
+			
+			mcu.setPrinterBuffer(String.valueOf(c));
+			
+			registers.increasePCByOne();
+		}
+	}
 
-    @Override
-    public String getExecuteMessage() {
-        return "OUT " + this.num + ", " + this.devId;
-    }
+	@Override
+	public String getExecuteMessage() {
+		return "OUT " + this.num + ", " + this.devId;
+	}
 
 }

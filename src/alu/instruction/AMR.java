@@ -26,16 +26,18 @@ public class AMR extends AbstractInstruction {
 		i = StringUtil.binaryToDecimal(instruction.substring(10, 11));
 
 		int effectiveAddress = EffectiveAddress.calculateEA(ix, address, i, mcu, registers);
-		
+
 		// we check if effective address is a reserved memory address or not
-		if (Const.ReservedMemory.containsKey(Integer.toString(effectiveAddress))) {
-			throw new MachineFaultException(Const.FaultCode.ILL_MEM_RSV.getValue());
+		if (effectiveAddress < 6) {
+			throw new MachineFaultException(Const.FaultCode.ILL_MEM_RSV.getValue(),
+					Const.FaultCode.ILL_MEM_RSV.getMessage());
 			// now we check if address is beyond our current memory size
-		} else if (effectiveAddress >= mcu.getCurrentMemorySize()) {
-			throw new MachineFaultException(Const.FaultCode.ILL_MEM_BYD.getValue());
+		} else if (effectiveAddress > mcu.getCurrentMemorySize() - 1) {
+			throw new MachineFaultException(Const.FaultCode.ILL_MEM_BYD.getValue(),
+					Const.FaultCode.ILL_MEM_BYD.getMessage());
 		} else {
 			// first, we store the effective address in memory address register
-			registers.setMAR(EffectiveAddress.calculateEA(ix, address, i, mcu, registers));
+			registers.setMAR(effectiveAddress);
 
 			// storing what we fetched from memory into the memory buffer
 			// register
