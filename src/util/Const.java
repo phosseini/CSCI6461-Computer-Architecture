@@ -590,7 +590,7 @@ public class Const {
         PROG2_0.put("1723", 0xf901); // OUT r1, 1
         PROG2_0.put("1724", 0xb13); // Store r3 into m(19)
     }
-    public static final HashMap<String, Integer> PROG2_2 = new HashMap<>(); // read the word
+    public static final HashMap<String, Integer> PROG2_2 = new HashMap<>(); // find the word
     static {
     	PROG2_2.put("900", 0x61F);// LDR r3 from M(31)
     	PROG2_2.put("901", 0x1A01);// AIR r3+1 

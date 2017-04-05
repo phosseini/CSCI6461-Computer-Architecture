@@ -1915,6 +1915,7 @@ public class FrontPanel {
                         JOptionPane.showMessageDialog(null, "type a word in the console keyboard");
 
                     } else {
+                        //read the word
                         mcu.loadProgram(Const.PROG2_1);
                         registers.setPC(Const.PG2_1_BASE);
                         do {
@@ -1923,6 +1924,15 @@ public class FrontPanel {
                             registers.setIR(registers.getMBR());
                             runInstruction(registers.getBinaryStringIr(), registers, mcu);
                         } while (registers.getPC() <= Const.PG2_1_END && registers.getPC() >= Const.PG2_1_BASE);
+                        //find the word
+                        mcu.loadProgram(Const.PROG2_2);
+                        registers.setPC(Const.PG2_2_BASE);
+                        do {
+                            registers.setMAR(registers.getPC());
+                            registers.setMBR(mcu.fetchFromCache(registers.getMAR()));
+                            registers.setIR(registers.getMBR());
+                            runInstruction(registers.getBinaryStringIr(), registers, mcu);
+                        } while (registers.getPC() <= Const.PG2_2_END && registers.getPC() >= Const.PG2_2_BASE);
                         refreshRegistersPanel();
                         prog2Step = 0;
                     }
