@@ -641,7 +641,7 @@ public class Const {
     	PROG2_2.put("946", 0x815); // STR r0 to M(21)
     	PROG2_2.put("947", 0x407); // LDR r0 from M(7)
     	PROG2_2.put("948", 0x1801);  // AIR r0+1
-    	PROG2_2.put("949", 0x807); // STR r0 to M(7)
+    	PROG2_2.put("949", 0x807); // STR r0 to M(7) c
     	PROG2_2.put("950", 0x3428); // // JMA to for
     	PROG2_2.put("951", 0x41D); // LDR r0 from M(29) cs  #
     	PROG2_2.put("952", 0x1801); // AIR r0+1
