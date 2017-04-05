@@ -564,7 +564,7 @@ public class Const {
     static {
         PROG2_0.put("1700", 0xf33); // Load r3 with content of m(19)
         // (0)
-        PROG2_0.put("1701", 0xf500); // IN r1, 0
+        PROG2_0.put("1701", 0xf500); // IN r1, 0.0
         PROG2_0.put("1702", 0xe31); // Load r2 with content of m(17)
         PROG2_0.put("1703", 0x1a14); // AIR r2, 20
         PROG2_0.put("1704", 0xa11); // Store r2 into m(17)
