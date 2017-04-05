@@ -17,6 +17,8 @@ public class Const {
     public static final Integer PG2_0_END = 1624;
     public static final Integer PG2_1_BASE = 1700;
     public static final Integer PG2_1_END = 1724;
+    public static final Integer PG2_2_BASE = 900;
+    public static final Integer PG2_2_END = 989;
 
 //    public static final HashMap<String, Integer> ROM = new HashMap<>();
 //    static {
@@ -507,17 +509,28 @@ public class Const {
         PRE_PROG2.put("29", 1); // current sentence
         PRE_PROG2.put("28", 1); // current word of sentence
         PRE_PROG2.put("27", 32); // ascii of space
-        
+        PRE_PROG2.put("26", 0); // ascii of 0
         PRE_PROG2.put("25", 46); // ascii of period
-        
-        PRE_PROG2.put("22", 0); // i
+        PRE_PROG2.put("24", 0); // r1
+        PRE_PROG2.put("22", -1); // i
         PRE_PROG2.put("21", 0); // j
         PRE_PROG2.put("20", 99); // m(100) start of sentences
-        PRE_PROG2.put("19", 79); // m(80) start of word
+        PRE_PROG2.put("19", 81); // m(80) start of word or 80
         PRE_PROG2.put("18", 1601); // start of (0) in PROG2_0
         PRE_PROG2.put("17", 1701); // start of (0) in PROG2_1
+        PRE_PROG2.put("16", 81); // clear location to 80
+        PRE_PROG2.put("15", 904); // the first JMA
+        PRE_PROG2.put("14", 989); // END of the program
+        PRE_PROG2.put("13", 951); // the second JMA
+        PRE_PROG2.put("12", 961); // the third JMA
+        PRE_PROG2.put("11", 937); // the forth JMA
+        PRE_PROG2.put("10", 969); // the fifth JMA
+        PRE_PROG2.put("9", 979); // the sixth JMA
+        PRE_PROG2.put("8", 902); // the third JMA to for 
+        
     }
-    
+ 
+
     public static final HashMap<String, Integer> PROG2_0 = new HashMap<>(); // read the sentences
     static {
         PROG2_0.put("1600", 0xf34); // Load r3 with content of m(20)
@@ -575,7 +588,100 @@ public class Const {
         PROG2_0.put("1723", 0xf901); // OUT r1, 1
         PROG2_0.put("1724", 0xb13); // Store r3 into m(19)
     }
+    public static final HashMap<String, Integer> PROG2_2 = new HashMap<>(); // read the word
+    static {
+    	PROG2_2.put("900", 0x61F);// LDR r3 from M(31)
+    	PROG2_2.put("901", 0x1A01);// AIR r3+1 
+    	PROG2_2.put("902", 0x422F); // SOB r3 *
+    	PROG2_2.put("903", 0x342E); // JMA to the final STOP
+    	PROG2_2.put("904", 0x416); // LDR r0 from M(22) !
+    	PROG2_2.put("905", 0x1801);// AIR r0+1 
+    	PROG2_2.put("906", 0x816); // STR r0 to M (22)
+    	PROG2_2.put("907", 0x414); // LDR M (20) =99
+    	PROG2_2.put("908", 0x1801); // AIR r0+1
+    	PROG2_2.put("909", 0x814); // STR r0 to M(20) 
+    	PROG2_2.put("910", 0x534); // LDR r1 form M(100) indirect 
+    	PROG2_2.put("911", 0x419); // LDR r0 from M(25)= 46
+    	PROG2_2.put("912", 0x5840); // TRR r1 and r0
+    	PROG2_2.put("913", 0x332D); // JCC cc3 if 1 if not 0 continue
+    	PROG2_2.put("914", 0x419); // LDR r0 from M(27)= 32
+    	PROG2_2.put("915", 0x5840); // TRR r1 and r0
+    	PROG2_2.put("916", 0x330C); // JCC cc3 if 1 if not 0 continue 
+    	PROG2_2.put("917", 0x633); // LDR r2 from M(19)=80 first capital from wor
+    	PROG2_2.put("918", 0x5980); // TRR r1 and r2 
+    	PROG2_2.put("919", 0x332B);  // JCC cc3 if 1 if not 0 continue 
+    	PROG2_2.put("920", 0x416); // LDR r0 from M(22)
+    	PROG2_2.put("921", 0x1415); // SMR r0 –M(21)
+    	PROG2_2.put("922", 0x816); // STR r0 to M(22)
+    	PROG2_2.put("923", 0x414); // LDR r0 from M(20)
+    	PROG2_2.put("924", 0x1415); // SMR r0 –M(21)
+    	PROG2_2.put("925", 0x814); // STR r0 to M(20)   i= i-j
+    	PROG2_2.put("926", 0x419); // LDR r0 from M(25)
+    	PROG2_2.put("927", 0x5840); // TRR r1 and r0
+    	PROG2_2.put("928", 0x330A);   // JCC cc3 if 1 if not 0 continue
+    	PROG2_2.put("929", 0x41B); // LDR r0 from M(27)
+    	PROG2_2.put("930", 0x5840); // TRR r1 and r0
+    	PROG2_2.put("931", 0x3309); // JCC cc3 if 1 if not 0 continue
+    	PROG2_2.put("932", 0x041A); // LDR r0 from M(26)=0
+    	PROG2_2.put("933", 0x815); // STR r0 to M (21)
+    	PROG2_2.put("934", 0x410); // LDR r0 from M(16)=81
+    	PROG2_2.put("935", 0x813); // STR r0 to M (19)
+    	PROG2_2.put("936", 0x3408);   // JMA EA8 =*  902
+    	PROG2_2.put("937", 0x415); // LDR r0 from M(21) j %
+    	PROG2_2.put("938", 0x918); // STR r1 to M(24) r1
+    	PROG2_2.put("939", 0x51E); // LDR r1 from M(30)
+    	PROG2_2.put("940", 0x1D01); // SIR r1-1 
+    	PROG2_2.put("941", 0x5840); // TRR r1 and r0
+    	PROG2_2.put("942", 0x518); // LDR r1 from M(24)
+    	PROG2_2.put("943", 0x330E); // JCC cc3 if 1 if not 0 continue 
+    	PROG2_2.put("944", 0x415); // LDR r0 from M(21) j
+    	PROG2_2.put("945", 0x1801); // AIR r0+1
+    	PROG2_2.put("946", 0x815); // STR r0 to M(21)
+    	PROG2_2.put("947", 0x413); // LDR r0 from M(19)
+    	PROG2_2.put("948", 0x1801);  // AIR r0+1
+    	PROG2_2.put("949", 0x813); // STR r0 to M(21)
+    	PROG2_2.put("950", 0x3428); // // JMA to for
+    	PROG2_2.put("951", 0x41D); // LDR r0 from M(29) cs  #
+    	PROG2_2.put("952", 0x1801); // AIR r0+1
+    	PROG2_2.put("953", 0x81D); // STR r0 to M(29)
+    	PROG2_2.put("954", 0x41A); // LDR r0 from M(26)=0 
+    	PROG2_2.put("955", 0x81C); // STR r0 to M(28)
+    	PROG2_2.put("956", 0x40D); // LDR r0 from M(13) 951
+    	PROG2_2.put("957", 0x1C1F); // SIR 951-31=920 
+    	PROG2_2.put("958", 0x1C06); // SIR 920-6=914
+    	PROG2_2.put("959", 0x806); // STR r0 to M(6)
+    	PROG2_2.put("960", 0x3426); // JMA to 14 
+    	PROG2_2.put("961", 0x41C); // LDR r0 from M(28) cw $
+    	PROG2_2.put("962", 0x1801); // AIR r0+1
+    	PROG2_2.put("963", 0x81C); // STR r0 to M(28)
+    	PROG2_2.put("964", 0x40D); // LDR r0 from M(12) 961
+    	PROG2_2.put("965", 0x1C1F); // SIR 961-31=930 
+    	PROG2_2.put("966", 0x1C0D); // SIR 930-13=917
+    	PROG2_2.put("967", 0x806); // STR r0 to M(6)
+    	PROG2_2.put("968", 0x3426); // JMA to 17 
+    	PROG2_2.put("969", 0x40A); // LDR r0 from M(10) 969 ^
+    	PROG2_2.put("970", 0x1C1F); // SIR 969-31=938 
+    	PROG2_2.put("971", 0x1C09); // SIR 938-9=929 
+    	PROG2_2.put("972", 0x806); // STR r0 to M(6)
+    	PROG2_2.put("973", 0x415); // LDR r0 from M(21) 
+    	PROG2_2.put("974", 0x2826); // JZ j if 0 
+    	PROG2_2.put("975", 0x41D); // LDR r0 from M(29) cs  
+    	PROG2_2.put("976", 0x1C01); // SIR -1 cs-1  
+    	PROG2_2.put("977", 0x81D); // STR r0 to M(29)
+    	PROG2_2.put("978", 0x3426); // JMA to 29 
+    	PROG2_2.put("979", 0x409); // LDR r0 from M(9) 979 ^
+    	PROG2_2.put("980", 0x1C1F); // SIR 979-31=948 
+    	PROG2_2.put("981", 0x1C10); // SIR 948-16=932 
+    	PROG2_2.put("982", 0x806); // STR r0 to M(6)
+    	PROG2_2.put("983", 0x415); // LDR r0 from M(21) j
+    	PROG2_2.put("984", 0x2826); // JZ j if 0 
+    	PROG2_2.put("985", 0x41C); // LDR r0 from M(28) cws  
+    	PROG2_2.put("986", 0x1C01); // SIR -1 cs-1  
+    	PROG2_2.put("987", 0x81C); // STR r0 to M(28)
+    	PROG2_2.put("988", 0x3426); //JMA to 32
+    	PROG2_2.put("989", 0x41D); //out LDR r0 from M(29)
 
+    }
     /**
      * table and routine for TRAP instruction
      */
