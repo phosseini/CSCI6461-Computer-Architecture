@@ -2,6 +2,8 @@ package util;
 
 import java.util.HashMap;
 
+import jdk.nashorn.internal.runtime.regexp.joni.constants.OPCode;
+
 public class Const {
 
     public static final Integer MEMORY_RESERVE_LOCATION = 5;
@@ -886,6 +888,7 @@ public class Const {
         OPCODE.put("010100", "MLT");
         OPCODE.put("010101", "DVD");
         OPCODE.put("010110", "TRR");
+        OPCODE.put("111111", "CHK");
     }
 
 }
