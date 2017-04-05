@@ -515,10 +515,10 @@ public class Const {
         PRE_PROG2.put("22", -1); // i
         PRE_PROG2.put("21", 0); // j
         PRE_PROG2.put("20", 99); // m(100) start of sentences
-        PRE_PROG2.put("19", 81); // m(80) start of word or 80
+        PRE_PROG2.put("19", 79); // m(80) start of word or 80
         PRE_PROG2.put("18", 1601); // start of (0) in PROG2_0
         PRE_PROG2.put("17", 1701); // start of (0) in PROG2_1
-        PRE_PROG2.put("16", 81); // clear location to 80
+        PRE_PROG2.put("16", 80); // clear location to 80
         PRE_PROG2.put("15", 904); // the first JMA
         PRE_PROG2.put("14", 989); // END of the program
         PRE_PROG2.put("13", 951); // the second JMA
@@ -527,7 +527,7 @@ public class Const {
         PRE_PROG2.put("10", 969); // the fifth JMA
         PRE_PROG2.put("9", 979); // the sixth JMA
         PRE_PROG2.put("8", 902); // the third JMA to for 
-        
+        PRE_PROG2.put("7", 80);
     }
  
 
@@ -564,7 +564,7 @@ public class Const {
     static {
         PROG2_0.put("1700", 0xf33); // Load r3 with content of m(19)
         // (0)
-        PROG2_0.put("1701", 0xf500); // IN r1, 0.0
+        PROG2_0.put("1701", 0xf500); // IN r1, 0
         PROG2_0.put("1702", 0xe31); // Load r2 with content of m(17)
         PROG2_0.put("1703", 0x1a14); // AIR r2, 20
         PROG2_0.put("1704", 0xa11); // Store r2 into m(17)
@@ -607,7 +607,7 @@ public class Const {
     	PROG2_2.put("914", 0x419); // LDR r0 from M(27)= 32
     	PROG2_2.put("915", 0x5840); // TRR r1 and r0
     	PROG2_2.put("916", 0x330C); // JCC cc3 if 1 if not 0 continue 
-    	PROG2_2.put("917", 0x633); // LDR r2 from M(19)=80 first capital from wor
+    	PROG2_2.put("917", 0x627); // LDR r2 from M(7)=80 first capital from wor
     	PROG2_2.put("918", 0x5980); // TRR r1 and r2 
     	PROG2_2.put("919", 0x332B);  // JCC cc3 if 1 if not 0 continue 
     	PROG2_2.put("920", 0x416); // LDR r0 from M(22)
@@ -625,7 +625,7 @@ public class Const {
     	PROG2_2.put("932", 0x041A); // LDR r0 from M(26)=0
     	PROG2_2.put("933", 0x815); // STR r0 to M (21)
     	PROG2_2.put("934", 0x410); // LDR r0 from M(16)=81
-    	PROG2_2.put("935", 0x813); // STR r0 to M (19)
+    	PROG2_2.put("935", 0x807); // STR r0 to M (7)
     	PROG2_2.put("936", 0x3408);   // JMA EA8 =*  902
     	PROG2_2.put("937", 0x415); // LDR r0 from M(21) j %
     	PROG2_2.put("938", 0x918); // STR r1 to M(24) r1
@@ -637,9 +637,9 @@ public class Const {
     	PROG2_2.put("944", 0x415); // LDR r0 from M(21) j
     	PROG2_2.put("945", 0x1801); // AIR r0+1
     	PROG2_2.put("946", 0x815); // STR r0 to M(21)
-    	PROG2_2.put("947", 0x413); // LDR r0 from M(19)
+    	PROG2_2.put("947", 0x407); // LDR r0 from M(7)
     	PROG2_2.put("948", 0x1801);  // AIR r0+1
-    	PROG2_2.put("949", 0x813); // STR r0 to M(21)
+    	PROG2_2.put("949", 0x807); // STR r0 to M(7)
     	PROG2_2.put("950", 0x3428); // // JMA to for
     	PROG2_2.put("951", 0x41D); // LDR r0 from M(29) cs  #
     	PROG2_2.put("952", 0x1801); // AIR r0+1
