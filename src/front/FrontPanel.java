@@ -1365,7 +1365,7 @@ public class FrontPanel {
         lblProgram1 = new JLabel("Program 1");
         pnlProgram1.add(lblProgram1);
 
-        btnNums = new JButton("read 21 numbers");
+        btnNums = new JButton("read 20 numbers");
         pnlProgram1.add(btnNums);
 
         btnCompare = new JButton("compare");
@@ -1833,9 +1833,10 @@ public class FrontPanel {
                     // read 20 numbers from the console keyboard
                     System.out.println("start reading numbers");
                     if (consoleKeyboard.getText() == null || consoleKeyboard.getText().length() == 0) {
-                        JOptionPane.showMessageDialog(null, "type 21 numbers in the console keyboard");
+                        JOptionPane.showMessageDialog(null, "type 20 numbers in the console keyboard");
 
                     } else {
+                        printConsole("Below are the 20 numbers: ");
                         mcu.loadProgram(Const.Pre);
                         mcu.loadProgram(Const.PG1_20);
                         registers.setPC(Const.PG_20_BASE);
@@ -1852,6 +1853,7 @@ public class FrontPanel {
                         } while (registers.getPC() <= Const.PG_20_END && registers.getPC() >= Const.PG_20_BASE);
                         refreshRegistersPanel();
                         prog1Step = 1;
+                        printConsole("Please enter 1 number (end with ',') and press the compare button. ");
                     }
                 }
 
@@ -1862,7 +1864,23 @@ public class FrontPanel {
             public void mousePressed(MouseEvent e) {
 
                 if (prog1Step == 1) {
+                    System.out.println("read 1 number");
+                    mcu.loadProgram(Const.PG1_20);
+                    registers.setPC(Const.PG_20_BASE);
+
+                    // refreshRegistersPanel();
+                    do {
+                        // refreshRegistersPanel();
+                        registers.setMAR(registers.getPC());
+                        registers.setMBR(mcu.fetchFromCache(registers.getMAR()));
+                        registers.setIR(registers.getMBR());
+                        runInstruction(registers.getBinaryStringIr(), registers, mcu);
+                        // refreshRegistersPanel();
+                        // pushConsoleBuffer();
+                    } while (registers.getPC() <= Const.PG_20_END && registers.getPC() >= Const.PG_20_BASE);
+                    
                     System.out.println("start comparing numbers");
+                    printConsole("compare result: the closest number is");
                     mcu.loadProgram(Const.PG1_10);
                     registers.setPC(Const.PG_10BASE);
 

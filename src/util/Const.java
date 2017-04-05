@@ -14,7 +14,7 @@ public class Const {
     public static final Integer PG_10BASE = 500;
     public static final Integer PG_10END = 871;
     public static final Integer PG_20_BASE = 300;
-    public static final Integer PG_20_END = 367;
+    public static final Integer PG_20_END = 370;
     public static final Integer PG2_0_BASE = 1600;
     public static final Integer PG2_0_END = 1624;
     public static final Integer PG2_1_BASE = 1700;
@@ -22,21 +22,21 @@ public class Const {
     public static final Integer PG2_2_BASE = 900;
     public static final Integer PG2_2_END = 989;
 
-//    public static final HashMap<String, Integer> ROM = new HashMap<>();
-//    static {
-//        // address-value pair Boot Program
-//        ROM.put("8", 0x69f); // LDR 2, 2, 31
-//        ROM.put("9", 0x75b); // LDR 3, 1, 27
-//        ROM.put("10", 0xa9e); // STR 2, 2, 30
-//        ROM.put("11", 0x943); // STR 1, 1, 3
-//        ROM.put("12", 0xf87); // LDA 3, 2, 7
-//        ROM.put("13", 0xecb); // LDA 2, 3,11
-//        ROM.put("14", 0xa595); // LDX 1, 2, 21
-//        ROM.put("15", 0xa7c5); // LDX 3, 3, 5
-//        ROM.put("16", 0xa947); // STX 1, 1, 7
-//        ROM.put("17", 0xa9ca); // STX 1, 3, 10
-//    }
-    
+    // public static final HashMap<String, Integer> ROM = new HashMap<>();
+    // static {
+    // // address-value pair Boot Program
+    // ROM.put("8", 0x69f); // LDR 2, 2, 31
+    // ROM.put("9", 0x75b); // LDR 3, 1, 27
+    // ROM.put("10", 0xa9e); // STR 2, 2, 30
+    // ROM.put("11", 0x943); // STR 1, 1, 3
+    // ROM.put("12", 0xf87); // LDA 3, 2, 7
+    // ROM.put("13", 0xecb); // LDA 2, 3,11
+    // ROM.put("14", 0xa595); // LDX 1, 2, 21
+    // ROM.put("15", 0xa7c5); // LDX 3, 3, 5
+    // ROM.put("16", 0xa947); // STX 1, 1, 7
+    // ROM.put("17", 0xa9ca); // STX 1, 3, 10
+    // }
+
     public static final HashMap<String, Integer> PG1_10 = new HashMap<>();
     static {
         // address-value pair Boot Program
@@ -432,6 +432,69 @@ public class Const {
         PG1_10.put("869", 0x51A);
         PG1_10.put("870", 0x91E);
         PG1_10.put("871", 0x71F);
+
+        // print the result in m(30)
+
+    }
+
+    public static final HashMap<String, Integer> PG_P = new HashMap<>(); // print
+                                                                         // the
+                                                                         // result
+                                                                         // in
+                                                                         // m(30)
+    static {
+        // presets of this single program
+        PG_P.put("31", 1800); // start of the block (0)
+        // m(30) store the number that you want to print
+        PG_P.put("6", 50); // store every digit of the numbers starting from
+                           // m(50), example: for number 31 we store like this,
+                           // m(50)=10 (new line sign), m(51)=49 (ascii of '1'), m(52)=51 (ascii of '3')
+
+        // program begins
+        
+        // reset r1
+        // AIR r1, 10
+        // store r1 into location of content of m(6)
+        // load r3 with content of m(6)
+        // AIR r3, 1
+        // store r3 into m(6)
+        // reset r2
+        // AIR r2, 10
+        // load r0 with content of m(30)
+        
+        // (0)
+        // DVD r0, r2
+        // load r3 with content of m(31)
+        // AIR r3, 20
+        // store r3 into m(31)
+        // JZ r0, content of m(31), means if r0 == 0 jump to (1)
+        // r1 + 48, convert to ascii
+        // store r1 into location of content of m(6)
+        // load r3 with content of m(6)
+        // AIR r3, 1
+        // store r3 into m(6)
+        // load r3 with content of m(31)
+        // SIR r3, 20
+        // store r3 into m(31)
+        // JMA, content of m(31), means jump to (0)
+        
+        // (1) r0 == 0, means has reach the highest digit of the number
+        // r1 + 48, convert to ascii
+        // store r1 into location of content of m(6)
+        // load r3 with content of m(31)
+        // AIR r3, 20
+        // store r3 into m(31)
+        // reset r3
+        // AIR r3, 10 (new line sign, use to compare)
+        // JMA, content of m(31), means jump to (2)
+
+        // (2) print the digit one by one
+        // load r1 with address of content of m(6)
+        // print r1 to console
+        
+        
+        // (3) finish printing the numbers
+
     }
 
     public static final HashMap<String, Integer> Pre = new HashMap<>();
@@ -441,7 +504,7 @@ public class Const {
         // 27 store the 1 number
         Pre.put("28", 302); // start of block (0)
         Pre.put("29", 7); // the first address of the numbers
-        Pre.put("30", 21); // the numbers of words need to read in program 1
+        Pre.put("30", 20); // the numbers of words need to read in program 1
         Pre.put("31", 505);
     }
 
@@ -464,15 +527,18 @@ public class Const {
         // (1) it is a ','
         PG1_20.put("322", 0x83d);// Store r0 into memory with a location of
                                  // c(memory 29)
-        PG1_20.put("323", 0xd3d);// Load r1 with content of memory address 29
-        PG1_20.put("324", 0x1901);// AIR r1 with 1
-        PG1_20.put("325", 0x91d);// Store r1 into memory address 29
-        PG1_20.put("326", 0x7c8f);// Reset r0
-        PG1_20.put("327", 0xe3c);// Load r2 with c(memory 28)
-        PG1_20.put("328", 0x1a14);// AIR r2, 20
-        PG1_20.put("329", 0x1a14);// AIR r2, 20
-        PG1_20.put("330", 0xa1c);// Store r2 into location memory 28
-        PG1_20.put("331", 0x343c);// JMA to c(memory 28) means jump to (3)
+        PG1_20.put("323", 0x7c8f);// reset r0
+        PG1_20.put("324", 0x180a);// AIR r0, 10
+        PG1_20.put("325", 0xf801);// print r0 to console
+        PG1_20.put("326", 0xd3d);// Load r1 with content of memory address 29
+        PG1_20.put("327", 0x1901);// AIR r1 with 1
+        PG1_20.put("328", 0x91d);// Store r1 into memory address 29
+        PG1_20.put("329", 0x7c8f);// Reset r0
+        PG1_20.put("330", 0xe3c);// Load r2 with c(memory 28)
+        PG1_20.put("331", 0x1a14);// AIR r2, 20
+        PG1_20.put("332", 0x1a14);// AIR r2, 20
+        PG1_20.put("333", 0xa1c);// Store r2 into location memory 28
+        PG1_20.put("334", 0x343c);// JMA to c(memory 28) means jump to (3)
         // (2) it is a digit
         PG1_20.put("342", 0x83D);// STR r0 into memory with a location of
                                  // c(memory 29)
@@ -485,16 +551,17 @@ public class Const {
         PG1_20.put("349", 0x103D);// AMR r0, c(memory 29)
         PG1_20.put("350", 0x103D);// AMR r0, c(memory 29)
         PG1_20.put("351", 0x103D);// AMR r0, c(memory 29)
-        PG1_20.put("352", 0x1d18);// r1 should subtract 48 to get a digit
-        PG1_20.put("353", 0x1d18);
-        PG1_20.put("354", 0x93D);// Store r1 into memory with a location of
+        PG1_20.put("352", 0xf901);// print r1 to console
+        PG1_20.put("353", 0x1d18);// r1 should subtract 48 to get a digit
+        PG1_20.put("354", 0x1d18);
+        PG1_20.put("355", 0x93D);// Store r1 into memory with a location of
                                  // c(memory 29)
-        PG1_20.put("355", 0x103D);// AMR r0, c(memory 29)
-        PG1_20.put("356", 0xE3C);// LDA r2 with c(memory 28)
-        PG1_20.put("357", 0x1E14);// SIR r2, 20
+        PG1_20.put("356", 0x103D);// AMR r0, c(memory 29)
+        PG1_20.put("357", 0xE3C);// LDA r2 with c(memory 28)
         PG1_20.put("358", 0x1E14);// SIR r2, 20
-        PG1_20.put("359", 0xA1C);// Store r2 into location memory 28
-        PG1_20.put("360", 0x343C);// JMA to c(memory 28) means jump to (3)
+        PG1_20.put("359", 0x1E14);// SIR r2, 20
+        PG1_20.put("360", 0xA1C);// Store r2 into location memory 28
+        PG1_20.put("361", 0x343C);// JMA to c(memory 28) means jump to (3)
         // (3)
         PG1_20.put("362", 0xE3C);// Load r2 with c(memory 28)
         PG1_20.put("363", 0x1E14);// SIR r2, 20
@@ -502,8 +569,11 @@ public class Const {
         PG1_20.put("365", 0x1E14);// SIR r2, 20
         PG1_20.put("366", 0xA1C);// Store r2 into location memory 28
         PG1_20.put("367", 0x433C);// SOB r3, c(memory 28)
+        PG1_20.put("368", 0x7c8f);// reset r0
+        PG1_20.put("369", 0x1801);// AIR r0, 1
+        PG1_20.put("370", 0x81e);// store r0 to m(30)
     }
-    
+
     public static final HashMap<String, Integer> PRE_PROG2 = new HashMap<>();
     static {
         PRE_PROG2.put("31", 0); // length of the sentence
@@ -528,12 +598,13 @@ public class Const {
         PRE_PROG2.put("11", 937); // the forth JMA
         PRE_PROG2.put("10", 969); // the fifth JMA
         PRE_PROG2.put("9", 979); // the sixth JMA
-        PRE_PROG2.put("8", 902); // the third JMA to for 
+        PRE_PROG2.put("8", 902); // the third JMA to for
         PRE_PROG2.put("7", 80);
     }
- 
 
-    public static final HashMap<String, Integer> PROG2_0 = new HashMap<>(); // read the sentences
+    public static final HashMap<String, Integer> PROG2_0 = new HashMap<>(); // read
+                                                                            // the
+                                                                            // sentences
     static {
         PROG2_0.put("1600", 0xf34); // Load r3 with content of m(20)
         // (0)
@@ -541,7 +612,8 @@ public class Const {
         PROG2_0.put("1602", 0xe32); // Load r2 with content of m(18)
         PROG2_0.put("1603", 0x1a14); // AIR r2, 20
         PROG2_0.put("1604", 0xa12); // Store r2 into m(18)
-        PROG2_0.put("1605", 0x2932); // JZ r1, content of m(18), means jump to (1) if r1 == 0
+        PROG2_0.put("1605", 0x2932); // JZ r1, content of m(18), means jump to
+                                     // (1) if r1 == 0
         PROG2_0.put("1606", 0xf901); // OUT r1, 1
         PROG2_0.put("1607", 0xc3f); // Load r0 with content of m(31)
         PROG2_0.put("1608", 0x1801); // AIR r0, 1
@@ -554,15 +626,17 @@ public class Const {
         PROG2_0.put("1615", 0x1E14); // SIR r2, 20
         PROG2_0.put("1616", 0xa12); // Store r2 into m(18)
         PROG2_0.put("1617", 0x3432); // JMA content of m(18), means jump to (0)
-        
-        //(1) if r1 == 0
-        PROG2_0.put("1621", 0x7d8f);  // SRC reset r1 to 0
+
+        // (1) if r1 == 0
+        PROG2_0.put("1621", 0x7d8f); // SRC reset r1 to 0
         PROG2_0.put("1622", 0x190a); // AIR r1, 10
         PROG2_0.put("1623", 0xf901); // OUT r1, 1
         PROG2_0.put("1624", 0xb14); // Store r3 into m(20)
     }
-    
-    public static final HashMap<String, Integer> PROG2_1 = new HashMap<>(); // read the word
+
+    public static final HashMap<String, Integer> PROG2_1 = new HashMap<>(); // read
+                                                                            // the
+                                                                            // word
     static {
         PROG2_0.put("1700", 0xf33); // Load r3 with content of m(19)
         // (0)
@@ -570,7 +644,8 @@ public class Const {
         PROG2_0.put("1702", 0xe31); // Load r2 with content of m(17)
         PROG2_0.put("1703", 0x1a14); // AIR r2, 20
         PROG2_0.put("1704", 0xa11); // Store r2 into m(17)
-        PROG2_0.put("1705", 0x2931); // JZ r1, content of m(17), means jump to (1) if r1 == 0
+        PROG2_0.put("1705", 0x2931); // JZ r1, content of m(17), means jump to
+                                     // (1) if r1 == 0
         PROG2_0.put("1706", 0xf901); // OUT r1, 1
         PROG2_0.put("1707", 0xc3e); // Load r0 with content of m(30)
         PROG2_0.put("1708", 0x1801); // AIR r0, 1
@@ -583,105 +658,107 @@ public class Const {
         PROG2_0.put("1715", 0x1E14); // SIR r2, 20
         PROG2_0.put("1716", 0xa11); // Store r2 into m(17)
         PROG2_0.put("1717", 0x3431); // JMA content of m(17), means jump to (0)
-        
-        //(1) if r1 == 0
-        PROG2_0.put("1721", 0x7d8f);  // SRC reset r1 to 0
+
+        // (1) if r1 == 0
+        PROG2_0.put("1721", 0x7d8f); // SRC reset r1 to 0
         PROG2_0.put("1722", 0x190a); // AIR r1, 10
         PROG2_0.put("1723", 0xf901); // OUT r1, 1
         PROG2_0.put("1724", 0xb13); // Store r3 into m(19)
     }
-    public static final HashMap<String, Integer> PROG2_2 = new HashMap<>(); // find the word
+    public static final HashMap<String, Integer> PROG2_2 = new HashMap<>(); // find
+                                                                            // the
+                                                                            // word
     static {
-    	PROG2_2.put("900", 0x61F);// LDR r3 from M(31)
-    	PROG2_2.put("901", 0x1A01);// AIR r3+1 
-    	PROG2_2.put("902", 0x422F); // SOB r3 *
-    	PROG2_2.put("903", 0x342E); // JMA to the final STOP
-    	PROG2_2.put("904", 0x416); // LDR r0 from M(22) !
-    	PROG2_2.put("905", 0x1801);// AIR r0+1 
-    	PROG2_2.put("906", 0x816); // STR r0 to M (22)
-    	PROG2_2.put("907", 0x414); // LDR M (20) =99
-    	PROG2_2.put("908", 0x1801); // AIR r0+1
-    	PROG2_2.put("909", 0x814); // STR r0 to M(20) 
-    	PROG2_2.put("910", 0x534); // LDR r1 form M(100) indirect 
-    	PROG2_2.put("911", 0x419); // LDR r0 from M(25)= 46
-    	PROG2_2.put("912", 0x5840); // TRR r1 and r0
-    	PROG2_2.put("913", 0x332D); // JCC cc3 if 1 if not 0 continue
-    	PROG2_2.put("914", 0x419); // LDR r0 from M(27)= 32
-    	PROG2_2.put("915", 0x5840); // TRR r1 and r0
-    	PROG2_2.put("916", 0x330C); // JCC cc3 if 1 if not 0 continue 
-    	PROG2_2.put("917", 0x627); // LDR r2 from M(7)=80 first capital from wor
-    	PROG2_2.put("918", 0x5980); // TRR r1 and r2 
-    	PROG2_2.put("919", 0x332B);  // JCC cc3 if 1 if not 0 continue 
-    	PROG2_2.put("920", 0x416); // LDR r0 from M(22)
-    	PROG2_2.put("921", 0x1415); // SMR r0 –M(21)
-    	PROG2_2.put("922", 0x816); // STR r0 to M(22)
-    	PROG2_2.put("923", 0x414); // LDR r0 from M(20)
-    	PROG2_2.put("924", 0x1415); // SMR r0 –M(21)
-    	PROG2_2.put("925", 0x814); // STR r0 to M(20)   i= i-j
-    	PROG2_2.put("926", 0x419); // LDR r0 from M(25)
-    	PROG2_2.put("927", 0x5840); // TRR r1 and r0
-    	PROG2_2.put("928", 0x330A);   // JCC cc3 if 1 if not 0 continue
-    	PROG2_2.put("929", 0x41B); // LDR r0 from M(27)
-    	PROG2_2.put("930", 0x5840); // TRR r1 and r0
-    	PROG2_2.put("931", 0x3309); // JCC cc3 if 1 if not 0 continue
-    	PROG2_2.put("932", 0x041A); // LDR r0 from M(26)=0
-    	PROG2_2.put("933", 0x815); // STR r0 to M (21)
-    	PROG2_2.put("934", 0x410); // LDR r0 from M(16)=81
-    	PROG2_2.put("935", 0x807); // STR r0 to M (7)
-    	PROG2_2.put("936", 0x3408);   // JMA EA8 =*  902
-    	PROG2_2.put("937", 0x415); // LDR r0 from M(21) j %
-    	PROG2_2.put("938", 0x918); // STR r1 to M(24) r1
-    	PROG2_2.put("939", 0x51E); // LDR r1 from M(30)
-    	PROG2_2.put("940", 0x1D01); // SIR r1-1 
-    	PROG2_2.put("941", 0x5840); // TRR r1 and r0
-    	PROG2_2.put("942", 0x518); // LDR r1 from M(24)
-    	PROG2_2.put("943", 0x330E); // JCC cc3 if 1 if not 0 continue 
-    	PROG2_2.put("944", 0x415); // LDR r0 from M(21) j
-    	PROG2_2.put("945", 0x1801); // AIR r0+1
-    	PROG2_2.put("946", 0x815); // STR r0 to M(21)
-    	PROG2_2.put("947", 0x407); // LDR r0 from M(7)
-    	PROG2_2.put("948", 0x1801);  // AIR r0+1
-    	PROG2_2.put("949", 0x807); // STR r0 to M(7) c
-    	PROG2_2.put("950", 0x3428); // // JMA to for
-    	PROG2_2.put("951", 0x41D); // LDR r0 from M(29) cs  #
-    	PROG2_2.put("952", 0x1801); // AIR r0+1
-    	PROG2_2.put("953", 0x81D); // STR r0 to M(29)
-    	PROG2_2.put("954", 0x41A); // LDR r0 from M(26)=0 
-    	PROG2_2.put("955", 0x81C); // STR r0 to M(28)
-    	PROG2_2.put("956", 0x40D); // LDR r0 from M(13) 951
-    	PROG2_2.put("957", 0x1C1F); // SIR 951-31=920 
-    	PROG2_2.put("958", 0x1C06); // SIR 920-6=914
-    	PROG2_2.put("959", 0x806); // STR r0 to M(6)
-    	PROG2_2.put("960", 0x3426); // JMA to 14 
-    	PROG2_2.put("961", 0x41C); // LDR r0 from M(28) cw $
-    	PROG2_2.put("962", 0x1801); // AIR r0+1
-    	PROG2_2.put("963", 0x81C); // STR r0 to M(28)
-    	PROG2_2.put("964", 0x40D); // LDR r0 from M(12) 961
-    	PROG2_2.put("965", 0x1C1F); // SIR 961-31=930 
-    	PROG2_2.put("966", 0x1C0D); // SIR 930-13=917
-    	PROG2_2.put("967", 0x806); // STR r0 to M(6)
-    	PROG2_2.put("968", 0x3426); // JMA to 17 
-    	PROG2_2.put("969", 0x40A); // LDR r0 from M(10) 969 ^
-    	PROG2_2.put("970", 0x1C1F); // SIR 969-31=938 
-    	PROG2_2.put("971", 0x1C09); // SIR 938-9=929 
-    	PROG2_2.put("972", 0x806); // STR r0 to M(6)
-    	PROG2_2.put("973", 0x415); // LDR r0 from M(21) 
-    	PROG2_2.put("974", 0x2826); // JZ j if 0 
-    	PROG2_2.put("975", 0x41D); // LDR r0 from M(29) cs  
-    	PROG2_2.put("976", 0x1C01); // SIR -1 cs-1  
-    	PROG2_2.put("977", 0x81D); // STR r0 to M(29)
-    	PROG2_2.put("978", 0x3426); // JMA to 29 
-    	PROG2_2.put("979", 0x409); // LDR r0 from M(9) 979 ^
-    	PROG2_2.put("980", 0x1C1F); // SIR 979-31=948 
-    	PROG2_2.put("981", 0x1C10); // SIR 948-16=932 
-    	PROG2_2.put("982", 0x806); // STR r0 to M(6)
-    	PROG2_2.put("983", 0x415); // LDR r0 from M(21) j
-    	PROG2_2.put("984", 0x2826); // JZ j if 0 
-    	PROG2_2.put("985", 0x41C); // LDR r0 from M(28) cws  
-    	PROG2_2.put("986", 0x1C01); // SIR -1 cs-1  
-    	PROG2_2.put("987", 0x81C); // STR r0 to M(28)
-    	PROG2_2.put("988", 0x3426); //JMA to 32
-    	PROG2_2.put("989", 0x41D); //out LDR r0 from M(29)
+        PROG2_2.put("900", 0x61F);// LDR r3 from M(31)
+        PROG2_2.put("901", 0x1A01);// AIR r3+1
+        PROG2_2.put("902", 0x422F); // SOB r3 *
+        PROG2_2.put("903", 0x342E); // JMA to the final STOP
+        PROG2_2.put("904", 0x416); // LDR r0 from M(22) !
+        PROG2_2.put("905", 0x1801);// AIR r0+1
+        PROG2_2.put("906", 0x816); // STR r0 to M (22)
+        PROG2_2.put("907", 0x414); // LDR M (20) =99
+        PROG2_2.put("908", 0x1801); // AIR r0+1
+        PROG2_2.put("909", 0x814); // STR r0 to M(20)
+        PROG2_2.put("910", 0x534); // LDR r1 form M(100) indirect
+        PROG2_2.put("911", 0x419); // LDR r0 from M(25)= 46
+        PROG2_2.put("912", 0x5840); // TRR r1 and r0
+        PROG2_2.put("913", 0x332D); // JCC cc3 if 1 if not 0 continue
+        PROG2_2.put("914", 0x419); // LDR r0 from M(27)= 32
+        PROG2_2.put("915", 0x5840); // TRR r1 and r0
+        PROG2_2.put("916", 0x330C); // JCC cc3 if 1 if not 0 continue
+        PROG2_2.put("917", 0x627); // LDR r2 from M(7)=80 first capital from wor
+        PROG2_2.put("918", 0x5980); // TRR r1 and r2
+        PROG2_2.put("919", 0x332B); // JCC cc3 if 1 if not 0 continue
+        PROG2_2.put("920", 0x416); // LDR r0 from M(22)
+        PROG2_2.put("921", 0x1415); // SMR r0 –M(21)
+        PROG2_2.put("922", 0x816); // STR r0 to M(22)
+        PROG2_2.put("923", 0x414); // LDR r0 from M(20)
+        PROG2_2.put("924", 0x1415); // SMR r0 –M(21)
+        PROG2_2.put("925", 0x814); // STR r0 to M(20) i= i-j
+        PROG2_2.put("926", 0x419); // LDR r0 from M(25)
+        PROG2_2.put("927", 0x5840); // TRR r1 and r0
+        PROG2_2.put("928", 0x330A); // JCC cc3 if 1 if not 0 continue
+        PROG2_2.put("929", 0x41B); // LDR r0 from M(27)
+        PROG2_2.put("930", 0x5840); // TRR r1 and r0
+        PROG2_2.put("931", 0x3309); // JCC cc3 if 1 if not 0 continue
+        PROG2_2.put("932", 0x041A); // LDR r0 from M(26)=0
+        PROG2_2.put("933", 0x815); // STR r0 to M (21)
+        PROG2_2.put("934", 0x410); // LDR r0 from M(16)=81
+        PROG2_2.put("935", 0x807); // STR r0 to M (7)
+        PROG2_2.put("936", 0x3408); // JMA EA8 =* 902
+        PROG2_2.put("937", 0x415); // LDR r0 from M(21) j %
+        PROG2_2.put("938", 0x918); // STR r1 to M(24) r1
+        PROG2_2.put("939", 0x51E); // LDR r1 from M(30)
+        PROG2_2.put("940", 0x1D01); // SIR r1-1
+        PROG2_2.put("941", 0x5840); // TRR r1 and r0
+        PROG2_2.put("942", 0x518); // LDR r1 from M(24)
+        PROG2_2.put("943", 0x330E); // JCC cc3 if 1 if not 0 continue
+        PROG2_2.put("944", 0x415); // LDR r0 from M(21) j
+        PROG2_2.put("945", 0x1801); // AIR r0+1
+        PROG2_2.put("946", 0x815); // STR r0 to M(21)
+        PROG2_2.put("947", 0x407); // LDR r0 from M(7)
+        PROG2_2.put("948", 0x1801); // AIR r0+1
+        PROG2_2.put("949", 0x807); // STR r0 to M(7) c
+        PROG2_2.put("950", 0x3428); // // JMA to for
+        PROG2_2.put("951", 0x41D); // LDR r0 from M(29) cs #
+        PROG2_2.put("952", 0x1801); // AIR r0+1
+        PROG2_2.put("953", 0x81D); // STR r0 to M(29)
+        PROG2_2.put("954", 0x41A); // LDR r0 from M(26)=0
+        PROG2_2.put("955", 0x81C); // STR r0 to M(28)
+        PROG2_2.put("956", 0x40D); // LDR r0 from M(13) 951
+        PROG2_2.put("957", 0x1C1F); // SIR 951-31=920
+        PROG2_2.put("958", 0x1C06); // SIR 920-6=914
+        PROG2_2.put("959", 0x806); // STR r0 to M(6)
+        PROG2_2.put("960", 0x3426); // JMA to 14
+        PROG2_2.put("961", 0x41C); // LDR r0 from M(28) cw $
+        PROG2_2.put("962", 0x1801); // AIR r0+1
+        PROG2_2.put("963", 0x81C); // STR r0 to M(28)
+        PROG2_2.put("964", 0x40D); // LDR r0 from M(12) 961
+        PROG2_2.put("965", 0x1C1F); // SIR 961-31=930
+        PROG2_2.put("966", 0x1C0D); // SIR 930-13=917
+        PROG2_2.put("967", 0x806); // STR r0 to M(6)
+        PROG2_2.put("968", 0x3426); // JMA to 17
+        PROG2_2.put("969", 0x40A); // LDR r0 from M(10) 969 ^
+        PROG2_2.put("970", 0x1C1F); // SIR 969-31=938
+        PROG2_2.put("971", 0x1C09); // SIR 938-9=929
+        PROG2_2.put("972", 0x806); // STR r0 to M(6)
+        PROG2_2.put("973", 0x415); // LDR r0 from M(21)
+        PROG2_2.put("974", 0x2826); // JZ j if 0
+        PROG2_2.put("975", 0x41D); // LDR r0 from M(29) cs
+        PROG2_2.put("976", 0x1C01); // SIR -1 cs-1
+        PROG2_2.put("977", 0x81D); // STR r0 to M(29)
+        PROG2_2.put("978", 0x3426); // JMA to 29
+        PROG2_2.put("979", 0x409); // LDR r0 from M(9) 979 ^
+        PROG2_2.put("980", 0x1C1F); // SIR 979-31=948
+        PROG2_2.put("981", 0x1C10); // SIR 948-16=932
+        PROG2_2.put("982", 0x806); // STR r0 to M(6)
+        PROG2_2.put("983", 0x415); // LDR r0 from M(21) j
+        PROG2_2.put("984", 0x2826); // JZ j if 0
+        PROG2_2.put("985", 0x41C); // LDR r0 from M(28) cws
+        PROG2_2.put("986", 0x1C01); // SIR -1 cs-1
+        PROG2_2.put("987", 0x81C); // STR r0 to M(28)
+        PROG2_2.put("988", 0x3426); // JMA to 32
+        PROG2_2.put("989", 0x41D); // out LDR r0 from M(29)
 
     }
     /**
