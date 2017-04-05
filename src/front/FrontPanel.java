@@ -1832,22 +1832,27 @@ public class FrontPanel {
                 if (prog1Step == 0) {
                     // read 20 numbers from the console keyboard
                     System.out.println("start reading numbers");
-                    mcu.loadProgram(Const.Pre);
-                    mcu.loadProgram(Const.PG1_20);
-                    registers.setPC(Const.PG_20_BASE);
+                    if (consoleKeyboard.getText() == null || consoleKeyboard.getText().length() == 0) {
+                        JOptionPane.showMessageDialog(null, "type 21 numbers in the console keyboard");
 
-                    // refreshRegistersPanel();
-                    do {
+                    } else {
+                        mcu.loadProgram(Const.Pre);
+                        mcu.loadProgram(Const.PG1_20);
+                        registers.setPC(Const.PG_20_BASE);
+
                         // refreshRegistersPanel();
-                        registers.setMAR(registers.getPC());
-                        registers.setMBR(mcu.fetchFromCache(registers.getMAR()));
-                        registers.setIR(registers.getMBR());
-                        runInstruction(registers.getBinaryStringIr(), registers, mcu);
-                        // refreshRegistersPanel();
-                        // pushConsoleBuffer();
-                    } while (registers.getPC() <= Const.PG_20_END && registers.getPC() >= Const.PG_20_BASE);
-                    refreshRegistersPanel();
-                    prog1Step = 1;
+                        do {
+                            // refreshRegistersPanel();
+                            registers.setMAR(registers.getPC());
+                            registers.setMBR(mcu.fetchFromCache(registers.getMAR()));
+                            registers.setIR(registers.getMBR());
+                            runInstruction(registers.getBinaryStringIr(), registers, mcu);
+                            // refreshRegistersPanel();
+                            // pushConsoleBuffer();
+                        } while (registers.getPC() <= Const.PG_20_END && registers.getPC() >= Const.PG_20_BASE);
+                        refreshRegistersPanel();
+                        prog1Step = 1;
+                    }
                 }
 
             }
