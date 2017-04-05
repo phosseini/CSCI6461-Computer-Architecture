@@ -45,7 +45,7 @@ public class CHK extends AbstractInstruction {
 	@Override
 	public String getExecuteMessage() {
 		// TODO Auto-generated method stub
-		return null;
+		return "CHK"+ num +", "+devId;
 	}
 
 }
