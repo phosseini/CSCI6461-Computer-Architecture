@@ -18,50 +18,28 @@ public class CHK extends AbstractInstruction {
 		this.devId = StringUtil.binaryToDecimal(instruction.substring(11, 16));
 		
 		if (this.devId == Const.DevId.KEYBOARD.getValue()) {
-			String buffer = mcu.getKeyboardBuffer();
-
-            if (buffer != null && buffer.length() > 0) {
-
-                int val = buffer.charAt(0);
-                registers.setRnByNum(this.num, val);
-                mcu.setKeyboardBuffer(buffer.substring(1, buffer.length()));
-
-            } else {
-                registers.setRnByNum(this.num, 0);
-            }
+			
+                
+                registers.setRnByNum(this.num, 1);
+               
+           
 		}
 		
 		if (this.devId == Const.DevId.CARD.getValue()) {
-			String buffer = mcu.getCardBuffer();
-            
-            if (buffer != null && buffer.length() > 0) {
-                
-                int val = buffer.charAt(0);
-                registers.setRnByNum(this.num, val);
-                mcu.setCardBuffer(buffer.substring(1, buffer.length()));
-                
-            } else {
-                registers.setRnByNum(this.num, 0);
-            }
+			
+                registers.setRnByNum(this.num, 1);
+               
         }
         
 		
 		
 		if (this.devId == Const.DevId.PRINTER.getValue()) {
-			String buffer = mcu.getPrinterBuffer();
-            
-            if (buffer != null && buffer.length() > 0) {
-                
-                int val = buffer.charAt(0);
-                registers.setRnByNum(this.num, val);
-                mcu.setCardBuffer(buffer.substring(1, buffer.length()));
-                
-            } else {
-                registers.setRnByNum(this.num, 0);
-            }
+			
+            	
+                registers.setRnByNum(this.num, 1);
+               
 		}
-		}
-		
+	}	
 	
 
 	@Override
