@@ -1890,6 +1890,17 @@ public class FrontPanel {
                         registers.setIR(registers.getMBR());
                         runInstruction(registers.getBinaryStringIr(), registers, mcu);
                     } while (registers.getPC() <= Const.PG_10END && registers.getPC() >= Const.PG_10BASE);
+                    
+                    System.out.println("print the result in m(30)");
+                    mcu.loadProgram(Const.PG_P);
+                    registers.setPC(Const.PG_P_BASE);
+                    do {
+                        registers.setMAR(registers.getPC());
+                        registers.setMBR(mcu.fetchFromCache(registers.getMAR()));
+                        registers.setIR(registers.getMBR());
+                        runInstruction(registers.getBinaryStringIr(), registers, mcu);
+                    } while (registers.getPC() <= Const.PG_P_END && registers.getPC() >= Const.PG_P_BASE);
+                    
                     refreshRegistersPanel();
                     prog1Step = 0;
 
@@ -2070,7 +2081,7 @@ public class FrontPanel {
                 AbstractInstruction instr = (AbstractInstruction) Class
                         .forName("alu.instruction." + Const.OPCODE.get(opCode)).newInstance();
                 instr.execute(instruction, registers, mcu);
-                System.out.println("instruction: " + instruction);
+                System.out.println("PC: " + registers.getPC() + ", instruction: " + instruction);
                 // printConsole("instruction: " + instruction);
                 refreshCacheTable();
                 pushConsoleBuffer();
