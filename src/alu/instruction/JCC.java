@@ -26,24 +26,11 @@ public class JCC extends AbstractInstruction {
 
 		int effectiveAddress = EffectiveAddress.calculateEA(ix, address, i, mcu, registers);
 
-		// we check if effective address is a reserved memory address or not
-		if (effectiveAddress < 6) {
-			throw new MachineFaultException(Const.FaultCode.ILL_MEM_RSV.getValue(),
-					Const.FaultCode.ILL_MEM_RSV.getMessage());
-			// now we check if address is beyond our current memory size
-		} else if (effectiveAddress > mcu.getCurrentMemorySize() - 1) {
-			throw new MachineFaultException(Const.FaultCode.ILL_MEM_BYD.getValue(),
-					Const.FaultCode.ILL_MEM_BYD.getMessage());
+		if (registers.getCCElementByBit(cc)) {
+			registers.setPC(effectiveAddress);
 		} else {
-
-			if (registers.getCCElementByBit(cc)) {
-				registers.setPC(effectiveAddress);
-			} else {
-				registers.increasePCByOne();
-			}
+			registers.increasePCByOne();
 		}
-		
-		// System.out.println("this is a JCC instruction!");
 	}
 
 	@Override

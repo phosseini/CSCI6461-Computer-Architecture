@@ -26,25 +26,14 @@ public class STR extends AbstractInstruction {
 
 		int effectiveAddress = EffectiveAddress.calculateEA(ix, address, i, mcu, registers);
 
-		// we check if effective address is a reserved memory address or not
-		if (effectiveAddress < 6) {
-			throw new MachineFaultException(Const.FaultCode.ILL_MEM_RSV.getValue(),
-					Const.FaultCode.ILL_MEM_RSV.getMessage());
-			// now we check if address is beyond our current memory size
-		} else if (effectiveAddress > mcu.getCurrentMemorySize() - 1) {
-			throw new MachineFaultException(Const.FaultCode.ILL_MEM_BYD.getValue(),
-					Const.FaultCode.ILL_MEM_BYD.getMessage());
-		} else {
+		// reading the content of selected register using [R] in the
+		// instruction
+		registers.setMAR(effectiveAddress);
+		registers.setMBR(registers.getRnByNum(r));
 
-			// reading the content of selected register using [R] in the
-			// instruction
-			registers.setMAR(EffectiveAddress.calculateEA(ix, address, i, mcu, registers));
-			registers.setMBR(registers.getRnByNum(r));
+		mcu.storeIntoCache(registers.getMAR(), registers.getMBR());
 
-			mcu.storeIntoCache(registers.getMAR(), registers.getMBR());
-
-			registers.increasePCByOne();
-		}
+		registers.increasePCByOne();
 	}
 
 	@Override

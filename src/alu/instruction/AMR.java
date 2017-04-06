@@ -26,36 +26,26 @@ public class AMR extends AbstractInstruction {
 		i = StringUtil.binaryToDecimal(instruction.substring(10, 11));
 
 		int effectiveAddress = EffectiveAddress.calculateEA(ix, address, i, mcu, registers);
+		
+		// first, we store the effective address in memory address register
+		registers.setMAR(effectiveAddress);
 
-		// we check if effective address is a reserved memory address or not
-		if (effectiveAddress < 6) {
-			throw new MachineFaultException(Const.FaultCode.ILL_MEM_RSV.getValue(),
-					Const.FaultCode.ILL_MEM_RSV.getMessage());
-			// now we check if address is beyond our current memory size
-		} else if (effectiveAddress > mcu.getCurrentMemorySize() - 1) {
-			throw new MachineFaultException(Const.FaultCode.ILL_MEM_BYD.getValue(),
-					Const.FaultCode.ILL_MEM_BYD.getMessage());
+		// storing what we fetched from memory into the memory buffer
+		// register
+		registers.setMBR(mcu.fetchFromCache(registers.getMAR()));
+
+		int result = registers.getRnByNum(r) + registers.getMBR();
+
+		// we check if we have an overflow
+		if (result > Integer.MAX_VALUE || result < Integer.MIN_VALUE) {
+			registers.setCCElementByBit(Const.ConditionCode.OVERFLOW.getValue(), true);
 		} else {
-			// first, we store the effective address in memory address register
-			registers.setMAR(effectiveAddress);
-
-			// storing what we fetched from memory into the memory buffer
+			// if we do not have an overflow, we update the value of
 			// register
-			registers.setMBR(mcu.fetchFromCache(registers.getMAR()));
-
-			int result = registers.getRnByNum(r) + registers.getMBR();
-
-			// we check if we have an overflow
-			if (result > Integer.MAX_VALUE || result < Integer.MIN_VALUE) {
-				registers.setCCElementByBit(Const.ConditionCode.OVERFLOW.getValue(), true);
-			} else {
-				// if we do not have an overflow, we update the value of
-				// register
-				registers.setRnByNum(r, result);
-			}
-
-			registers.increasePCByOne();
+			registers.setRnByNum(r, result);
 		}
+
+		registers.increasePCByOne();
 	}
 
 	@Override
