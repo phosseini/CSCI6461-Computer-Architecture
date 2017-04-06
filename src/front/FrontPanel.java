@@ -1920,6 +1920,7 @@ public class FrontPanel {
                             + "Or, if you prefer to learn Python through listening to a lecture, you can attend a training course or even hire a trainer to come to your company. ";
                     mcu.setCardBuffer(sentences);
                     System.out.println("start to read sentences");
+                  
                     mcu.loadProgram(Const.PRE_PROG2);
                     mcu.loadProgram(Const.PROG2_0);
                     registers.setPC(Const.PG2_0_BASE);
@@ -1929,6 +1930,8 @@ public class FrontPanel {
                         registers.setIR(registers.getMBR());
                         runInstruction(registers.getBinaryStringIr(), registers, mcu);
                     } while (registers.getPC() <= Const.PG2_0_END && registers.getPC() >= Const.PG2_0_BASE);
+                  printConsole("Please enter a word in the console keyboard and press the find word button. "); 
+                   
                     refreshRegistersPanel();
                     prog2Step = 1;
                 }
@@ -1945,7 +1948,8 @@ public class FrontPanel {
 
                     } else {
                         //read the word
-                        mcu.loadProgram(Const.PROG2_1);
+                    	 printConsole("search result: the word is");
+                    	mcu.loadProgram(Const.PROG2_1);
                         registers.setPC(Const.PG2_1_BASE);
                         do {
                             registers.setMAR(registers.getPC());
@@ -1954,6 +1958,7 @@ public class FrontPanel {
                             runInstruction(registers.getBinaryStringIr(), registers, mcu);
                         } while (registers.getPC() <= Const.PG2_1_END && registers.getPC() >= Const.PG2_1_BASE);
                         //find the word
+                        printConsole("the word number is");
                         mcu.loadProgram(Const.PROG2_2);
                         registers.setPC(Const.PG2_2_BASE);
                         do {
@@ -1962,6 +1967,27 @@ public class FrontPanel {
                             registers.setIR(registers.getMBR());
                             runInstruction(registers.getBinaryStringIr(), registers, mcu);
                         } while (registers.getPC() <= Const.PG2_2_END && registers.getPC() >= Const.PG2_2_BASE);
+                        System.out.println("print the result in m(28)");
+                      
+                        mcu.loadProgram(Const.PG_P1);
+                        registers.setPC(Const.PG_P1_BASE);
+                        do {
+                            registers.setMAR(registers.getPC());
+                            registers.setMBR(mcu.fetchFromCache(registers.getMAR()));
+                            registers.setIR(registers.getMBR());
+                            runInstruction(registers.getBinaryStringIr(), registers, mcu);
+                        } while (registers.getPC() <= Const.PG_P1_END && registers.getPC() >= Const.PG_P1_BASE);
+                        System.out.println("print the result in m(29)");
+                        printConsole("the sentence number is"); 
+                        mcu.loadProgram(Const.PG_P2);
+                        registers.setPC(Const.PG_P2_BASE);
+                        do {
+                            registers.setMAR(registers.getPC());
+                            registers.setMBR(mcu.fetchFromCache(registers.getMAR()));
+                            registers.setIR(registers.getMBR());
+                            runInstruction(registers.getBinaryStringIr(), registers, mcu);
+                        } while (registers.getPC() <= Const.PG_P2_END && registers.getPC() >= Const.PG_P2_BASE);
+                        
                         refreshRegistersPanel();
                         prog2Step = 0;
                     }
