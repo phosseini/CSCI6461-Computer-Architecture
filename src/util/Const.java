@@ -23,7 +23,10 @@ public class Const {
     public static final Integer PG2_2_END = 989;
     public static final Integer PG_P_BASE = 1800;
     public static final Integer PG_P_END = 1862;
-
+    public static final Integer PG_P1_BASE = 1000;
+    public static final Integer PG_P1_END = 1062;
+    public static final Integer PG_P2_BASE = 1100;
+    public static final Integer PG_P2_END = 1162;
     // public static final HashMap<String, Integer> ROM = new HashMap<>();
     // static {
     // // address-value pair Boot Program
@@ -512,7 +515,150 @@ public class Const {
         // (3) finish printing the numbers
         PG_P.put("1869", 0);
     }
+    public static final HashMap<String, Integer> PG_P2 = new HashMap<>(); // print
+    // the
+    // result
+    // in
+    // m(30)
+static {
+// presets of this single program
+PG_P2.put("31", 1109); // start of the block (0)
+// m(30) store the number that you want to print
+PG_P2.put("6", 50); // store every digit of the numbers starting from
+// m(50), example: for number 31 we store like this,
+// m(50)=10 (new line sign), m(51)=49 (ascii of '1'), m(52)=51 (ascii of '3')
 
+// program begins
+
+PG_P2.put("1100", 0x7d8f); // reset r1
+PG_P2.put("1101", 0x190a); // AIR r1, 10
+PG_P2.put("1102", 0x926); // store r1 into location of content of m(6)
+PG_P2.put("1103", 0xf26); // load r3 with content of m(6)
+PG_P2.put("1104", 0x1b01); // AIR r3, 1
+PG_P2.put("1105", 0xb06); // store r3 into m(6)
+PG_P2.put("1106", 0x7e8f); // reset r2
+PG_P2.put("1107", 0x1a0a); // AIR r2, 10
+PG_P2.put("1108", 0xc3d); // load r0 with content of m(29)
+
+// (0)
+PG_P2.put("1109", 0x5480); // DVD r0, r2
+PG_P2.put("1110", 0xf3f);// load r3 with content of m(31)
+PG_P2.put("1111", 0x1b14);// AIR r3, 20
+PG_P2.put("1112", 0xb1f);// store r3 into m(31)
+PG_P2.put("1113", 0x283f);// JZ r0, content of m(31), means if r0 == 0 jump to (1)
+PG_P2.put("1114", 0x1918);// r1 + 48, convert to ascii
+PG_P2.put("1115", 0x1918);
+PG_P2.put("1116", 0x926);// store r1 into location of content of m(6)
+PG_P2.put("1117", 0xf26);// load r3 with content of m(6)
+PG_P2.put("1118", 0x1b01);// AIR r3, 1
+PG_P2.put("1119", 0xb06);// store r3 into m(6)
+PG_P2.put("1120", 0xf3f);// load r3 with content of m(31)
+PG_P2.put("1121", 0x1f14);// SIR r3, 20
+PG_P2.put("1122", 0xb1f);// store r3 into m(31)
+PG_P2.put("1123", 0x343f);// JMA, content of m(31), means jump to (0)
+// (1) r0 == 0, means has reach the highest digit of the number
+PG_P2.put("1129", 0x1918);// r1 + 48, convert to ascii
+PG_P2.put("1130", 0x1918);
+PG_P2.put("1131", 0x926);// store r1 into location of content of m(6)
+PG_P2.put("1132", 0xf3f);// load r3 with content of m(31)
+PG_P2.put("1133", 0x1b14);// AIR r3, 20
+PG_P2.put("1134", 0xb1f);// store r3 into m(31)
+PG_P2.put("1135", 0x7e8f);// reset r2
+PG_P2.put("1136", 0x1a0a);// AIR r2, 10 (new line sign, use to compare)
+PG_P2.put("1137", 0x343f);// JMA, content of m(31), means jump to (2)
+// (2) print the digit one by one
+PG_P2.put("1149", 0x526);// load r1 with address of content of m(6)
+PG_P2.put("1150", 0xf901);// print r1 to console
+PG_P2.put("1151", 0xf3f);// load r3 with content of m(31)
+PG_P2.put("1152", 0x1b14);// AIR r3, 20
+PG_P2.put("1153", 0xb1f);// store r3 into m(31)
+PG_P2.put("1154", 0x5980);// TRR r1, r2
+PG_P2.put("1155", 0x333f);// JCC cc(3), content of m(31), mean jump to (3)
+PG_P2.put("1156", 0xf26);// load r3 with content of m(6)
+PG_P2.put("1157", 0x1f01);// SIR r3, 1
+PG_P2.put("1158", 0xb06);// store r3 into m(6)
+PG_P2.put("1159", 0xf3f);// load r3 with content of m(31)
+PG_P2.put("1160", 0x1f14);// SIR r3, 20
+PG_P2.put("1161", 0xb1f);// store r3 into m(31)
+PG_P2.put("1162", 0x343f);// JMA, content of m(31), means jump to (2)
+
+
+// (3) finish printing the numbers
+PG_P2.put("1169", 0);
+}
+    public static final HashMap<String, Integer> PG_P1 = new HashMap<>(); // print
+    // the
+    // result
+    // in
+    // m(30)
+static {
+// presets of this single program
+PG_P1.put("31", 1009); // start of the block (0)
+// m(30) store the number that you want to print
+PG_P1.put("6", 50); // store every digit of the numbers starting from
+// m(50), example: for number 31 we store like this,
+// m(50)=10 (new line sign), m(51)=49 (ascii of '1'), m(52)=51 (ascii of '3')
+
+// program begins
+
+PG_P1.put("1000", 0x7d8f); // reset r1
+PG_P1.put("1001", 0x190a); // AIR r1, 10
+PG_P1.put("1002", 0x926); // store r1 into location of content of m(6)
+PG_P1.put("1003", 0xf26); // load r3 with content of m(6)
+PG_P1.put("1004", 0x1b01); // AIR r3, 1
+PG_P1.put("1005", 0xb06); // store r3 into m(6)
+PG_P1.put("1006", 0x7e8f); // reset r2
+PG_P1.put("1007", 0x1a0a); // AIR r2, 10
+PG_P1.put("1008", 0xc3c); // load r0 with content of m(28)
+
+// (0)
+PG_P1.put("1009", 0x5480); // DVD r0, r2
+PG_P1.put("1010", 0xf3f);// load r3 with content of m(31)
+PG_P1.put("1011", 0x1b14);// AIR r3, 20
+PG_P1.put("1012", 0xb1f);// store r3 into m(31)
+PG_P1.put("1013", 0x283f);// JZ r0, content of m(31), means if r0 == 0 jump to (1)
+PG_P1.put("1014", 0x1918);// r1 + 48, convert to ascii
+PG_P1.put("1015", 0x1918);
+PG_P1.put("1016", 0x926);// store r1 into location of content of m(6)
+PG_P1.put("1017", 0xf26);// load r3 with content of m(6)
+PG_P1.put("1018", 0x1b01);// AIR r3, 1
+PG_P1.put("1019", 0xb06);// store r3 into m(6)
+PG_P1.put("1020", 0xf3f);// load r3 with content of m(31)
+PG_P1.put("1021", 0x1f14);// SIR r3, 20
+PG_P1.put("1022", 0xb1f);// store r3 into m(31)
+PG_P1.put("1023", 0x343f);// JMA, content of m(31), means jump to (0)
+
+// (1) r0 == 0, means has reach the highest digit of the number
+PG_P1.put("1029", 0x1918);// r1 + 48, convert to ascii
+PG_P1.put("1030", 0x1918);
+PG_P1.put("1031", 0x926);// store r1 into location of content of m(6)
+PG_P1.put("1032", 0xf3f);// load r3 with content of m(31)
+PG_P1.put("1033", 0x1b14);// AIR r3, 20
+PG_P1.put("1034", 0xb1f);// store r3 into m(31)
+PG_P1.put("1035", 0x7e8f);// reset r2
+PG_P1.put("1036", 0x1a0a);// AIR r2, 10 (new line sign, use to compare)
+PG_P1.put("1037", 0x343f);// JMA, content of m(31), means jump to (2)
+
+// (2) print the digit one by one
+PG_P1.put("1049", 0x526);// load r1 with address of content of m(6)
+PG_P1.put("1050", 0xf901);// print r1 to console
+PG_P1.put("1051", 0xf3f);// load r3 with content of m(31)
+PG_P1.put("1052", 0x1b14);// AIR r3, 20
+PG_P1.put("1053", 0xb1f);// store r3 into m(31)
+PG_P1.put("1054", 0x5980);// TRR r1, r2
+PG_P1.put("1055", 0x333f);// JCC cc(3), content of m(31), mean jump to (3)
+PG_P1.put("1056", 0xf26);// load r3 with content of m(6)
+PG_P1.put("1057", 0x1f01);// SIR r3, 1
+PG_P1.put("1058", 0xb06);// store r3 into m(6)
+PG_P1.put("1059", 0xf3f);// load r3 with content of m(31)
+PG_P1.put("1060", 0x1f14);// SIR r3, 20
+PG_P1.put("1061", 0xb1f);// store r3 into m(31)
+PG_P1.put("1062", 0x343f);// JMA, content of m(31), means jump to (2)
+
+
+// (3) finish printing the numbers
+PG_P1.put("1069", 0);
+}
     public static final HashMap<String, Integer> Pre = new HashMap<>();
     static {
         Pre.put("6", 44); // ascii of ','
