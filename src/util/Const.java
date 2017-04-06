@@ -41,7 +41,6 @@ public class Const {
 
     public static final HashMap<String, Integer> PG1_10 = new HashMap<>();
     static {
-        // address-value pair Boot Program
         PG1_10.put("500", 0x407);
         PG1_10.put("501", 0x141B);
         PG1_10.put("502", 0x443F);
