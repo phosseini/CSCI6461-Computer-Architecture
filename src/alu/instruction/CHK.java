@@ -31,7 +31,8 @@ public class CHK extends AbstractInstruction {
 
 	@Override
 	public String getExecuteMessage() {
-		return null;
+		// TODO Auto-generated method stub
+		return "CHK "+ num +", "+ devId;
 	}
 
 }

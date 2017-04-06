@@ -1365,7 +1365,7 @@ public class FrontPanel {
         lblProgram1 = new JLabel("Program 1");
         pnlProgram1.add(lblProgram1);
 
-        btnNums = new JButton("read 21 numbers");
+        btnNums = new JButton("read 20 numbers");
         pnlProgram1.add(btnNums);
 
         btnCompare = new JButton("compare");
@@ -1832,7 +1832,39 @@ public class FrontPanel {
                 if (prog1Step == 0) {
                     // read 20 numbers from the console keyboard
                     System.out.println("start reading numbers");
-                    mcu.loadProgram(Const.Pre);
+                    if (consoleKeyboard.getText() == null || consoleKeyboard.getText().length() == 0) {
+                        JOptionPane.showMessageDialog(null, "type 20 numbers in the console keyboard");
+
+                    } else {
+                        printConsole("Below are the 20 numbers: ");
+                        mcu.loadProgram(Const.Pre);
+                        mcu.loadProgram(Const.PG1_20);
+                        registers.setPC(Const.PG_20_BASE);
+
+                        // refreshRegistersPanel();
+                        do {
+                            // refreshRegistersPanel();
+                            registers.setMAR(registers.getPC());
+                            registers.setMBR(mcu.fetchFromCache(registers.getMAR()));
+                            registers.setIR(registers.getMBR());
+                            runInstruction(registers.getBinaryStringIr(), registers, mcu);
+                            // refreshRegistersPanel();
+                            // pushConsoleBuffer();
+                        } while (registers.getPC() <= Const.PG_20_END && registers.getPC() >= Const.PG_20_BASE);
+                        refreshRegistersPanel();
+                        prog1Step = 1;
+                        printConsole("Please enter 1 number (end with ',') and press the compare button. ");
+                    }
+                }
+
+            }
+        });
+
+        btnCompare.addMouseListener(new MouseAdapter() {
+            public void mousePressed(MouseEvent e) {
+
+                if (prog1Step == 1) {
+                    System.out.println("read 1 number");
                     mcu.loadProgram(Const.PG1_20);
                     registers.setPC(Const.PG_20_BASE);
 
@@ -1846,18 +1878,9 @@ public class FrontPanel {
                         // refreshRegistersPanel();
                         // pushConsoleBuffer();
                     } while (registers.getPC() <= Const.PG_20_END && registers.getPC() >= Const.PG_20_BASE);
-                    refreshRegistersPanel();
-                    prog1Step = 1;
-                }
-
-            }
-        });
-
-        btnCompare.addMouseListener(new MouseAdapter() {
-            public void mousePressed(MouseEvent e) {
-
-                if (prog1Step == 1) {
+                    
                     System.out.println("start comparing numbers");
+                    printConsole("compare result: the closest number is");
                     mcu.loadProgram(Const.PG1_10);
                     registers.setPC(Const.PG_10BASE);
 
@@ -1867,6 +1890,17 @@ public class FrontPanel {
                         registers.setIR(registers.getMBR());
                         runInstruction(registers.getBinaryStringIr(), registers, mcu);
                     } while (registers.getPC() <= Const.PG_10END && registers.getPC() >= Const.PG_10BASE);
+                    
+                    System.out.println("print the result in m(30)");
+                    mcu.loadProgram(Const.PG_P);
+                    registers.setPC(Const.PG_P_BASE);
+                    do {
+                        registers.setMAR(registers.getPC());
+                        registers.setMBR(mcu.fetchFromCache(registers.getMAR()));
+                        registers.setIR(registers.getMBR());
+                        runInstruction(registers.getBinaryStringIr(), registers, mcu);
+                    } while (registers.getPC() <= Const.PG_P_END && registers.getPC() >= Const.PG_P_BASE);
+                    
                     refreshRegistersPanel();
                     prog1Step = 0;
 
@@ -1910,6 +1944,7 @@ public class FrontPanel {
                         JOptionPane.showMessageDialog(null, "type a word in the console keyboard");
 
                     } else {
+                        //read the word
                         mcu.loadProgram(Const.PROG2_1);
                         registers.setPC(Const.PG2_1_BASE);
                         do {
@@ -1918,6 +1953,15 @@ public class FrontPanel {
                             registers.setIR(registers.getMBR());
                             runInstruction(registers.getBinaryStringIr(), registers, mcu);
                         } while (registers.getPC() <= Const.PG2_1_END && registers.getPC() >= Const.PG2_1_BASE);
+                        //find the word
+                        mcu.loadProgram(Const.PROG2_2);
+                        registers.setPC(Const.PG2_2_BASE);
+                        do {
+                            registers.setMAR(registers.getPC());
+                            registers.setMBR(mcu.fetchFromCache(registers.getMAR()));
+                            registers.setIR(registers.getMBR());
+                            runInstruction(registers.getBinaryStringIr(), registers, mcu);
+                        } while (registers.getPC() <= Const.PG2_2_END && registers.getPC() >= Const.PG2_2_BASE);
                         refreshRegistersPanel();
                         prog2Step = 0;
                     }
@@ -2037,7 +2081,7 @@ public class FrontPanel {
                 AbstractInstruction instr = (AbstractInstruction) Class
                         .forName("alu.instruction." + Const.OPCODE.get(opCode)).newInstance();
                 instr.execute(instruction, registers, mcu);
-                System.out.println("instruction: " + instruction);
+                System.out.println("PC: " + registers.getPC() + ", instruction: " + instruction);
                 // printConsole("instruction: " + instruction);
                 refreshCacheTable();
                 pushConsoleBuffer();
