@@ -685,96 +685,96 @@ public class Const {
                                                                             // the
                                                                             // word
     static {
-        PROG2_2.put("900", 0x61F);// LDR r3 from M(31)
-        PROG2_2.put("901", 0x1A01);// AIR r3+1
-        PROG2_2.put("902", 0x422F); // SOB r3 *
-        PROG2_2.put("903", 0x342E); // JMA to the final STOP
-        PROG2_2.put("904", 0x416); // LDR r0 from M(22) !
-        PROG2_2.put("905", 0x1801);// AIR r0+1
-        PROG2_2.put("906", 0x816); // STR r0 to M (22)
-        PROG2_2.put("907", 0x414); // LDR M (20) =99
-        PROG2_2.put("908", 0x1801); // AIR r0+1
-        PROG2_2.put("909", 0x814); // STR r0 to M(20)
-        PROG2_2.put("910", 0x534); // LDR r1 form M(100) indirect
-        PROG2_2.put("911", 0x419); // LDR r0 from M(25)= 46
-        PROG2_2.put("912", 0x5840); // TRR r1 and r0
-        PROG2_2.put("913", 0x332D); // JCC cc3 if 1 if not 0 continue
-        PROG2_2.put("914", 0x419); // LDR r0 from M(27)= 32
-        PROG2_2.put("915", 0x5840); // TRR r1 and r0
-        PROG2_2.put("916", 0x330C); // JCC cc3 if 1 if not 0 continue
-        PROG2_2.put("917", 0x627); // LDR r2 from M(7)=80 first capital from wor
-        PROG2_2.put("918", 0x5980); // TRR r1 and r2
-        PROG2_2.put("919", 0x332B); // JCC cc3 if 1 if not 0 continue
-        PROG2_2.put("920", 0x416); // LDR r0 from M(22)
-        PROG2_2.put("921", 0x1415); // SMR r0 –M(21)
-        PROG2_2.put("922", 0x816); // STR r0 to M(22)
-        PROG2_2.put("923", 0x414); // LDR r0 from M(20)
-        PROG2_2.put("924", 0x1415); // SMR r0 –M(21)
-        PROG2_2.put("925", 0x814); // STR r0 to M(20) i= i-j
-        PROG2_2.put("926", 0x419); // LDR r0 from M(25)
-        PROG2_2.put("927", 0x5840); // TRR r1 and r0
-        PROG2_2.put("928", 0x330A); // JCC cc3 if 1 if not 0 continue
-        PROG2_2.put("929", 0x41B); // LDR r0 from M(27)
-        PROG2_2.put("930", 0x5840); // TRR r1 and r0
-        PROG2_2.put("931", 0x3309); // JCC cc3 if 1 if not 0 continue
-        PROG2_2.put("932", 0x041A); // LDR r0 from M(26)=0
-        PROG2_2.put("933", 0x815); // STR r0 to M (21)
-        PROG2_2.put("934", 0x410); // LDR r0 from M(16)=81
-        PROG2_2.put("935", 0x807); // STR r0 to M (7)
-        PROG2_2.put("936", 0x3408); // JMA EA8 =* 902
-        PROG2_2.put("937", 0x415); // LDR r0 from M(21) j %
-        PROG2_2.put("938", 0x918); // STR r1 to M(24) r1
-        PROG2_2.put("939", 0x51E); // LDR r1 from M(30)
-        PROG2_2.put("940", 0x1D01); // SIR r1-1
-        PROG2_2.put("941", 0x5840); // TRR r1 and r0
-        PROG2_2.put("942", 0x518); // LDR r1 from M(24)
-        PROG2_2.put("943", 0x330E); // JCC cc3 if 1 if not 0 continue
-        PROG2_2.put("944", 0x415); // LDR r0 from M(21) j
-        PROG2_2.put("945", 0x1801); // AIR r0+1
-        PROG2_2.put("946", 0x815); // STR r0 to M(21)
-        PROG2_2.put("947", 0x407); // LDR r0 from M(7)
-        PROG2_2.put("948", 0x1801); // AIR r0+1
-        PROG2_2.put("949", 0x807); // STR r0 to M(7) c
-        PROG2_2.put("950", 0x3428); // // JMA to for
-        PROG2_2.put("951", 0x41D); // LDR r0 from M(29) cs #
-        PROG2_2.put("952", 0x1801); // AIR r0+1
-        PROG2_2.put("953", 0x81D); // STR r0 to M(29)
-        PROG2_2.put("954", 0x41A); // LDR r0 from M(26)=0
-        PROG2_2.put("955", 0x81C); // STR r0 to M(28)
-        PROG2_2.put("956", 0x40D); // LDR r0 from M(13) 951
-        PROG2_2.put("957", 0x1C1F); // SIR 951-31=920
-        PROG2_2.put("958", 0x1C06); // SIR 920-6=914
-        PROG2_2.put("959", 0x806); // STR r0 to M(6)
-        PROG2_2.put("960", 0x3426); // JMA to 14
-        PROG2_2.put("961", 0x41C); // LDR r0 from M(28) cw $
-        PROG2_2.put("962", 0x1801); // AIR r0+1
-        PROG2_2.put("963", 0x81C); // STR r0 to M(28)
-        PROG2_2.put("964", 0x40D); // LDR r0 from M(12) 961
-        PROG2_2.put("965", 0x1C1F); // SIR 961-31=930
-        PROG2_2.put("966", 0x1C0D); // SIR 930-13=917
-        PROG2_2.put("967", 0x806); // STR r0 to M(6)
-        PROG2_2.put("968", 0x3426); // JMA to 17
-        PROG2_2.put("969", 0x40A); // LDR r0 from M(10) 969 ^
-        PROG2_2.put("970", 0x1C1F); // SIR 969-31=938
-        PROG2_2.put("971", 0x1C09); // SIR 938-9=929
-        PROG2_2.put("972", 0x806); // STR r0 to M(6)
-        PROG2_2.put("973", 0x415); // LDR r0 from M(21)
-        PROG2_2.put("974", 0x2826); // JZ j if 0
-        PROG2_2.put("975", 0x41D); // LDR r0 from M(29) cs
-        PROG2_2.put("976", 0x1C01); // SIR -1 cs-1
-        PROG2_2.put("977", 0x81D); // STR r0 to M(29)
-        PROG2_2.put("978", 0x3426); // JMA to 29
-        PROG2_2.put("979", 0x409); // LDR r0 from M(9) 979 ^
-        PROG2_2.put("980", 0x1C1F); // SIR 979-31=948
-        PROG2_2.put("981", 0x1C10); // SIR 948-16=932
-        PROG2_2.put("982", 0x806); // STR r0 to M(6)
-        PROG2_2.put("983", 0x415); // LDR r0 from M(21) j
-        PROG2_2.put("984", 0x2826); // JZ j if 0
-        PROG2_2.put("985", 0x41C); // LDR r0 from M(28) cws
-        PROG2_2.put("986", 0x1C01); // SIR -1 cs-1
-        PROG2_2.put("987", 0x81C); // STR r0 to M(28)
-        PROG2_2.put("988", 0x3426); // JMA to 32
-        PROG2_2.put("989", 0x41D); // out LDR r0 from M(29)
+    	PROG2_2.put("900", 0x61F);// LDR r3 from M(31)
+    	PROG2_2.put("901", 0x1A01);// AIR r3+1 
+    	PROG2_2.put("902", 0x422F); // SOB r3 *
+    	PROG2_2.put("903", 0x342E); // JMA to the final STOP
+    	PROG2_2.put("904", 0x416); // LDR r0 from M(22) !
+    	PROG2_2.put("905", 0x1801);// AIR r0+1 
+    	PROG2_2.put("906", 0x816); // STR r0 to M (22)
+    	PROG2_2.put("907", 0x414); // LDR M (20) =99
+    	PROG2_2.put("908", 0x1801); // AIR r0+1
+    	PROG2_2.put("909", 0x814); // STR r0 to M(20) 
+    	PROG2_2.put("910", 0x534); // LDR r1 form M(100) indirect 
+    	PROG2_2.put("911", 0x419); // LDR r0 from M(25)= 46
+    	PROG2_2.put("912", 0x5840); // TRR r1 and r0
+    	PROG2_2.put("913", 0x332D); // JCC cc3 if 1 if not 0 continue
+    	PROG2_2.put("914", 0x41B); // LDR r0 from M(27)= 32
+    	PROG2_2.put("915", 0x5840); // TRR r1 and r0
+    	PROG2_2.put("916", 0x332C); // JCC cc3 if 1 if not 0 continue 
+    	PROG2_2.put("917", 0x627); // LDR r2 from M(7)=80 first capital from wor
+    	PROG2_2.put("918", 0x5980); // TRR r1 and r2 
+    	PROG2_2.put("919", 0x332B);  // JCC cc3 if 1 if not 0 continue 
+    	PROG2_2.put("920", 0x416); // LDR r0 from M(22)
+    	PROG2_2.put("921", 0x1415); // SMR r0 –M(21)
+    	PROG2_2.put("922", 0x816); // STR r0 to M(22)
+    	PROG2_2.put("923", 0x414); // LDR r0 from M(20)
+    	PROG2_2.put("924", 0x1415); // SMR r0 –M(21)
+    	PROG2_2.put("925", 0x814); // STR r0 to M(20)   i= i-j
+    	PROG2_2.put("926", 0x419); // LDR r0 from M(25)
+    	PROG2_2.put("927", 0x5840); // TRR r1 and r0
+    	PROG2_2.put("928", 0x332A);   // JCC cc3 if 1 if not 0 continue
+    	PROG2_2.put("929", 0x41B); // LDR r0 from M(27)
+    	PROG2_2.put("930", 0x5840); // TRR r1 and r0
+    	PROG2_2.put("931", 0x3329); // JCC cc3 if 1 if not 0 continue
+    	PROG2_2.put("932", 0x041A); // LDR r0 from M(26)=0
+    	PROG2_2.put("933", 0x815); // STR r0 to M (21)
+    	PROG2_2.put("934", 0x410); // LDR r0 from M(16)=81
+    	PROG2_2.put("935", 0x807); // STR r0 to M (7)
+    	PROG2_2.put("936", 0x3428);   // JMA EA8 =*  902
+    	PROG2_2.put("937", 0x415); // LDR r0 from M(21) j %
+    	PROG2_2.put("938", 0x918); // STR r1 to M(24) r1
+    	PROG2_2.put("939", 0x51E); // LDR r1 from M(30)
+    	PROG2_2.put("940", 0x1D01); // SIR r1-1 
+    	PROG2_2.put("941", 0x5840); // TRR r1 and r0
+    	PROG2_2.put("942", 0x518); // LDR r1 from M(24)
+    	PROG2_2.put("943", 0x332E); // JCC cc3 if 1 if not 0 continue 
+    	PROG2_2.put("944", 0x415); // LDR r0 from M(21) j
+    	PROG2_2.put("945", 0x1801); // AIR r0+1
+    	PROG2_2.put("946", 0x815); // STR r0 to M(21)
+    	PROG2_2.put("947", 0x407); // LDR r0 from M(7)
+    	PROG2_2.put("948", 0x1801);  // AIR r0+1
+    	PROG2_2.put("949", 0x807); // STR r0 to M(7) c
+    	PROG2_2.put("950", 0x3428); // // JMA to for
+    	PROG2_2.put("951", 0x41D); // LDR r0 from M(29) cs  #
+    	PROG2_2.put("952", 0x1801); // AIR r0+1
+    	PROG2_2.put("953", 0x81D); // STR r0 to M(29)
+    	PROG2_2.put("954", 0x41A); // LDR r0 from M(26)=0 
+    	PROG2_2.put("955", 0x81C); // STR r0 to M(28)
+    	PROG2_2.put("956", 0x40D); // LDR r0 from M(13) 951
+    	PROG2_2.put("957", 0x1C1F); // SIR 951-31=920 
+    	PROG2_2.put("958", 0x1C06); // SIR 920-6=914
+    	PROG2_2.put("959", 0x806); // STR r0 to M(6)
+    	PROG2_2.put("960", 0x3426); // JMA to 14 
+    	PROG2_2.put("961", 0x41C); // LDR r0 from M(28) cw $
+    	PROG2_2.put("962", 0x1801); // AIR r0+1
+    	PROG2_2.put("963", 0x81C); // STR r0 to M(28)
+    	PROG2_2.put("964", 0x40D); // LDR r0 from M(12) 961
+    	PROG2_2.put("965", 0x1C1F); // SIR 961-31=930 
+    	PROG2_2.put("966", 0x1C0D); // SIR 930-13=917
+    	PROG2_2.put("967", 0x806); // STR r0 to M(6)
+    	PROG2_2.put("968", 0x3426); // JMA to 17 
+    	PROG2_2.put("969", 0x40A); // LDR r0 from M(10) 969 ^
+    	PROG2_2.put("970", 0x1C1F); // SIR 969-31=938 
+    	PROG2_2.put("971", 0x1C09); // SIR 938-9=929 
+    	PROG2_2.put("972", 0x806); // STR r0 to M(6)
+    	PROG2_2.put("973", 0x415); // LDR r0 from M(21) 
+    	PROG2_2.put("974", 0x2826); // JZ j if 0 
+    	PROG2_2.put("975", 0x41D); // LDR r0 from M(29) cs  
+    	PROG2_2.put("976", 0x1C01); // SIR -1 cs-1  
+    	PROG2_2.put("977", 0x81D); // STR r0 to M(29)
+    	PROG2_2.put("978", 0x3426); // JMA to 29 
+    	PROG2_2.put("979", 0x409); // LDR r0 from M(9) 979 ^
+    	PROG2_2.put("980", 0x1C1F); // SIR 979-31=948 
+    	PROG2_2.put("981", 0x1C10); // SIR 948-16=932 
+    	PROG2_2.put("982", 0x806); // STR r0 to M(6)
+    	PROG2_2.put("983", 0x415); // LDR r0 from M(21) j
+    	PROG2_2.put("984", 0x2826); // JZ j if 0 
+    	PROG2_2.put("985", 0x41C); // LDR r0 from M(28) cws  
+    	PROG2_2.put("986", 0x1C01); // SIR -1 cs-1  
+    	PROG2_2.put("987", 0x81C); // STR r0 to M(28)
+    	PROG2_2.put("988", 0x3426); //JMA to 32
+    	PROG2_2.put("989", 0x41D); //out LDR r0 from M(29)
 
     }
     /**
