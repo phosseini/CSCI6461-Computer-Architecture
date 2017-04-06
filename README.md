@@ -1,5 +1,7 @@
 # CSCI6461-computer-architecture
 
+Designing and implementing a simple computer simulator.
+
 CSCI6461: Computer System Architecture Project
 
 Spring 2017
