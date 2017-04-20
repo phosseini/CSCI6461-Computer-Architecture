@@ -378,6 +378,46 @@ public class FrontPanel {
     private JLabel lblProgram;
     private JButton btnLoadSentences;
     private JButton btnFindWord;
+    private JPanel panel_1;
+    private JLabel lblFr;
+    private JRadioButton radioButton;
+    private JRadioButton radioButton_1;
+    private JRadioButton radioButton_2;
+    private JRadioButton radioButton_3;
+    private JRadioButton radioButton_4;
+    private JRadioButton radioButton_5;
+    private JRadioButton radioButton_6;
+    private JRadioButton radioButton_7;
+    private JRadioButton radioButton_8;
+    private JRadioButton radioButton_9;
+    private JRadioButton radioButton_10;
+    private JRadioButton radioButton_11;
+    private JRadioButton radioButton_12;
+    private JRadioButton radioButton_13;
+    private JRadioButton radioButton_14;
+    private JRadioButton radioButton_15;
+    private JTextField textField;
+    private JButton button;
+    private JPanel panel_2;
+    private JLabel lblFr_1;
+    private JRadioButton radioButton_16;
+    private JRadioButton radioButton_17;
+    private JRadioButton radioButton_18;
+    private JRadioButton radioButton_19;
+    private JRadioButton radioButton_20;
+    private JRadioButton radioButton_21;
+    private JRadioButton radioButton_22;
+    private JRadioButton radioButton_23;
+    private JRadioButton radioButton_24;
+    private JRadioButton radioButton_25;
+    private JRadioButton radioButton_26;
+    private JRadioButton radioButton_27;
+    private JRadioButton radioButton_28;
+    private JRadioButton radioButton_29;
+    private JRadioButton radioButton_30;
+    private JRadioButton radioButton_31;
+    private JTextField textField_1;
+    private JButton button_1;
 
     /**
      * Launch the application.
@@ -418,11 +458,11 @@ public class FrontPanel {
     private void initComponents() {
         frmCsciClassProject = new JFrame();
         frmCsciClassProject.setTitle("CSCI6461 Class Project");
-        frmCsciClassProject.setBounds(100, 100, 1096, 845);
+        frmCsciClassProject.setBounds(100, 100, 1097, 913);
         frmCsciClassProject.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         pnlRegisters = new JPanel();
-        pnlRegisters.setBounds(14, 169, 782, 617);
+        pnlRegisters.setBounds(14, 169, 780, 684);
 
         pnlR3 = new JPanel();
 
@@ -1374,6 +1414,130 @@ public class FrontPanel {
         frmCsciClassProject.getContentPane().setLayout(null);
         frmCsciClassProject.getContentPane().add(pnlOp);
         frmCsciClassProject.getContentPane().add(pnlRegisters);
+        
+        panel_1 = new JPanel();
+        pnlRegisters.add(panel_1);
+        
+        lblFr = new JLabel("FR0");
+        panel_1.add(lblFr);
+        
+        radioButton = new JRadioButton("");
+        panel_1.add(radioButton);
+        
+        radioButton_1 = new JRadioButton("");
+        panel_1.add(radioButton_1);
+        
+        radioButton_2 = new JRadioButton("");
+        panel_1.add(radioButton_2);
+        
+        radioButton_3 = new JRadioButton("");
+        panel_1.add(radioButton_3);
+        
+        radioButton_4 = new JRadioButton("");
+        panel_1.add(radioButton_4);
+        
+        radioButton_5 = new JRadioButton("");
+        panel_1.add(radioButton_5);
+        
+        radioButton_6 = new JRadioButton("");
+        panel_1.add(radioButton_6);
+        
+        radioButton_7 = new JRadioButton("");
+        panel_1.add(radioButton_7);
+        
+        radioButton_8 = new JRadioButton("");
+        panel_1.add(radioButton_8);
+        
+        radioButton_9 = new JRadioButton("");
+        panel_1.add(radioButton_9);
+        
+        radioButton_10 = new JRadioButton("");
+        panel_1.add(radioButton_10);
+        
+        radioButton_11 = new JRadioButton("");
+        panel_1.add(radioButton_11);
+        
+        radioButton_12 = new JRadioButton("");
+        panel_1.add(radioButton_12);
+        
+        radioButton_13 = new JRadioButton("");
+        panel_1.add(radioButton_13);
+        
+        radioButton_14 = new JRadioButton("");
+        panel_1.add(radioButton_14);
+        
+        radioButton_15 = new JRadioButton("");
+        panel_1.add(radioButton_15);
+        
+        textField = new JTextField();
+        textField.setEditable(false);
+        textField.setColumns(10);
+        panel_1.add(textField);
+        
+        button = new JButton("store");
+        panel_1.add(button);
+        
+        panel_2 = new JPanel();
+        pnlRegisters.add(panel_2);
+        
+        lblFr_1 = new JLabel("FR1");
+        panel_2.add(lblFr_1);
+        
+        radioButton_16 = new JRadioButton("");
+        panel_2.add(radioButton_16);
+        
+        radioButton_17 = new JRadioButton("");
+        panel_2.add(radioButton_17);
+        
+        radioButton_18 = new JRadioButton("");
+        panel_2.add(radioButton_18);
+        
+        radioButton_19 = new JRadioButton("");
+        panel_2.add(radioButton_19);
+        
+        radioButton_20 = new JRadioButton("");
+        panel_2.add(radioButton_20);
+        
+        radioButton_21 = new JRadioButton("");
+        panel_2.add(radioButton_21);
+        
+        radioButton_22 = new JRadioButton("");
+        panel_2.add(radioButton_22);
+        
+        radioButton_23 = new JRadioButton("");
+        panel_2.add(radioButton_23);
+        
+        radioButton_24 = new JRadioButton("");
+        panel_2.add(radioButton_24);
+        
+        radioButton_25 = new JRadioButton("");
+        panel_2.add(radioButton_25);
+        
+        radioButton_26 = new JRadioButton("");
+        panel_2.add(radioButton_26);
+        
+        radioButton_27 = new JRadioButton("");
+        panel_2.add(radioButton_27);
+        
+        radioButton_28 = new JRadioButton("");
+        panel_2.add(radioButton_28);
+        
+        radioButton_29 = new JRadioButton("");
+        panel_2.add(radioButton_29);
+        
+        radioButton_30 = new JRadioButton("");
+        panel_2.add(radioButton_30);
+        
+        radioButton_31 = new JRadioButton("");
+        panel_2.add(radioButton_31);
+        
+        textField_1 = new JTextField();
+        textField_1.setEditable(false);
+        textField_1.setColumns(10);
+        panel_2.add(textField_1);
+        
+        button_1 = new JButton("store");
+        panel_2.add(button_1);
         frmCsciClassProject.getContentPane().add(btnIPL);
         frmCsciClassProject.getContentPane().add(pnlPrinter);
         frmCsciClassProject.getContentPane().add(testPanel);

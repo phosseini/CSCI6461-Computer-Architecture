@@ -95,6 +95,14 @@ public class Registers {
      */
     int fr0;
 
+    public void setFr0(int fr0) {
+        this.fr0 = fr0;
+    }
+
+    public void setFr1(int fr1) {
+        this.fr1 = fr1;
+    }
+
     /**
      * floating point register <br/>
      * 16 bits
