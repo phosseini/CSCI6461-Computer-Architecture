@@ -90,6 +90,18 @@ public class Registers {
     int x3;
 
     /**
+     * floating point register <br/>
+     * 16 bits
+     */
+    int fr0;
+
+    /**
+     * floating point register <br/>
+     * 16 bits
+     */
+    int fr1;
+
+    /**
      * initialize all the registers
      */
     public Registers() {
@@ -158,13 +170,14 @@ public class Registers {
      *            1 - UNDERFLOW</br>
      *            2 - DIVZERO</br>
      *            3 - EQUALORNOT
-     * @param flag set either 1 or 0
+     * @param flag
+     *            set either 1 or 0
      * 
      */
     public void setCCElementByBit(int bitNum, boolean flag) {
-        if(flag){
+        if (flag) {
             this.cc = (this.cc | (1 << bitNum));
-        }else{
+        } else {
             int mask = ~(1 << bitNum);
             this.cc = this.cc & mask;
         }
@@ -354,6 +367,21 @@ public class Registers {
 
     }
 
+    public int getFRByNum(int num) {
+        if (num == 0)
+            return this.fr0;
+        if (num == 1)
+            return this.fr1;
+        return 0;
+    }
+
+    public void setFRByNum(int num, int fr) {
+        if (num == 0)
+            this.fr0 = fr;
+        if (num == 1)
+            this.fr1 = fr;
+    }
+
     public int getRegistersByName(String name) {
         if (name.equals("CC"))
             return this.cc;
@@ -383,6 +411,10 @@ public class Registers {
             return this.x2;
         if (name.equals("X3"))
             return this.x3;
+        if (name.equals("FR0"))
+            return this.fr0;
+        if (name.equals("FR1"))
+            return this.fr1;
         return 0;
     }
 
@@ -414,6 +446,10 @@ public class Registers {
         if (name.equals("X2"))
             return 16;
         if (name.equals("X3"))
+            return 16;
+        if (name.equals("FR0"))
+            return 16;
+        if (name.equals("FR1"))
             return 16;
         return 0;
     }
