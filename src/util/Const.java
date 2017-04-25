@@ -1133,6 +1133,13 @@ public class Const {
 		OPCODE.put("010101", "DVD");
 		OPCODE.put("010110", "TRR");
 		OPCODE.put("111111", "CHK");
+		OPCODE.put("100001", "FADD");
+		OPCODE.put("100010", "FSUB");
+		OPCODE.put("100011", "VADD");
+		OPCODE.put("100100", "VSUB");
+		OPCODE.put("100101", "CNVRT");
+		OPCODE.put("110010", "LDFR");
+		OPCODE.put("110011", "STFR");
 	}
 
 }
