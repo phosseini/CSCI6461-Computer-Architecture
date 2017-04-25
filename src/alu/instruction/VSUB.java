@@ -17,8 +17,8 @@ public class VSUB extends AbstractInstruction {
 	@Override
 	public void execute(String instruction, Registers registers, MCU mcu) throws MachineFaultException {
 		// -----------------------------------
-		// 033: VADD -> Vector ADD 
-		// V1(i) <- V1(i) + V2(i)
+		// 036: VSUB -> Vector SUB
+		// V1(i) <- V1(i) - V2(i)
 		// -----------------------------------
 		fr = StringUtil.binaryToDecimal(instruction.substring(6, 8));
 		ix = StringUtil.binaryToDecimal(instruction.substring(8, 10));
@@ -39,7 +39,7 @@ public class VSUB extends AbstractInstruction {
         registers.setMBR(mcu.fetchFromCache(registers.getMAR()));
         int v2 = registers.getMBR();
      // we get the second vector from EA+1
-        int result = v1+v2;
+        int result = v1 - v2;
         
 		// we check if we have an overflow
 		int MAX_VALUE = 2^6;
@@ -60,7 +60,7 @@ public class VSUB extends AbstractInstruction {
 	@Override
 	public String getExecuteMessage() {
 		// TODO Auto-generated method stub
-		return "FADD " + fr + ", " + ix + ", " + address_V1 + ", "+address_V2+", " + i;
+		return "FSUB " + fr + ", " + ix + ", " + address_V1 + ", "+address_V2+", " + i;
 	}
 
 }
