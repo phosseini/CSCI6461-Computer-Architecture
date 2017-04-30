@@ -26,4 +26,8 @@ We are working on designing and implementing the basic machine architecture in t
 ## Component 3: Execute All Instructions (Finishing Date: 4/5/2017)
 - Handling machine faults and TRAP.
 - Extending the user interface
-- Demonstrate 2nd program running on our simulator. 
+- Demonstrate 2nd program running on our simulator.
+
+## Component 4: Floating point and vector operations (ongoing)
+- Designing and implementing the modules for floating point and vector operations.
+- Designing and implementing simple pipelining.
