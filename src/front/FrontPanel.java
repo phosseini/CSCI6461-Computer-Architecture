@@ -418,6 +418,7 @@ public class FrontPanel {
     private JRadioButton radioButton_31;
     private JTextField textFieldFR1;
     private JButton btnStoreFR1;
+    private JButton btnExample;
 
     /**
      * Launch the application.
@@ -1198,36 +1199,6 @@ public class FrontPanel {
         pnlRegisters.add(pnlMAR);
         pnlRegisters.add(pnlMBR);
         pnlRegisters.add(pnlMSR);
-
-        pnlMFR = new JPanel();
-
-        lblMFR = new JLabel("MFR");
-        pnlMFR.add(lblMFR);
-
-        rdbMFR_4 = new JRadioButton("");
-        pnlMFR.add(rdbMFR_4);
-
-        rdbMFR_3 = new JRadioButton("");
-        pnlMFR.add(rdbMFR_3);
-
-        rdbMFR_2 = new JRadioButton("");
-        pnlMFR.add(rdbMFR_2);
-
-        rdbMFR_1 = new JRadioButton("");
-        pnlMFR.add(rdbMFR_1);
-
-        textFieldMFR = new JTextField();
-        textFieldMFR.setEditable(false);
-        textFieldMFR.setColumns(10);
-        pnlMFR.add(textFieldMFR);
-
-        btnStoreMFR = new JButton("store");
-        btnStoreMFR.addActionListener(new ActionListener() {
-        	public void actionPerformed(ActionEvent e) {
-        	}
-        });
-        pnlMFR.add(btnStoreMFR);
-        pnlRegisters.add(pnlMFR);
         pnlRegisters.add(pnlPC);
         pnlRegisters.add(pnlIR);
 
@@ -1550,6 +1521,36 @@ public class FrontPanel {
         
         btnStoreFR1 = new JButton("store");
         pnlFR1.add(btnStoreFR1);
+        
+                pnlMFR = new JPanel();
+                
+                        lblMFR = new JLabel("MFR");
+                        pnlMFR.add(lblMFR);
+                        
+                                rdbMFR_4 = new JRadioButton("");
+                                pnlMFR.add(rdbMFR_4);
+                                
+                                        rdbMFR_3 = new JRadioButton("");
+                                        pnlMFR.add(rdbMFR_3);
+                                        
+                                                rdbMFR_2 = new JRadioButton("");
+                                                pnlMFR.add(rdbMFR_2);
+                                                
+                                                        rdbMFR_1 = new JRadioButton("");
+                                                        pnlMFR.add(rdbMFR_1);
+                                                        
+                                                                textFieldMFR = new JTextField();
+                                                                textFieldMFR.setEditable(false);
+                                                                textFieldMFR.setColumns(10);
+                                                                pnlMFR.add(textFieldMFR);
+                                                                
+                                                                        btnStoreMFR = new JButton("store");
+                                                                        btnStoreMFR.addActionListener(new ActionListener() {
+                                                                        	public void actionPerformed(ActionEvent e) {
+                                                                        	}
+                                                                        });
+                                                                        pnlMFR.add(btnStoreMFR);
+                                                                        pnlRegisters.add(pnlMFR);
         frmCsciClassProject.getContentPane().add(btnIPL);
         frmCsciClassProject.getContentPane().add(pnlPrinter);
         frmCsciClassProject.getContentPane().add(testPanel);
@@ -1589,6 +1590,10 @@ public class FrontPanel {
         btnFindWord = new JButton("find word");
         pnlProgram2.add(btnFindWord);
         setEnableForPanel(pnlProgram2, false);
+        
+        btnExample = new JButton("example");
+        btnExample.setBounds(885, 818, 93, 23);
+        frmCsciClassProject.getContentPane().add(btnExample);
         enableFlag = 0;
 
     }
@@ -2208,6 +2213,20 @@ public class FrontPanel {
                         prog2Step = 0;
                     }
                 }
+            }
+        });
+        
+        btnExample.addMouseListener(new MouseAdapter() {
+            public void mousePressed(MouseEvent e){
+                registers.setPC(1200);
+                do {
+                    registers.setMAR(registers.getPC());
+                    registers.setMBR(mcu.fetchFromCache(registers.getMAR()));
+                    registers.setIR(registers.getMBR());
+                    runInstruction(registers.getBinaryStringIr(), registers, mcu);
+                } while (registers.getPC() <= 1300 && registers.getPC() >= 1200);
+
+                refreshRegistersPanel();
             }
         });
 
