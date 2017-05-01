@@ -458,11 +458,11 @@ public class FrontPanel {
     private void initComponents() {
         frmCsciClassProject = new JFrame();
         frmCsciClassProject.setTitle("CSCI6461 Class Project");
-        frmCsciClassProject.setBounds(100, 100, 1097, 913);
+        frmCsciClassProject.setBounds(100, 100, 1097, 980);
         frmCsciClassProject.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         pnlRegisters = new JPanel();
-        pnlRegisters.setBounds(14, 169, 780, 684);
+        pnlRegisters.setBounds(14, 169, 780, 721);
 
         pnlR3 = new JPanel();
 
