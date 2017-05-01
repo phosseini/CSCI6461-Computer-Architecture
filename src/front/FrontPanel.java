@@ -378,7 +378,7 @@ public class FrontPanel {
     private JLabel lblProgram;
     private JButton btnLoadSentences;
     private JButton btnFindWord;
-    private JPanel panel_1;
+    private JPanel pnlFR0;
     private JLabel lblFr;
     private JRadioButton radioButton;
     private JRadioButton radioButton_1;
@@ -396,9 +396,9 @@ public class FrontPanel {
     private JRadioButton radioButton_13;
     private JRadioButton radioButton_14;
     private JRadioButton radioButton_15;
-    private JTextField textField;
-    private JButton button;
-    private JPanel panel_2;
+    private JTextField textFieldFR0;
+    private JButton btnStoreFR0;
+    private JPanel pnlFR1;
     private JLabel lblFr_1;
     private JRadioButton radioButton_16;
     private JRadioButton radioButton_17;
@@ -416,8 +416,8 @@ public class FrontPanel {
     private JRadioButton radioButton_29;
     private JRadioButton radioButton_30;
     private JRadioButton radioButton_31;
-    private JTextField textField_1;
-    private JButton button_1;
+    private JTextField textFieldFR1;
+    private JButton btnStoreFR1;
 
     /**
      * Launch the application.
@@ -950,6 +950,10 @@ public class FrontPanel {
         pnlIR.add(textFieldIR);
 
         btnStoreIR = new JButton("store");
+        btnStoreIR.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        	}
+        });
         pnlIR.add(btnStoreIR);
 
         pnlPC = new JPanel();
@@ -1218,6 +1222,10 @@ public class FrontPanel {
         pnlMFR.add(textFieldMFR);
 
         btnStoreMFR = new JButton("store");
+        btnStoreMFR.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        	}
+        });
         pnlMFR.add(btnStoreMFR);
         pnlRegisters.add(pnlMFR);
         pnlRegisters.add(pnlPC);
@@ -1415,129 +1423,133 @@ public class FrontPanel {
         frmCsciClassProject.getContentPane().add(pnlOp);
         frmCsciClassProject.getContentPane().add(pnlRegisters);
         
-        panel_1 = new JPanel();
-        pnlRegisters.add(panel_1);
+        pnlFR0 = new JPanel();
+        pnlRegisters.add(pnlFR0);
         
         lblFr = new JLabel("FR0");
-        panel_1.add(lblFr);
+        pnlFR0.add(lblFr);
         
         radioButton = new JRadioButton("");
-        panel_1.add(radioButton);
+        pnlFR0.add(radioButton);
         
         radioButton_1 = new JRadioButton("");
-        panel_1.add(radioButton_1);
+        pnlFR0.add(radioButton_1);
         
         radioButton_2 = new JRadioButton("");
-        panel_1.add(radioButton_2);
+        pnlFR0.add(radioButton_2);
         
         radioButton_3 = new JRadioButton("");
-        panel_1.add(radioButton_3);
+        pnlFR0.add(radioButton_3);
         
         radioButton_4 = new JRadioButton("");
-        panel_1.add(radioButton_4);
+        pnlFR0.add(radioButton_4);
         
         radioButton_5 = new JRadioButton("");
-        panel_1.add(radioButton_5);
+        pnlFR0.add(radioButton_5);
         
         radioButton_6 = new JRadioButton("");
-        panel_1.add(radioButton_6);
+        pnlFR0.add(radioButton_6);
         
         radioButton_7 = new JRadioButton("");
-        panel_1.add(radioButton_7);
+        pnlFR0.add(radioButton_7);
         
         radioButton_8 = new JRadioButton("");
-        panel_1.add(radioButton_8);
+        pnlFR0.add(radioButton_8);
         
         radioButton_9 = new JRadioButton("");
-        panel_1.add(radioButton_9);
+        pnlFR0.add(radioButton_9);
         
         radioButton_10 = new JRadioButton("");
-        panel_1.add(radioButton_10);
+        pnlFR0.add(radioButton_10);
         
         radioButton_11 = new JRadioButton("");
-        panel_1.add(radioButton_11);
+        pnlFR0.add(radioButton_11);
         
         radioButton_12 = new JRadioButton("");
-        panel_1.add(radioButton_12);
+        pnlFR0.add(radioButton_12);
         
         radioButton_13 = new JRadioButton("");
-        panel_1.add(radioButton_13);
+        pnlFR0.add(radioButton_13);
         
         radioButton_14 = new JRadioButton("");
-        panel_1.add(radioButton_14);
+        pnlFR0.add(radioButton_14);
         
         radioButton_15 = new JRadioButton("");
-        panel_1.add(radioButton_15);
+        pnlFR0.add(radioButton_15);
         
-        textField = new JTextField();
-        textField.setEditable(false);
-        textField.setColumns(10);
-        panel_1.add(textField);
+        textFieldFR0 = new JTextField();
+        textFieldFR0.setEditable(false);
+        textFieldFR0.setColumns(10);
+        pnlFR0.add(textFieldFR0);
         
-        button = new JButton("store");
-        panel_1.add(button);
+        btnStoreFR0 = new JButton("store");
+        btnStoreFR0.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        	}
+        });
+        pnlFR0.add(btnStoreFR0);
         
-        panel_2 = new JPanel();
-        pnlRegisters.add(panel_2);
+        pnlFR1 = new JPanel();
+        pnlRegisters.add(pnlFR1);
         
         lblFr_1 = new JLabel("FR1");
-        panel_2.add(lblFr_1);
+        pnlFR1.add(lblFr_1);
         
         radioButton_16 = new JRadioButton("");
-        panel_2.add(radioButton_16);
+        pnlFR1.add(radioButton_16);
         
         radioButton_17 = new JRadioButton("");
-        panel_2.add(radioButton_17);
+        pnlFR1.add(radioButton_17);
         
         radioButton_18 = new JRadioButton("");
-        panel_2.add(radioButton_18);
+        pnlFR1.add(radioButton_18);
         
         radioButton_19 = new JRadioButton("");
-        panel_2.add(radioButton_19);
+        pnlFR1.add(radioButton_19);
         
         radioButton_20 = new JRadioButton("");
-        panel_2.add(radioButton_20);
+        pnlFR1.add(radioButton_20);
         
         radioButton_21 = new JRadioButton("");
-        panel_2.add(radioButton_21);
+        pnlFR1.add(radioButton_21);
         
         radioButton_22 = new JRadioButton("");
-        panel_2.add(radioButton_22);
+        pnlFR1.add(radioButton_22);
         
         radioButton_23 = new JRadioButton("");
-        panel_2.add(radioButton_23);
+        pnlFR1.add(radioButton_23);
         
         radioButton_24 = new JRadioButton("");
-        panel_2.add(radioButton_24);
+        pnlFR1.add(radioButton_24);
         
         radioButton_25 = new JRadioButton("");
-        panel_2.add(radioButton_25);
+        pnlFR1.add(radioButton_25);
         
         radioButton_26 = new JRadioButton("");
-        panel_2.add(radioButton_26);
+        pnlFR1.add(radioButton_26);
         
         radioButton_27 = new JRadioButton("");
-        panel_2.add(radioButton_27);
+        pnlFR1.add(radioButton_27);
         
         radioButton_28 = new JRadioButton("");
-        panel_2.add(radioButton_28);
+        pnlFR1.add(radioButton_28);
         
         radioButton_29 = new JRadioButton("");
-        panel_2.add(radioButton_29);
+        pnlFR1.add(radioButton_29);
         
         radioButton_30 = new JRadioButton("");
-        panel_2.add(radioButton_30);
+        pnlFR1.add(radioButton_30);
         
         radioButton_31 = new JRadioButton("");
-        panel_2.add(radioButton_31);
+        pnlFR1.add(radioButton_31);
         
-        textField_1 = new JTextField();
-        textField_1.setEditable(false);
-        textField_1.setColumns(10);
-        panel_2.add(textField_1);
+        textFieldFR1 = new JTextField();
+        textFieldFR1.setEditable(false);
+        textFieldFR1.setColumns(10);
+        pnlFR1.add(textFieldFR1);
         
-        button_1 = new JButton("store");
-        panel_2.add(button_1);
+        btnStoreFR1 = new JButton("store");
+        pnlFR1.add(btnStoreFR1);
         frmCsciClassProject.getContentPane().add(btnIPL);
         frmCsciClassProject.getContentPane().add(pnlPrinter);
         frmCsciClassProject.getContentPane().add(testPanel);
@@ -1818,7 +1830,7 @@ public class FrontPanel {
                 printConsole("PC is set to: " + value);
             }
         });
-        // add listener to the store button of ID
+        // add listener to the store button of IR
         btnStoreIR.addMouseListener(new MouseAdapter() {
             public void mousePressed(MouseEvent e) {
                 StringBuffer buffer = new StringBuffer();
@@ -1853,7 +1865,47 @@ public class FrontPanel {
                 printConsole("CC is set to: " + value);
             }
         });
+        
+        // add listener to the store button of FR0
+        btnStoreFR0.addMouseListener(new MouseAdapter() {
+        	 public void mousePressed(MouseEvent e) {
+                 StringBuffer buffer = new StringBuffer();
+                 for (Component com : pnlFR0.getComponents()) {
+                     if (com instanceof JRadioButton) {
+                         JRadioButton rdb = (JRadioButton) com;
+                         buffer = rdb.isSelected() ? buffer.append("1") : buffer.append("0");
+                     }
+                 }
 
+                 int value = StringUtil.binaryToDecimal(buffer.toString());
+                 registers.setFR0(value);
+                 textFieldFR0.setText(String.valueOf(registers.getConvertFRByNum(0)));
+                 
+                 System.out.println("FR0 is set to: " + value);
+                 printConsole("FR0 is set to: " + value);
+             }
+        });
+        
+        // add listener to the store button of FR1
+        btnStoreFR1.addMouseListener(new MouseAdapter() {
+       	 public void mousePressed(MouseEvent e) {
+                StringBuffer buffer = new StringBuffer();
+                for (Component com : pnlFR1.getComponents()) {
+                    if (com instanceof JRadioButton) {
+                        JRadioButton rdb = (JRadioButton) com;
+                        buffer = rdb.isSelected() ? buffer.append("1") : buffer.append("0");
+                    }
+                }
+
+                int value = StringUtil.binaryToDecimal(buffer.toString());
+                registers.setFR1(value);
+                textFieldFR1.setText(String.valueOf(registers.getConvertFRByNum(1)));
+                
+                System.out.println("FR1 is set to: " + value);
+                printConsole("FR1 is set to: " + value);
+            }
+       });
+        
         // add listener to the execute button of instruction
         btnExecute.addMouseListener(new MouseAdapter() {
             public void mousePressed(MouseEvent e) {

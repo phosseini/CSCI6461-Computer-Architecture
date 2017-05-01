@@ -345,7 +345,23 @@ public class Registers {
     public void setX3(int x3) {
         this.x3 = x3;
     }
-
+    
+    public int getFR0(){
+    	return fr0;
+    }
+    
+    public void setFR0(int fr0) {
+    	this.fr0=fr0;
+    }
+    
+    public int getFR1() {
+    	return fr1;
+    }
+    
+    public void setFR1(int fr1) {
+    	this.fr1=fr1;
+    }
+    
     /**
      * @param num
      *            from 1 to 3
@@ -376,11 +392,29 @@ public class Registers {
             this.x3 = x;
 
     }
+    public int getFRByNum(int num){
+    	if(num==0){
+    		return this.fr0;
+    	}
+    	if(num==1){
+    		return this.fr1;
+    	}
+    	return 0;
+    }
+    
+    public void setFRByNum(int num, int fr){
+    	if (num==0){
+    		this.fr0=fr;
+    	}
+    	if (num==1){
+    		this.fr1=fr;
+    	}
+    }
     
     String exp="0000000";
     String man="00000000";
     String output=null;
-    public int getFRByNum(int num) {
+    public int getConvertFRByNum(int num) {
         if (num == 0){
         	String fr0s=Integer.toBinaryString(fr0);
         	fr0s=fr0s.replaceFirst("0000000000000000", "");
@@ -479,7 +513,7 @@ public class Registers {
         return 0;
     }
 
-    public void setFRByNum(int num, int fr) {
+    public void setConvertFRByNum(int num, int fr) {
     	String input = Integer.toBinaryString(fr);
     	
     	if (num == 0){

@@ -33,7 +33,7 @@ public class CNVRT extends AbstractInstruction{
 		}
 		if(F==1){
 			
-			registers.setFRByNum(0, registers.getMBR());
+			registers.setConvertFRByNum(0, registers.getMBR());
 		}
 		registers.increasePCByOne();
 	}

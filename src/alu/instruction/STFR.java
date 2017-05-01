@@ -25,6 +25,7 @@ public class STFR extends AbstractInstruction{
 		
 		int cfr=registers.getFRByNum(fr);
 		String frs=Integer.toBinaryString(cfr);
+		
 		frs=frs.replaceFirst("0000000000000000", "");
 		
 		int man=Integer.parseInt(frs.substring(8, 16));
