@@ -932,9 +932,9 @@ public class Const {
 	}
 	public static final HashMap<String, Integer> Pre3 = new HashMap<>();
 	static {
-		//Pre3.put("100", 3);
-		//Pre3.put("101", 4);
-		//Pre3.put("102", 5);
+		Pre3.put("100", 3);
+		Pre3.put("101", 4);
+		Pre3.put("102", 5);
 		Pre3.put("200", 80);
 		Pre3.put("201", 100);
 		Pre3.put("202", 120);
