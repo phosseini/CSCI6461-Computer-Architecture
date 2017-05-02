@@ -6,13 +6,12 @@ import util.EffectiveAddress;
 import util.MachineFaultException;
 import util.StringUtil;
 
-public class STFR extends AbstractInstruction{
-	
+public class STFR extends AbstractInstruction {
+
 	int fr;
 	int ix;
 	int address;
 	int i;
-	
 
 	@Override
 	public void execute(String instruction, Registers registers, MCU mcu) throws MachineFaultException {
@@ -22,6 +21,7 @@ public class STFR extends AbstractInstruction{
 		i = StringUtil.binaryToDecimal(instruction.substring(8, 9));
 		address = StringUtil.binaryToDecimal(instruction.substring(11, 16));
 		int effectiveAddress = EffectiveAddress.calculateEA(ix, address, i, mcu, registers);
+
 		
 		int cfr=registers.getFRByNum(fr);
 		String buffer="0000000000000000";
@@ -32,21 +32,26 @@ public class STFR extends AbstractInstruction{
 		int man=Integer.parseInt(frs.substring(8, 16),2);
 		int exp=Integer.parseInt(frs.substring(0, 8),2);
 		
+
+
+		
+
+
 		registers.setMAR(effectiveAddress);
 		registers.setMBR(exp);
 		mcu.storeIntoCache(registers.getMAR(), registers.getMBR());
-		
-		registers.setMAR(effectiveAddress+1);
+
+		registers.setMAR(effectiveAddress + 1);
 		registers.setMBR(man);
 		mcu.storeIntoCache(registers.getMAR(), registers.getMBR());
-		
+
 		registers.increasePCByOne();
 	}
 
 	@Override
 	public String getExecuteMessage() {
 		// TODO Auto-generated method stub
-		return "STFR"+ fr + ", " + ix + ", " + address + "," +i;
+		return "STFR" + fr + ", " + ix + ", " + address + "," + i;
 	}
 
 }

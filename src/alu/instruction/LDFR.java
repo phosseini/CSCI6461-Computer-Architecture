@@ -33,10 +33,13 @@ public class LDFR extends AbstractInstruction{
 		registers.setMBR(mcu.fetchFromCache(registers.getMAR()));
 		int manI=registers.getMBR();
 		
+
 		String temp=Integer.toString(expI);
 		exp=exp.substring(0,7-temp.length())+temp;
 		String temp1=Integer.toString(manI);
 		man=temp1+man.substring(temp1.length());
+
+		
 		String frs=exp+man;
 		
 		registers.setFRByNum(fr, Integer.parseInt(frs,2));
