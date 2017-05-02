@@ -35,7 +35,7 @@ public class FADD extends AbstractInstruction {
 		// register
 		registers.setMBR(mcu.fetchFromCache(registers.getMAR()));
 
-		int result = registers.getConvertFRByNum(fr) + registers.getMBR();
+		int result = registers.getFRByNum(fr) + registers.getMBR();
 
 		// we check if we have an overflow
 		int MAX_VALUE = 2^6;
@@ -46,7 +46,7 @@ public class FADD extends AbstractInstruction {
 			// if we do not have an overflow, we update the value of
 			// register
 
-			registers.setConvertFRByNum(fr, result);			
+			registers.setFRByNum(fr, result);			
 
 		}
 
