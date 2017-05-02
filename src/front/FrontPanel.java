@@ -1592,7 +1592,7 @@ public class FrontPanel {
         setEnableForPanel(pnlProgram2, false);
         
         btnExample = new JButton("example");
-        btnExample.setBounds(804, 741, 212, 23);
+        btnExample.setBounds(960, 658, 212, 23);
         frmCsciClassProject.getContentPane().add(btnExample);
         enableFlag = 0;
 

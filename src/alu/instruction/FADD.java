@@ -45,7 +45,9 @@ public class FADD extends AbstractInstruction {
 		} else {
 			// if we do not have an overflow, we update the value of
 			// register
+
 			registers.setConvertFRByNum(fr, result);			
+
 		}
 
 		registers.increasePCByOne();
