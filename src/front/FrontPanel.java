@@ -1066,6 +1066,10 @@ public class FrontPanel {
         textFieldR0.setColumns(10);
 
         btnStoreR0 = new JButton("store");
+        btnStoreR0.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        	}
+        });
         pnlR0.add(btnStoreR0);
         pnlRegisters.add(pnlR0);
 
@@ -1591,8 +1595,8 @@ public class FrontPanel {
         pnlProgram2.add(btnFindWord);
         setEnableForPanel(pnlProgram2, false);
         
-        btnExample = new JButton("example");
-        btnExample.setBounds(960, 658, 212, 23);
+        btnExample = new JButton("VADD Example");
+        btnExample.setBounds(886, 740, 130, 23);
         frmCsciClassProject.getContentPane().add(btnExample);
         enableFlag = 0;
 
