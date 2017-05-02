@@ -519,14 +519,14 @@ public class Registers {
     	String input=null;
     	
     	if(num==0){
-        if(fr>=0){
-            input = Integer.toBinaryString(fr);
-        	man=input+man.substring(input.length());
-        	String temp=Integer.toBinaryString(input.length());
-        	exp=exp.substring(0, 7-temp.length())+temp;
-        	output="0"+exp+man;
+    		if(fr>=0){
+    			input = Integer.toBinaryString(fr);
+    			man=input+man.substring(input.length());
+    			String temp=Integer.toBinaryString(input.length());
+    			exp=exp.substring(0, 7-temp.length())+temp;
+    			output="0"+exp+man;
         	
-        }else{
+    		}else{
         	fr=-1*fr;
         	input=Integer.toBinaryString(fr);
         	
