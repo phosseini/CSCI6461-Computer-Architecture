@@ -22,6 +22,9 @@ public class LDFR extends AbstractInstruction{
 		address = StringUtil.binaryToDecimal(instruction.substring(11, 16));
 		int effectiveAddress = EffectiveAddress.calculateEA(ix, address, i, mcu, registers);
 		
+		String exp="0000000";
+	    String man="00000000";
+	    
 		registers.setMAR(effectiveAddress);
 		registers.setMBR(mcu.fetchFromCache(registers.getMAR()));
 		int expI=registers.getMBR();
@@ -30,10 +33,10 @@ public class LDFR extends AbstractInstruction{
 		registers.setMBR(mcu.fetchFromCache(registers.getMAR()));
 		int manI=registers.getMBR();
 		
-		String exp=Integer.toString(expI);
-		exp=exp.substring(23);
-		String man=Integer.toString(manI);
-		man=man.substring(23);
+		String temp=Integer.toString(expI);
+		exp=exp.substring(0,7-temp.length())+temp;
+		String temp1=Integer.toString(manI);
+		man=temp1+man.substring(temp1.length());
 		String frs=exp+man;
 		
 		registers.setFRByNum(fr, Integer.parseInt(frs,2));
