@@ -28,7 +28,7 @@ public class Const {
 	public static final Integer PG_P2_BASE = 1100;
 	public static final Integer PG_P2_END = 1162;
 	public static final Integer PG_3_BASE = 1200;
-	public static final Integer PG_3_END = 1203;
+	public static final Integer PG_3_END = 1204;
 	// public static final HashMap<String, Integer> ROM = new HashMap<>();
 	// static {
 	// // address-value pair Boot Program
@@ -942,8 +942,8 @@ public class Const {
 		Pre3.put("27", 100);
 		Pre3.put("26", 101);
 		Pre3.put("25", 102);
-		Pre3.put("31", 0);
-		Pre3.put("30", 1);
+		Pre3.put("31", 10100000);
+		Pre3.put("30", 11);
 		Pre3.put("29", 10);
 	}
 
@@ -952,11 +952,11 @@ public class Const {
 static {
 
 	PG_3.put("1200", 0x8D3B);
-	PG_3.put("1201", 0x841D);
-	PG_3.put("1202", 0x881D);
-	PG_3.put("1203", 0xC81E);
+	PG_3.put("1201", 0x881D);
+	PG_3.put("1202", 0xC81E);
+	PG_3.put("1203", 0x841D);
+	PG_3.put("1204", 0xCC1E);
 
-	
 	
 
 }
