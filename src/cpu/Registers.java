@@ -411,103 +411,105 @@ public class Registers {
     	}
     }
     
-    String exp="0000000";
-    String man="00000000";
+    String exp=null;
+    String man=null;
     String output=null;
     public int getConvertFRByNum(int num) {
         if (num == 0){
         	String fr0s=Integer.toBinaryString(fr0);
-        	fr0s=fr0s.replaceFirst("0000000000000000", "");
-        	exp=fr0s.substring(1, 8);
-        	man=fr0s.substring(8, 16);
-        	char bit=fr0s.charAt(0);
+        	int len=fr0s.length();
         	int expI;
         	int manI;
         	
-        	if(bit==0){
-        		expI=Integer.parseInt(exp);
-        		manI=Integer.parseInt(man.substring(0, expI));
-        		fr0=manI;
+        	if(len==16){
+        	exp=fr0s.substring(1, 8);
+        	man=fr0s.substring(8, 16);
+        	expI=Integer.parseInt(exp,2);
+    		man=man.substring(0, expI);
+    		char[] ori=man.toCharArray();
+    		for(int i=expI-1; i>=0; i--){
+    		   
+    			if(ori[i]=='1'){
+    				ori[i]='0';
+    				break;
+    			}else{
+    				ori[i]='1';
+    				continue;
+    			}
+    		
+    		}
+    		for( int k=0; k<=expI-1; k++){
+    			if(ori[k]=='1'){
+    				ori[k]='0';
+    				
+    			}else{
+    				ori[k]='1';
+    				
+    			}
+    		}
+    		man=new String(ori);
+    		manI=Integer.parseInt(man,2);
+    		fr0=-1*manI;
         	}else{
-        		expI=Integer.parseInt(exp);
-        		man=man.substring(0, expI);
-        		char[] ori=null;
-        		for(int j=0; j<=expI-1; j++){
-        			char current1=man.charAt(j);
-        			ori[j]=current1;
-        		}
-        		for(int i=expI-1; i>=0; i--){
-        		   
-        			if(ori[i]=='1'){
-        				ori[i]='0';
-        				break;
-        			}else{
-        				ori[i]='1';
-        				continue;
-        			}
-        		
-        		}
-        		for( int k=0; k<=expI-1; k++){
-        			if(ori[k]=='1'){
-        				ori[k]='0';
-        				
-        			}else{
-        				ori[k]='1';
-        				
-        			}
-        		}
-        		man=new String(ori);
-        		manI=Integer.parseInt(man);
-        		fr0=-1*manI;
-        	}
+        	
+        	
+        		exp=fr0s.substring(0, len-8);
+        		man=fr0s.substring(len-8);
+        	
+        		expI=Integer.parseInt(exp,2);
+        		manI=Integer.parseInt(man.substring(0, expI),2);
+        		fr0=manI;
+        
+        	}	
         	
             return this.fr0;
         }
         if (num == 1){
         	String fr1s=Integer.toBinaryString(fr1);
-        	fr1s=fr1s.replaceAll("0000000000000000", "");
-        	exp=fr1s.substring(1, 8);
-        	man=fr1s.substring(8, 16);
-        	char bit=fr1s.charAt(0);
+        	int len=fr1s.length();
         	int expI;
         	int manI;
         	
-        	if(bit==0){
-        		expI=Integer.parseInt(exp);
-        		manI=Integer.parseInt(man.substring(0, expI));
-        		fr1=manI;
+        	if(len==16){
+        	exp=fr1s.substring(1, 8);
+        	man=fr1s.substring(8, 16);
+        	expI=Integer.parseInt(exp,2);
+    		man=man.substring(0, expI);
+    		char[] ori=man.toCharArray();
+    		for(int i=expI-1; i>=0; i--){
+    		   
+    			if(ori[i]=='1'){
+    				ori[i]='0';
+    				break;
+    			}else{
+    				ori[i]='1';
+    				continue;
+    			}
+    		
+    		}
+    		for( int k=0; k<=expI-1; k++){
+    			if(ori[k]=='1'){
+    				ori[k]='0';
+    				
+    			}else{
+    				ori[k]='1';
+    				
+    			}
+    		}
+    		man=new String(ori);
+    		manI=Integer.parseInt(man,2);
+    		fr1=-1*manI;
         	}else{
-        		expI=Integer.parseInt(exp);
-        		man=man.substring(0, expI);
-        		char[] ori=null;
-        		for(int j=0; j<=expI-1; j++){
-        			char current1=man.charAt(j);
-        			ori[j]=current1;
-        		}
-        		for(int i=expI-1; i>=0; i--){
-        		   
-        			if(ori[i]=='1'){
-        				ori[i]='0';
-        				break;
-        			}else{
-        				ori[i]='1';
-        				continue;
-        			}
-        		
-        		}
-        		for( int k=0; k<=expI-1; k++){
-        			if(ori[k]=='1'){
-        				ori[k]='0';
-        				
-        			}else{
-        				ori[k]='1';
-        				
-        			}
-        		}
-        		man=new String(ori);
-        		manI=Integer.parseInt(man);
-        		fr1=-1*manI;
-        	}
+        	
+        	
+        		exp=fr1s.substring(0, len-8);
+        		man=fr1s.substring(len-8);
+        	
+        		expI=Integer.parseInt(exp,2);
+        		manI=Integer.parseInt(man.substring(0, expI),2);
+        		fr1=manI;
+        
+        	}	
             return this.fr1;
         }
         return 0;

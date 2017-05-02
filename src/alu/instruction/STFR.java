@@ -28,8 +28,8 @@ public class STFR extends AbstractInstruction{
 		
 		frs=frs.replaceFirst("0000000000000000", "");
 		
-		int man=Integer.parseInt(frs.substring(8, 16));
-		int exp=Integer.parseInt(frs.substring(0, 8));
+		int man=Integer.parseInt(frs.substring(8, 16),2);
+		int exp=Integer.parseInt(frs.substring(0, 8),2);
 		
 		registers.setMAR(effectiveAddress);
 		registers.setMBR(exp);

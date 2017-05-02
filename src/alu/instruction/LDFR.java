@@ -36,7 +36,7 @@ public class LDFR extends AbstractInstruction{
 		man=man.substring(23);
 		String frs=exp+man;
 		
-		registers.setFRByNum(fr, Integer.parseInt(frs));
+		registers.setFRByNum(fr, Integer.parseInt(frs,2));
 		registers.increasePCByOne();
 	}
 
