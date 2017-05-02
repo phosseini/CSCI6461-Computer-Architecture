@@ -411,8 +411,8 @@ public class Registers {
     	}
     }
     
-    String exp=null;
-    String man=null;
+    String exp="0000000";
+    String man="00000000";
     String output=null;
     public int getConvertFRByNum(int num) {
         if (num == 0){
@@ -516,99 +516,73 @@ public class Registers {
     }
 
     public void setConvertFRByNum(int num, int fr) {
-    	String input = Integer.toBinaryString(fr);
+    	String input=null;
     	
-    	if (num == 0){
-            if(fr>=0){
-            	input = input.replace("0000000000000000", "");
-            	int i;
-            	for(i=0; i<=15; i++){
-            		char current=input.charAt(i);
-            		if(current!='0')
-            			break;
-            	}
-            	man=input.substring(i+1, 16)+man.substring(16-i, 8);
-            	String temp=Integer.toBinaryString(16-i);
-            	exp=temp.replaceAll("0000000000000000000000000", "");
-            	output="0"+exp+man;
-            	
-            }else{
-            	fr=-1*fr;
-            	input=Integer.toBinaryString(fr);
-            	input = input.replace("0000000000000000", "");
-            	int i;
-            	for(i=0; i<=15; i++){
-            		char current=input.charAt(i);
-            		if(current!='0')
-            			break;
-            	}
-            	char[] opp=null;
-            	int k=0;
-            	for(int j=i; j<=15;j++){
-            		char current1=input.substring(i+1, 16).charAt(j);
-            		if (current1=='0'){
-            			current1='1';
-            		}else{
-            			current1='0';
-            		}
-            		opp[k]=current1;
-            		k++;
-            	}
-            	for(k-=1;k>=0;k--){
-            	if(opp[k]=='0'){
-            		opp[k]='1';
-            		break;
-            	}else {
-            		opp[k]='0';
-            		continue;
-            	}
-            	}	
-            	String valid=new String(opp);	
-            	man=valid+man.substring(16-i, 8);
-            	
-            	String temp=Integer.toBinaryString(16-i);
-            	exp=temp.replaceAll("0000000000000000000000000", "");
-            	output="1"+exp+man;
-            }
+    	if(num==0){
+        if(fr>=0){
+            input = Integer.toBinaryString(fr);
+        	man=input+man.substring(input.length());
+        	String temp=Integer.toBinaryString(input.length());
+        	exp=exp.substring(0, 7-temp.length())+temp;
+        	output="0"+exp+man;
+        	
+        }else{
+        	fr=-1*fr;
+        	input=Integer.toBinaryString(fr);
+        	
+        	char[] opp=input.toCharArray();
+        	int k;
+        	for(int i=0; i<input.length();i++){
+        		
+        		if (opp[i]=='0'){
+        			opp[i]='1';
+        		}else{
+        			opp[i]='0';
+        		}
+        		
+        	}
+        	for(k=input.length()-1;k>=0;k--){
+        	if(opp[k]=='0'){
+        		opp[k]='1';
+        		break;
+        	}else {
+        		opp[k]='0';
+        		continue;
+        	}
+        	}	
+        	String valid=new String(opp);	
+        	man=valid+man.substring(input.length());
+        	
+        	String temp=Integer.toBinaryString(input.length());
+        	exp=exp.substring(0, 7-temp.length())+temp;
+        	output="1"+exp+man;
+        }
         	this.fr0 = Integer.parseInt(output);
         }
         if (num == 1){
         	if(fr>=0){
-            	input = input.replace("0000000000000000", "");
-            	int i;
-            	for(i=0; i<=15; i++){
-            		char current=input.charAt(i);
-            		if(current!='0')
-            			break;
-            	}
-            	man=input.substring(i+1, 16)+man.substring(16-i, 8);
-            	String temp=Integer.toBinaryString(16-i);
-            	exp=temp.replaceAll("0000000000000000000000000", "");
+                input = Integer.toBinaryString(fr);
+            	man=input+man.substring(input.length());
+            	String temp=Integer.toBinaryString(input.length());
+            	exp=exp.substring(0, 7-temp.length())+temp;
             	output="0"+exp+man;
             	
             }else{
             	fr=-1*fr;
             	input=Integer.toBinaryString(fr);
-            	input = input.replace("0000000000000000", "");
-            	int i;
-            	for(i=0; i<=15; i++){
-            		char current=input.charAt(i);
-            		if(current!='0')
-            			break;
-            	}
-            	char[] opp=null;
-            	int k=0;
-            	for(int j=i; j<=15;j++){
-            		char current1=input.substring(i+1, 16).charAt(j);
-            		if (current1=='0'){
-            			current1='1';
+            	
+            	char[] opp=input.toCharArray();
+            	int k;
+            	for(int i=0; i<input.length();i++){
+            		
+            		if (opp[i]=='0'){
+            			opp[i]='1';
             		}else{
-            			current1='0';
+            			opp[i]='0';
             		}
-            		opp[k]=current1;
-            		k++;
+            		
             	}
-            	for(k-=1;k>=0;k--){
+            	for(k=input.length()-1;k>=0;k--){
             	if(opp[k]=='0'){
             		opp[k]='1';
             		break;
@@ -618,10 +592,10 @@ public class Registers {
             	}
             	}	
             	String valid=new String(opp);	
-            	man=valid+man.substring(16-i, 8);
+            	man=valid+man.substring(input.length());
             	
-            	String temp=Integer.toBinaryString(16-i);
-            	exp=temp.replaceAll("0000000000000000000000000", "");
+            	String temp=Integer.toBinaryString(input.length());
+            	exp=exp.substring(0, 7-temp.length())+temp;
             	output="1"+exp+man;
             }
             this.fr1 = Integer.parseInt(output);
