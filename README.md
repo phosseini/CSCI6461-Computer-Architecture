@@ -28,6 +28,6 @@ We are working on designing and implementing the basic machine architecture in t
 - Extending the user interface
 - Demonstrate 2nd program running on our simulator.
 
-## Component 4: Floating point and vector operations (ongoing)
+## Component 4: Floating point and vector operations (Finishing Date: 5/1/2017)
 - Designing and implementing the modules for floating point and vector operations.
 - Designing and implementing simple pipelining.
