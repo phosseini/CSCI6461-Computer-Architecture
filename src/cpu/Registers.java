@@ -557,7 +557,7 @@ public class Registers {
         	exp=exp.substring(0, 7-temp.length())+temp;
         	output="1"+exp+man;
         }
-        	this.fr0 = Integer.parseInt(output);
+        	this.fr0 = Integer.parseInt(output,2);
         }
         if (num == 1){
         	if(fr>=0){
@@ -598,7 +598,7 @@ public class Registers {
             	exp=exp.substring(0, 7-temp.length())+temp;
             	output="1"+exp+man;
             }
-            this.fr1 = Integer.parseInt(output);
+            this.fr1 = Integer.parseInt(output,2);
         }
     }
 
