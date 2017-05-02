@@ -25,13 +25,10 @@ public class LDFR extends AbstractInstruction{
 		registers.setMAR(effectiveAddress);
 		registers.setMBR(mcu.fetchFromCache(registers.getMAR()));
 		int expI=registers.getMBR();
-		
 		registers.setMAR(effectiveAddress+1);
 		registers.setMBR(mcu.fetchFromCache(registers.getMAR()));
 		int manI=registers.getMBR();
-		
 		String exp=Integer.toString(expI);
-		System.out.print(exp);
 		exp=exp.substring(23);
 		String man=Integer.toString(manI);
 		man=man.substring(23);
