@@ -1592,7 +1592,7 @@ public class FrontPanel {
         setEnableForPanel(pnlProgram2, false);
         
         btnExample = new JButton("example");
-        btnExample.setBounds(885, 818, 93, 23);
+        btnExample.setBounds(1014, 675, 93, 23);
         frmCsciClassProject.getContentPane().add(btnExample);
         enableFlag = 0;
 
@@ -2217,14 +2217,17 @@ public class FrontPanel {
         });
         
         btnExample.addMouseListener(new MouseAdapter() {
-            public void mousePressed(MouseEvent e){
-                registers.setPC(1200);
+            
+        	public void mousePressed(MouseEvent e){
+            	mcu.loadProgram(Const.Pre3);
+            	mcu.loadProgram(Const.PG_3);
+                 registers.setPC(Const.PG_3_BASE);
                 do {
                     registers.setMAR(registers.getPC());
                     registers.setMBR(mcu.fetchFromCache(registers.getMAR()));
                     registers.setIR(registers.getMBR());
                     runInstruction(registers.getBinaryStringIr(), registers, mcu);
-                } while (registers.getPC() <= 1300 && registers.getPC() >= 1200);
+                } while (registers.getPC() <= Const.PG_3_END && registers.getPC() >= Const.PG_3_BASE);
 
                 refreshRegistersPanel();
             }

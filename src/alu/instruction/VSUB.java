@@ -27,6 +27,7 @@ public class VSUB extends AbstractInstruction {
 		i = StringUtil.binaryToDecimal(instruction.substring(10, 11));
 		int effectiveAddress_V1 = EffectiveAddress.calculateEA(ix, address_V1, i, mcu, registers);	
 		int effectiveAddress_V2 = EffectiveAddress.calculateEA(ix, address_V2, i, mcu, registers);
+		fr = 3;
 		for (int i=0;i<fr;i++)
 		{// first, we store the effective address in memory address register
 		registers.setMAR(effectiveAddress_V1+i);
@@ -60,7 +61,7 @@ public class VSUB extends AbstractInstruction {
 	@Override
 	public String getExecuteMessage() {
 		// TODO Auto-generated method stub
-		return "FSUB " + fr + ", " + ix + ", " + address_V1 + ", "+address_V2+", " + i;
+		return "VSUB " + fr + ", " + ix + ", " + address_V1 + ", "+address_V2+", " + i;
 	}
 
 }
