@@ -30,10 +30,12 @@ public class CNVRT extends AbstractInstruction {
 		if (F == 0) {
 
 			registers.setRnByNum(r, Math.round(registers.getMBR()));
+			
 		}
 		if (F == 1) {
 
 			registers.setConvertFRByNum(0, registers.getMBR());
+			
 		}
 		registers.increasePCByOne();
 	}

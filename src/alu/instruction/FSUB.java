@@ -40,7 +40,7 @@ public class FSUB extends AbstractInstruction {
 		// we check if we have an overflow
 		int MAX_VALUE = 2^6;
 		int MIN_VALUE = -2^6-1;
-		if (result > MAX_VALUE || result < MIN_VALUE) {
+		if (result > MAX_VALUE && result < MIN_VALUE) {
 			registers.setCCElementByBit(Const.ConditionCode.OVERFLOW.getValue(), true);
 		} else {
 			// if we do not have an overflow, we update the value of

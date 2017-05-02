@@ -45,7 +45,7 @@ public class LDFR extends AbstractInstruction{
 		String frs=exp+man;
 		
 		registers.setFRByNum(fr, Integer.parseInt(frs,2));
-		System.out.print(Integer.parseInt(frs,2));
+		
 		registers.increasePCByOne();
 	}
 

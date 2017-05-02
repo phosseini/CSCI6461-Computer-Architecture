@@ -28,7 +28,7 @@ public class Const {
 	public static final Integer PG_P2_BASE = 1100;
 	public static final Integer PG_P2_END = 1162;
 	public static final Integer PG_3_BASE = 1200;
-	public static final Integer PG_3_END = 1204;
+	public static final Integer PG_3_END = 1208;
 	// public static final HashMap<String, Integer> ROM = new HashMap<>();
 	// static {
 	// // address-value pair Boot Program
@@ -932,9 +932,9 @@ public class Const {
 	}
 	public static final HashMap<String, Integer> Pre3 = new HashMap<>();
 	static {
-		Pre3.put("100", 3);
-		Pre3.put("101", 4);
-		Pre3.put("102", 5);
+		//Pre3.put("100", 3);
+		//Pre3.put("101", 4);
+		//Pre3.put("102", 5);
 		Pre3.put("200", 80);
 		Pre3.put("201", 100);
 		Pre3.put("202", 120);
@@ -943,8 +943,11 @@ public class Const {
 		Pre3.put("26", 101);
 		Pre3.put("25", 102);
 		Pre3.put("31", 10100000);
-		Pre3.put("30", 11);
+		Pre3.put("30", 11);;
 		Pre3.put("29", 10);
+		Pre3.put("24", 1);
+		Pre3.put("23", 0);
+		Pre3.put("22", 3);
 	}
 
 	public static final HashMap<String, Integer> PG_3 = new HashMap<>(); // example
@@ -956,8 +959,10 @@ static {
 	PG_3.put("1202", 0xC81E);
 	PG_3.put("1203", 0x841D);
 	PG_3.put("1204", 0xCC1E);
-
-	
+	PG_3.put("1205", 0x418);
+	PG_3.put("1206", 0x941E);
+	PG_3.put("1207", 0x417);
+	PG_3.put("1208", 0x9416);
 
 }
 	/**
