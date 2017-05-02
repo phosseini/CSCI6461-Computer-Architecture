@@ -31,6 +31,7 @@ public class LDFR extends AbstractInstruction{
 		int manI=registers.getMBR();
 		
 		String exp=Integer.toString(expI);
+		System.out.print(exp);
 		exp=exp.substring(23);
 		String man=Integer.toString(manI);
 		man=man.substring(23);
